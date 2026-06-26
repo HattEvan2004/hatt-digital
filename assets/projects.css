@@ -8,19 +8,20 @@
 body.pf{background:#071426;color:#e9eef7}
 body.pf .wrap{max-width:1180px}
 
-/* dark, quiet header on this page */
-body.pf header{background:rgba(7,20,38,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.07)}
-body.pf header.scrolled{border-color:rgba(255,255,255,.12);box-shadow:0 10px 30px -20px rgba(0,0,0,.8)}
-body.pf .brand .name{color:#fff}
-body.pf .brand .name span{color:#92a2c0;font-weight:500}
-body.pf .nav-links a{color:#dce4f2;opacity:.82}
+/* clean WHITE header on this page — matches the rest of the site */
+body.pf header{background:#FFFFFF;backdrop-filter:none;border-bottom:1px solid #DDE7F3;
+  box-shadow:0 10px 30px -22px rgba(7,20,38,.18)}
+body.pf header.scrolled{border-color:#DDE7F3;box-shadow:0 14px 34px -22px rgba(7,20,38,.28)}
+body.pf .brand .name{color:#071426}
+body.pf .brand .name span{color:#5E6E8C;font-weight:500}
+body.pf .nav-links a{color:#071426;opacity:.82}
 body.pf .nav-links a:hover{opacity:1}
-body.pf .nav-links a.active{color:#14B8FF;opacity:1}
-body.pf .nav-links a.active:after{background:#1267FF}
-body.pf .menu-btn span{background:#fff}
+body.pf .nav-links a.active{color:#1267FF;opacity:1}
+body.pf .nav-links a.active:after{background:linear-gradient(150deg,#14B8FF,#1267FF)}
+body.pf .menu-btn span{background:#071426}
 @media(max-width:900px){
-  body.pf .nav-links{background:#0B1D35;border-bottom:1px solid rgba(255,255,255,.08)}
-  body.pf .nav-links a{border-bottom:1px solid rgba(255,255,255,.06)}
+  body.pf .nav-links{background:#FFFFFF;border-bottom:1px solid #DDE7F3}
+  body.pf .nav-links a{border-bottom:1px solid #DDE7F3}
 }
 
 .pf-accent{--blue:#1267FF;--blue-soft:#14B8FF;--ink2:#0B1D35;--panel:#10233E;
@@ -95,9 +96,11 @@ body.pf .menu-btn span{background:#fff}
 .imp-list li{display:flex;align-items:flex-start;gap:11px;color:#c4cee0;font-size:14.5px;line-height:1.45}
 .imp-list li svg{flex:none;margin-top:2px;color:#14B8FF}
 
-/* footer: status + cta */
-.case-foot{margin-top:26px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);
+/* footer: status + cta — pushed to the bottom so buttons align across cards */
+.case-foot{margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);
   display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+/* keep a comfortable gap above the footer regardless of list length */
+.case-improve{margin-bottom:4px}
 .case-status{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
   font-size:11.5px;letter-spacing:.02em;color:#8c9bb8}
 .case-status .dot{width:7px;height:7px;border-radius:50%;background:#3a78d6;flex:none;
