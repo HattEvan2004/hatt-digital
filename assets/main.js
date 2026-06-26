@@ -142,17 +142,36 @@
     on(bSub, true); on(bCta, true);
   }
 
-  /* The nav stays clear over the dark hero, then turns to solid glass
-     once the visitor scrolls down into the light part of the page. This
-     runs on every load (animated or reduced) so the header always reads. */
-  function bindHeaderSolid() {
+  /* The nav is hidden completely over the dark hero + code-build intro,
+     then drops in as a solid white bar the moment the white "Why it matters"
+     section reaches the top of the viewport — and stays for the rest of the
+     page. Driven off the section itself (not a fixed pixel) so it lands the
+     same on desktop and mobile. Runs on every load (animated or reduced). */
+  function bindHeaderReveal() {
     if (!header) return;
-    var hc = function () {
-      header.classList.toggle('solid', window.scrollY > window.innerHeight * 0.6);
-      header.classList.toggle('scrolled', window.scrollY > 8);
+    var whyMatters = document.getElementById('why-it-matters');
+    if (!whyMatters) return;
+
+    var ticking = false;
+    var sync = function () {
+      ticking = false;
+      var trigger = header.offsetHeight || 76;
+      var reached = whyMatters.getBoundingClientRect().top <= trigger;
+      header.classList.toggle('is-visible', reached);
     };
-    hc();
-    window.addEventListener('scroll', hc, { passive: true });
+    var onScroll = function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(sync); }
+    };
+
+    sync();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    /* Belt-and-suspenders: an IntersectionObserver wakes the scroll sync up
+       so the bar still settles correctly if the section size shifts. */
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(sync, { threshold: [0, 0.01, 1] }).observe(whyMatters);
+    }
   }
 
   /* Map a single 0..1 progress value to every build stage. */
@@ -160,8 +179,6 @@
     var tp = clamp(p / 0.55, 0, 1);                 // code types over first 55%
     renderCode(Math.floor(tp * TOTAL), true);
     if (compBar) compBar.style.width = (clamp(p / 0.9, 0, 1) * 100).toFixed(1) + '%';
-
-    if (header) header.classList.toggle('lit', p > 0.12);   // nav rides in early
 
     on(bEyebrow, p > 0.60);
     var n = words.length;
@@ -187,14 +204,13 @@
   if (reduce) {
     finished();
     if (compiler) compiler.style.display = 'none';
-    if (header) header.classList.add('lit');
     if (hint) hint.style.opacity = '1';
-    bindHeaderSolid();
+    bindHeaderReveal();
     return;
   }
 
   /* ---------- AUTO-PLAY: the build runs itself on load ---------- */
-  bindHeaderSolid();
+  bindHeaderReveal();
   if (hint) hint.style.opacity = '0';
 
   var DURATION = 10000;   // ms for the full build to play out

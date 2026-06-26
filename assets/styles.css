@@ -403,20 +403,19 @@
   /* ======  CINEMATIC SCROLL-BUILT HERO (homepage)  ===== */
   /* ===================================================== */
 
-  /* Homepage nav rides over the dark hero, then turns solid on scroll */
-  html.js body.home header{background:transparent;backdrop-filter:none;border-color:transparent;
-    transform:translateY(-115%);opacity:0;
-    transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .5s ease,background .35s ease,border-color .35s ease}
-  html.js body.home header.lit{transform:none;opacity:1}
-  body.home header.solid{background:rgba(252,253,255,.85);backdrop-filter:blur(14px)}
-  body.home header:not(.solid) .brand .name{color:#fff}
-  body.home header:not(.solid) .brand .name span{color:var(--muted-d)}
-  body.home header:not(.solid) .nav-links a{color:#fff;opacity:.82}
-  body.home header:not(.solid) .nav-links a:hover{opacity:1}
-  body.home header:not(.solid) .nav-links a.active{color:var(--cyan);opacity:1}
-  body.home header:not(.solid) .menu-btn span{background:#fff}
+  /* Homepage nav is hidden entirely over the dark hero + code-build intro,
+     then drops in as a solid white bar once "Why it matters" is reached. */
+  html.js body.home header{
+    position:fixed;top:0;left:0;width:100%;
+    background:#ffffff;backdrop-filter:none;
+    border-bottom:1px solid rgba(10,20,45,.08);
+    box-shadow:0 12px 30px rgba(10,20,45,.08);
+    opacity:0;transform:translateY(-100%);pointer-events:none;
+    transition:opacity .3s ease,transform .3s ease;
+    z-index:1000}
+  html.js body.home header.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
 
-  .intro{position:relative;background:var(--ink);margin-top:-77px}
+  .intro{position:relative;background:var(--ink);margin-top:0}
   .intro-stage{position:relative;min-height:100vh;overflow:hidden;display:grid;place-items:center;padding:96px 0}
 
   .intro-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
