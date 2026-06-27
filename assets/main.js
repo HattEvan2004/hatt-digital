@@ -14,6 +14,8 @@
   var menuBtn = document.getElementById('menuBtn');
   var navLinks = document.getElementById('navLinks');
   if (menuBtn && navLinks) {
+    if (!navLinks.id) navLinks.id = 'navLinks';
+    menuBtn.setAttribute('aria-controls', navLinks.id);
     menuBtn.addEventListener('click', function () {
       var open = navLinks.classList.toggle('open');
       menuBtn.setAttribute('aria-expanded', open);
@@ -32,15 +34,35 @@
   }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
 
-  /* ---- FAQ ---- */
-  document.querySelectorAll('.faq-q').forEach(function (q) {
+  /* ---- FAQ (accessible accordion) ---- */
+  document.querySelectorAll('.faq-q').forEach(function (q, i) {
+    var item = q.parentElement, ans = item.querySelector('.faq-a');
+    if (ans) {
+      /* wire button <-> panel so screen readers announce the relationship
+         and skip the collapsed answer text until it is opened */
+      if (!q.id) q.id = 'faq-q-' + (i + 1);
+      if (!ans.id) ans.id = 'faq-panel-' + (i + 1);
+      ans.setAttribute('role', 'region');
+      ans.setAttribute('aria-labelledby', q.id);
+      ans.setAttribute('aria-hidden', 'true');
+      q.setAttribute('aria-controls', ans.id);
+    }
     q.addEventListener('click', function () {
-      var item = q.parentElement, ans = item.querySelector('.faq-a'),
-          open = item.classList.toggle('open');
+      var open = item.classList.toggle('open');
       q.setAttribute('aria-expanded', open);
-      ans.style.maxHeight = open ? ans.scrollHeight + 'px' : 0;
+      if (ans) {
+        ans.style.maxHeight = open ? ans.scrollHeight + 'px' : 0;
+        ans.setAttribute('aria-hidden', open ? 'false' : 'true');
+      }
     });
   });
+
+  /* keep open FAQ answers correctly sized when the viewport changes */
+  window.addEventListener('resize', function () {
+    document.querySelectorAll('.faq-item.open .faq-a').forEach(function (ans) {
+      ans.style.maxHeight = ans.scrollHeight + 'px';
+    });
+  }, { passive: true });
 
   /* ---- contact form -> mailto ---- */
   var f = document.getElementById('quoteForm');

@@ -836,3 +836,52 @@
 
   /* Consistent vertical rhythm: keep band padding aligned with projects page */
   @media(min-width:901px){.band{padding:104px 0}}
+
+  /* ===================================================== */
+  /* ====  ACCESSIBILITY & INTERACTION HARDENING  ======== */
+  /* Keyboard focus, skip link, tactile feedback. These are */
+  /* additive — they never change the resting visual design.*/
+  /* ===================================================== */
+
+  /* --- Skip to content: hidden until focused via keyboard --- */
+  .skip-link{position:fixed;top:10px;left:10px;z-index:2000;
+    transform:translateY(-150%);transition:transform .2s ease;
+    background:var(--royal);color:#fff;font-family:'Inter Tight',sans-serif;font-weight:600;
+    font-size:15px;padding:11px 18px;border-radius:10px;
+    box-shadow:0 12px 30px -10px rgba(10,91,230,.6)}
+  .skip-link:focus{transform:none;outline:2px solid #fff;outline-offset:2px}
+
+  /* --- Visible keyboard focus on every interactive element ---
+     Uses :focus-visible so mouse clicks stay clean, keyboard
+     navigation gets a clear ring. Brand royal on light surfaces. */
+  a:focus-visible,button:focus-visible,
+  input:focus-visible,select:focus-visible,textarea:focus-visible,
+  [tabindex]:focus-visible,.faq-q:focus-visible,.menu-btn:focus-visible{
+    outline:2.5px solid var(--royal);outline-offset:3px;border-radius:4px}
+  /* Cyan ring on dark surfaces for adequate contrast */
+  footer a:focus-visible,.foot-social a:focus-visible,
+  .phead a:focus-visible,.phead button:focus-visible,
+  .form-card a:focus-visible,.form-card button:focus-visible,
+  .form-card input:focus-visible,.form-card select:focus-visible,.form-card textarea:focus-visible,
+  .cta-band a:focus-visible,.band-flow a:focus-visible,
+  .band-dark a:focus-visible,.intro a:focus-visible,.intro button:focus-visible,
+  .care a:focus-visible,.map-card a:focus-visible{
+    outline-color:var(--cyan)}
+  /* Logo lock-up sits on white inside the footer — keep a dark ring there */
+  .foot-brand .fb-logo:focus-visible{outline-color:var(--royal)}
+
+  /* --- Tactile pressed feedback (skill: feedback within ~100ms) --- */
+  .btn:active{transform:translateY(0) scale(.98)}
+  .faq-q:active{transform:none}
+  .foot-social a:active,.contact-social a:active{transform:translateY(0) scale(.96)}
+
+  /* --- Home: the auto-hiding sticky header must not be a keyboard
+     trap while it is invisible. visibility:hidden removes its links
+     from the tab order until the bar actually drops in. --- */
+  html.js body.home header{visibility:hidden;
+    transition:opacity .3s ease,transform .3s ease,visibility .3s ease}
+  html.js body.home header.is-visible{visibility:visible}
+
+  @media(prefers-reduced-motion:reduce){
+    .skip-link{transition:none}
+  }
