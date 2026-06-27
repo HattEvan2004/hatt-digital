@@ -261,3 +261,238 @@
     });
   }
 })();
+
+/* =====================================================
+   HATT DIGITAL — BRAND SPEC FIELD
+   A subtle animated background accent for the homepage
+   hero: small glowing rounded-square "logo specs" drift
+   along loose curved paths, softly cluster and separate,
+   and leave gentle comet trails. Canvas + rAF, no deps.
+   Lives behind the hero content (pointer-events:none),
+   is responsive, and respects prefers-reduced-motion by
+   falling back to a static spec scatter.
+===================================================== */
+(function () {
+  'use strict';
+  var intro = document.getElementById('intro');
+  var canvas = document.getElementById('introSpecs');
+  if (!intro || !canvas) return;
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hoverable = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+  /* Hatt Digital logo palette — bright cyan through medium blue.
+     The deep navies are kept for the larger "block" specs so they
+     read as hollow logo pixels rather than vanishing on the dark bg. */
+  var COLORS = [
+    [20, 184, 255],   // bright cyan   #14B8FF
+    [63, 208, 255],   // lighter cyan  #3FD0FF
+    [18, 103, 255],   // medium royal  #1267FF
+    [31, 123, 255]    // medium blue   #1F7BFF
+  ];
+
+  var W = 0, H = 0, dpr = 1;
+  var specs = [];
+  var pX = 0, pY = 0, cX = 0, cY = 0;   // pointer parallax (target / eased)
+  var raf = null, running = false, last = 0;
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function pick(a) { return a[(Math.random() * a.length) | 0]; }
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  function count() {
+    var w = window.innerWidth;
+    if (w < 600) return 18;    // mobile: keep it uncluttered (15–25)
+    if (w < 1000) return 34;
+    return 52;                 // desktop (35–60)
+  }
+
+  function makeSpec() {
+    var z = Math.random();                       // depth: 0 far … 1 near
+    var roll = Math.random();
+    var cat = roll < 0.70 ? 'small' : roll < 0.92 ? 'mid' : 'block';
+    var base = cat === 'small' ? rand(2, 4.5) : cat === 'mid' ? rand(5.5, 9) : rand(12, 18);
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      z: z,
+      cat: cat,
+      size: base * (0.6 + z * 0.85),
+      rot: rand(0, Math.PI),
+      rotSpeed: rand(-0.16, 0.16) * (cat === 'block' ? 0.4 : 1),
+      phase: rand(0, Math.PI * 2),
+      color: pick(COLORS),
+      alpha: clamp((cat === 'block' ? rand(0.22, 0.4) : rand(0.28, 0.7)) * (0.5 + z * 0.6), 0, 0.82),
+      trail: [],
+      tlen: cat === 'small' ? 5 : cat === 'mid' ? 6 : 3
+    };
+  }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var r = canvas.getBoundingClientRect();
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function build() {
+    resize();
+    var c = count();
+    specs = [];
+    for (var i = 0; i < c; i++) specs.push(makeSpec());
+  }
+
+  /* rounded-square path (with manual fallback for older engines) */
+  function rsPath(x, y, s, r) {
+    if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(x, y, s, s, r); return; }
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + s, y, x + s, y + s, r);
+    ctx.arcTo(x + s, y + s, x, y + s, r);
+    ctx.arcTo(x, y + s, x, y, r);
+    ctx.arcTo(x, y, x + s, y, r);
+    ctx.closePath();
+  }
+
+  function square(x, y, size, rot, col, alpha, glow, cat) {
+    if (alpha <= 0.01 || size < 0.4) return;
+    var rgb = col[0] + ',' + col[1] + ',' + col[2];
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(rot);
+    rsPath(-size / 2, -size / 2, size, Math.min(size * 0.32, 4));
+    if (glow) {
+      ctx.shadowColor = 'rgba(' + rgb + ',0.55)';
+      ctx.shadowBlur = cat === 'block' ? 9 : 6;
+    }
+    if (cat === 'block') {
+      ctx.globalAlpha = alpha * 0.5;
+      ctx.fillStyle = 'rgb(' + rgb + ')';
+      ctx.fill();
+      ctx.globalAlpha = alpha;
+      ctx.lineWidth = 1.1;
+      ctx.strokeStyle = 'rgb(' + rgb + ')';
+      ctx.stroke();
+    } else {
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = 'rgb(' + rgb + ')';
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  /* loose curved drift: layered sines create natural convergence
+     (clustering) and divergence (separation) zones over time */
+  function step(dt, time) {
+    var amp = 13, m = 44;
+    for (var i = 0; i < specs.length; i++) {
+      var s = specs[i];
+      var sp = 0.4 + s.z * 0.9;
+      var fx = Math.sin(s.y * 0.0042 + time * 0.16 + s.phase);
+      var fy = Math.cos(s.x * 0.0040 - time * 0.13 + s.phase * 1.3);
+      s.x += (fx * amp + 9) * sp * dt;     // gentle global drift right…
+      s.y += (fy * amp - 6) * sp * dt;     // …and slightly up
+      s.rot += s.rotSpeed * dt;
+
+      var wrapped = false;
+      if (s.x < -m) { s.x = W + m; wrapped = true; }
+      else if (s.x > W + m) { s.x = -m; wrapped = true; }
+      if (s.y < -m) { s.y = H + m; wrapped = true; }
+      else if (s.y > H + m) { s.y = -m; wrapped = true; }
+
+      if (wrapped) { s.trail.length = 0; }
+      s.trail.push(s.x, s.y);
+      if (s.trail.length > (s.tlen + 1) * 2) s.trail.splice(0, 2);
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineJoin = 'round';
+    for (var i = 0; i < specs.length; i++) {
+      var s = specs[i];
+      var ox = cX * (0.4 + s.z) * 16;
+      var oy = cY * (0.4 + s.z) * 16;
+      var tr = s.trail, n = tr.length / 2;
+      for (var j = 0; j < n; j++) {
+        var f = (j + 1) / n;                 // newest = brightest
+        var head = j === n - 1;
+        square(tr[j * 2] + ox, tr[j * 2 + 1] + oy, s.size * (0.5 + 0.5 * f),
+          s.rot, s.color, s.alpha * f * f, head, s.cat);
+      }
+    }
+  }
+
+  function frame(ts) {
+    if (!running) return;
+    if (!last) last = ts;
+    var dt = Math.min((ts - last) / 1000, 0.05);
+    last = ts;
+    cX += (pX - cX) * 0.05;
+    cY += (pY - cY) * 0.05;
+    step(dt, ts / 1000);
+    draw();
+    raf = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (running || reduce) return;
+    running = true; last = 0;
+    raf = requestAnimationFrame(frame);
+  }
+  function stop() {
+    running = false;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
+  }
+
+  /* ---- reduced motion: paint a single static spec scatter ---- */
+  function paintStatic() {
+    resize();
+    var c = count();
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineJoin = 'round';
+    for (var i = 0; i < c; i++) {
+      var s = makeSpec();
+      square(s.x, s.y, s.size, s.rot, s.color, s.alpha, s.cat !== 'small', s.cat);
+    }
+  }
+
+  /* ---- responsive rebuild (debounced) ---- */
+  var rt = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(function () {
+      if (reduce) { paintStatic(); return; }
+      build();
+    }, 200);
+  }, { passive: true });
+
+  if (reduce) { paintStatic(); return; }
+
+  /* subtle pointer parallax — clean, only on fine-pointer devices */
+  if (hoverable) {
+    window.addEventListener('pointermove', function (e) {
+      pX = (e.clientX / window.innerWidth - 0.5) * 2;
+      pY = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+  }
+
+  /* pause when the hero is offscreen or the tab is hidden */
+  var onScreen = true;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) stop(); else if (onScreen) start();
+  });
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      onScreen = es[0].isIntersecting;
+      if (onScreen && !document.hidden) start(); else stop();
+    }, { threshold: 0 }).observe(intro);
+  }
+
+  build();
+  start();
+})();
