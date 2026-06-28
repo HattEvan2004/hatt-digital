@@ -688,6 +688,30 @@
     .value-grid.v2 .vcard.lead{grid-column:auto;grid-template-columns:1fr;gap:24px}
   }
 
+  /* premium feature tiles — branded chips + spec motif (homepage) */
+  .value-grid.v2 .tile{position:relative;background:linear-gradient(180deg,#fff,#f6faff);
+    border:1px solid var(--line);border-radius:20px;padding:30px 28px 28px;overflow:hidden;
+    transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,border-color .35s}
+  .value-grid.v2 .tile:before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);opacity:.9}
+  .tile .specks{position:absolute;top:18px;right:18px;display:grid;grid-template-columns:repeat(3,5px);gap:4px;opacity:.5;transition:opacity .35s}
+  .tile .specks i{width:5px;height:5px;border-radius:1.5px;background:var(--cyan)}
+  .tile .specks i:nth-child(2){background:var(--royal);opacity:.6}
+  .tile .specks i:nth-child(3){opacity:.35}
+  .tile .specks i:nth-child(5){background:var(--royal);opacity:.5}
+  .tile .specks i:nth-child(6){opacity:.3}
+  .tile .specks i:nth-child(7){opacity:.25}
+  .tile .specks i:nth-child(8){background:var(--royal);opacity:.4}
+  .tile .idx{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.05em}
+  .tile .chip{width:56px;height:56px;border-radius:16px;background:var(--grad);display:grid;place-items:center;
+    color:#fff;margin:14px 0 20px;box-shadow:0 14px 28px -12px rgba(18,103,255,.6);transition:transform .35s}
+  .tile .chip svg{width:26px;height:26px}
+  .tile h3{font-size:21px;font-weight:700;letter-spacing:-.01em}
+  .tile p{color:var(--muted);margin-top:9px;font-size:15.5px;line-height:1.55}
+  .tile:hover{transform:translateY(-6px);border-color:#bcd2f5;
+    box-shadow:0 30px 56px -28px rgba(10,91,230,.4),0 0 0 1px rgba(20,184,255,.25)}
+  .tile:hover .chip{transform:scale(1.07) rotate(-3deg)}
+  .tile:hover .specks{opacity:.9}
+
   /* ===================================================== */
   /* PROJECTS — premium "in progress" build shells          */
   /* ===================================================== */
