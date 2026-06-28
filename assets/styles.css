@@ -885,3 +885,14 @@
   @media(prefers-reduced-motion:reduce){
     .skip-link{transition:none}
   }
+
+  /* --- Form validation feedback (contact form, on dark card) --- */
+  form .field-error{display:block;margin-top:6px;min-height:1px;
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.02em;color:#ff9a8f}
+  form .field-error:empty{margin-top:0}
+  form input[aria-invalid="true"],form textarea[aria-invalid="true"],form select[aria-invalid="true"]{
+    border-color:#ff6b5e;box-shadow:0 0 0 3px rgba(255,107,94,.16)}
+  .form-status{margin-top:6px;font-size:13.5px;line-height:1.5}
+  .form-status:empty{margin-top:0}
+  .form-status.err{color:#ff9a8f}
+  .form-status.ok{color:var(--term)}

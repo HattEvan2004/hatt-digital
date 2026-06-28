@@ -64,15 +64,70 @@
     });
   }, { passive: true });
 
-  /* ---- contact form -> mailto ---- */
+  /* ---- contact form: accessible validation + mailto handoff ---- */
   var f = document.getElementById('quoteForm');
   if (f) {
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    /* live-region status so screen readers hear submit results */
+    var status = document.createElement('p');
+    status.className = 'form-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    f.appendChild(status);
+
+    function errorEl(input, create) {
+      var id = input.id + '-err';
+      var el = document.getElementById(id);
+      if (!el && create) {
+        el = document.createElement('span');
+        el.className = 'field-error';
+        el.id = id;
+        input.parentNode.appendChild(el);
+      }
+      return el;
+    }
+    function setError(input, msg) {
+      var el = errorEl(input, true);
+      el.textContent = msg;
+      input.setAttribute('aria-invalid', 'true');
+      input.setAttribute('aria-describedby', el.id);
+    }
+    function clearError(input) {
+      var el = errorEl(input, false);
+      if (el) el.textContent = '';
+      input.removeAttribute('aria-invalid');
+      input.removeAttribute('aria-describedby');
+    }
+
+    function validate() {
+      var first = null;
+      clearError(f.name); clearError(f.email);
+      if (!f.name.value.trim()) { setError(f.name, 'Please add your name.'); first = first || f.name; }
+      if (!f.email.value.trim()) { setError(f.email, 'Please add your email.'); first = first || f.email; }
+      else if (!EMAIL_RE.test(f.email.value.trim())) { setError(f.email, 'That email doesn’t look right.'); first = first || f.email; }
+      return first;
+    }
+
+    f.addEventListener('input', function (e) {
+      if (e.target.matches('input, textarea, select')) clearError(e.target);
+    });
+
     f.addEventListener('submit', function (e) {
       e.preventDefault();
+      var invalid = validate();
+      if (invalid) {
+        status.textContent = 'Please fix the highlighted field' + (document.querySelectorAll('[aria-invalid="true"]').length > 1 ? 's' : '') + ' above.';
+        status.className = 'form-status err';
+        invalid.focus();
+        return;
+      }
       var subj = encodeURIComponent('Website enquiry — ' + (f.biz.value || f.name.value || 'New lead'));
       var body = encodeURIComponent('Name: ' + f.name.value + '\nBusiness: ' + f.biz.value +
         '\nEmail: ' + f.email.value + '\nBudget: ' + (f.budget ? f.budget.value : '') + '\n\n' + f.msg.value);
       window.location.href = 'mailto:hattdigitalns@gmail.com?subject=' + subj + '&body=' + body;
+      status.textContent = 'Opening your email app… if nothing happens, email hattdigitalns@gmail.com directly.';
+      status.className = 'form-status ok';
     });
   }
 
@@ -517,4 +572,69 @@
 
   build();
   start();
+})();
+
+/* =====================================================
+   INTERIOR EDITOR PANES — type the data-lines content
+   The phead "code editor" mockups on services/about/faq/
+   contact carry their lines in a data-lines attribute but
+   were never rendered. Type them in when scrolled into
+   view; show them statically under reduced motion.
+===================================================== */
+(function () {
+  'use strict';
+  var panes = document.querySelectorAll('.editor pre[data-lines]');
+  if (!panes.length) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isComment = function (l) { return /^\s*\/\//.test(l); };
+
+  function lineSpan(text, comment) {
+    var s = document.createElement('span');
+    s.className = 'ln' + (comment ? ' cm' : '');
+    s.textContent = text;
+    return s;
+  }
+
+  function render(pre) {
+    var lines;
+    try { lines = JSON.parse(pre.getAttribute('data-lines')); } catch (e) { return; }
+    if (!Array.isArray(lines) || !lines.length) return;
+    pre.textContent = '';
+    /* .editor .ln is display:block, so each line is its own block —
+       no literal newlines, and the caret rides inside the active line */
+    var cursor = document.createElement('span');
+    cursor.className = 'cursor';
+
+    if (reduce) {
+      lines.forEach(function (l) { pre.appendChild(lineSpan(l, isComment(l))); });
+      pre.lastChild.appendChild(cursor);
+      return;
+    }
+
+    var li = 0, ci = 0, span = null;
+    function step() {
+      if (li >= lines.length) return;          // leave the caret blinking at the end
+      var line = lines[li];
+      if (ci === 0) { span = lineSpan('', isComment(line)); pre.appendChild(span); span.appendChild(cursor); }
+      if (ci < line.length) {
+        span.insertBefore(document.createTextNode(line.charAt(ci)), cursor); ci++;
+        setTimeout(step, 24 + Math.random() * 28);
+      } else {
+        li++; ci = 0;
+        setTimeout(step, 340);
+      }
+    }
+    setTimeout(step, 260);
+  }
+
+  if (reduce || !('IntersectionObserver' in window)) {
+    panes.forEach(render);
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { render(en.target); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.25 });
+  panes.forEach(function (p) { io.observe(p); });
 })();
