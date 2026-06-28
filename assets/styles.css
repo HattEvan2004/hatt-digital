@@ -896,3 +896,23 @@
   .form-status:empty{margin-top:0}
   .form-status.err{color:#ff9a8f}
   .form-status.ok{color:var(--term)}
+
+  /* ===================================================== */
+  /* ====  HOMEPAGE VISUAL / LAYOUT REFINEMENT  ========== */
+  /* ===================================================== */
+
+  /* Bug fix: clip the hero's decorative glow/spec layer in every mode.
+     Under prefers-reduced-motion .intro-stage becomes position:static,
+     which reparents the absolute .intro-bg to .intro — without this the
+     side glows escaped and caused ~55px of horizontal scroll on mobile. */
+  .intro{overflow:hidden}
+
+  /* The header is sticky/fixed on every page, so offset in-page jumps
+     (skip link, anchors, focus) to land below the bar, not under it. */
+  html{scroll-padding-top:84px}
+
+  /* "What I do" rows: vertically centre the status tag so each row reads
+     as one balanced unit (homepage only — services page keeps top-align). */
+  @media(min-width:901px){
+    body.home .svc-list.system .svc-tag{align-self:center}
+  }
