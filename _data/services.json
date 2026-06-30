@@ -1,0 +1,41 @@
+{
+  "seo": {
+    "title": "Web Design & Local SEO Services in Nova Scotia | Hatt Digital",
+    "description": "Web design, redesigns, local SEO, care plans, and online booking for Nova Scotia businesses. Straightforward services built to bring you more customers."
+  },
+  "hero": {
+    "eyebrow": "Services",
+    "heading": "What I build for **your business.**",
+    "lead": "Straightforward web services with one goal: getting more customers through your door. No upsells you don't need."
+  },
+  "list": {
+    "eyebrow": "The service list",
+    "heading": "What I build — and what it does for your business.",
+    "intro": "Every service below is here for one reason: to help more local customers find you, trust you, and get in touch. Mix and match, or start simple and grow later.",
+    "items": [
+      { "title": "New business websites", "body": "A brand-new, custom-built site designed around your business and the customers you want to reach. The outcome: a professional first impression that turns visitors into enquiries instead of sending them to a competitor.", "features": ["Custom design", "Mobile-first", "Contact forms", "Fast hosting setup"], "tag": "New build" },
+      { "title": "Website redesigns", "body": "If your current site is slow, dated, or hard to use on a phone, it’s quietly costing you customers. I rebuild it into something modern that actually works — keeping what’s good and fixing what isn’t.", "features": ["Modern rebuild", "Speed & SEO fixes", "Content migration"], "tag": "Rebuild" },
+      { "title": "Contractor & service-business websites", "body": "Sites built for trades and local services. Clear service lists, obvious trust signals, and click-to-call buttons, so the people searching for what you do end up calling you — not the next name on the list.", "features": ["Service sections", "Trust signals", "Click-to-call", "Quote requests"], "tag": "Specialty" },
+      { "title": "Mobile-friendly design", "body": "Your site should look clean and be easy to use on a phone, because that’s where most customers will check your business first. Every build is designed for the small screen before the big one.", "features": ["Mobile-first layout", "Tap-friendly buttons", "Fast on data"], "tag": "Standard" },
+      { "title": "Local SEO setup", "body": "The basics that help nearby customers find you on Google — clean page titles, location wording, Google Business Profile support, mobile speed, and proper site structure. Built in, not sold as an upsell.", "features": ["Local keywords", "Page titles & descriptions", "Mobile-friendly structure", "Contact/map setup"], "tag": "Included" },
+      { "title": "Contact & quote forms", "body": "Simple forms that make it effortless to request a quote or send a message. Often the difference between a visit that goes nowhere and a real lead in your inbox.", "features": ["Quote forms", "Contact forms", "Spam protection"], "tag": "Included" },
+      { "title": "Google Business Profile guidance", "body": "Help getting your Google profile set up and pointing at your new site, so you have a better shot at showing up in local map results when people search nearby.", "features": ["Profile setup help", "Local listing tips", "Map & hours"], "tag": "Guidance" },
+      { "title": "Website launch & support", "body": "I handle the technical launch, double-check everything works, and show you how it all fits together. Then I’m still around when you need a change down the road.", "features": ["Domain & hosting setup", "Launch checks", "Friendly handoff"], "tag": "Included" },
+      { "title": "CMS / editable content", "body": "Want to update your own text or images later? I can set the site up so you can make simple edits yourself, without touching code or paying for every little change.", "features": ["Editable sections", "Easy image swaps", "Plain-English guide"], "tag": "Optional" },
+      { "title": "Care & updates", "body": "An optional monthly plan that keeps everything running — hosting, security, backups, and small content changes — so you never have to think about your site’s upkeep again. Cancel anytime.", "features": ["Hosting & backups", "Security updates", "Small edits included"], "tag": "Optional" }
+    ]
+  },
+  "pricing_mini": {
+    "heading": "Not sure which one fits?",
+    "body": "Tell me your goals and budget and I’ll point you to the right option — then build a fair quote around the actual project."
+  },
+  "who": {
+    "eyebrow": "Who it’s for",
+    "heading": "Web design built for local trades, services & small businesses.",
+    "intro": "Pages tailored to specific industries and areas around Nova Scotia — with the problems, trust signals, and calls-to-action that matter for each one."
+  },
+  "cta": {
+    "heading": "Ready to make your website easier to trust and easier to contact?",
+    "body": "Tell me about your business and I’ll come back with honest advice and a clear, flat quote — free."
+  }
+}

@@ -1,19 +1,19 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071426">
-<title>Web Design &amp; Local SEO Services in Nova Scotia | Hatt Digital</title>
-<meta name="description" content="Web design, redesigns, local SEO, care plans, and online booking for Nova Scotia businesses. Straightforward services built to bring you more customers.">
+<title>{{ services.seo.title }}</title>
+<meta name="description" content="{{ services.seo.description }}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://hattdigital.ca/services.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hatt Digital">
-<meta property="og:title" content="Web Design &amp; Local SEO Services in Nova Scotia | Hatt Digital">
-<meta property="og:description" content="Web design, redesigns, local SEO, care plans, and online booking for Nova Scotia businesses. Straightforward services built to bring you more customers.">
+<meta property="og:title" content="{{ services.seo.title }}">
+<meta property="og:description" content="{{ services.seo.description }}">
 <meta property="og:url" content="https://hattdigital.ca/services.html">
 <meta property="og:image" content="https://hattdigital.ca/assets/logo.png">
 <meta property="og:locale" content="en_CA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Web Design &amp; Local SEO Services in Nova Scotia | Hatt Digital">
-<meta name="twitter:description" content="Web design, redesigns, local SEO, care plans, and online booking for Nova Scotia businesses. Straightforward services built to bring you more customers.">
+<meta name="twitter:title" content="{{ services.seo.title }}">
+<meta name="twitter:description" content="{{ services.seo.description }}">
 <meta name="twitter:image" content="https://hattdigital.ca/assets/logo.png">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
       </a>
       <div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html" class="active">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a></div>
       <div class="nav-cta">
-        <a class="nav-call" href="tel:+19022774424" aria-label="Call Hatt Digital at 902-277-4424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 902-277-4424</a>
+        <a class="nav-call" href="tel:{{ site.contact.phone_link }}" aria-label="Call Hatt Digital at {{ site.contact.phone }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{ site.contact.phone }}</a>
         <a href="quote.html" class="btn btn-grad">Start a Website Project</a>
         <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
@@ -38,9 +38,9 @@
 <main id="main">
 <section class="phead"><span class="glow"></span><div class="wrap"><div class="phead-grid">
       <div class="rv">
-        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> Services</span>
-        <h1>What I build for <span class="hl">your business.</span></h1>
-        <p>Straightforward web services with one goal: getting more customers through your door. No upsells you don't need.</p>
+        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ services.hero.eyebrow }}</span>
+        <h1>{{ services.hero.heading | hl | safe }}</h1>
+        <p>{{ services.hero.lead }}</p>
       </div>
       <div class="editor rv">
       <div class="ebar"><i></i><i></i><i></i><span class="fname">services.js</span></div>
@@ -48,98 +48,49 @@
     </div>
     </div></div></section>
 <section class="band"><div class="wrap">
-  <div class="band-head rv" style="margin-bottom:8px"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> The service list</span>
-    <h2>What I build &mdash; and what it does for your business.</h2>
-    <p>Every service below is here for one reason: to help more local customers find you, trust you, and get in touch. Mix and match, or start simple and grow later.</p></div>
+  <div class="band-head rv" style="margin-bottom:8px"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ services.list.eyebrow }}</span>
+    <h2>{{ services.list.heading }}</h2>
+    <p>{{ services.list.intro }}</p></div>
   <div class="svc-list system" style="margin-top:48px" data-stagger="0.07">
-  <div class="svc rv spot"><span class="num">01</span><div class="svc-main"><h3>New business websites</h3>
-    <p>A brand-new, custom-built site designed around your business and the customers you want to reach. The outcome: a professional first impression that turns visitors into enquiries instead of sending them to a competitor.</p>
-    <ul><li>Custom design</li><li>Mobile-first</li><li>Contact forms</li><li>Fast hosting setup</li></ul></div><span class="svc-tag neutral">New build</span></div>
-  <div class="svc rv spot"><span class="num">02</span><div class="svc-main"><h3>Website redesigns</h3>
-    <p>If your current site is slow, dated, or hard to use on a phone, it&rsquo;s quietly costing you customers. I rebuild it into something modern that actually works &mdash; keeping what&rsquo;s good and fixing what isn&rsquo;t.</p>
-    <ul><li>Modern rebuild</li><li>Speed &amp; SEO fixes</li><li>Content migration</li></ul></div><span class="svc-tag neutral">Rebuild</span></div>
-  <div class="svc rv spot"><span class="num">03</span><div class="svc-main"><h3>Contractor &amp; service-business websites</h3>
-    <p>Sites built for trades and local services. Clear service lists, obvious trust signals, and click-to-call buttons, so the people searching for what you do end up calling you &mdash; not the next name on the list.</p>
-    <ul><li>Service sections</li><li>Trust signals</li><li>Click-to-call</li><li>Quote requests</li></ul></div><span class="svc-tag neutral">Specialty</span></div>
-  <div class="svc rv spot"><span class="num">04</span><div class="svc-main"><h3>Mobile-friendly design</h3>
-    <p>Your site should look clean and be easy to use on a phone, because that&rsquo;s where most customers will check your business first. Every build is designed for the small screen before the big one.</p>
-    <ul><li>Mobile-first layout</li><li>Tap-friendly buttons</li><li>Fast on data</li></ul></div><span class="svc-tag neutral">Standard</span></div>
-  <div class="svc rv spot"><span class="num">05</span><div class="svc-main"><h3>Local SEO setup</h3>
-    <p>The basics that help nearby customers find you on Google &mdash; clean page titles, location wording, Google Business Profile support, mobile speed, and proper site structure. Built in, not sold as an upsell.</p>
-    <ul><li>Local keywords</li><li>Page titles &amp; descriptions</li><li>Mobile-friendly structure</li><li>Contact/map setup</li></ul></div><span class="svc-tag neutral">Included</span></div>
-  <div class="svc rv spot"><span class="num">06</span><div class="svc-main"><h3>Contact &amp; quote forms</h3>
-    <p>Simple forms that make it effortless to request a quote or send a message. Often the difference between a visit that goes nowhere and a real lead in your inbox.</p>
-    <ul><li>Quote forms</li><li>Contact forms</li><li>Spam protection</li></ul></div><span class="svc-tag neutral">Included</span></div>
-  <div class="svc rv spot"><span class="num">07</span><div class="svc-main"><h3>Google Business Profile guidance</h3>
-    <p>Help getting your Google profile set up and pointing at your new site, so you have a better shot at showing up in local map results when people search nearby.</p>
-    <ul><li>Profile setup help</li><li>Local listing tips</li><li>Map &amp; hours</li></ul></div><span class="svc-tag neutral">Guidance</span></div>
-  <div class="svc rv spot"><span class="num">08</span><div class="svc-main"><h3>Website launch &amp; support</h3>
-    <p>I handle the technical launch, double-check everything works, and show you how it all fits together. Then I&rsquo;m still around when you need a change down the road.</p>
-    <ul><li>Domain &amp; hosting setup</li><li>Launch checks</li><li>Friendly handoff</li></ul></div><span class="svc-tag neutral">Included</span></div>
-  <div class="svc rv spot"><span class="num">09</span><div class="svc-main"><h3>CMS / editable content</h3>
-    <p>Want to update your own text or images later? I can set the site up so you can make simple edits yourself, without touching code or paying for every little change.</p>
-    <ul><li>Editable sections</li><li>Easy image swaps</li><li>Plain-English guide</li></ul></div><span class="svc-tag neutral">Optional</span></div>
-  <div class="svc rv spot"><span class="num">10</span><div class="svc-main"><h3>Care &amp; updates</h3>
-    <p>An optional monthly plan that keeps everything running &mdash; hosting, security, backups, and small content changes &mdash; so you never have to think about your site&rsquo;s upkeep again. Cancel anytime.</p>
-    <ul><li>Hosting &amp; backups</li><li>Security updates</li><li>Small edits included</li></ul></div><span class="svc-tag neutral">Optional</span></div>
+  {%- for s in services.list.items %}
+  <div class="svc rv spot"><span class="num">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span><div class="svc-main"><h3>{{ s.title }}</h3>
+    <p>{{ s.body }}</p>
+    <ul>{% for f in s.features %}<li>{{ f }}</li>{% endfor %}</ul></div><span class="svc-tag neutral">{{ s.tag }}</span></div>
+  {%- endfor %}
 </div></div></section>
 
 <!-- ============ PRICING / PACKAGES ============ -->
 <section class="band band-tint" id="pricing"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Website packages</span>
-    <h2>Three clear ways to get your website built.</h2>
-    <p>Choose the option that sounds closest to what you need. Every project gets a fair, custom quote built around your goals &mdash; no fixed template pricing, no guesswork.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.pricing.eyebrow }}</span>
+    <h2>{{ home.pricing.heading }}</h2>
+    <p>{{ home.pricing.intro }}</p></div>
   <div class="price-grid" data-stagger="0.08">
-    <div class="ptier rv">
-      <span class="tier-name">Starter Website</span>
-      <p class="tier-label">Best for getting online properly</p>
-      <p class="tier-sub">A clean, focused website for small businesses that need a professional online presence without overcomplicating things.</p>
+    {%- for t in home.pricing.tiers %}
+    <div class="ptier{% if t.featured %} feature{% endif %} rv">
+      {%- if t.badge %}
+      <span class="tier-badge">{{ t.badge }}</span>
+      {%- endif %}
+      <span class="tier-name">{{ t.name }}</span>
+      <p class="tier-label">{{ t.label }}</p>
+      <p class="tier-sub">{{ t.sub }}</p>
       <ul>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>One-page website</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Mobile-friendly design</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Contact form</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Basic SEO setup</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Launch support</li>
+        {%- for f in t.features %}
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</li>
+        {%- endfor %}
       </ul>
-      <a href="quote.html?package=starter" class="btn btn-ghost">Start with Starter</a>
+      <a href="quote.html?package={{ t.package }}" class="btn {% if t.featured %}btn-grad{% else %}btn-ghost{% endif %}">{{ t.button }}</a>
     </div>
-    <div class="ptier feature rv">
-      <span class="tier-badge">Best for most</span>
-      <span class="tier-name">Business Website</span>
-      <p class="tier-label">Best for most businesses</p>
-      <p class="tier-sub">A stronger website for service businesses that need more pages, better structure, and more trust before customers reach out.</p>
-      <ul>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Multi-page website</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Home, Services, About, Contact, FAQ</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Local SEO structure</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Stronger calls-to-action</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Google Business Profile guidance</li>
-      </ul>
-      <a href="quote.html?package=business" class="btn btn-grad">Start with Business</a>
-    </div>
-    <div class="ptier rv">
-      <span class="tier-name">Growth Website</span>
-      <p class="tier-label">Best for custom needs</p>
-      <p class="tier-sub">A more flexible website option for businesses that need extra pages, custom sections, quote flows, booking flows, or CMS/editable content.</p>
-      <ul>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced layouts</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Booking or quote flows</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>CMS / editable content options</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Extra service or location pages</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom integrations where needed</li>
-      </ul>
-      <a href="quote.html?package=growth" class="btn btn-ghost">Start with Growth</a>
-    </div>
+    {%- endfor %}
   </div>
-  <p class="price-foot rv">Every business is different. Choose the option that sounds closest to what you need, then tell me your goals and budget. I&rsquo;ll build a fair quote around the actual project.</p>
-  <div class="mini-cta rv"><div class="mc-l"><h3>Not sure which one fits?</h3><p>Tell me your goals and budget and I&rsquo;ll point you to the right option &mdash; then build a fair quote around the actual project.</p></div><a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a></div>
+  <p class="price-foot rv">{{ home.pricing.foot }}</p>
+  <div class="mini-cta rv"><div class="mc-l"><h3>{{ services.pricing_mini.heading }}</h3><p>{{ services.pricing_mini.body }}</p></div><a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a></div>
 </div></section>
 
 <!-- ============ INDUSTRIES &amp; AREAS ============ -->
 <section class="band"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Who it&rsquo;s for</span>
-    <h2>Web design built for local trades, services &amp; small businesses.</h2>
-    <p>Pages tailored to specific industries and areas around Nova Scotia &mdash; with the problems, trust signals, and calls-to-action that matter for each one.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ services.who.eyebrow }}</span>
+    <h2>{{ services.who.heading }}</h2>
+    <p>{{ services.who.intro }}</p></div>
   <div class="lp-chips rv">
     <a href="web-design-for-contractors.html">Web design for contractors</a>
     <a href="web-design-for-electricians.html">Web design for electricians</a>
@@ -151,12 +102,12 @@
 </div></section>
 
 <section class="band band-tint"><div class="wrap"><div class="cta-band rv"><span class="glow"></span><span class="glow g2"></span>
-      <h2>Ready to make your website easier to trust and easier to contact?</h2>
-      <p>Tell me about your business and I&rsquo;ll come back with honest advice and a clear, flat quote &mdash; free.</p>
+      <h2>{{ services.cta.heading }}</h2>
+      <p>{{ services.cta.body }}</p>
       <div class="cta-actions">
         <a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a>
         <a href="quote.html" class="btn btn-ghost on-dark">Start a Website Project</a>
-        <a href="tel:+19022774424" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
+        <a href="tel:{{ site.contact.phone_link }}" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
       </div>
     </div></div></section>
 
@@ -165,10 +116,10 @@
       <div class="foot-top">
         <div class="foot-brand">
           <a class="fb-logo" href="index.html"><img src="assets/logo.png" alt="Hatt Digital" width="560" height="397" loading="lazy" decoding="async"><span class="name">Hatt <span>Digital</span></span></a>
-          <p>Honest, effective websites for local businesses across Nova Scotia.</p>
+          <p>{{ site.footer.blurb }}</p>
           <div class="foot-social">
-            <a href="https://www.facebook.com/profile.php?id=61590965965094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+            <a href="{{ site.social.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="{{ site.social.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
           </div>
         </div>
         <div class="foot-cols">
@@ -179,14 +130,14 @@
             <a href="web-design-for-contractors.html">Contractors</a><a href="web-design-for-electricians.html">Electricians</a><a href="web-design-for-plumbers.html">Plumbers</a><a href="web-design-for-small-businesses.html">Small businesses</a>
           </div>
           <div class="foot-col"><h4>Areas &amp; contact</h4>
-            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:+19022774424">902-277-4424</a><a href="mailto:hattdigitalns@gmail.com">Email me</a>
+            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:{{ site.contact.phone_link }}">{{ site.contact.phone }}</a><a href="mailto:{{ site.contact.email }}">Email me</a>
           </div>
         </div>
       </div>
       <div class="foot-bottom"><span>&copy; <span id="yr"></span> Hatt Digital. All rights reserved.</span><span class="mono">Nova Scotia, Canada &middot; 44.65&deg; N</span></div>
     </div></footer>
 <div class="mobile-cta" id="mobileCta" aria-label="Quick contact bar">
-  <a class="call" href="tel:+19022774424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
+  <a class="call" href="tel:{{ site.contact.phone_link }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
   <a href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
   <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Start Project</a>
 </div>
