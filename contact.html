@@ -18,7 +18,10 @@
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css"><script type="application/ld+json">
+<link rel="stylesheet" href="assets/styles.css">
+<!-- Forminit CDN SDK — backend for this form. Form ID is set in assets/forminit.js. -->
+<script src="https://forminit.com/sdk/v1/forminit.js" defer></script>
+<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ContactPage","url":"https://hattdigital.ca/contact.html","mainEntity":{"@type":"ProfessionalService","name":"Hatt Digital","url":"https://hattdigital.ca/","telephone":"+1-902-277-4424","email":"hattdigitalns@gmail.com","areaServed":[{"@type":"AdministrativeArea","name":"Nova Scotia"}]}}
 </script>
 <script type="application/ld+json">
@@ -67,19 +70,20 @@
   </div>
   <div class="form-card rv">
     <p class="form-intro">Not sure what you need yet? That&rsquo;s fine. Send what you have and I&rsquo;ll help you figure out the next step.</p>
-    <form id="quoteForm" novalidate>
+    <!-- data-forminit hands this form to assets/forminit.js (Forminit backend). -->
+    <form id="quoteForm" novalidate data-forminit>
       <div class="row">
-        <div><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
-        <div><label for="biz">Business name</label><input id="biz" name="biz" type="text" autocomplete="organization" placeholder="Smith Plumbing"></div>
+        <div><label for="name">Your name</label><input id="name" name="fi-sender-fullName" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
+        <div><label for="biz">Business name</label><input id="biz" name="fi-text-business" type="text" autocomplete="organization" placeholder="Smith Plumbing"></div>
       </div>
       <div class="row">
-        <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca" required></div>
-        <div><label for="phone">Phone <span class="opt">(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
+        <div><label for="email">Email</label><input id="email" name="fi-sender-email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca" required></div>
+        <div><label for="phone">Phone <span class="opt">(optional)</span></label><input id="phone" name="fi-text-phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
       </div>
-      <div><label for="website">Current website <span class="opt">(if you have one)</span></label><input id="website" name="website" type="text" inputmode="url" placeholder="smithplumbing.ca, or a Facebook page"></div>
+      <div><label for="website">Current website <span class="opt">(if you have one)</span></label><input id="website" name="fi-text-website" type="text" inputmode="url" placeholder="smithplumbing.ca, or a Facebook page"></div>
       <div class="row">
         <div><label for="needs">What do you need?</label>
-          <select id="needs" name="needs">
+          <select id="needs" name="fi-text-needs">
             <option>A new website</option>
             <option>A redesign of my current site</option>
             <option>A free website audit / honest feedback</option>
@@ -87,14 +91,14 @@
             <option>Not sure yet — need advice</option>
           </select></div>
         <div><label for="budget">Budget range <span class="opt">(optional)</span></label>
-          <select id="budget" name="budget">
+          <select id="budget" name="fi-text-budget">
             <option>Not sure yet</option>
             <option>Around $750–$1,500</option>
             <option>Around $1,500–$3,000</option>
             <option>$3,000+</option>
           </select></div>
       </div>
-      <div><label for="msg">Anything else?</label><textarea id="msg" name="msg" placeholder="A new website for my plumbing business — currently just have a Facebook page."></textarea></div>
+      <div><label for="msg">Anything else?</label><textarea id="msg" name="fi-text-message" placeholder="A new website for my plumbing business — currently just have a Facebook page."></textarea></div>
       <button type="submit" class="btn btn-grad">Send it over <span class="arr">&rarr;</span></button>
     </form>
   </div>
@@ -131,4 +135,6 @@
   <a class="primary" href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Free Audit</a>
 </div>
 <script src="assets/main.js"></script>
+<!-- Forminit integration (shared by contact.html + quote.html). Form ID lives in assets/forminit.js. -->
+<script src="assets/forminit.js" defer></script>
 </body></html>

@@ -94,7 +94,9 @@
     <p class="form-intro">Already picked a package? It&rsquo;s pre-selected below &mdash; change it any time. Not sure yet? Choose &ldquo;Not sure yet&rdquo; and I&rsquo;ll help you figure it out.</p>
 
     <!-- enctype is multipart/form-data so the file uploads below are sent as real files via FormData. -->
-    <form id="fiQuoteForm" enctype="multipart/form-data" novalidate>
+    <!-- data-forminit hands this form to assets/forminit.js (Forminit backend). -->
+    <form id="fiQuoteForm" enctype="multipart/form-data" novalidate data-forminit data-forminit-max-mb="25"
+          data-forminit-success="Thanks! Your quote request is in — I’ll reply within one business day.">
 
       <!-- Hidden field submitted to Forminit. Kept in sync with the visible -->
       <!-- "Package" dropdown and the ?package= URL parameter by the inline script. -->
@@ -102,7 +104,7 @@
 
       <div>
         <label for="package">Package</label>
-        <select id="package" name="package_choice">
+        <select id="package" name="package_choice" data-package-select>
           <option value="">Not sure yet — help me choose</option>
           <option value="Starter Website">Starter Website</option>
           <option value="Business Website">Business Website</option>
@@ -183,160 +185,7 @@
   <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Free Audit</a>
 </div>
 <script src="assets/main.js"></script>
-
-<!-- =================================================================== -->
-<!-- Forminit quote-form integration                                     -->
-<!-- =================================================================== -->
-<script>
-(function () {
-  'use strict';
-
-  /* ================================================================= */
-  /*  >>> PASTE YOUR REAL FORMINIT FORM ID ON THE NEXT LINE <<<        */
-  /*  Replace the string 'YOUR_FORM_ID' with the Form ID from your     */
-  /*  Forminit dashboard. This is the ONLY place the Form ID is used.  */
-  var FORMINIT_FORM_ID = 'wfjl4ah61iy';
-  /* ================================================================= */
-
-  var MAX_TOTAL_BYTES = 25 * 1024 * 1024; /* 25 MB total across all file fields */
-
-  var form = document.getElementById('fiQuoteForm');
-  if (!form) return;
-
-  var submitBtn = form.querySelector('button[type="submit"]');
-  var hiddenPkg = document.getElementById('selected_package');
-  var pkgSelect = document.getElementById('package');
-  var emailInput = document.getElementById('email');
-  var nameInput = document.getElementById('fullName');
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  /* Map ?package= URL value -> the visible dropdown option value. */
-  var PACKAGE_MAP = {
-    starter: 'Starter Website',
-    business: 'Business Website',
-    growth: 'Growth Website'
-  };
-
-  /* Live status line (matches the contact form's accessible status pattern). */
-  var status = document.createElement('p');
-  status.className = 'form-status';
-  status.setAttribute('role', 'status');
-  status.setAttribute('aria-live', 'polite');
-  form.appendChild(status);
-
-  function setStatus(msg, kind) {
-    status.textContent = msg;
-    status.className = 'form-status' + (kind ? ' ' + kind : '');
-  }
-
-  /* Keep the hidden selected_package field in sync with the dropdown. */
-  function syncHiddenPackage() {
-    hiddenPkg.value = pkgSelect.value; /* '' when "Not sure yet" is chosen */
-  }
-
-  /* ---- Pre-select the package from ?package=starter|business|growth ---- */
-  (function preselectFromUrl() {
-    var params = new URLSearchParams(window.location.search);
-    var raw = (params.get('package') || '').trim().toLowerCase();
-    if (raw && PACKAGE_MAP[raw]) {
-      pkgSelect.value = PACKAGE_MAP[raw];
-    }
-    syncHiddenPackage();
-  })();
-
-  /* User can manually change the package; keep the hidden field updated. */
-  pkgSelect.addEventListener('change', syncHiddenPackage);
-
-  /* ---- Client-side file-size validation (25 MB total) ---- */
-  function totalFileBytes() {
-    var total = 0;
-    form.querySelectorAll('input[type="file"]').forEach(function (input) {
-      if (input.files) {
-        for (var i = 0; i < input.files.length; i++) total += input.files[i].size;
-      }
-    });
-    return total;
-  }
-  function humanMB(bytes) { return (bytes / (1024 * 1024)).toFixed(1) + ' MB'; }
-
-  function basicValidation() {
-    if (!nameInput.value.trim()) { setStatus('Please add your name.', 'err'); nameInput.focus(); return false; }
-    if (!EMAIL_RE.test(emailInput.value.trim())) { setStatus('That email doesn’t look right.', 'err'); emailInput.focus(); return false; }
-    var bytes = totalFileBytes();
-    if (bytes > MAX_TOTAL_BYTES) {
-      setStatus('Your uploads total ' + humanMB(bytes) + '. Please keep them under 25 MB — or paste a Drive/Dropbox link in the “Asset folder link” field instead.', 'err');
-      return false;
-    }
-    return true;
-  }
-
-  /* Re-validate file size as soon as files are picked, so the user gets early feedback. */
-  form.querySelectorAll('input[type="file"]').forEach(function (input) {
-    input.addEventListener('change', function () {
-      var bytes = totalFileBytes();
-      if (bytes > MAX_TOTAL_BYTES) {
-        setStatus('Your uploads total ' + humanMB(bytes) + '. That’s over the 25 MB limit — remove a file or paste a folder link instead.', 'err');
-      } else if (status.classList.contains('err')) {
-        setStatus('', '');
-      }
-    });
-  });
-
-  /* ---- Submit via JavaScript using FormData ---- */
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    syncHiddenPackage();
-    if (!basicValidation()) return;
-
-    if (FORMINIT_FORM_ID === 'YOUR_FORM_ID') {
-      setStatus('This form isn’t connected yet — the Forminit Form ID still needs to be added.', 'err');
-      return;
-    }
-
-    /* FormData captures every field including the file inputs and selected_package. */
-    var formData = new FormData(form);
-
-    submitBtn.disabled = true;
-    setStatus('Sending your request…', '');
-
-    /*
-     * Submit through the Forminit CDN SDK when it's available
-     * (window.Forminit / window.forminit). If the SDK hasn't loaded for any
-     * reason, fall back to a direct multipart POST to Forminit so a real
-     * submission (files included) still goes through — no faked uploads.
-     */
-    function onSuccess() {
-      setStatus('Thanks! Your quote request is in — I’ll reply within one business day.', 'ok');
-      form.reset();
-      syncHiddenPackage(); /* restore hidden field after reset */
-      submitBtn.disabled = false;
-    }
-    function onError(err) {
-      if (window.console && err) console.error('Forminit submit failed:', err);
-      setStatus('Something went wrong sending your request. Please try again, or email hattdigitalns@gmail.com directly.', 'err');
-      submitBtn.disabled = false;
-    }
-
-    var sdk = window.Forminit || window.forminit;
-    try {
-      if (sdk && typeof sdk.submit === 'function') {
-        /* Most common SDK shape: Forminit.submit(formId, formData) -> Promise */
-        Promise.resolve(sdk.submit(FORMINIT_FORM_ID, formData)).then(onSuccess).catch(onError);
-      } else {
-        /* Fallback: post the FormData straight to the Forminit submit endpoint. */
-        fetch('https://forminit.com/api/v1/forms/' + FORMINIT_FORM_ID + '/submissions', {
-          method: 'POST',
-          body: formData
-        }).then(function (res) {
-          if (!res.ok) throw new Error('HTTP ' + res.status);
-          onSuccess();
-        }).catch(onError);
-      }
-    } catch (err) {
-      onError(err);
-    }
-  });
-})();
-</script>
+<!-- Forminit integration (shared by quote.html + contact.html). -->
+<!-- The Forminit Form ID lives in assets/forminit.js. -->
+<script src="assets/forminit.js" defer></script>
 </body></html>
