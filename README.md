@@ -61,16 +61,17 @@ using **[Pages CMS](https://pagescms.org)**:
 Saving commits to `main`, which rebuilds and redeploys the site automatically.
 The structure of the editor is defined in `.pages.yml`.
 
-## Deploy with GitHub Pages
+## Deploy with Vercel
 
-This repo includes a workflow that publishes the site automatically.
+The site is hosted on Vercel and deploys automatically on every push to `main`.
+Vercel runs the Eleventy build defined in `vercel.json`:
 
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Build and deployment → Source**, choose **GitHub Actions**.
-4. Every push to `main` now deploys to `https://<your-username>.github.io/<repo-name>/`.
+- **Build command:** `npm run build`
+- **Output directory:** `_site`
 
-Using a custom domain (e.g. `hattdigital.ca`)? Add it under Settings → Pages, and create a file named `CNAME` in the repo root containing just your domain.
+Redirects and security headers are configured in `vercel.json` as well. No other
+setup is needed — push to `main` (or save in the CMS) and Vercel rebuilds and
+redeploys the finished site.
 
 ## Customize before launch
 
