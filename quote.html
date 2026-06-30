@@ -58,6 +58,17 @@
     color:#fff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.04em}
   .q-head h2{font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
   .q-note{color:var(--muted);font-size:14.5px;line-height:1.55;margin:12px 0 0}
+  .q-hint{color:var(--muted);font-size:13px;line-height:1.5;margin:14px 0 0;font-family:'Inter',sans-serif}
+
+  /* Friendly lead-in callout at the top of the form */
+  .form-lead{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--line);
+    border-left:3px solid var(--cyan);border-radius:14px;padding:15px 18px;margin:0;
+    font-family:'Inter',sans-serif;font-size:15.5px;line-height:1.45;color:var(--ink);font-weight:500;
+    box-shadow:0 18px 44px -38px rgba(10,22,51,.45)}
+  .form-lead svg{flex:none;width:20px;height:20px;color:var(--royal)}
+
+  /* Optional section reads as clearly lighter / lower-pressure */
+  .q-block.q-optional{background:var(--mist-2);border-style:dashed}
   .q-fields{display:flex;flex-direction:column;gap:18px;margin-top:22px}
   .q-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .q-field{display:flex;flex-direction:column;min-width:0}
@@ -76,16 +87,16 @@
   .quote-form textarea{resize:vertical;min-height:98px;line-height:1.55}
 
   /* ---- Website-type tiles ---- */
-  .quote-form .pkg-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-  .quote-form .pkg-card{position:relative;display:flex;flex-direction:column;gap:6px;cursor:pointer;
-    background:var(--mist-2);border:1.5px solid var(--line);border-radius:16px;padding:20px 18px 18px;
+  .quote-form .pkg-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
+  .quote-form .pkg-card{position:relative;display:flex;flex-direction:column;gap:9px;cursor:pointer;
+    background:var(--mist-2);border:1.5px solid var(--line);border-radius:16px;padding:24px 22px 22px;
     transition:border-color .2s,box-shadow .2s,background .2s,transform .15s}
   .quote-form .pkg-card input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
   .quote-form .pkg-card:hover{border-color:#bcd0ee;transform:translateY(-2px);box-shadow:0 18px 34px -26px rgba(10,22,51,.45)}
   .quote-form .pkg-card .pkg-name{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.06em;
     text-transform:uppercase;color:var(--royal);font-weight:700}
-  .quote-form .pkg-card .pkg-label{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:16px;color:var(--ink);letter-spacing:-.01em;text-transform:none}
-  .quote-form .pkg-card .pkg-desc{font-family:'Inter',sans-serif;color:var(--muted);font-size:13px;line-height:1.5;font-weight:400;text-transform:none;letter-spacing:0}
+  .quote-form .pkg-card .pkg-label{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:16.5px;color:var(--ink);letter-spacing:-.01em;text-transform:none;margin-top:2px}
+  .quote-form .pkg-card .pkg-desc{font-family:'Inter',sans-serif;color:var(--muted);font-size:13.5px;line-height:1.6;font-weight:400;text-transform:none;letter-spacing:0}
   .quote-form .pkg-card .pkg-badge{position:absolute;top:14px;right:14px;display:none;align-items:center;gap:5px;
     background:var(--grad);color:#fff;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
     letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;box-shadow:0 8px 18px -8px rgba(10,91,230,.7)}
@@ -160,10 +171,6 @@
     </div></div></section>
 
 <section class="band band-tint"><div class="wrap">
-  <div class="quote-intro rv">
-    <p>Fill out what you can &mdash; most fields are optional. The more you share about your business and goals, the more accurate and fair your quote will be. Only your name and email are required.</p>
-  </div>
-
   <div class="quote-shell rv">
     <!-- data-forminit hands this form to assets/forminit.js (Forminit backend). -->
     <form id="fiQuoteForm" novalidate data-forminit
@@ -176,43 +183,71 @@
 
       <div class="quote-form">
 
+        <p class="form-lead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> This only takes a minute. Most details are optional &mdash; just share what you can.</p>
+
         <!-- ===== Section 1 — Website type ===== -->
-        <section class="q-block">
+        <section class="q-block" id="pkgSection">
           <div class="q-head"><span class="q-num">01</span><h2>Choose your website type</h2></div>
-          <p class="q-note">Tap the option that sounds closest to what you need. If you arrived from a package on the site, it&rsquo;s already selected &mdash; you can change it any time.</p>
+          <p class="q-note">Pick the option that sounds closest to what you need. If you came from a package on the site, it&rsquo;s already selected &mdash; change it any time.</p>
           <div class="pkg-picker" data-package-cards>
             <label class="pkg-card">
               <input type="radio" name="package_choice" value="Starter Website">
               <span class="pkg-badge">Selected</span>
-              <span class="pkg-name">Starter</span>
+              <span class="pkg-name">Starter Website</span>
               <span class="pkg-label">Best for getting online properly</span>
-              <span class="pkg-desc">A clean, focused website for small businesses that need a professional online presence without overcomplicating things.</span>
+              <span class="pkg-desc">A focused website for small businesses that need a clean, credible online presence.</span>
             </label>
             <label class="pkg-card">
               <input type="radio" name="package_choice" value="Business Website">
               <span class="pkg-badge">Selected</span>
-              <span class="pkg-name">Business</span>
+              <span class="pkg-name">Business Website</span>
               <span class="pkg-label">Best for most businesses</span>
-              <span class="pkg-desc">A stronger website for service businesses that need more pages, better structure, and more trust before customers reach out.</span>
+              <span class="pkg-desc">A stronger multi-page website for service businesses that need more trust and better structure.</span>
             </label>
             <label class="pkg-card">
               <input type="radio" name="package_choice" value="Growth Website">
               <span class="pkg-badge">Selected</span>
-              <span class="pkg-name">Growth</span>
+              <span class="pkg-name">Growth Website</span>
               <span class="pkg-label">Best for custom needs</span>
-              <span class="pkg-desc">A flexible option for businesses that need extra pages, custom sections, quote flows, booking flows, or CMS/editable content.</span>
+              <span class="pkg-desc">A flexible option for businesses that need extra pages, quote flows, CMS options, or custom features.</span>
             </label>
           </div>
         </section>
 
-        <!-- ===== Section 2 — Comfortable budget ===== -->
+        <!-- ===== Section 2 — Basic details ===== -->
         <section class="q-block">
-          <div class="q-head"><span class="q-num">02</span><h2>Your comfortable budget</h2></div>
-          <p class="q-note">Slide to a number you&rsquo;d feel comfortable with. The range adjusts to the option you picked above. This just gives me a starting point &mdash; nothing is locked in.</p>
+          <div class="q-head"><span class="q-num">02</span><h2>Basic details</h2></div>
+          <div class="q-fields">
+            <div class="q-row">
+              <div class="q-field"><label for="contact_name">Contact name</label><input id="contact_name" name="fi-sender-fullName" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
+              <div class="q-field"><label for="business_name">Business name</label><input id="business_name" name="fi-text-business_name" type="text" autocomplete="organization" placeholder="Smith Plumbing" required></div>
+            </div>
+            <div class="q-row">
+              <div class="q-field"><label for="email">Email</label><input id="email" name="fi-sender-email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca"></div>
+              <div class="q-field"><label for="phone">Phone number</label><input id="phone" name="fi-text-phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
+            </div>
+            <div class="q-field"><label for="current_website">Current website URL <span class="opt">(optional)</span></label><input id="current_website" name="fi-text-current_website" type="text" inputmode="url" placeholder="smithplumbing.ca — or leave blank if you don't have one yet"></div>
+          </div>
+          <p class="q-hint">Add an email or a phone number so I can reply.</p>
+        </section>
+
+        <!-- ===== Section 3 — Project goals ===== -->
+        <section class="q-block">
+          <div class="q-head"><span class="q-num">03</span><h2>Project goals</h2></div>
+          <div class="q-fields">
+            <div class="q-field"><label for="business_does">What does your business do?</label><textarea id="business_does" name="fi-text-business_does" placeholder="A quick description of your business and the services you offer." required></textarea></div>
+            <div class="q-field"><label for="website_goals">What do you want the website to help with?</label><textarea id="website_goals" name="fi-text-website_goals" placeholder="e.g. more calls, more quote requests, looking more professional, showing past work." required></textarea></div>
+          </div>
+        </section>
+
+        <!-- ===== Section 4 — Project budget range ===== -->
+        <section class="q-block">
+          <div class="q-head"><span class="q-num">04</span><h2>Project budget range</h2></div>
+          <p class="q-note">This helps me recommend the right scope &mdash; it does not lock you into a final price.</p>
           <div class="budget-wrap" id="budgetWrap">
             <input type="range" id="budgetSlider" name="selected_budget" min="500" max="1500" step="50" value="1000"
-                   aria-label="Comfortable budget">
-            <div class="budget-readout">Comfortable budget: <strong id="budgetValue">$1,000</strong></div>
+                   aria-label="Preferred budget range">
+            <div class="budget-readout">Preferred range: <strong id="budgetValue">$1,000</strong></div>
             <div class="budget-scale"><span id="budgetMin">$500</span><span id="budgetMax">$1,500</span></div>
           </div>
           <label class="check-line">
@@ -221,39 +256,14 @@
           </label>
         </section>
 
-        <!-- ===== Section 3 — Business information ===== -->
-        <section class="q-block">
-          <div class="q-head"><span class="q-num">03</span><h2>Business information</h2></div>
+        <!-- ===== Section 5 — Optional details ===== -->
+        <section class="q-block q-optional">
+          <div class="q-head"><span class="q-num">05</span><h2>Optional details</h2></div>
+          <p class="q-note">Add these if you have them. If not, leave them blank.</p>
           <div class="q-fields">
-            <div class="q-row">
-              <div class="q-field"><label for="business_name">Business name</label><input id="business_name" name="fi-text-business_name" type="text" autocomplete="organization" placeholder="Smith Plumbing"></div>
-              <div class="q-field"><label for="contact_name">Contact name</label><input id="contact_name" name="fi-sender-fullName" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
-            </div>
-            <div class="q-row">
-              <div class="q-field"><label for="email">Email</label><input id="email" name="fi-sender-email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca" required></div>
-              <div class="q-field"><label for="phone">Phone number</label><input id="phone" name="fi-text-phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
-            </div>
-            <div class="q-field"><label for="current_website">Current website URL <span class="opt">(optional)</span></label><input id="current_website" name="fi-text-current_website" type="text" inputmode="url" placeholder="smithplumbing.ca — or leave blank if you don't have one yet"></div>
-          </div>
-        </section>
-
-        <!-- ===== Section 4 — Project goals ===== -->
-        <section class="q-block">
-          <div class="q-head"><span class="q-num">04</span><h2>Project goals</h2></div>
-          <div class="q-fields">
-            <div class="q-field"><label for="business_does">What does your business do?</label><textarea id="business_does" name="fi-text-business_does" placeholder="A quick description of your business and the services you offer."></textarea></div>
-            <div class="q-field"><label for="website_goals">What are you hoping the website helps with?</label><textarea id="website_goals" name="fi-text-website_goals" placeholder="e.g. more calls, more quote requests, looking more professional, showing past work."></textarea></div>
             <div class="q-field"><label for="pages_needed">What pages do you think you need?</label><textarea id="pages_needed" name="fi-text-pages_needed" placeholder="e.g. Home, Services, About, Gallery, Contact — a rough idea is fine."></textarea></div>
-            <div class="q-field"><label for="contact_preference">Do you want customers to call, submit a quote form, book online, or something else?</label><textarea id="contact_preference" name="fi-text-contact_preference" placeholder="How would you like customers to get in touch?"></textarea></div>
-          </div>
-        </section>
-
-        <!-- ===== Section 5 — Branding & content ===== -->
-        <section class="q-block">
-          <div class="q-head"><span class="q-num">05</span><h2>Branding &amp; content</h2></div>
-          <div class="q-fields">
             <div class="q-row">
-              <div class="q-field"><label for="has_branding">Do you already have a logo/branding?</label>
+              <div class="q-field"><label for="has_branding">Do you already have a logo or branding?</label>
                 <select id="has_branding" name="fi-text-has_branding">
                   <option value="">Not sure yet</option>
                   <option value="Yes — logo and branding ready">Yes — logo &amp; branding ready</option>
@@ -278,40 +288,19 @@
                 <option value="Some help">Some help</option>
               </select>
             </div>
-            <div class="q-field"><label for="assets_link">Logo / image link <span class="opt">(optional)</span></label>
+            <div class="q-field"><label for="assets_link">Logo / image link</label>
               <input id="assets_link" name="fi-text-assets_link" type="text" inputmode="url"
                      placeholder="Paste a Google Drive, Dropbox, Canva, or file link to your logo/images">
             </div>
-          </div>
-        </section>
-
-        <!-- ===== Section 6 — Social media ===== -->
-        <section class="q-block">
-          <div class="q-head"><span class="q-num">06</span><h2>Social media</h2></div>
-          <p class="q-note">Add any you use &mdash; leave the rest blank.</p>
-          <div class="q-fields">
-            <div class="q-row">
-              <div class="q-field"><label for="facebook">Facebook URL <span class="opt">(optional)</span></label><input id="facebook" name="fi-text-facebook" type="text" inputmode="url" placeholder="facebook.com/yourbusiness"></div>
-              <div class="q-field"><label for="instagram">Instagram URL <span class="opt">(optional)</span></label><input id="instagram" name="fi-text-instagram" type="text" inputmode="url" placeholder="instagram.com/yourbusiness"></div>
-            </div>
-            <div class="q-row">
-              <div class="q-field"><label for="linkedin">LinkedIn URL <span class="opt">(optional)</span></label><input id="linkedin" name="fi-text-linkedin" type="text" inputmode="url" placeholder="linkedin.com/company/…"></div>
-              <div class="q-field"><label for="tiktok">TikTok URL <span class="opt">(optional)</span></label><input id="tiktok" name="fi-text-tiktok" type="text" inputmode="url" placeholder="tiktok.com/@yourbusiness"></div>
-            </div>
-            <div class="q-field"><label for="other_social">Other social links <span class="opt">(optional)</span></label><input id="other_social" name="fi-text-other_social" type="text" placeholder="Anything else you use"></div>
-          </div>
-        </section>
-
-        <!-- ===== Section 7 — Extra notes ===== -->
-        <section class="q-block">
-          <div class="q-head"><span class="q-num">07</span><h2>Extra notes</h2></div>
-          <div class="q-fields">
-            <div class="q-field"><label for="extra_notes">Anything else I should know before building your demo?</label><textarea id="extra_notes" name="fi-text-extra_notes" style="min-height:130px" placeholder="Anything at all — must-haves, things to avoid, deadlines, inspiration links, questions."></textarea></div>
+            <div class="q-field"><label for="social_links">Social media links</label>
+              <textarea id="social_links" name="fi-text-social_links" placeholder="Paste any social media links here if you want them included."></textarea></div>
+            <div class="q-field"><label for="extra_notes">Anything else I should know?</label>
+              <textarea id="extra_notes" name="fi-text-extra_notes" placeholder="Must-haves, things to avoid, deadlines, inspiration links, questions."></textarea></div>
           </div>
         </section>
 
         <button type="submit" class="btn btn-grad">Request My Website Quote <span class="arr">&rarr;</span></button>
-        <p class="quote-foot">No obligation &middot; I reply within one business day</p>
+        <p class="quote-foot">No pressure. I&rsquo;ll review your details and reply with the next best step.</p>
       </div>
     </form>
   </div>
@@ -360,6 +349,37 @@
   };
   var PMAP={starter:'Starter Website',business:'Business Website',growth:'Growth Website'};
   function money(n){return '$'+Number(n).toLocaleString('en-US');}
+
+  /* ---- Light required-field checks ----
+     This script runs before the deferred assets/forminit.js, so this submit
+     listener fires first. Native `required` handles contact name, business
+     name and the two goal fields; here we cover the two rules native HTML
+     can't: a website type must be picked, and at least one of email/phone.
+     On failure we stop the Forminit handler from sending. */
+  var qForm=document.getElementById('fiQuoteForm');
+  if(qForm){
+    qForm.addEventListener('submit',function(e){
+      var radios=Array.prototype.slice.call(qForm.querySelectorAll('input[name="package_choice"]'));
+      var statusEl=qForm.querySelector('.form-status');
+      function fail(msg,focusEl,scrollEl){
+        e.preventDefault(); e.stopImmediatePropagation();
+        if(statusEl){ statusEl.textContent=msg; statusEl.className='form-status err'; }
+        if(scrollEl) scrollEl.scrollIntoView({behavior:'smooth',block:'center'});
+        if(focusEl) focusEl.focus();
+      }
+      if(!radios.some(function(r){return r.checked;})){
+        return fail('Please choose a website type above.',null,document.getElementById('pkgSection'));
+      }
+      var emailEl=qForm.querySelector('[name="fi-sender-email"]');
+      var phoneEl=qForm.querySelector('[name="fi-text-phone"]');
+      var email=emailEl?emailEl.value.trim():'';
+      var phone=phoneEl?phoneEl.value.trim():'';
+      if(!email && !phone){
+        return fail('Please add an email or a phone number so I can reply.',emailEl);
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded',function(){
     var slider=document.getElementById('budgetSlider');
     if(!slider) return;
