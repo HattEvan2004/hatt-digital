@@ -40,17 +40,22 @@
       return Promise.resolve(client.submit(FORMINIT_FORM_ID, formData)).then(function (res) {
         /* SDK resolves with { data, redirectUrl, error } — surface errors. */
         if (res && res.error) {
-          throw new Error(res.error.message || res.error.error || 'Submission failed');
+          throw new Error('SDK: ' + (res.error.message || res.error.error || res.error.code || 'rejected'));
         }
         return res;
       });
     }
+    /* SDK didn't load — post straight to the endpoint the SDK uses. */
     return fetch('https://forminit.com/f/' + FORMINIT_FORM_ID, {
       method: 'POST',
       body: formData,
       headers: { 'Accept': 'application/json' }
     }).then(function (res) {
-      if (!res.ok) throw new Error('HTTP ' + res.status);
+      if (!res.ok) {
+        return res.text().catch(function () { return ''; }).then(function (body) {
+          throw new Error('no-SDK HTTP ' + res.status + (body ? ' — ' + body.slice(0, 160) : ''));
+        });
+      }
       return res;
     });
   }
@@ -151,7 +156,9 @@
         if (submitBtn) submitBtn.disabled = false;
       }).catch(function (err) {
         if (window.console && err) console.error('Forminit submit failed:', err);
-        setStatus(errMsg, 'err');
+        /* Surface the real reason on-page so failures are diagnosable. */
+        var detail = err && err.message ? ' [' + err.message + ']' : '';
+        setStatus(errMsg + detail, 'err');
         if (submitBtn) submitBtn.disabled = false;
       });
     });
