@@ -105,6 +105,12 @@ body.pf .menu-btn span{background:#071426}
 .imp-list li{display:flex;align-items:flex-start;gap:11px;color:#c4cee0;font-size:14.5px;line-height:1.45}
 .imp-list li svg{flex:none;margin-top:2px;color:#14B8FF}
 
+/* "best for" line — who the build suits, kept quiet and scannable */
+.case-bestfor{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12.5px;
+  color:#9fadc8;line-height:1.5}
+.case-bestfor b{color:#cfe8ff;text-transform:uppercase;letter-spacing:.1em;font-size:10.5px;
+  font-weight:700;margin-right:8px}
+
 /* footer: status + cta — pushed to the bottom so buttons align across cards */
 .case-foot{margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.08);
   display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}

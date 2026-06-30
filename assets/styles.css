@@ -945,3 +945,120 @@
   @media(min-width:901px){
     body.home .svc-list.system .svc-tag{align-self:center}
   }
+
+  /* ===================================================== */
+  /* ====  CONVERSION PASS — audit, pricing, CTAs, etc. == */
+  /* Lead-magnet, package cards on light, comparison cards, */
+  /* testimonials placeholder, header call link, mobile bar.*/
+  /* ===================================================== */
+
+  /* --- Header click-to-call (desktop only) --- */
+  .nav-call{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+    font-size:14px;font-weight:500;color:var(--ink);opacity:.85;transition:opacity .2s,color .2s;white-space:nowrap}
+  .nav-call svg{width:16px;height:16px;color:var(--royal)}
+  .nav-call:hover{opacity:1;color:var(--royal)}
+  @media(max-width:1080px){.nav-call{display:none}}
+
+  /* --- CTA button rows (final CTA + sections) --- */
+  .cta-actions{display:flex;gap:13px;flex-wrap:wrap;justify-content:center;position:relative}
+  .btn-call{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2);color:#eaf1fb;backdrop-filter:blur(6px)}
+  .btn-call:hover{background:rgba(20,184,255,.12);border-color:rgba(20,184,255,.55);color:#fff;transform:translateY(-2px)}
+  .btn-call svg{width:17px;height:17px}
+
+  /* --- Free Website Audit lead-magnet panel --- */
+  .audit{position:relative;overflow:hidden;border-radius:26px;border:1px solid var(--line-d);
+    background:linear-gradient(150deg,var(--navy) 0%,var(--ink) 74%);color:#fff;
+    padding:clamp(32px,4.6vw,56px);display:grid;grid-template-columns:1.12fr .88fr;gap:44px;align-items:center;
+    box-shadow:0 50px 100px -52px rgba(7,16,40,.7)}
+  .audit:before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(560px 280px at 90% -12%,rgba(24,182,242,.22),transparent 66%)}
+  .audit:after{content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(120,170,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,255,.025) 1px,transparent 1px);
+    background-size:44px 44px;-webkit-mask-image:radial-gradient(120% 90% at 10% 100%,#000 20%,transparent 72%);
+    mask-image:radial-gradient(120% 90% at 10% 100%,#000 20%,transparent 72%)}
+  .audit>*{position:relative;z-index:1}
+  .audit .eyebrow.on-dark{margin-bottom:16px}
+  .audit h2{color:#fff;font-size:clamp(25px,3.4vw,38px);letter-spacing:-.03em;line-height:1.08}
+  .audit p{color:var(--muted-d);font-size:16.5px;margin-top:14px;max-width:48ch}
+  .audit-actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:26px}
+  .audit-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.11);border-radius:18px;
+    padding:26px 26px;backdrop-filter:blur(6px)}
+  .audit-card h3{color:#fff;font-size:14px;font-weight:700;margin-bottom:18px;font-family:'JetBrains Mono',monospace;
+    letter-spacing:.08em;text-transform:uppercase}
+  .audit-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .audit-list li{display:flex;gap:13px;align-items:flex-start;font-size:15px;color:#dbe6f7;line-height:1.45}
+  .audit-list li svg{flex:none;margin-top:2px;color:var(--cyan)}
+  @media(max-width:860px){.audit{grid-template-columns:1fr;gap:28px}}
+
+  /* --- Pricing packages on a light band (reuses .price-grid/.ptier) --- */
+  .price-foot{margin-top:26px;text-align:center;color:var(--muted);font-size:15px;max-width:62ch;
+    margin-left:auto;margin-right:auto}
+  .ptier .price .amt.word{font-size:34px}
+  .tier-badge{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:#fff;background:var(--grad);padding:5px 13px;border-radius:999px;font-weight:700;
+    position:absolute;top:-12px;left:50%;transform:translateX(-50%);white-space:nowrap;
+    box-shadow:0 10px 24px -10px rgba(10,91,230,.7)}
+
+  /* --- Trust-points strip (item 6) --- */
+  .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+  .tpoint{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);
+    border-radius:14px;padding:20px 22px;transition:transform .3s cubic-bezier(.2,.7,.2,1),border-color .3s,box-shadow .3s}
+  .tpoint:hover{transform:translateY(-3px);border-color:#cdd9ef;box-shadow:0 22px 44px -28px rgba(10,22,51,.3)}
+  .tpoint .tp-ic{flex:none;width:40px;height:40px;border-radius:12px;background:var(--grad);display:grid;
+    place-items:center;color:#fff;box-shadow:0 12px 24px -12px rgba(18,103,255,.55)}
+  .tpoint .tp-ic svg{width:18px;height:18px}
+  .tpoint b{font-size:15.5px;font-weight:700;letter-spacing:-.01em;display:block}
+  .tpoint span{color:var(--muted);font-size:14px;display:block;margin-top:3px;line-height:1.5}
+  @media(max-width:860px){.trust-grid{grid-template-columns:1fr}}
+
+  /* --- Testimonials placeholder (honest, layout-complete) --- */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+  .testi{position:relative;background:linear-gradient(160deg,var(--mist-2),#fff);border:1px solid var(--line);
+    border-radius:18px;padding:28px 26px;display:flex;flex-direction:column;min-height:210px}
+  .testi .stars{display:flex;gap:5px;color:#c2d2ec;margin-bottom:16px}
+  .testi .stars svg{width:17px;height:17px}
+  .testi .quote{color:var(--muted);font-size:15.5px;font-style:italic;flex:1;line-height:1.6}
+  .testi .who{margin-top:20px;display:flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;color:var(--muted)}
+  .testi .who .av{width:38px;height:38px;border-radius:11px;background:var(--mist);border:1px dashed #c9d6ec;flex:none}
+  .testi.invite{align-items:center;justify-content:center;text-align:center;border-style:dashed;
+    border-color:#c9d6ec;background:#fff}
+  .testi.invite .ti-ic{width:48px;height:48px;border-radius:14px;background:var(--mist);display:grid;
+    place-items:center;color:var(--royal);margin-bottom:16px}
+  .testi.invite h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
+  .testi.invite p{font-style:normal;color:var(--muted);font-size:14.5px;margin-top:8px;max-width:30ch}
+  @media(max-width:860px){.testi-grid{grid-template-columns:1fr}}
+
+  /* --- Mobile sticky CTA bar (Call · Quote · Free Audit) --- */
+  .mobile-cta{position:fixed;left:0;right:0;bottom:0;z-index:1500;display:none;
+    grid-template-columns:repeat(3,1fr);gap:8px;
+    padding:9px 11px calc(9px + env(safe-area-inset-bottom,0px));
+    background:rgba(7,20,38,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line-d);
+    transform:translateY(115%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  .mobile-cta.show{transform:none}
+  .mobile-cta a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:12px;color:#eaf1fb;line-height:1.1;
+    border-radius:11px;padding:8px 4px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05)}
+  .mobile-cta a svg{width:17px;height:17px}
+  .mobile-cta a.primary{background:var(--grad);border-color:transparent;color:#fff;
+    box-shadow:0 10px 22px -12px rgba(10,91,230,.8)}
+  .mobile-cta a.call svg{color:var(--cyan)}
+  @media(max-width:720px){.mobile-cta{display:grid}body{padding-bottom:72px}}
+
+  /* ===================================================== */
+  /* ====  SEO LANDING PAGES (industry / area)  ========== */
+  /* Reuses phead, band, get-grid, svc-list, cta-band.     */
+  /* ===================================================== */
+  .lp-list{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-direction:column;gap:13px;max-width:64ch}
+  .lp-list li{display:flex;gap:13px;align-items:flex-start;font-size:16px;color:var(--muted);line-height:1.55}
+  .lp-list li svg{flex:none;margin-top:3px;color:var(--royal)}
+  .lp-chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+  .lp-chips a{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted);background:var(--mist);
+    border:1px solid var(--line);padding:8px 15px;border-radius:999px;transition:color .2s,border-color .2s,background .2s}
+  .lp-chips a:hover{color:var(--royal);border-color:#cdd9ef;background:#fff}
+  .lp-chips a.active{color:#fff;background:var(--grad);border-color:transparent}
+
+  /* --- Contact form: reassurance intro + optional-field hint --- */
+  .form-intro{color:#c9d6ee;font-size:14.5px;line-height:1.55;margin-bottom:20px;
+    padding-bottom:18px;border-bottom:1px solid var(--line-d)}
+  form label .opt{color:#5e6f9e;font-weight:400;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif}

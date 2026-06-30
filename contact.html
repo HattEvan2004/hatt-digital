@@ -33,7 +33,8 @@
       </a>
       <div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a></div>
       <div class="nav-cta">
-        <a href="contact.html" class="btn btn-grad">Get a free quote</a>
+        <a class="nav-call" href="tel:+19022774424" aria-label="Call Hatt Digital at 902-277-4424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 902-277-4424</a>
+        <a href="contact.html" class="btn btn-grad">Free Website Audit</a>
         <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </nav></div></header>
@@ -41,8 +42,8 @@
 <section class="phead"><span class="glow"></span><div class="wrap"><div class="phead-grid">
       <div class="rv">
         <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> Contact</span>
-        <h1>Let's build <span class="hl">something great.</span></h1>
-        <p>Tell me about your business and what you're after. I'll reply with honest advice and a clear quote — free, no strings.</p>
+        <h1>Tell me what you <span class="hl">need built.</span></h1>
+        <p>Whether you need a new website, a redesign, or just want honest feedback on your current site, send over the details and I&rsquo;ll get back to you within one business day &mdash; free, no strings.</p>
       </div>
       <div class="editor rv">
       <div class="ebar"><i></i><i></i><i></i><span class="fname">contact.js</span></div>
@@ -65,21 +66,35 @@
       <div><h4>Instagram</h4><a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener">@hattdigital</a></div></div>
   </div>
   <div class="form-card rv">
+    <p class="form-intro">Not sure what you need yet? That&rsquo;s fine. Send what you have and I&rsquo;ll help you figure out the next step.</p>
     <form id="quoteForm" novalidate>
       <div class="row">
-        <div><label for="name">Your name</label><input id="name" name="name" type="text" placeholder="Jane Smith" required></div>
-        <div><label for="biz">Business</label><input id="biz" name="biz" type="text" placeholder="Smith Plumbing"></div>
+        <div><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
+        <div><label for="biz">Business name</label><input id="biz" name="biz" type="text" autocomplete="organization" placeholder="Smith Plumbing"></div>
       </div>
-      <div><label for="email">Email</label><input id="email" name="email" type="email" placeholder="jane@smithplumbing.ca" required></div>
-      <div><label for="budget">Roughly what are you after?</label>
-        <select id="budget" name="budget">
-          <option>A new one-page site (Starter)</option>
-          <option>A multi-page site (Business)</option>
-          <option>Bookings / store / custom (Complete)</option>
-          <option>A redesign of my current site</option>
-          <option>Not sure yet — need advice</option>
-        </select></div>
-      <div><label for="msg">Tell me about it</label><textarea id="msg" name="msg" placeholder="A new website for my plumbing business — currently have nothing online."></textarea></div>
+      <div class="row">
+        <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca" required></div>
+        <div><label for="phone">Phone <span class="opt">(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
+      </div>
+      <div><label for="website">Current website <span class="opt">(if you have one)</span></label><input id="website" name="website" type="text" inputmode="url" placeholder="smithplumbing.ca, or a Facebook page"></div>
+      <div class="row">
+        <div><label for="needs">What do you need?</label>
+          <select id="needs" name="needs">
+            <option>A new website</option>
+            <option>A redesign of my current site</option>
+            <option>A free website audit / honest feedback</option>
+            <option>Bookings, a store, or something custom</option>
+            <option>Not sure yet — need advice</option>
+          </select></div>
+        <div><label for="budget">Budget range <span class="opt">(optional)</span></label>
+          <select id="budget" name="budget">
+            <option>Not sure yet</option>
+            <option>Around $750–$1,500</option>
+            <option>Around $1,500–$3,000</option>
+            <option>$3,000+</option>
+          </select></div>
+      </div>
+      <div><label for="msg">Anything else?</label><textarea id="msg" name="msg" placeholder="A new website for my plumbing business — currently just have a Facebook page."></textarea></div>
       <button type="submit" class="btn btn-grad">Send it over <span class="arr">&rarr;</span></button>
     </form>
   </div>
@@ -98,14 +113,22 @@
         </div>
         <div class="foot-cols">
           <div class="foot-col"><h4>Explore</h4>
-            <a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a>
+            <a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a>
           </div>
-          <div class="foot-col"><h4>Get started</h4>
-            <a href="faq.html">FAQ</a><a href="contact.html">Get a quote</a><a href="mailto:hattdigitalns@gmail.com">Email me</a><a href="https://www.facebook.com/profile.php?id=61590965965094" target="_blank" rel="noopener">Facebook</a><a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener">Instagram</a>
+          <div class="foot-col"><h4>Web design for</h4>
+            <a href="web-design-for-contractors.html">Contractors</a><a href="web-design-for-electricians.html">Electricians</a><a href="web-design-for-plumbers.html">Plumbers</a><a href="web-design-for-small-businesses.html">Small businesses</a>
+          </div>
+          <div class="foot-col"><h4>Areas &amp; contact</h4>
+            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="contact.html">Get a free quote</a><a href="tel:+19022774424">902-277-4424</a><a href="mailto:hattdigitalns@gmail.com">Email me</a>
           </div>
         </div>
       </div>
       <div class="foot-bottom"><span>&copy; <span id="yr"></span> Hatt Digital. All rights reserved.</span><span class="mono">Nova Scotia, Canada &middot; 44.65&deg; N</span></div>
     </div></footer>
+<div class="mobile-cta" id="mobileCta" aria-label="Quick contact bar">
+  <a class="call" href="tel:+19022774424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
+  <a href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
+  <a class="primary" href="contact.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Free Audit</a>
+</div>
 <script src="assets/main.js"></script>
 </body></html>

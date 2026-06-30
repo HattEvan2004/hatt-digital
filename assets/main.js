@@ -122,9 +122,19 @@
         invalid.focus();
         return;
       }
-      var subj = encodeURIComponent('Website enquiry — ' + (f.biz.value || f.name.value || 'New lead'));
-      var body = encodeURIComponent('Name: ' + f.name.value + '\nBusiness: ' + f.biz.value +
-        '\nEmail: ' + f.email.value + '\nBudget: ' + (f.budget ? f.budget.value : '') + '\n\n' + f.msg.value);
+      var val = function (name) { return f[name] && typeof f[name].value === 'string' ? f[name].value : ''; };
+      var subj = encodeURIComponent('Website enquiry — ' + (val('biz') || val('name') || 'New lead'));
+      var body = encodeURIComponent([
+        'Name: ' + val('name'),
+        'Business: ' + val('biz'),
+        'Email: ' + val('email'),
+        'Phone: ' + val('phone'),
+        'Current website: ' + val('website'),
+        'Looking for: ' + val('needs'),
+        'Budget: ' + val('budget'),
+        '',
+        val('msg')
+      ].join('\n'));
       window.location.href = 'mailto:hattdigitalns@gmail.com?subject=' + subj + '&body=' + body;
       status.textContent = 'Opening your email app… if nothing happens, email hattdigitalns@gmail.com directly.';
       status.className = 'form-status ok';
@@ -637,4 +647,26 @@
     });
   }, { threshold: 0.25 });
   panes.forEach(function (p) { io.observe(p); });
+})();
+
+/* =====================================================
+   MOBILE STICKY CTA BAR — Call · Get Quote · Free Audit
+   Slides up once the visitor scrolls past the hero so it
+   never covers the first screen. CSS hides it >720px.
+===================================================== */
+(function () {
+  'use strict';
+  var bar = document.getElementById('mobileCta');
+  if (!bar) return;
+  var shown = false;
+  var ticking = false;
+  function sync() {
+    ticking = false;
+    var past = window.scrollY > 340;
+    if (past !== shown) { shown = past; bar.classList.toggle('show', past); }
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(sync); } }
+  sync();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
 })();
