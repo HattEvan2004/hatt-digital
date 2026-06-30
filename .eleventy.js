@@ -38,6 +38,19 @@ module.exports = function (eleventyConfig) {
       .join(" ");
   });
 
+  // Highlight a phrase inside a heading, edited as ONE field: wrap the part you
+  // want coloured in **double asterisks** -> <span class="hl">...</span>.
+  // (Unlike heroWords this does NOT split into per-word spans.)
+  eleventyConfig.addFilter("hl", function (str) {
+    if (!str) return "";
+    const esc = (s) =>
+      String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    return String(str)
+      .split("**")
+      .map((part, idx) => (idx % 2 === 1 ? `<span class="hl">${esc(part)}</span>` : esc(part)))
+      .join("");
+  });
+
   // Escape + convert newlines to <br>. Lets a single textarea hold a short
   // multi-line heading without exposing HTML to the editor.
   eleventyConfig.addFilter("nl2br", function (str) {
