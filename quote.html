@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071426">
+<title>Request a Website Quote — Nova Scotia Web Design | Hatt Digital</title>
+<meta name="description" content="Request a free website quote from Hatt Digital. Pick a package, share your details and assets, and get a flat, honest quote — replies within one business day.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://hattdigital.ca/quote.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hatt Digital">
+<meta property="og:title" content="Request a Website Quote — Nova Scotia Web Design | Hatt Digital">
+<meta property="og:description" content="Request a free website quote from Hatt Digital. Pick a package, share your details and assets, and get a flat, honest quote — replies within one business day.">
+<meta property="og:url" content="https://hattdigital.ca/quote.html">
+<meta property="og:image" content="https://hattdigital.ca/assets/logo.png">
+<meta property="og:locale" content="en_CA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Request a Website Quote — Nova Scotia Web Design | Hatt Digital">
+<meta name="twitter:description" content="Request a free website quote from Hatt Digital. Pick a package, share your details and assets, and get a flat, honest quote — replies within one business day.">
+<meta name="twitter:image" content="https://hattdigital.ca/assets/logo.png">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+
+<!-- ============================================================= -->
+<!-- Forminit CDN SDK — backend for this quote form.               -->
+<!-- This loads the SDK; the Form ID itself is set in the inline   -->
+<!-- script near the bottom of this file (search: YOUR_FORM_ID).   -->
+<!-- ============================================================= -->
+<script src="https://forminit.com/sdk/v1/forminit.js" defer></script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ContactPage","url":"https://hattdigital.ca/quote.html","mainEntity":{"@type":"ProfessionalService","name":"Hatt Digital","url":"https://hattdigital.ca/","telephone":"+1-902-277-4424","email":"hattdigitalns@gmail.com","areaServed":[{"@type":"AdministrativeArea","name":"Nova Scotia"}]}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://hattdigital.ca/"},{"@type":"ListItem","position":2,"name":"Request a quote","item":"https://hattdigital.ca/quote.html"}]}
+</script>
+
+<style>
+  /* Quote-form specific touches that build on the shared form styles. */
+  .pkg-hint{color:#5e6f9e;font-size:12.5px;margin-top:6px;font-family:'Inter',sans-serif}
+  form input[type=file]{padding:11px 13px;font-size:14px;cursor:pointer;line-height:1.4}
+  form input[type=file]::file-selector-button{
+    margin-right:12px;padding:8px 14px;border:1px solid var(--line-d);border-radius:9px;
+    background:var(--royal);color:#fff;font-family:'Inter',sans-serif;font-weight:600;
+    font-size:13px;cursor:pointer;transition:filter .2s}
+  form input[type=file]::file-selector-button:hover{filter:brightness(1.12)}
+  .upload-note{color:#5e6f9e;font-size:12px;margin-top:6px;line-height:1.5}
+  /* Disabled submit state while sending. */
+  form button[type=submit][disabled]{opacity:.6;cursor:not-allowed}
+  /* Keep file inputs from overflowing their cards on small screens. */
+  @media(max-width:520px){form input[type=file]{font-size:13px}}
+</style>
+</head><body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header id="top"><div class="wrap"><nav>
+      <a class="brand" href="index.html" aria-label="Hatt Digital home">
+        <img src="assets/logo.png" alt="Hatt Digital logo" width="560" height="397" decoding="async">
+        <span class="name">Hatt <span>Digital</span></span>
+      </a>
+      <div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a></div>
+      <div class="nav-cta">
+        <a class="nav-call" href="tel:+19022774424" aria-label="Call Hatt Digital at 902-277-4424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 902-277-4424</a>
+        <a href="quote.html" class="btn btn-grad">Free Website Audit</a>
+        <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </nav></div></header>
+<main id="main">
+<section class="phead"><span class="glow"></span><div class="wrap"><div class="phead-grid">
+      <div class="rv">
+        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> Request a quote</span>
+        <h1>Get your flat, <span class="hl">honest quote.</span></h1>
+        <p>Pick the package that fits, share a few details and any assets you have, and I&rsquo;ll send back a clear, all-in quote &mdash; usually within one business day. No pressure, no runaround.</p>
+      </div>
+      <div class="editor rv">
+      <div class="ebar"><i></i><i></i><i></i><span class="fname">quote.js</span></div>
+      <pre data-lines='["submit({ package: selected });", "// flat quote within 1 business day"]'></pre>
+    </div>
+    </div></div></section>
+<section class="band"><div class="wrap"><div class="contact-grid">
+  <div class="contact-info rv">
+    <div class="ci"><div class="cic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></div>
+      <div><h4>Email</h4><a href="mailto:hattdigitalns@gmail.com">hattdigitalns@gmail.com</a></div></div>
+    <div class="ci"><div class="cic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+      <div><h4>Phone</h4><a href="tel:+19022774424">902-277-4424</a></div></div>
+    <div class="ci"><div class="cic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div><h4>Based in</h4><p>Nova Scotia, Canada</p></div></div>
+    <div class="ci"><div class="cic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+      <div><h4>Response time</h4><p>Within 1 business day</p></div></div>
+    <div class="ci"><div class="cic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+      <div><h4>Facebook</h4><a href="https://www.facebook.com/profile.php?id=61590965965094" target="_blank" rel="noopener">facebook.com/hattdigital</a></div></div>
+    <div class="ci"><div class="cic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></div>
+      <div><h4>Instagram</h4><a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener">@hattdigital</a></div></div>
+  </div>
+  <div class="form-card rv">
+    <p class="form-intro">Already picked a package? It&rsquo;s pre-selected below &mdash; change it any time. Not sure yet? Choose &ldquo;Not sure yet&rdquo; and I&rsquo;ll help you figure it out.</p>
+
+    <!-- enctype is multipart/form-data so the file uploads below are sent as real files via FormData. -->
+    <form id="fiQuoteForm" enctype="multipart/form-data" novalidate>
+
+      <!-- Hidden field submitted to Forminit. Kept in sync with the visible -->
+      <!-- "Package" dropdown and the ?package= URL parameter by the inline script. -->
+      <input type="hidden" id="selected_package" name="selected_package" value="">
+
+      <div>
+        <label for="package">Package</label>
+        <select id="package" name="package_choice">
+          <option value="">Not sure yet — help me choose</option>
+          <option value="Starter Website">Starter Website</option>
+          <option value="Business Website">Business Website</option>
+          <option value="Growth Website">Growth Website</option>
+        </select>
+        <p class="pkg-hint">Starter from $750 · Business from $1,500 · Growth quoted by scope.</p>
+      </div>
+
+      <div class="row">
+        <div><label for="fullName">Your name</label><input id="fullName" name="fi-sender-fullName" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
+        <div><label for="biz">Business name <span class="opt">(optional)</span></label><input id="biz" name="fi-text-business" type="text" autocomplete="organization" placeholder="Smith Plumbing"></div>
+      </div>
+
+      <div class="row">
+        <div><label for="email">Email</label><input id="email" name="fi-sender-email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca" required></div>
+        <div><label for="phone">Phone <span class="opt">(optional)</span></label><input id="phone" name="fi-text-phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
+      </div>
+
+      <div><label for="website">Current website <span class="opt">(if you have one)</span></label><input id="website" name="fi-text-website" type="text" inputmode="url" placeholder="smithplumbing.ca, or a Facebook page"></div>
+
+      <div><label for="message">Project details</label><textarea id="message" name="fi-text-message" placeholder="A new website for my plumbing business — currently just have a Facebook page. I'd like online quote requests and a few photos of recent jobs."></textarea></div>
+
+      <!-- ---- File uploads (sent as real files because the form submits via FormData) ---- -->
+      <div>
+        <label for="logo">Logo upload <span class="opt">(optional)</span></label>
+        <input id="logo" name="fi-file-logo" type="file"
+               accept=".jpg,.jpeg,.png,.webp,.svg,.pdf,.doc,.docx,image/jpeg,image/png,image/webp,image/svg+xml,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        <p class="upload-note">Accepted: JPG, PNG, WEBP, SVG, PDF, DOC, DOCX.</p>
+      </div>
+
+      <div>
+        <label for="website_photos">Website photos <span class="opt">(optional, you can pick several)</span></label>
+        <input id="website_photos" name="fi-file-website_photos[]" type="file" multiple
+               accept=".jpg,.jpeg,.png,.webp,.svg,.pdf,.doc,.docx,image/jpeg,image/png,image/webp,image/svg+xml,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+        <p class="upload-note">Photos of your work, premises, team, etc. Same accepted types. Total uploads must stay under 25&nbsp;MB.</p>
+      </div>
+
+      <div>
+        <label for="asset_link">Asset folder link <span class="opt">(optional)</span></label>
+        <input id="asset_link" name="fi-text-asset_link" type="text" inputmode="url"
+               placeholder="Google Drive, Dropbox, iCloud, or website link">
+        <p class="upload-note">Got a lot of files? Drop them in a shared folder and paste the link instead of uploading.</p>
+      </div>
+
+      <button type="submit" class="btn btn-grad">Send my quote request <span class="arr">&rarr;</span></button>
+    </form>
+  </div>
+</div></div></section>
+
+</main>
+<footer><div class="wrap">
+      <div class="foot-top">
+        <div class="foot-brand">
+          <a class="fb-logo" href="index.html"><img src="assets/logo.png" alt="Hatt Digital" width="560" height="397" loading="lazy" decoding="async"><span class="name">Hatt <span>Digital</span></span></a>
+          <p>Honest, effective websites for local businesses across Nova Scotia.</p>
+          <div class="foot-social">
+            <a href="https://www.facebook.com/profile.php?id=61590965965094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+          </div>
+        </div>
+        <div class="foot-cols">
+          <div class="foot-col"><h4>Explore</h4>
+            <a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a>
+          </div>
+          <div class="foot-col"><h4>Web design for</h4>
+            <a href="web-design-for-contractors.html">Contractors</a><a href="web-design-for-electricians.html">Electricians</a><a href="web-design-for-plumbers.html">Plumbers</a><a href="web-design-for-small-businesses.html">Small businesses</a>
+          </div>
+          <div class="foot-col"><h4>Areas &amp; contact</h4>
+            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:+19022774424">902-277-4424</a><a href="mailto:hattdigitalns@gmail.com">Email me</a>
+          </div>
+        </div>
+      </div>
+      <div class="foot-bottom"><span>&copy; <span id="yr"></span> Hatt Digital. All rights reserved.</span><span class="mono">Nova Scotia, Canada &middot; 44.65&deg; N</span></div>
+    </div></footer>
+<div class="mobile-cta" id="mobileCta" aria-label="Quick contact bar">
+  <a class="call" href="tel:+19022774424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
+  <a href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
+  <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Free Audit</a>
+</div>
+<script src="assets/main.js"></script>
+
+<!-- =================================================================== -->
+<!-- Forminit quote-form integration                                     -->
+<!-- =================================================================== -->
+<script>
+(function () {
+  'use strict';
+
+  /* ================================================================= */
+  /*  >>> PASTE YOUR REAL FORMINIT FORM ID ON THE NEXT LINE <<<        */
+  /*  Replace the string 'YOUR_FORM_ID' with the Form ID from your     */
+  /*  Forminit dashboard. This is the ONLY place the Form ID is used.  */
+  var FORMINIT_FORM_ID = 'YOUR_FORM_ID';
+  /* ================================================================= */
+
+  var MAX_TOTAL_BYTES = 25 * 1024 * 1024; /* 25 MB total across all file fields */
+
+  var form = document.getElementById('fiQuoteForm');
+  if (!form) return;
+
+  var submitBtn = form.querySelector('button[type="submit"]');
+  var hiddenPkg = document.getElementById('selected_package');
+  var pkgSelect = document.getElementById('package');
+  var emailInput = document.getElementById('email');
+  var nameInput = document.getElementById('fullName');
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  /* Map ?package= URL value -> the visible dropdown option value. */
+  var PACKAGE_MAP = {
+    starter: 'Starter Website',
+    business: 'Business Website',
+    growth: 'Growth Website'
+  };
+
+  /* Live status line (matches the contact form's accessible status pattern). */
+  var status = document.createElement('p');
+  status.className = 'form-status';
+  status.setAttribute('role', 'status');
+  status.setAttribute('aria-live', 'polite');
+  form.appendChild(status);
+
+  function setStatus(msg, kind) {
+    status.textContent = msg;
+    status.className = 'form-status' + (kind ? ' ' + kind : '');
+  }
+
+  /* Keep the hidden selected_package field in sync with the dropdown. */
+  function syncHiddenPackage() {
+    hiddenPkg.value = pkgSelect.value; /* '' when "Not sure yet" is chosen */
+  }
+
+  /* ---- Pre-select the package from ?package=starter|business|growth ---- */
+  (function preselectFromUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var raw = (params.get('package') || '').trim().toLowerCase();
+    if (raw && PACKAGE_MAP[raw]) {
+      pkgSelect.value = PACKAGE_MAP[raw];
+    }
+    syncHiddenPackage();
+  })();
+
+  /* User can manually change the package; keep the hidden field updated. */
+  pkgSelect.addEventListener('change', syncHiddenPackage);
+
+  /* ---- Client-side file-size validation (25 MB total) ---- */
+  function totalFileBytes() {
+    var total = 0;
+    form.querySelectorAll('input[type="file"]').forEach(function (input) {
+      if (input.files) {
+        for (var i = 0; i < input.files.length; i++) total += input.files[i].size;
+      }
+    });
+    return total;
+  }
+  function humanMB(bytes) { return (bytes / (1024 * 1024)).toFixed(1) + ' MB'; }
+
+  function basicValidation() {
+    if (!nameInput.value.trim()) { setStatus('Please add your name.', 'err'); nameInput.focus(); return false; }
+    if (!EMAIL_RE.test(emailInput.value.trim())) { setStatus('That email doesn’t look right.', 'err'); emailInput.focus(); return false; }
+    var bytes = totalFileBytes();
+    if (bytes > MAX_TOTAL_BYTES) {
+      setStatus('Your uploads total ' + humanMB(bytes) + '. Please keep them under 25 MB — or paste a Drive/Dropbox link in the “Asset folder link” field instead.', 'err');
+      return false;
+    }
+    return true;
+  }
+
+  /* Re-validate file size as soon as files are picked, so the user gets early feedback. */
+  form.querySelectorAll('input[type="file"]').forEach(function (input) {
+    input.addEventListener('change', function () {
+      var bytes = totalFileBytes();
+      if (bytes > MAX_TOTAL_BYTES) {
+        setStatus('Your uploads total ' + humanMB(bytes) + '. That’s over the 25 MB limit — remove a file or paste a folder link instead.', 'err');
+      } else if (status.classList.contains('err')) {
+        setStatus('', '');
+      }
+    });
+  });
+
+  /* ---- Submit via JavaScript using FormData ---- */
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    syncHiddenPackage();
+    if (!basicValidation()) return;
+
+    if (FORMINIT_FORM_ID === 'YOUR_FORM_ID') {
+      setStatus('This form isn’t connected yet — the Forminit Form ID still needs to be added.', 'err');
+      return;
+    }
+
+    /* FormData captures every field including the file inputs and selected_package. */
+    var formData = new FormData(form);
+
+    submitBtn.disabled = true;
+    setStatus('Sending your request…', '');
+
+    /*
+     * Submit through the Forminit CDN SDK when it's available
+     * (window.Forminit / window.forminit). If the SDK hasn't loaded for any
+     * reason, fall back to a direct multipart POST to Forminit so a real
+     * submission (files included) still goes through — no faked uploads.
+     */
+    function onSuccess() {
+      setStatus('Thanks! Your quote request is in — I’ll reply within one business day.', 'ok');
+      form.reset();
+      syncHiddenPackage(); /* restore hidden field after reset */
+      submitBtn.disabled = false;
+    }
+    function onError(err) {
+      if (window.console && err) console.error('Forminit submit failed:', err);
+      setStatus('Something went wrong sending your request. Please try again, or email hattdigitalns@gmail.com directly.', 'err');
+      submitBtn.disabled = false;
+    }
+
+    var sdk = window.Forminit || window.forminit;
+    try {
+      if (sdk && typeof sdk.submit === 'function') {
+        /* Most common SDK shape: Forminit.submit(formId, formData) -> Promise */
+        Promise.resolve(sdk.submit(FORMINIT_FORM_ID, formData)).then(onSuccess).catch(onError);
+      } else {
+        /* Fallback: post the FormData straight to the Forminit submit endpoint. */
+        fetch('https://forminit.com/api/v1/forms/' + FORMINIT_FORM_ID + '/submissions', {
+          method: 'POST',
+          body: formData
+        }).then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          onSuccess();
+        }).catch(onError);
+      }
+    } catch (err) {
+      onError(err);
+    }
+  });
+})();
+</script>
+</body></html>
