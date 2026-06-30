@@ -718,6 +718,33 @@
   .tile:hover .specks{opacity:.9}
 
   /* ===================================================== */
+  /* CARD STACK (RuixenUI / Aceternity-style)               */
+  /* Progressive enhancement: without JS (or under reduced  */
+  /* motion) the three cards stay in a readable row; JS adds */
+  /* .is-stacked to collapse them into an auto-cycling deck. */
+  /* ===================================================== */
+  .value-grid.v2 .card-stack-wrap{grid-column:span 3}
+  .card-stack-wrap .card-stack{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+  @media(max-width:860px){.card-stack-wrap .card-stack{grid-template-columns:1fr}}
+  .card-stack-wrap .cs-card{margin:0}
+  .card-stack-wrap .cs-dots{display:none}
+
+  /* --- stacked (JS-enhanced) state --- */
+  .card-stack-wrap.is-stacked .card-stack{display:block;position:relative;
+    width:min(460px,100%);margin:8px auto 0}
+  .card-stack-wrap.is-stacked .cs-card{position:absolute;top:0;left:0;right:0;
+    transform-origin:top center;cursor:pointer;
+    transition:transform .55s cubic-bezier(.2,.7,.2,1),box-shadow .4s ease,border-color .4s ease;
+    box-shadow:0 14px 26px -18px rgba(10,22,51,.45)}
+  .card-stack-wrap.is-stacked .cs-card:hover{transform:none} /* JS owns the transform */
+  .card-stack-wrap.is-stacked .cs-dots{display:flex;justify-content:center;gap:9px;margin-top:22px}
+  .card-stack-wrap.is-stacked .cs-dot{width:9px;height:9px;padding:0;border:0;border-radius:50%;
+    background:#c6d4ec;cursor:pointer;transition:transform .3s,background .3s;-webkit-appearance:none;appearance:none}
+  .card-stack-wrap.is-stacked .cs-dot:hover{background:#9fb6dd}
+  .card-stack-wrap.is-stacked .cs-dot.on{background:var(--grad);width:24px;border-radius:5px}
+  .card-stack-wrap.is-stacked .cs-dot:focus-visible{outline:2px solid var(--royal);outline-offset:3px}
+
+  /* ===================================================== */
   /* PROJECTS — premium "in progress" build shells          */
   /* ===================================================== */
   .band-proj{position:relative;background:linear-gradient(180deg,#0b1838 0%,var(--ink) 100%);color:#fff;overflow:hidden}

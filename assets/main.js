@@ -638,3 +638,86 @@
   }, { threshold: 0.25 });
   panes.forEach(function (p) { io.observe(p); });
 })();
+
+/* =====================================================
+   CARD STACK (RuixenUI / Aceternity-style)
+   Collapses the "why it matters" feature cards into a
+   stacked deck: the front card cycles to the back every
+   few seconds, with depth offset + scale behind it.
+   Progressive enhancement — without JS or under reduced
+   motion the cards stay in their readable row layout.
+   Pauses on hover/focus and while off-screen; clickable
+   and dot-navigable for keyboard / assistive tech.
+===================================================== */
+(function () {
+  'use strict';
+  var wrap = document.querySelector('[data-card-stack]');
+  if (!wrap) return;
+
+  var stack = wrap.querySelector('.card-stack');
+  var cards = Array.prototype.slice.call(wrap.querySelectorAll('.cs-card'));
+  if (!stack || cards.length < 2) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;            // leave the accessible row layout in place
+
+  var dots = Array.prototype.slice.call(wrap.querySelectorAll('.cs-dot'));
+  var OFFSET = 28;               // px each deeper card sits below the front one
+  var SCALE = 0.045;             // scale step per depth level
+  var INTERVAL = 5000;           // ms between auto-advances
+  var n = cards.length;
+  var order = cards.map(function (_, i) { return i; });  // order[0] = front card
+  var timer = null, paused = false;
+
+  function sizeStack() {
+    var h = 0;
+    cards.forEach(function (c) { h = Math.max(h, c.offsetHeight); });
+    stack.style.height = (h + OFFSET * (n - 1)) + 'px';
+  }
+
+  function render() {
+    order.forEach(function (cardIndex, pos) {
+      var card = cards[cardIndex];
+      card.style.transform = 'translateY(' + (pos * OFFSET) + 'px) scale(' + (1 - pos * SCALE).toFixed(3) + ')';
+      card.style.zIndex = String(n - pos);
+      card.style.opacity = pos > 2 ? '0' : '1';
+    });
+    dots.forEach(function (d, i) {
+      var active = order[0] === i;
+      d.classList.toggle('on', active);
+    });
+  }
+
+  function advance() { order.push(order.shift()); render(); }   // front -> back
+  function goTo(cardIndex) {
+    var guard = 0;
+    while (order[0] !== cardIndex && guard++ < n) order.push(order.shift());
+    render();
+  }
+
+  function start() { if (!timer && !paused) timer = setInterval(advance, INTERVAL); }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+  wrap.classList.add('is-stacked');
+  sizeStack();
+  render();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(sizeStack);
+  window.addEventListener('resize', sizeStack);
+
+  wrap.addEventListener('mouseenter', function () { paused = true; stop(); });
+  wrap.addEventListener('mouseleave', function () { paused = false; start(); });
+  wrap.addEventListener('focusin', function () { paused = true; stop(); });
+  wrap.addEventListener('focusout', function () { paused = false; start(); });
+  stack.addEventListener('click', advance);
+  dots.forEach(function (d, i) {
+    d.addEventListener('click', function (e) { e.stopPropagation(); goTo(i); });
+  });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) start(); else stop(); });
+    }, { threshold: 0.2 }).observe(wrap);
+  } else {
+    start();
+  }
+})();
