@@ -1047,7 +1047,8 @@
   .mobile-cta a.primary{background:var(--grad);border-color:transparent;color:#fff;
     box-shadow:0 10px 22px -12px rgba(10,91,230,.8)}
   .mobile-cta a.call svg{color:var(--cyan)}
-  @media(max-width:720px){.mobile-cta{display:grid}body{padding-bottom:72px}}
+  /* Mobile sticky CTA bar retired site-wide — it stays display:none on every
+     viewport, so no bottom-bar overlap and no reserved body padding. */
 
   /* ===================================================== */
   /* ====  SEO LANDING PAGES (industry / area)  ========== */

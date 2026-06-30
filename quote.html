@@ -137,9 +137,59 @@
   #fiQuoteForm .form-status.err{color:#d6453a}
   .quote-foot{text-align:center;color:var(--muted);font-size:13.5px;margin-top:18px;font-family:'JetBrains Mono',monospace}
 
+  /* Desktop defaults: short mobile copy hidden, optional-details toggle hidden
+     (the optional fields stay open on desktop). */
+  .phead-sub-mobile{display:none}
+  .q-optional-toggle{display:none}
+
+  /* =========================================================
+     MOBILE (<=680px): one continuous, lighter form flow.
+     Desktop card layout above is untouched.
+  ========================================================= */
   @media(max-width:680px){
-    .quote-form .pkg-picker{grid-template-columns:1fr}
-    .q-row{grid-template-columns:1fr}
+    /* --- Compact quote hero (scoped to this page only) --- */
+    .phead-quote .phead-grid{grid-template-columns:1fr;gap:0;padding:28px 0 26px}
+    .phead-quote h1{font-size:30px;margin-top:14px}
+    .phead-quote .phead-sub-full,
+    .phead-quote .phead-note,
+    .phead-quote .editor{display:none}
+    .phead-quote .phead-sub-mobile{display:block;font-size:16px;margin-top:14px}
+
+    /* --- Flatten section cards into a single guided flow --- */
+    .quote-form{gap:0}
+    .q-block{background:transparent;border:0;border-radius:0;box-shadow:none;
+      padding:26px 0;border-top:1px solid var(--line)}
+    .q-block:first-of-type{border-top:0;padding-top:18px}
+    .q-block.q-optional{background:transparent;border:0;border-top:1px solid var(--line);border-radius:0}
+    .q-head h2{font-size:18px}
+    .q-num{min-width:27px;height:27px;font-size:11px}
+    .q-note{font-size:14px;margin-top:10px}
+    .q-fields{gap:14px;margin-top:16px}
+    .q-row{grid-template-columns:1fr;gap:14px}
+    .quote-form textarea{min-height:74px}
+    .quote-form input::placeholder,.quote-form textarea::placeholder{color:#8190ab}
+    .budget-readout{font-size:18px;margin-top:16px}
+    .check-line{margin-top:18px}
+
+    /* --- Denser website-type tiles --- */
+    .quote-form .pkg-picker{grid-template-columns:1fr;gap:12px;margin-top:16px}
+    .quote-form .pkg-card{padding:16px 16px 15px;gap:5px;border-radius:13px}
+    .quote-form .pkg-card .pkg-label{font-size:15.5px}
+    .quote-form .pkg-card .pkg-desc{font-size:13px;line-height:1.5}
+
+    /* --- Collapse Optional details behind a toggle --- */
+    .q-optional .q-note{display:none}
+    .q-optional .q-fields{display:none}
+    .q-optional.is-open .q-fields{display:flex;margin-top:16px}
+    .q-optional-toggle{display:flex;align-items:center;gap:13px;width:100%;margin-top:14px;cursor:pointer;
+      background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:left;
+      font-family:'Inter',sans-serif;box-shadow:0 14px 36px -34px rgba(10,22,51,.45)}
+    .q-optional-toggle .ot-icon{flex:none;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+      background:var(--mist);color:var(--royal);font-size:21px;font-weight:600;line-height:1;transition:transform .2s}
+    .q-optional-toggle .ot-text{display:flex;flex-direction:column;gap:2px}
+    .q-optional-toggle .ot-label{font-size:15.5px;font-weight:700;color:var(--ink)}
+    .q-optional-toggle .ot-sub{font-size:12.5px;color:var(--muted)}
+    .q-optional.is-open .q-optional-toggle .ot-icon{transform:rotate(45deg)}
   }
 </style>
 </head><body>
@@ -157,11 +207,12 @@
       </div>
     </nav></div></header>
 <main id="main">
-<section class="phead"><span class="glow"></span><div class="wrap"><div class="phead-grid">
+<section class="phead phead-quote"><span class="glow"></span><div class="wrap"><div class="phead-grid">
       <div class="rv">
         <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> Website quote</span>
         <h1>Request a <span class="hl">Website Quote</span></h1>
-        <p>Choose the website option that sounds closest to what you need, then tell me about your business, goals, and budget. I&rsquo;ll use that to build a fair quote around the actual project.</p>
+        <p class="phead-sub-full">Choose the website option that sounds closest to what you need, then tell me about your business, goals, and budget. I&rsquo;ll use that to build a fair quote around the actual project.</p>
+        <p class="phead-sub-mobile">Pick the option closest to what you need, share a few details, and I&rsquo;ll build a fair quote around your project.</p>
         <p class="phead-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> The option you choose is just a starting point &mdash; every business is different.</p>
       </div>
       <div class="editor rv">
@@ -260,7 +311,11 @@
         <section class="q-block q-optional">
           <div class="q-head"><span class="q-num">05</span><h2>Optional details</h2></div>
           <p class="q-note">Add these if you have them. If not, leave them blank.</p>
-          <div class="q-fields">
+          <button type="button" class="q-optional-toggle" id="optToggle" aria-expanded="false" aria-controls="optionalFields">
+            <span class="ot-icon" aria-hidden="true">+</span>
+            <span class="ot-text"><span class="ot-label">Add optional details</span><span class="ot-sub">Pages, branding, social links &amp; more</span></span>
+          </button>
+          <div class="q-fields" id="optionalFields">
             <div class="q-field"><label for="pages_needed">What pages do you think you need?</label><textarea id="pages_needed" name="fi-text-pages_needed" placeholder="e.g. Home, Services, About, Gallery, Contact — a rough idea is fine."></textarea></div>
             <div class="q-row">
               <div class="q-field"><label for="has_branding">Do you already have a logo or branding?</label>
@@ -381,6 +436,19 @@
   }
 
   document.addEventListener('DOMContentLoaded',function(){
+    /* Optional-details collapse toggle (mobile only; on desktop the toggle is
+       hidden via CSS and the fields stay visible). */
+    var optToggle=document.getElementById('optToggle');
+    var optBlock=document.querySelector('.q-optional');
+    if(optToggle && optBlock){
+      optToggle.addEventListener('click',function(){
+        var open=optBlock.classList.toggle('is-open');
+        optToggle.setAttribute('aria-expanded',open?'true':'false');
+        var label=optToggle.querySelector('.ot-label');
+        if(label) label.textContent=open?'Hide optional details':'Add optional details';
+      });
+    }
+
     var slider=document.getElementById('budgetSlider');
     if(!slider) return;
     var valEl=document.getElementById('budgetValue');
