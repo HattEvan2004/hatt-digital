@@ -5,7 +5,7 @@
   },
   "hero": {
     "eyebrow": "Web design · Nova Scotia",
-    "title": "Websites that make local businesses look **impossible to ignore.**",
+    "title": "Websites that work as hard as you do. ",
     "sub": "Hatt Digital builds clean, mobile-friendly websites for Nova Scotia businesses — designed to turn visitors into calls, messages, and quote requests, without the agency runaround.",
     "cta_primary": "Request a Website Quote",
     "cta_secondary": "View My Work"
@@ -17,22 +17,38 @@
     "lead_heading": "A site that earns its place on your business card.",
     "lead_body": "Most local websites are digital dust collectors. Yours should be the thing that quietly works in the background — the reason someone picks you over the next name on the list.",
     "stats": [
-      { "value": "1", "label": "person you actually talk to — the one building it" },
-      { "value": "0", "label": "hidden fees, surprise invoices, or lock-in" },
-      { "value": "100%", "label": "yours: domain, site, and content in your name" }
+      {
+        "value": "1",
+        "label": "person you actually talk to — the one building it"
+      },
+      {
+        "value": "0",
+        "label": "hidden fees, surprise invoices, or lock-in"
+      },
+      {
+        "value": "100%",
+        "label": "yours: domain, site, and content in your name"
+      }
     ],
     "tiles": [
-      { "title": "Get found on Google", "text": "Local SEO is built into every site, so when someone nearby searches for what you do, your business is what they find." },
-      { "title": "Turn visitors into calls", "text": "Clear layout, fast load times, and obvious ways to get in touch. Built to get you leads — not just to look pretty." },
-      { "title": "Sharp on every phone", "text": "Most customers see your site on their phone first. Every site I build looks sharp and works perfectly on any screen." }
+      {
+        "title": "Get found on Google",
+        "text": "Local SEO is built into every site, so when someone nearby searches for what you do, your business is what they find."
+      },
+      {
+        "title": "Turn visitors into calls",
+        "text": "Clear layout, fast load times, and obvious ways to get in touch. Built to get you leads — not just to look pretty."
+      },
+      {
+        "title": "Sharp on every phone",
+        "text": "Most customers see your site on their phone first. Every site I build looks sharp and works perfectly on any screen."
+      }
     ]
   },
   "start": {
     "eyebrow": "Start your website",
     "heading": "Ready to get your website handled properly?",
     "body": "Tell me about your business, your goals, and a budget you’re comfortable with, and I’ll put together a fair, all-in quote built around what you actually need. No pressure, no obligation — even if you’re still deciding.",
-    "cta": "Request a Website Quote",
-    "call": "Call Evan",
     "card_heading": "How it works",
     "steps": [
       "Choose the website option that sounds closest to your needs",
