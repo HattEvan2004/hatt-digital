@@ -1,20 +1,20 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071426">
-<title>Web Design in Nova Scotia for Local Businesses | Hatt Digital</title>
-<meta name="description" content="Hatt Digital builds clean, mobile-friendly websites for Nova Scotia businesses — built to turn visitors into calls and quote requests. Local SEO included, flat honest pricing.">
+<title>{{ home.seo.title }}</title>
+<meta name="description" content="{{ home.seo.description }}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://hattdigital.ca/">
 <meta name="author" content="Evan Hatt">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hatt Digital">
-<meta property="og:title" content="Web Design in Nova Scotia for Local Businesses | Hatt Digital">
-<meta property="og:description" content="Hatt Digital builds clean, mobile-friendly websites for Nova Scotia businesses — built to turn visitors into calls and quote requests. Local SEO included, flat honest pricing.">
+<meta property="og:title" content="{{ home.seo.title }}">
+<meta property="og:description" content="{{ home.seo.description }}">
 <meta property="og:url" content="https://hattdigital.ca/">
 <meta property="og:image" content="https://hattdigital.ca/assets/logo.png">
 <meta property="og:locale" content="en_CA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Web Design in Nova Scotia for Local Businesses | Hatt Digital">
-<meta name="twitter:description" content="Hatt Digital builds clean, mobile-friendly websites for Nova Scotia businesses — built to turn visitors into calls and quote requests. Local SEO included, flat honest pricing.">
+<meta name="twitter:title" content="{{ home.seo.title }}">
+<meta name="twitter:description" content="{{ home.seo.description }}">
 <meta name="twitter:image" content="https://hattdigital.ca/assets/logo.png">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +72,7 @@
       </a>
       <div class="nav-links" id="navLinks"><a href="index.html" class="active">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a></div>
       <div class="nav-cta">
-        <a class="nav-call" href="tel:+19022774424" aria-label="Call Hatt Digital at 902-277-4424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 902-277-4424</a>
+        <a class="nav-call" href="tel:{{ site.contact.phone_link }}" aria-label="Call Hatt Digital at {{ site.contact.phone }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{ site.contact.phone }}</a>
         <a href="quote.html" class="btn btn-grad">Start a Website Project</a>
         <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
@@ -89,14 +89,14 @@
       <canvas class="intro-specs" id="introSpecs"></canvas>
     </div>
     <div class="sh">
-      <span class="eyebrow on-dark" data-build="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Web design &middot; Nova Scotia</span>
+      <span class="eyebrow on-dark" data-build="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.hero.eyebrow }}</span>
       <h1 class="sh-title">
-        <span class="sh-word">Websites</span> <span class="sh-word">that</span> <span class="sh-word">make</span> <span class="sh-word">local</span> <span class="sh-word">businesses</span> <span class="sh-word">look</span> <span class="sh-word hl">impossible</span> <span class="sh-word hl">to</span> <span class="sh-word hl">ignore.</span>
+        {{ home.hero.title | heroWords | safe }}
       </h1>
-      <p class="sh-sub" data-build="sub">Hatt Digital builds clean, mobile-friendly websites for Nova Scotia businesses &mdash; designed to turn visitors into calls, messages, and quote requests, without the agency runaround.</p>
+      <p class="sh-sub" data-build="sub">{{ home.hero.sub }}</p>
       <div class="sh-cta" data-build="cta">
-        <a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a>
-        <a href="projects.html" class="btn btn-ghost on-dark">View My Work</a>
+        <a href="quote.html" class="btn btn-grad">{{ home.hero.cta_primary }} <span class="arr">&rarr;</span></a>
+        <a href="projects.html" class="btn btn-ghost on-dark">{{ home.hero.cta_secondary }}</a>
       </div>
     </div>
     <div class="compiler" id="compiler" aria-hidden="true">
@@ -113,22 +113,22 @@
 </section>
 
 <section class="band" id="why-it-matters"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Why it matters</span>
-    <h2>No buzzwords. Just the things that grow your business.</h2>
-    <p>A website isn&rsquo;t a brochure that sits there. Built right, it&rsquo;s the hardest-working part of your business &mdash; turning a late-night search into a call the next morning, while you do the actual work.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.why.eyebrow }}</span>
+    <h2>{{ home.why.heading }}</h2>
+    <p>{{ home.why.intro }}</p></div>
   <div class="value-grid v2" data-stagger="0.07">
     <div class="vcard lead rv">
-      <div><h3>A site that earns its place on your business card.</h3>
-      <p>Most local websites are digital dust collectors. Yours should be the thing that quietly works in the background &mdash; the reason someone picks you over the next name on the list.</p></div>
+      <div><h3>{{ home.why.lead_heading }}</h3>
+      <p>{{ home.why.lead_body }}</p></div>
       <div class="vstat">
-        <div class="vs"><b>1</b><span>person you actually talk to &mdash; the one building it</span></div>
-        <div class="vs"><b>0</b><span>hidden fees, surprise invoices, or lock-in</span></div>
-        <div class="vs"><b>100%</b><span>yours: domain, site, and content in your name</span></div>
+        {%- for s in home.why.stats %}
+        <div class="vs"><b>{{ s.value }}</b><span>{{ s.label }}</span></div>
+        {%- endfor %}
       </div>
     </div>
-    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">01</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><h3>Get found on Google</h3><p>Local SEO is built into every site, so when someone nearby searches for what you do, your business is what they find.</p></div>
-    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">02</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>Turn visitors into calls</h3><p>Clear layout, fast load times, and obvious ways to get in touch. Built to get you leads &mdash; not just to look pretty.</p></div>
-    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">03</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h3>Sharp on every phone</h3><p>Most customers see your site on their phone first. Every site I build looks sharp and works perfectly on any screen.</p></div>
+    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">01</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><h3>{{ home.why.tiles[0].title }}</h3><p>{{ home.why.tiles[0].text }}</p></div>
+    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">02</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>{{ home.why.tiles[1].title }}</h3><p>{{ home.why.tiles[1].text }}</p></div>
+    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">03</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h3>{{ home.why.tiles[2].title }}</h3><p>{{ home.why.tiles[2].text }}</p></div>
   </div>
 </div></section>
 
@@ -136,21 +136,20 @@
 <section class="band band-tint" id="start"><div class="wrap">
   <div class="audit rv">
     <div>
-      <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> Start your website</span>
-      <h2>Ready to get your website handled properly?</h2>
-      <p>Tell me about your business, your goals, and a budget you&rsquo;re comfortable with, and I&rsquo;ll put together a fair, all-in quote built around what you actually need. No pressure, no obligation &mdash; even if you&rsquo;re still deciding.</p>
+      <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.start.eyebrow }}</span>
+      <h2>{{ home.start.heading }}</h2>
+      <p>{{ home.start.body }}</p>
       <div class="audit-actions">
         <a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a>
-        <a href="tel:+19022774424" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
+        <a href="tel:{{ site.contact.phone_link }}" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
       </div>
     </div>
     <div class="audit-card">
-      <h3>How it works</h3>
+      <h3>{{ home.start.card_heading }}</h3>
       <ul class="audit-list">
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Choose the website option that sounds closest to your needs</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Tell me your goals, timeline, and a comfortable budget</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>I reply with a clear, fair quote &mdash; usually within one business day</span></li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>We refine it together until it&rsquo;s right, then I build it</span></li>
+        {%- for step in home.start.steps %}
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>{{ step }}</span></li>
+        {%- endfor %}
       </ul>
     </div>
   </div>
@@ -160,9 +159,9 @@
 <section class="band band-proj">
   <div class="proj-bg" aria-hidden="true"><div class="proj-grid"></div><span class="proj-glow pg1"></span><span class="proj-glow pg2"></span></div>
   <div class="wrap">
-    <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> Recent work</span>
-      <h2>Mini case studies, built to convert.</h2>
-      <p>Each build is structured around one goal: making it obvious what the business does, why it&rsquo;s trusted, and how to get in touch. The builds below are demos that show what a stronger online presence could look like for a local niche.</p></div>
+    <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.work.eyebrow }}</span>
+      <h2>{{ home.work.heading }}</h2>
+      <p>{{ home.work.intro }}</p></div>
     <div class="cases trio" data-stagger="0.08">
       <article class="case rv">
         <span class="case-shot"><img src="assets/screens/toner-supplies.svg" alt="Toner and office supplies website demo built by Hatt Digital" width="1300" height="813" loading="lazy" decoding="async"></span>
@@ -231,15 +230,15 @@
         </div>
       </article>
     </div>
-    <div class="feat-viewall rv"><a href="projects.html" class="btn btn-ghost on-dark">View My Full Portfolio <span class="arr">&rarr;</span></a></div>
+    <div class="feat-viewall rv"><a href="projects.html" class="btn btn-ghost on-dark">{{ home.work.viewall }} <span class="arr">&rarr;</span></a></div>
   </div>
 </section>
 
 <!-- ============ PRICING / PACKAGES ============ -->
 <section class="band" id="pricing"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Website packages</span>
-    <h2>Three clear ways to get your website built.</h2>
-    <p>Choose the option that sounds closest to what you need. Every project gets a fair, custom quote built around your goals &mdash; no fixed template pricing, no guesswork.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.pricing.eyebrow }}</span>
+    <h2>{{ home.pricing.heading }}</h2>
+    <p>{{ home.pricing.intro }}</p></div>
   <div class="price-grid" data-stagger="0.08">
     <div class="ptier rv">
       <span class="tier-name">Starter Website</span>
@@ -282,7 +281,7 @@
       <a href="quote.html?package=growth" class="btn btn-ghost">Start with Growth</a>
     </div>
   </div>
-  <p class="price-foot rv">Every business is different. Choose the option that sounds closest to what you need, then tell me your goals and budget. I&rsquo;ll build a fair quote around the actual project.</p>
+  <p class="price-foot rv">{{ home.pricing.foot }}</p>
 </div></section>
 
 <!-- ============ SIGNATURE: SALES SYSTEM FLOW ============ -->
@@ -294,9 +293,9 @@
   </div>
   <div class="wrap">
     <div class="band-head rv">
-      <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> How a website earns its keep</span>
-      <h2>Your website should do more than sit there.</h2>
-      <p>A good site guides people from &ldquo;just looking&rdquo; to actually reaching out &mdash; with clear messaging, trust, speed, and simple ways to contact you.</p>
+      <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.earns.eyebrow }}</span>
+      <h2>{{ home.earns.heading }}</h2>
+      <p>{{ home.earns.intro }}</p>
     </div>
     <div class="flow">
       <div class="flow-track" aria-hidden="true"><span class="flow-pulse"></span></div>
@@ -322,9 +321,9 @@
 
 <!-- ============ WHY HATT DIGITAL (vs agency) + TRUST POINTS ============ -->
 <section class="band band-tint"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Why Hatt Digital</span>
-    <h2>Agency quality without the agency runaround.</h2>
-    <p>Bigger agencies can be a good fit for bigger companies. Hatt Digital is built for local businesses that want a clean, professional website &mdash; without a bloated process, confusing handoffs, or unclear pricing.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.whyhd.eyebrow }}</span>
+    <h2>{{ home.whyhd.heading }}</h2>
+    <p>{{ home.whyhd.intro }}</p></div>
   <div class="trust-grid" data-stagger="0.06">
     <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div><b>You work directly with the builder</b><span>The person you talk to is the person designing and building your site.</span></div></div>
     <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><b>No runaround or handoffs</b><span>No account managers or ticket queues. One point of contact, start to finish.</span></div></div>
@@ -337,16 +336,16 @@
 
 <!-- ============ WHY NOT DIY (Squarespace / Wix) ============ -->
 <section class="band"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> DIY vs done-for-you</span>
-    <h2>Why not just use Squarespace or Wix?</h2>
-    <p>Website builders are useful tools &mdash; but the tool isn&rsquo;t the strategy. You can spend hours dragging sections around and still end up with a site that looks okay yet doesn&rsquo;t explain your offer clearly, build trust, show up properly on Google, or turn visitors into calls and quote requests.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.diy.eyebrow }}</span>
+    <h2>{{ home.diy.heading }}</h2>
+    <p>{{ home.diy.intro }}</p></div>
   <div class="get-grid" data-stagger="0.06">
     <div class="get rv"><span class="gk">01</span><h3>Templates aren&rsquo;t a strategy</h3><p>A template gives you a starting point. It doesn&rsquo;t know what your customers need to see, what questions they have, or what makes them trust your business.</p></div>
     <div class="get rv"><span class="gk">02</span><h3>A good website is more than how it looks</h3><p>The structure, copy, mobile layout, service pages, calls-to-action, contact flow, SEO basics, and trust signals all matter just as much as the design.</p></div>
     <div class="get rv"><span class="gk">03</span><h3>You don&rsquo;t need another project</h3><p>You already have a business to run. Hatt Digital handles the structure, design, setup, forms, mobile layout, launch details, and cleanup for you.</p></div>
     <div class="get rv"><span class="gk">04</span><h3>Built to get contacted, not just look nice</h3><p>A nice-looking site isn&rsquo;t the goal. The goal is to help people understand your business, trust it, and reach out.</p></div>
   </div>
-  <div class="mini-cta rv"><div class="mc-l"><h3>Want the site handled properly from the start?</h3><p>You could build it yourself &mdash; but if you want it done right and built around getting leads, I can handle it.</p></div><a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a></div>
+  <div class="mini-cta rv"><div class="mc-l"><h3>{{ home.diy.cta_heading }}</h3><p>{{ home.diy.cta_body }}</p></div><a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a></div>
 </div></section>
 
 <!-- ============ ABOUT EVAN + LOCAL ============ -->
@@ -356,19 +355,19 @@
     <div class="coord">44.6488&deg; N &middot; 63.5752&deg; W</div>
     <div class="big">Made in<br>Nova Scotia.</div>
   </div>
-  <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Local &amp; direct</span>
-    <h2 style="margin-top:16px">Your website, built by the person you actually talk to.</h2>
-    <p>Hatt Digital is run by Evan Hatt, right here in Nova Scotia. That means you&rsquo;re not being passed between salespeople, account managers, and developers. You deal directly with the person designing, building, and launching your website.</p>
-    <p>I work with local businesses across Halifax, Dartmouth, Bedford, the South Shore and beyond &mdash; contractors, trades, and service businesses that want a site that actually brings in work.</p>
+  <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.local.eyebrow }}</span>
+    <h2 style="margin-top:16px">{{ home.local.heading }}</h2>
+    <p>{{ home.local.body1 }}</p>
+    <p>{{ home.local.body2 }}</p>
     <div class="local-pills"><span>Halifax</span><span>Dartmouth</span><span>Bedford</span><span>South Shore</span><span>Annapolis Valley</span><span>Cape Breton</span></div>
-    <div style="margin-top:30px"><a href="about.html" class="btn btn-primary">More about Evan <span class="arr">&rarr;</span></a></div>
+    <div style="margin-top:30px"><a href="about.html" class="btn btn-primary">{{ home.local.button }} <span class="arr">&rarr;</span></a></div>
   </div>
 </div></div></section>
 
 <!-- ============ PROCESS ============ -->
 <section class="band band-dark"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> How it works</span><h2>From first message to launch &mdash; no mystery.</h2>
-    <p>You&rsquo;ll always know exactly where things stand and what happens next.</p></div>
+  <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.process.eyebrow }}</span><h2>{{ home.process.heading }}</h2>
+    <p>{{ home.process.intro }}</p></div>
   <div class="proc-grid" data-stagger="0.08">
     <div class="pstep rv"><div class="pn">STEP 01</div><div class="pline"></div><h3>Chat</h3><p>A quick, free call to understand your business and what you actually need. Zero pressure.</p></div>
     <div class="pstep rv"><div class="pn">STEP 02</div><div class="pline"></div><h3>Plan &amp; quote</h3><p>A clear, flat price and timeline up front &mdash; so you know exactly what you&rsquo;re paying before anything starts.</p></div>
@@ -379,9 +378,9 @@
 
 <!-- ============ TESTIMONIALS (honest placeholders) ============ -->
 <section class="band"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Reviews</span>
-    <h2>Real reviews will live here.</h2>
-    <p>Hatt Digital is a growing local studio. As projects wrap up, genuine client feedback goes right here &mdash; no stock photos, no made-up quotes, no fake five-stars.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.reviews.eyebrow }}</span>
+    <h2>{{ home.reviews.heading }}</h2>
+    <p>{{ home.reviews.intro }}</p></div>
   <div class="testi-grid" data-stagger="0.08">
     <div class="testi rv">
       <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
@@ -403,8 +402,8 @@
 
 <!-- ============ FAQ PREVIEW ============ -->
 <section class="band band-tint"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> FAQ</span><h2>Questions business owners ask me.</h2>
-    <p>The honest answers to the things people want to know before they reach out.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.faq.eyebrow }}</span><h2>{{ home.faq.heading }}</h2>
+    <p>{{ home.faq.intro }}</p></div>
   <div class="faq-list" data-stagger="0.05" style="margin-top:44px">
     <div class="faq-item rv"><button class="faq-q" aria-expanded="false">How much does a website cost?<span class="pm"></span></button><div class="faq-a"><div class="inner">Every project is quoted individually, because every business is different. Pick the package that sounds closest to what you need, tell me your goals and a budget you&rsquo;re comfortable with, and I&rsquo;ll build a fair, flat quote around the actual project. Whatever number you agree to is the number you pay &mdash; no surprises.</div></div></div>
     <div class="faq-item rv"><button class="faq-q" aria-expanded="false">How long does a website take?<span class="pm"></span></button><div class="faq-a"><div class="inner">Most sites go live within 2&ndash;3 weeks once I have your content. A simple one-page site can be ready in about a week.</div></div></div>
@@ -412,17 +411,17 @@
     <div class="faq-item rv"><button class="faq-q" aria-expanded="false">Why not just use Squarespace or Wix?<span class="pm"></span></button><div class="faq-a"><div class="inner">Those builders are good tools, but the tool isn&rsquo;t the strategy. Most owners don&rsquo;t have the time or the design, SEO, and copywriting know-how to turn a template into a site that actually brings in leads. That&rsquo;s the part I handle.</div></div></div>
     <div class="faq-item rv"><button class="faq-q" aria-expanded="false">What happens after I contact you?<span class="pm"></span></button><div class="faq-a"><div class="inner">I reply within one business day with honest advice and clear next steps. No pressure and no obligation &mdash; even if it&rsquo;s just feedback on what you already have.</div></div></div>
   </div>
-  <div class="mini-cta rv"><div class="mc-l"><h3>Got a question that isn&rsquo;t here?</h3><p>See the full FAQ, or just send it over and I&rsquo;ll give you a straight answer.</p></div><a href="faq.html" class="btn btn-ghost">See all FAQs <span class="arr">&rarr;</span></a></div>
+  <div class="mini-cta rv"><div class="mc-l"><h3>{{ home.faq.cta_heading }}</h3><p>{{ home.faq.cta_body }}</p></div><a href="faq.html" class="btn btn-ghost">See all FAQs <span class="arr">&rarr;</span></a></div>
 </div></section>
 
 <!-- ============ FINAL CTA ============ -->
 <section class="band"><div class="wrap"><div class="cta-band rv"><span class="glow"></span><span class="glow g2"></span>
-      <h2>Ready to make your website easier to trust and easier to contact?</h2>
-      <p>Send me your current site, your business idea, or what you need built. I&rsquo;ll take a look and let you know the best next step &mdash; free.</p>
+      <h2>{{ home.cta.heading }}</h2>
+      <p>{{ home.cta.body }}</p>
       <div class="cta-actions">
         <a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a>
         <a href="quote.html" class="btn btn-ghost on-dark">Start a Website Project</a>
-        <a href="tel:+19022774424" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
+        <a href="tel:{{ site.contact.phone_link }}" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
       </div>
     </div></div></section>
 
@@ -431,10 +430,10 @@
       <div class="foot-top">
         <div class="foot-brand">
           <a class="fb-logo" href="index.html"><img src="assets/logo.png" alt="Hatt Digital" width="560" height="397" loading="lazy" decoding="async"><span class="name">Hatt <span>Digital</span></span></a>
-          <p>Honest, effective websites for local businesses across Nova Scotia.</p>
+          <p>{{ site.footer.blurb }}</p>
           <div class="foot-social">
-            <a href="https://www.facebook.com/profile.php?id=61590965965094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+            <a href="{{ site.social.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="{{ site.social.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
           </div>
         </div>
         <div class="foot-cols">
@@ -445,14 +444,14 @@
             <a href="web-design-for-contractors.html">Contractors</a><a href="web-design-for-electricians.html">Electricians</a><a href="web-design-for-plumbers.html">Plumbers</a><a href="web-design-for-small-businesses.html">Small businesses</a>
           </div>
           <div class="foot-col"><h4>Areas &amp; contact</h4>
-            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:+19022774424">902-277-4424</a><a href="mailto:hattdigitalns@gmail.com">Email me</a>
+            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:{{ site.contact.phone_link }}">{{ site.contact.phone }}</a><a href="mailto:{{ site.contact.email }}">Email me</a>
           </div>
         </div>
       </div>
       <div class="foot-bottom"><span>&copy; <span id="yr"></span> Hatt Digital. All rights reserved.</span><span class="mono">Nova Scotia, Canada &middot; 44.65&deg; N</span></div>
     </div></footer>
 <div class="mobile-cta" id="mobileCta" aria-label="Quick contact bar">
-  <a class="call" href="tel:+19022774424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
+  <a class="call" href="tel:{{ site.contact.phone_link }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
   <a href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
   <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Start Project</a>
 </div>

@@ -2,7 +2,7 @@
 
 Marketing website for **Hatt Digital** — clean, fast websites for local businesses in Nova Scotia.
 
-A static, dependency-free site: just HTML, CSS, and a little vanilla JavaScript. No build step, no framework, nothing to install.
+A static site of hand-coded HTML, CSS, and a little vanilla JavaScript. Editable copy for the Home page lives in `_data/*.json` and is stitched into the HTML at build time by [Eleventy](https://www.11ty.dev/), so the content can be edited from a free CMS (see **Editing the site** below) without touching markup. The CSS, JavaScript, and animations are passed through untouched.
 
 ## Pages
 
@@ -35,15 +35,31 @@ and the footer columns (search the project for `web-design-for-contractors.html`
 
 ## Run it locally
 
-Because the pages load shared files from `assets/`, open them through a tiny local server (not by double-clicking the file):
+The site is built with Eleventy. Install once, then run the dev server:
 
 ```bash
-# Python 3
-python3 -m http.server 8000
-# then visit http://localhost:8000
+npm install
+npm run dev      # builds + serves with live reload at http://localhost:8080
 ```
 
-Or use any static server you like (`npx serve`, the VS Code "Live Server" extension, etc.).
+To produce the deployable output without serving:
+
+```bash
+npm run build    # writes the finished site to _site/
+```
+
+## Editing the site (no code)
+
+Content for the Home page is stored in `_data/home.json` and shared contact
+details in `_data/site.json`. You can edit these from a browser — no install —
+using **[Pages CMS](https://pagescms.org)**:
+
+1. Go to <https://app.pagescms.org> and sign in with GitHub.
+2. Open this repository and choose the `main` branch.
+3. Edit the labelled fields (headings, paragraphs, contact info) and save.
+
+Saving commits to `main`, which rebuilds and redeploys the site automatically.
+The structure of the editor is defined in `.pages.yml`.
 
 ## Deploy with GitHub Pages
 

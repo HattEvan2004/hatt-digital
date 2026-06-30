@@ -1,0 +1,101 @@
+{
+  "seo": {
+    "title": "Web Design in Nova Scotia for Local Businesses | Hatt Digital",
+    "description": "Hatt Digital builds clean, mobile-friendly websites for Nova Scotia businesses — built to turn visitors into calls and quote requests. Local SEO included, flat honest pricing."
+  },
+  "hero": {
+    "eyebrow": "Web design · Nova Scotia",
+    "title": "Websites that make local businesses look **impossible to ignore.**",
+    "sub": "Hatt Digital builds clean, mobile-friendly websites for Nova Scotia businesses — designed to turn visitors into calls, messages, and quote requests, without the agency runaround.",
+    "cta_primary": "Request a Website Quote",
+    "cta_secondary": "View My Work"
+  },
+  "why": {
+    "eyebrow": "Why it matters",
+    "heading": "No buzzwords. Just the things that grow your business.",
+    "intro": "A website isn’t a brochure that sits there. Built right, it’s the hardest-working part of your business — turning a late-night search into a call the next morning, while you do the actual work.",
+    "lead_heading": "A site that earns its place on your business card.",
+    "lead_body": "Most local websites are digital dust collectors. Yours should be the thing that quietly works in the background — the reason someone picks you over the next name on the list.",
+    "stats": [
+      { "value": "1", "label": "person you actually talk to — the one building it" },
+      { "value": "0", "label": "hidden fees, surprise invoices, or lock-in" },
+      { "value": "100%", "label": "yours: domain, site, and content in your name" }
+    ],
+    "tiles": [
+      { "title": "Get found on Google", "text": "Local SEO is built into every site, so when someone nearby searches for what you do, your business is what they find." },
+      { "title": "Turn visitors into calls", "text": "Clear layout, fast load times, and obvious ways to get in touch. Built to get you leads — not just to look pretty." },
+      { "title": "Sharp on every phone", "text": "Most customers see your site on their phone first. Every site I build looks sharp and works perfectly on any screen." }
+    ]
+  },
+  "start": {
+    "eyebrow": "Start your website",
+    "heading": "Ready to get your website handled properly?",
+    "body": "Tell me about your business, your goals, and a budget you’re comfortable with, and I’ll put together a fair, all-in quote built around what you actually need. No pressure, no obligation — even if you’re still deciding.",
+    "cta": "Request a Website Quote",
+    "call": "Call Evan",
+    "card_heading": "How it works",
+    "steps": [
+      "Choose the website option that sounds closest to your needs",
+      "Tell me your goals, timeline, and a comfortable budget",
+      "I reply with a clear, fair quote — usually within one business day",
+      "We refine it together until it’s right, then I build it"
+    ]
+  },
+  "work": {
+    "eyebrow": "Recent work",
+    "heading": "Mini case studies, built to convert.",
+    "intro": "Each build is structured around one goal: making it obvious what the business does, why it’s trusted, and how to get in touch. The builds below are demos that show what a stronger online presence could look like for a local niche.",
+    "viewall": "View My Full Portfolio"
+  },
+  "pricing": {
+    "eyebrow": "Website packages",
+    "heading": "Three clear ways to get your website built.",
+    "intro": "Choose the option that sounds closest to what you need. Every project gets a fair, custom quote built around your goals — no fixed template pricing, no guesswork.",
+    "foot": "Every business is different. Choose the option that sounds closest to what you need, then tell me your goals and budget. I’ll build a fair quote around the actual project."
+  },
+  "earns": {
+    "eyebrow": "How a website earns its keep",
+    "heading": "Your website should do more than sit there.",
+    "intro": "A good site guides people from “just looking” to actually reaching out — with clear messaging, trust, speed, and simple ways to contact you."
+  },
+  "whyhd": {
+    "eyebrow": "Why Hatt Digital",
+    "heading": "Agency quality without the agency runaround.",
+    "intro": "Bigger agencies can be a good fit for bigger companies. Hatt Digital is built for local businesses that want a clean, professional website — without a bloated process, confusing handoffs, or unclear pricing."
+  },
+  "diy": {
+    "eyebrow": "DIY vs done-for-you",
+    "heading": "Why not just use Squarespace or Wix?",
+    "intro": "Website builders are useful tools — but the tool isn’t the strategy. You can spend hours dragging sections around and still end up with a site that looks okay yet doesn’t explain your offer clearly, build trust, show up properly on Google, or turn visitors into calls and quote requests.",
+    "cta_heading": "Want the site handled properly from the start?",
+    "cta_body": "You could build it yourself — but if you want it done right and built around getting leads, I can handle it."
+  },
+  "local": {
+    "eyebrow": "Local & direct",
+    "heading": "Your website, built by the person you actually talk to.",
+    "body1": "Hatt Digital is run by Evan Hatt, right here in Nova Scotia. That means you’re not being passed between salespeople, account managers, and developers. You deal directly with the person designing, building, and launching your website.",
+    "body2": "I work with local businesses across Halifax, Dartmouth, Bedford, the South Shore and beyond — contractors, trades, and service businesses that want a site that actually brings in work.",
+    "button": "More about Evan"
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "heading": "From first message to launch — no mystery.",
+    "intro": "You’ll always know exactly where things stand and what happens next."
+  },
+  "reviews": {
+    "eyebrow": "Reviews",
+    "heading": "Real reviews will live here.",
+    "intro": "Hatt Digital is a growing local studio. As projects wrap up, genuine client feedback goes right here — no stock photos, no made-up quotes, no fake five-stars."
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "heading": "Questions business owners ask me.",
+    "intro": "The honest answers to the things people want to know before they reach out.",
+    "cta_heading": "Got a question that isn’t here?",
+    "cta_body": "See the full FAQ, or just send it over and I’ll give you a straight answer."
+  },
+  "cta": {
+    "heading": "Ready to make your website easier to trust and easier to contact?",
+    "body": "Send me your current site, your business idea, or what you need built. I’ll take a look and let you know the best next step — free."
+  }
+}

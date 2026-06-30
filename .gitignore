@@ -10,3 +10,6 @@ Thumbs.db
 # Logs / deps (if you add tooling later)
 node_modules/
 npm-debug.log*
+
+# Eleventy build output (generated; the deploy step builds this fresh)
+_site/

@@ -1,27 +1,186 @@
 # Pages CMS configuration — https://pagescms.org
+# Edit this site at https://app.pagescms.org (sign in with GitHub, no install).
+# Saving here commits to GitHub and the site rebuilds & deploys automatically.
 #
-# Hatt Digital is a hand-coded static HTML site (no markdown/frontmatter),
-# so each page is exposed for raw-HTML editing and the assets/ folder is
-# exposed for image upload/replace. Edit pages under "Content" and manage
-# images under "Media" in the Pages CMS dashboard.
+# The Home page is fully structured: you edit clean labelled boxes (headings,
+# paragraphs, lists) and never touch HTML. The remaining pages are still
+# available for advanced raw-HTML editing under "Other pages (HTML)" until they
+# are converted to structured fields too.
 
 media:
-  input: assets          # folder (in the repo) where images live
-  output: /assets        # public URL prefix used when inserting media
+  input: assets
+  output: /assets
   extensions: [jpg, jpeg, png, webp, svg, gif, ico, pdf]
 
 content:
-  # ---- Main pages ----
+  # ─────────────────────────────  HOME PAGE  ─────────────────────────────
   - name: home
-    label: Home
+    label: Home page
     type: file
-    path: index.html
-    format: code
+    path: _data/home.json
     fields:
-      - { name: body, label: Page HTML, type: code, options: { language: html } }
+      - name: seo
+        label: Browser tab & search engine
+        type: object
+        fields:
+          - { name: title, label: "Page title (browser tab & Google)", type: string }
+          - { name: description, label: "Search description", type: text }
+      - name: hero
+        label: Hero — top of the page
+        type: object
+        fields:
+          - { name: eyebrow, label: "Small tag above the headline", type: string }
+          - name: title
+            label: "Headline"
+            type: text
+            description: "Wrap the words you want highlighted in **double asterisks**. e.g. Websites that make local businesses look **impossible to ignore.**"
+          - { name: sub, label: "Intro sentence", type: text }
+          - { name: cta_primary, label: "Primary button label", type: string }
+          - { name: cta_secondary, label: "Secondary button label", type: string }
+      - name: why
+        label: "“Why it matters” section"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+          - { name: lead_heading, label: "Lead card — heading", type: string }
+          - { name: lead_body, label: "Lead card — paragraph", type: text }
+          - name: stats
+            label: "Stat boxes"
+            type: object
+            list: true
+            fields:
+              - { name: value, label: "Big number / label", type: string }
+              - { name: label, label: "Caption", type: string }
+          - name: tiles
+            label: "Feature tiles"
+            type: object
+            list: true
+            fields:
+              - { name: title, label: "Title", type: string }
+              - { name: text, label: "Text", type: text }
+      - name: start
+        label: "“Start your website” section"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: body, label: "Paragraph", type: text }
+          - { name: card_heading, label: "“How it works” card — heading", type: string }
+          - name: steps
+            label: "“How it works” steps"
+            type: string
+            list: true
+      - name: work
+        label: "Portfolio preview — heading"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+          - { name: viewall, label: "“View portfolio” button label", type: string }
+      - name: pricing
+        label: "Packages — heading"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+          - { name: foot, label: "Footnote under the packages", type: text }
+      - name: earns
+        label: "“Earns its keep” — heading"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+      - name: whyhd
+        label: "“Why Hatt Digital” — heading"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+      - name: diy
+        label: "“DIY vs done-for-you” section"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+          - { name: cta_heading, label: "Call-out — heading", type: string }
+          - { name: cta_body, label: "Call-out — paragraph", type: text }
+      - name: local
+        label: "“Local & direct” section"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: body1, label: "Paragraph 1", type: text }
+          - { name: body2, label: "Paragraph 2", type: text }
+          - { name: button, label: "Button label", type: string }
+      - name: process
+        label: "Process — heading"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+      - name: reviews
+        label: "Reviews — heading"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+      - name: faq
+        label: "FAQ preview — heading"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+          - { name: cta_heading, label: "Call-out — heading", type: string }
+          - { name: cta_body, label: "Call-out — paragraph", type: text }
+      - name: cta
+        label: "Final call-to-action"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: body, label: "Paragraph", type: text }
 
+  # ──────────────────────────  SITE & CONTACT  ──────────────────────────
+  - name: site
+    label: Site & contact
+    type: file
+    path: _data/site.json
+    fields:
+      - name: contact
+        label: Contact details (used across the site)
+        type: object
+        fields:
+          - { name: phone, label: "Phone (shown on the page)", type: string }
+          - { name: phone_link, label: "Phone (dial format, e.g. +19022774424)", type: string }
+          - { name: email, label: "Email", type: string }
+      - name: social
+        label: Social links
+        type: object
+        fields:
+          - { name: facebook, label: "Facebook URL", type: string }
+          - { name: instagram, label: "Instagram URL", type: string }
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - { name: blurb, label: "Short blurb under the logo", type: text }
+
+  # ───────────────  OTHER PAGES (advanced raw-HTML editing)  ───────────────
+  # These are still hand-coded HTML. You can edit them here, but you are editing
+  # raw HTML — take care not to break tags. They will be converted to friendly
+  # structured fields (like the Home page above) in a later update.
   - name: services
-    label: Services
+    label: "Services (HTML)"
     type: file
     path: services.html
     format: code
@@ -29,7 +188,7 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: projects
-    label: Portfolio
+    label: "Portfolio (HTML)"
     type: file
     path: projects.html
     format: code
@@ -37,15 +196,15 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: about
-    label: About
+    label: "About (HTML)"
     type: file
     path: about.html
     format: code
     fields:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
-  - name: faq
-    label: FAQ
+  - name: faqpage
+    label: "FAQ page (HTML)"
     type: file
     path: faq.html
     format: code
@@ -53,32 +212,15 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: quote
-    label: Quote form
+    label: "Quote form (HTML)"
     type: file
     path: quote.html
     format: code
     fields:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
-  - name: contact
-    label: Contact (redirect)
-    type: file
-    path: contact.html
-    format: code
-    fields:
-      - { name: body, label: Page HTML, type: code, options: { language: html } }
-
-  - name: preview
-    label: Preview
-    type: file
-    path: preview.html
-    format: code
-    fields:
-      - { name: body, label: Page HTML, type: code, options: { language: html } }
-
-  # ---- SEO landing pages (industry & area) ----
   - name: lp-contractors
-    label: Web design for contractors
+    label: "LP — Contractors (HTML)"
     type: file
     path: web-design-for-contractors.html
     format: code
@@ -86,7 +228,7 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: lp-electricians
-    label: Web design for electricians
+    label: "LP — Electricians (HTML)"
     type: file
     path: web-design-for-electricians.html
     format: code
@@ -94,7 +236,7 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: lp-plumbers
-    label: Web design for plumbers
+    label: "LP — Plumbers (HTML)"
     type: file
     path: web-design-for-plumbers.html
     format: code
@@ -102,7 +244,7 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: lp-small-businesses
-    label: Web design for small businesses
+    label: "LP — Small businesses (HTML)"
     type: file
     path: web-design-for-small-businesses.html
     format: code
@@ -110,7 +252,7 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: lp-halifax
-    label: Web design in Halifax
+    label: "LP — Halifax (HTML)"
     type: file
     path: web-design-halifax.html
     format: code
@@ -118,7 +260,7 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: lp-dartmouth
-    label: Web design in Dartmouth
+    label: "LP — Dartmouth (HTML)"
     type: file
     path: web-design-dartmouth.html
     format: code

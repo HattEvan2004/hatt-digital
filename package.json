@@ -1,0 +1,13 @@
+{
+  "name": "hatt-digital",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketing website for Hatt Digital — clean, fast websites for Nova Scotia businesses.",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
