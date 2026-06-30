@@ -73,35 +73,79 @@ content:
             type: string
             list: true
       - name: work
-        label: "Portfolio preview — heading"
+        label: "Portfolio preview"
         type: object
         fields:
           - { name: eyebrow, label: "Eyebrow", type: string }
           - { name: heading, label: "Heading", type: string }
           - { name: intro, label: "Intro paragraph", type: text }
           - { name: viewall, label: "“View portfolio” button label", type: string }
+          - name: cases
+            label: "Case study cards"
+            type: object
+            list: true
+            fields:
+              - { name: image, label: "Screenshot", type: image }
+              - { name: alt, label: "Image alt text", type: string }
+              - { name: w, label: "Image width (advanced)", type: string }
+              - { name: h, label: "Image height (advanced)", type: string }
+              - { name: type, label: "Category line", type: string }
+              - { name: title, label: "Title", type: string }
+              - { name: desc, label: "Description", type: text }
+              - { name: focus, label: "“What I focused on” bullets", type: string, list: true }
+              - { name: bestfor, label: "“Best for” text", type: string }
+              - { name: link, label: "Preview link (URL)", type: string }
       - name: pricing
-        label: "Packages — heading"
+        label: "Packages"
         type: object
         fields:
           - { name: eyebrow, label: "Eyebrow", type: string }
           - { name: heading, label: "Heading", type: string }
           - { name: intro, label: "Intro paragraph", type: text }
           - { name: foot, label: "Footnote under the packages", type: text }
+          - name: tiers
+            label: "Package cards"
+            type: object
+            list: true
+            fields:
+              - { name: name, label: "Package name", type: string }
+              - { name: label, label: "Short label", type: string }
+              - { name: sub, label: "Description", type: text }
+              - { name: features, label: "Feature bullets", type: string, list: true }
+              - { name: button, label: "Button label", type: string }
+              - { name: package, label: "Quote tag (starter / business / growth)", type: string }
+              - { name: featured, label: "Highlight as “best for most”?", type: boolean }
+              - { name: badge, label: "Badge text (only if highlighted)", type: string }
       - name: earns
-        label: "“Earns its keep” — heading"
+        label: "“Earns its keep” section"
         type: object
         fields:
           - { name: eyebrow, label: "Eyebrow", type: string }
           - { name: heading, label: "Heading", type: string }
           - { name: intro, label: "Intro paragraph", type: text }
+          - name: steps
+            label: "Flow steps"
+            type: object
+            list: true
+            fields:
+              - { name: tag, label: "Tag (e.g. Land, Trust, Act, Lead)", type: string }
+              - { name: title, label: "Title", type: string }
+              - { name: text, label: "Text", type: text }
+              - { name: d, label: "Animation delay (advanced, e.g. .1s)", type: string }
       - name: whyhd
-        label: "“Why Hatt Digital” — heading"
+        label: "“Why Hatt Digital” section"
         type: object
         fields:
           - { name: eyebrow, label: "Eyebrow", type: string }
           - { name: heading, label: "Heading", type: string }
           - { name: intro, label: "Intro paragraph", type: text }
+          - name: points
+            label: "Trust points"
+            type: object
+            list: true
+            fields:
+              - { name: title, label: "Title", type: string }
+              - { name: text, label: "Text", type: string }
       - name: diy
         label: "“DIY vs done-for-you” section"
         type: object
@@ -111,6 +155,13 @@ content:
           - { name: intro, label: "Intro paragraph", type: text }
           - { name: cta_heading, label: "Call-out — heading", type: string }
           - { name: cta_body, label: "Call-out — paragraph", type: text }
+          - name: cards
+            label: "Reason cards"
+            type: object
+            list: true
+            fields:
+              - { name: title, label: "Title", type: string }
+              - { name: text, label: "Text", type: text }
       - name: local
         label: "“Local & direct” section"
         type: object
@@ -121,21 +172,41 @@ content:
           - { name: body2, label: "Paragraph 2", type: text }
           - { name: button, label: "Button label", type: string }
       - name: process
-        label: "Process — heading"
+        label: "Process"
         type: object
         fields:
           - { name: eyebrow, label: "Eyebrow", type: string }
           - { name: heading, label: "Heading", type: string }
           - { name: intro, label: "Intro paragraph", type: text }
+          - name: steps
+            label: "Steps"
+            type: object
+            list: true
+            fields:
+              - { name: title, label: "Title", type: string }
+              - { name: text, label: "Text", type: text }
       - name: reviews
-        label: "Reviews — heading"
+        label: "Reviews"
         type: object
         fields:
           - { name: eyebrow, label: "Eyebrow", type: string }
           - { name: heading, label: "Heading", type: string }
           - { name: intro, label: "Intro paragraph", type: text }
+          - name: quotes
+            label: "Review cards"
+            type: object
+            list: true
+            fields:
+              - { name: quote, label: "Quote", type: text }
+              - { name: who, label: "Attribution", type: string }
+          - name: invite
+            label: "“Have we worked together?” card"
+            type: object
+            fields:
+              - { name: title, label: "Heading", type: string }
+              - { name: text, label: "Text", type: text }
       - name: faq
-        label: "FAQ preview — heading"
+        label: "FAQ preview"
         type: object
         fields:
           - { name: eyebrow, label: "Eyebrow", type: string }
@@ -143,6 +214,13 @@ content:
           - { name: intro, label: "Intro paragraph", type: text }
           - { name: cta_heading, label: "Call-out — heading", type: string }
           - { name: cta_body, label: "Call-out — paragraph", type: text }
+          - name: items
+            label: "FAQ items"
+            type: object
+            list: true
+            fields:
+              - { name: q, label: "Question", type: string }
+              - { name: a, label: "Answer", type: text }
       - name: cta
         label: "Final call-to-action"
         type: object

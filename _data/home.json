@@ -17,32 +17,14 @@
     "lead_heading": "A site that earns its place on your business card.",
     "lead_body": "Most local websites are digital dust collectors. Yours should be the thing that quietly works in the background — the reason someone picks you over the next name on the list.",
     "stats": [
-      {
-        "value": "1",
-        "label": "person you actually talk to — the one building it"
-      },
-      {
-        "value": "0",
-        "label": "hidden fees, surprise invoices, or lock-in"
-      },
-      {
-        "value": "100%",
-        "label": "yours: domain, site, and content in your name"
-      }
+      { "value": "1", "label": "person you actually talk to — the one building it" },
+      { "value": "0", "label": "hidden fees, surprise invoices, or lock-in" },
+      { "value": "100%", "label": "yours: domain, site, and content in your name" }
     ],
     "tiles": [
-      {
-        "title": "Get found on Google",
-        "text": "Local SEO is built into every site, so when someone nearby searches for what you do, your business is what they find."
-      },
-      {
-        "title": "Turn visitors into calls",
-        "text": "Clear layout, fast load times, and obvious ways to get in touch. Built to get you leads — not just to look pretty."
-      },
-      {
-        "title": "Sharp on every phone",
-        "text": "Most customers see your site on their phone first. Every site I build looks sharp and works perfectly on any screen."
-      }
+      { "title": "Get found on Google", "text": "Local SEO is built into every site, so when someone nearby searches for what you do, your business is what they find." },
+      { "title": "Turn visitors into calls", "text": "Clear layout, fast load times, and obvious ways to get in touch. Built to get you leads — not just to look pretty." },
+      { "title": "Sharp on every phone", "text": "Most customers see your site on their phone first. Every site I build looks sharp and works perfectly on any screen." }
     ]
   },
   "start": {
@@ -61,30 +43,120 @@
     "eyebrow": "Recent work",
     "heading": "Mini case studies, built to convert.",
     "intro": "Each build is structured around one goal: making it obvious what the business does, why it’s trusted, and how to get in touch. The builds below are demos that show what a stronger online presence could look like for a local niche.",
-    "viewall": "View My Full Portfolio"
+    "viewall": "View My Full Portfolio",
+    "cases": [
+      {
+        "image": "assets/screens/toner-supplies.svg",
+        "alt": "Toner and office supplies website demo built by Hatt Digital",
+        "w": "1300",
+        "h": "813",
+        "type": "Office & toner supplies · Demo build",
+        "title": "Toner Supplies Website",
+        "desc": "A demo build for a local toner and office-supply business. The goal: make a large product range easy to browse, build trust quickly, and turn “just looking” into a quote request.",
+        "focus": ["Clearer product browsing", "Stronger local trust signals", "Simple quote-request flow", "Mobile-first layout"],
+        "bestfor": "suppliers, retailers & B2B sellers",
+        "link": "https://toner-supplies-demo-v2.vercel.app/#"
+      },
+      {
+        "image": "assets/screens/electrical.png",
+        "alt": "Electrical contractor website demo built by Hatt Digital",
+        "w": "1300",
+        "h": "813",
+        "type": "Residential & commercial electrical · Demo build",
+        "title": "Electrical Contractor Website",
+        "desc": "A demo build for an electrical contractor. The brief: lay out services clearly, prove the business is trustworthy fast, and make requesting a quote the obvious next step.",
+        "focus": ["Interactive service sections", "Strong quote calls-to-action", "Clear trust signals", "Confident, modern brand feel"],
+        "bestfor": "electricians, HVAC & trades",
+        "link": "https://electrical-ns-demo.vercel.app/"
+      },
+      {
+        "image": "assets/screens/blandford-marine-real.png",
+        "alt": "Marine services website demo built by Hatt Digital",
+        "w": "1300",
+        "h": "809",
+        "type": "Marine services · Demo build",
+        "title": "Marine Business Website",
+        "desc": "A demo build for a local marine business. Organised so services are easy to scan, trust is built early, and customers can reach out without hunting for contact details.",
+        "focus": ["Organised service layout", "Trust-building sections", "One-tap ways to make contact", "Responsive on every device"],
+        "bestfor": "marine, outdoor & seasonal services",
+        "link": "https://marine-services-demo.vercel.app/"
+      }
+    ]
   },
   "pricing": {
     "eyebrow": "Website packages",
     "heading": "Three clear ways to get your website built.",
     "intro": "Choose the option that sounds closest to what you need. Every project gets a fair, custom quote built around your goals — no fixed template pricing, no guesswork.",
-    "foot": "Every business is different. Choose the option that sounds closest to what you need, then tell me your goals and budget. I’ll build a fair quote around the actual project."
+    "foot": "Every business is different. Choose the option that sounds closest to what you need, then tell me your goals and budget. I’ll build a fair quote around the actual project.",
+    "tiers": [
+      {
+        "package": "starter",
+        "featured": false,
+        "badge": "",
+        "name": "Starter Website",
+        "label": "Best for getting online properly",
+        "sub": "A clean, focused website for small businesses that need a professional online presence without overcomplicating things.",
+        "features": ["One-page website", "Mobile-friendly design", "Contact form", "Basic SEO setup", "Launch support"],
+        "button": "Start with Starter"
+      },
+      {
+        "package": "business",
+        "featured": true,
+        "badge": "Best for most",
+        "name": "Business Website",
+        "label": "Best for most businesses",
+        "sub": "A stronger website for service businesses that need more pages, better structure, and more trust before customers reach out.",
+        "features": ["Multi-page website", "Home, Services, About, Contact, FAQ", "Local SEO structure", "Stronger calls-to-action", "Google Business Profile guidance"],
+        "button": "Start with Business"
+      },
+      {
+        "package": "growth",
+        "featured": false,
+        "badge": "",
+        "name": "Growth Website",
+        "label": "Best for custom needs",
+        "sub": "A more flexible website option for businesses that need extra pages, custom sections, quote flows, booking flows, or CMS/editable content.",
+        "features": ["Advanced layouts", "Booking or quote flows", "CMS / editable content options", "Extra service or location pages", "Custom integrations where needed"],
+        "button": "Start with Growth"
+      }
+    ]
   },
   "earns": {
     "eyebrow": "How a website earns its keep",
     "heading": "Your website should do more than sit there.",
-    "intro": "A good site guides people from “just looking” to actually reaching out — with clear messaging, trust, speed, and simple ways to contact you."
+    "intro": "A good site guides people from “just looking” to actually reaching out — with clear messaging, trust, speed, and simple ways to contact you.",
+    "steps": [
+      { "d": "0s", "tag": "Land", "title": "Clear first impression", "text": "Visitors instantly understand what you do and who it’s for — no scrolling to figure it out." },
+      { "d": ".1s", "tag": "Trust", "title": "Proof you’re real", "text": "Professional design, local details, and the small signals that tell people you’re legit and nearby." },
+      { "d": ".2s", "tag": "Act", "title": "Easy to reach you", "text": "Obvious calls, forms, maps, and buttons that make getting in touch take one tap, not three." },
+      { "d": ".3s", "tag": "Lead", "title": "A real enquiry", "text": "The visitor becomes a call or message in your inbox — instead of quietly leaving for a competitor." }
+    ]
   },
   "whyhd": {
     "eyebrow": "Why Hatt Digital",
     "heading": "Agency quality without the agency runaround.",
-    "intro": "Bigger agencies can be a good fit for bigger companies. Hatt Digital is built for local businesses that want a clean, professional website — without a bloated process, confusing handoffs, or unclear pricing."
+    "intro": "Bigger agencies can be a good fit for bigger companies. Hatt Digital is built for local businesses that want a clean, professional website — without a bloated process, confusing handoffs, or unclear pricing.",
+    "points": [
+      { "title": "You work directly with the builder", "text": "The person you talk to is the person designing and building your site." },
+      { "title": "No runaround or handoffs", "text": "No account managers or ticket queues. One point of contact, start to finish." },
+      { "title": "Mobile-first as standard", "text": "Most customers see you on a phone first, so every site is built to look sharp there." },
+      { "title": "Clear, flat quotes", "text": "You see one all-in number before work starts. No surprise invoices later." },
+      { "title": "Local SEO basics included", "text": "The setup that helps nearby customers find you — not an upsell." },
+      { "title": "Built to get you contacted", "text": "Every page points toward calls, messages, and quote requests." }
+    ]
   },
   "diy": {
     "eyebrow": "DIY vs done-for-you",
     "heading": "Why not just use Squarespace or Wix?",
     "intro": "Website builders are useful tools — but the tool isn’t the strategy. You can spend hours dragging sections around and still end up with a site that looks okay yet doesn’t explain your offer clearly, build trust, show up properly on Google, or turn visitors into calls and quote requests.",
     "cta_heading": "Want the site handled properly from the start?",
-    "cta_body": "You could build it yourself — but if you want it done right and built around getting leads, I can handle it."
+    "cta_body": "You could build it yourself — but if you want it done right and built around getting leads, I can handle it.",
+    "cards": [
+      { "title": "Templates aren’t a strategy", "text": "A template gives you a starting point. It doesn’t know what your customers need to see, what questions they have, or what makes them trust your business." },
+      { "title": "A good website is more than how it looks", "text": "The structure, copy, mobile layout, service pages, calls-to-action, contact flow, SEO basics, and trust signals all matter just as much as the design." },
+      { "title": "You don’t need another project", "text": "You already have a business to run. Hatt Digital handles the structure, design, setup, forms, mobile layout, launch details, and cleanup for you." },
+      { "title": "Built to get contacted, not just look nice", "text": "A nice-looking site isn’t the goal. The goal is to help people understand your business, trust it, and reach out." }
+    ]
   },
   "local": {
     "eyebrow": "Local & direct",
@@ -96,19 +168,40 @@
   "process": {
     "eyebrow": "How it works",
     "heading": "From first message to launch — no mystery.",
-    "intro": "You’ll always know exactly where things stand and what happens next."
+    "intro": "You’ll always know exactly where things stand and what happens next.",
+    "steps": [
+      { "title": "Chat", "text": "A quick, free call to understand your business and what you actually need. Zero pressure." },
+      { "title": "Plan & quote", "text": "A clear, flat price and timeline up front — so you know exactly what you’re paying before anything starts." },
+      { "title": "Design & build", "text": "I design it, you review it, and we refine it together until it’s right. No surprises at the end." },
+      { "title": "Launch", "text": "Your site goes live. I make sure everything works and show you how to manage it. Then I’m still here." }
+    ]
   },
   "reviews": {
     "eyebrow": "Reviews",
     "heading": "Real reviews will live here.",
-    "intro": "Hatt Digital is a growing local studio. As projects wrap up, genuine client feedback goes right here — no stock photos, no made-up quotes, no fake five-stars."
+    "intro": "Hatt Digital is a growing local studio. As projects wrap up, genuine client feedback goes right here — no stock photos, no made-up quotes, no fake five-stars.",
+    "quotes": [
+      { "quote": "Client feedback coming soon. This space is reserved for real reviews from local businesses I’ve worked with.", "who": "Your business here" },
+      { "quote": "No stock quotes and no invented names. When a client leaves feedback, it’ll show up here exactly as they wrote it.", "who": "Your business here" }
+    ],
+    "invite": {
+      "title": "Have we worked together?",
+      "text": "Your honest feedback can be featured here. Get in touch and let me know how it went."
+    }
   },
   "faq": {
     "eyebrow": "FAQ",
     "heading": "Questions business owners ask me.",
     "intro": "The honest answers to the things people want to know before they reach out.",
     "cta_heading": "Got a question that isn’t here?",
-    "cta_body": "See the full FAQ, or just send it over and I’ll give you a straight answer."
+    "cta_body": "See the full FAQ, or just send it over and I’ll give you a straight answer.",
+    "items": [
+      { "q": "How much does a website cost?", "a": "Every project is quoted individually, because every business is different. Pick the package that sounds closest to what you need, tell me your goals and a budget you’re comfortable with, and I’ll build a fair, flat quote around the actual project. Whatever number you agree to is the number you pay — no surprises." },
+      { "q": "How long does a website take?", "a": "Most sites go live within 2–3 weeks once I have your content. A simple one-page site can be ready in about a week." },
+      { "q": "Can you redesign my current website?", "a": "Absolutely. If your current site is slow, dated, or hard to use on a phone, I’ll rebuild it into something modern — keeping what works and fixing what doesn’t." },
+      { "q": "Why not just use Squarespace or Wix?", "a": "Those builders are good tools, but the tool isn’t the strategy. Most owners don’t have the time or the design, SEO, and copywriting know-how to turn a template into a site that actually brings in leads. That’s the part I handle." },
+      { "q": "What happens after I contact you?", "a": "I reply within one business day with honest advice and clear next steps. No pressure and no obligation — even if it’s just feedback on what you already have." }
+    ]
   },
   "cta": {
     "heading": "Ready to make your website easier to trust and easier to contact?",

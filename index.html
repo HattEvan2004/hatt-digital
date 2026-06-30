@@ -163,72 +163,29 @@
       <h2>{{ home.work.heading }}</h2>
       <p>{{ home.work.intro }}</p></div>
     <div class="cases trio" data-stagger="0.08">
+      {%- for c in home.work.cases %}
       <article class="case rv">
-        <span class="case-shot"><img src="assets/screens/toner-supplies.svg" alt="Toner and office supplies website demo built by Hatt Digital" width="1300" height="813" loading="lazy" decoding="async"></span>
+        <span class="case-shot"><img src="{{ c.image }}" alt="{{ c.alt }}" width="{{ c.w }}" height="{{ c.h }}" loading="lazy" decoding="async"></span>
         <div class="case-body">
-          <span class="case-type">Office &amp; toner supplies &middot; Demo build</span>
-          <h3>Toner Supplies Website</h3>
-          <p class="case-desc">A demo build for a local toner and office-supply business. The goal: make a large product range easy to browse, build trust quickly, and turn &ldquo;just looking&rdquo; into a quote request.</p>
+          <span class="case-type">{{ c.type }}</span>
+          <h3>{{ c.title }}</h3>
+          <p class="case-desc">{{ c.desc }}</p>
           <div class="case-improve">
             <span class="imp-k">What I focused on</span>
             <ul class="imp-list">
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Clearer product browsing</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Stronger local trust signals</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Simple quote-request flow</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Mobile-first layout</span></li>
+            {%- for f in c.focus %}
+            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>{{ f }}</span></li>
+            {%- endfor %}
             </ul>
           </div>
-          <p class="case-bestfor"><b>Best for</b> suppliers, retailers &amp; B2B sellers</p>
+          <p class="case-bestfor"><b>Best for</b> {{ c.bestfor }}</p>
           <div class="case-foot">
             <span class="case-status"><span class="dot"></span> Live preview</span>
-            <a class="case-btn" href="https://toner-supplies-demo-v2.vercel.app/#" target="_blank" rel="noopener noreferrer">View Preview <span class="arr">&rarr;</span></a>
+            <a class="case-btn" href="{{ c.link }}" target="_blank" rel="noopener noreferrer">View Preview <span class="arr">&rarr;</span></a>
           </div>
         </div>
       </article>
-      <article class="case rv">
-        <span class="case-shot"><img src="assets/screens/electrical.png" alt="Electrical contractor website demo built by Hatt Digital" width="1300" height="813" loading="lazy" decoding="async"></span>
-        <div class="case-body">
-          <span class="case-type">Residential &amp; commercial electrical &middot; Demo build</span>
-          <h3>Electrical Contractor Website</h3>
-          <p class="case-desc">A demo build for an electrical contractor. The brief: lay out services clearly, prove the business is trustworthy fast, and make requesting a quote the obvious next step.</p>
-          <div class="case-improve">
-            <span class="imp-k">What I focused on</span>
-            <ul class="imp-list">
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Interactive service sections</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Strong quote calls-to-action</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Clear trust signals</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Confident, modern brand feel</span></li>
-            </ul>
-          </div>
-          <p class="case-bestfor"><b>Best for</b> electricians, HVAC &amp; trades</p>
-          <div class="case-foot">
-            <span class="case-status"><span class="dot"></span> Live preview</span>
-            <a class="case-btn" href="https://electrical-ns-demo.vercel.app/" target="_blank" rel="noopener noreferrer">View Preview <span class="arr">&rarr;</span></a>
-          </div>
-        </div>
-      </article>
-      <article class="case rv">
-        <span class="case-shot"><img src="assets/screens/blandford-marine-real.png" alt="Marine services website demo built by Hatt Digital" width="1300" height="809" loading="lazy" decoding="async"></span>
-        <div class="case-body">
-          <span class="case-type">Marine services &middot; Demo build</span>
-          <h3>Marine Business Website</h3>
-          <p class="case-desc">A demo build for a local marine business. Organised so services are easy to scan, trust is built early, and customers can reach out without hunting for contact details.</p>
-          <div class="case-improve">
-            <span class="imp-k">What I focused on</span>
-            <ul class="imp-list">
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Organised service layout</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Trust-building sections</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>One-tap ways to make contact</span></li>
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Responsive on every device</span></li>
-            </ul>
-          </div>
-          <p class="case-bestfor"><b>Best for</b> marine, outdoor &amp; seasonal services</p>
-          <div class="case-foot">
-            <span class="case-status"><span class="dot"></span> Live preview</span>
-            <a class="case-btn" href="https://marine-services-demo.vercel.app/" target="_blank" rel="noopener noreferrer">View Preview <span class="arr">&rarr;</span></a>
-          </div>
-        </div>
-      </article>
+      {%- endfor %}
     </div>
     <div class="feat-viewall rv"><a href="projects.html" class="btn btn-ghost on-dark">{{ home.work.viewall }} <span class="arr">&rarr;</span></a></div>
   </div>
@@ -240,46 +197,22 @@
     <h2>{{ home.pricing.heading }}</h2>
     <p>{{ home.pricing.intro }}</p></div>
   <div class="price-grid" data-stagger="0.08">
-    <div class="ptier rv">
-      <span class="tier-name">Starter Website</span>
-      <p class="tier-label">Best for getting online properly</p>
-      <p class="tier-sub">A clean, focused website for small businesses that need a professional online presence without overcomplicating things.</p>
+    {%- for t in home.pricing.tiers %}
+    <div class="ptier{% if t.featured %} feature{% endif %} rv">
+      {%- if t.badge %}
+      <span class="tier-badge">{{ t.badge }}</span>
+      {%- endif %}
+      <span class="tier-name">{{ t.name }}</span>
+      <p class="tier-label">{{ t.label }}</p>
+      <p class="tier-sub">{{ t.sub }}</p>
       <ul>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>One-page website</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Mobile-friendly design</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Contact form</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Basic SEO setup</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Launch support</li>
+        {%- for f in t.features %}
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</li>
+        {%- endfor %}
       </ul>
-      <a href="quote.html?package=starter" class="btn btn-ghost">Start with Starter</a>
+      <a href="quote.html?package={{ t.package }}" class="btn {% if t.featured %}btn-grad{% else %}btn-ghost{% endif %}">{{ t.button }}</a>
     </div>
-    <div class="ptier feature rv">
-      <span class="tier-badge">Best for most</span>
-      <span class="tier-name">Business Website</span>
-      <p class="tier-label">Best for most businesses</p>
-      <p class="tier-sub">A stronger website for service businesses that need more pages, better structure, and more trust before customers reach out.</p>
-      <ul>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Multi-page website</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Home, Services, About, Contact, FAQ</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Local SEO structure</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Stronger calls-to-action</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Google Business Profile guidance</li>
-      </ul>
-      <a href="quote.html?package=business" class="btn btn-grad">Start with Business</a>
-    </div>
-    <div class="ptier rv">
-      <span class="tier-name">Growth Website</span>
-      <p class="tier-label">Best for custom needs</p>
-      <p class="tier-sub">A more flexible website option for businesses that need extra pages, custom sections, quote flows, booking flows, or CMS/editable content.</p>
-      <ul>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced layouts</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Booking or quote flows</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>CMS / editable content options</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Extra service or location pages</li>
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom integrations where needed</li>
-      </ul>
-      <a href="quote.html?package=growth" class="btn btn-ghost">Start with Growth</a>
-    </div>
+    {%- endfor %}
   </div>
   <p class="price-foot rv">{{ home.pricing.foot }}</p>
 </div></section>
@@ -299,22 +232,12 @@
     </div>
     <div class="flow">
       <div class="flow-track" aria-hidden="true"><span class="flow-pulse"></span></div>
-      <div class="flow-step rv" style="--d:0s">
-        <div class="flow-node"><span class="fn-ring"></span><span class="fn-core"></span><span class="fn-num">01</span></div>
-        <div class="flow-card"><span class="fc-tag">Land</span><h3>Clear first impression</h3><p>Visitors instantly understand what you do and who it&rsquo;s for &mdash; no scrolling to figure it out.</p></div>
+      {%- for s in home.earns.steps %}
+      <div class="flow-step rv" style="--d:{{ s.d }}">
+        <div class="flow-node"><span class="fn-ring"></span><span class="fn-core"></span><span class="fn-num">0{{ loop.index }}</span></div>
+        <div class="flow-card"><span class="fc-tag">{{ s.tag }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>
       </div>
-      <div class="flow-step rv" style="--d:.1s">
-        <div class="flow-node"><span class="fn-ring"></span><span class="fn-core"></span><span class="fn-num">02</span></div>
-        <div class="flow-card"><span class="fc-tag">Trust</span><h3>Proof you&rsquo;re real</h3><p>Professional design, local details, and the small signals that tell people you&rsquo;re legit and nearby.</p></div>
-      </div>
-      <div class="flow-step rv" style="--d:.2s">
-        <div class="flow-node"><span class="fn-ring"></span><span class="fn-core"></span><span class="fn-num">03</span></div>
-        <div class="flow-card"><span class="fc-tag">Act</span><h3>Easy to reach you</h3><p>Obvious calls, forms, maps, and buttons that make getting in touch take one tap, not three.</p></div>
-      </div>
-      <div class="flow-step rv" style="--d:.3s">
-        <div class="flow-node"><span class="fn-ring"></span><span class="fn-core"></span><span class="fn-num">04</span></div>
-        <div class="flow-card"><span class="fc-tag">Lead</span><h3>A real enquiry</h3><p>The visitor becomes a call or message in your inbox &mdash; instead of quietly leaving for a competitor.</p></div>
-      </div>
+      {%- endfor %}
     </div>
   </div>
 </section>
@@ -325,12 +248,12 @@
     <h2>{{ home.whyhd.heading }}</h2>
     <p>{{ home.whyhd.intro }}</p></div>
   <div class="trust-grid" data-stagger="0.06">
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div><b>You work directly with the builder</b><span>The person you talk to is the person designing and building your site.</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><b>No runaround or handoffs</b><span>No account managers or ticket queues. One point of contact, start to finish.</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span><div><b>Mobile-first as standard</b><span>Most customers see you on a phone first, so every site is built to look sharp there.</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><div><b>Clear, flat quotes</b><span>You see one all-in number before work starts. No surprise invoices later.</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><div><b>Local SEO basics included</b><span>The setup that helps nearby customers find you &mdash; not an upsell.</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></span><div><b>Built to get you contacted</b><span>Every page points toward calls, messages, and quote requests.</span></div></div>
+    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div><b>{{ home.whyhd.points[0].title }}</b><span>{{ home.whyhd.points[0].text }}</span></div></div>
+    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><b>{{ home.whyhd.points[1].title }}</b><span>{{ home.whyhd.points[1].text }}</span></div></div>
+    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span><div><b>{{ home.whyhd.points[2].title }}</b><span>{{ home.whyhd.points[2].text }}</span></div></div>
+    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><div><b>{{ home.whyhd.points[3].title }}</b><span>{{ home.whyhd.points[3].text }}</span></div></div>
+    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><div><b>{{ home.whyhd.points[4].title }}</b><span>{{ home.whyhd.points[4].text }}</span></div></div>
+    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></span><div><b>{{ home.whyhd.points[5].title }}</b><span>{{ home.whyhd.points[5].text }}</span></div></div>
   </div>
 </div></section>
 
@@ -340,10 +263,9 @@
     <h2>{{ home.diy.heading }}</h2>
     <p>{{ home.diy.intro }}</p></div>
   <div class="get-grid" data-stagger="0.06">
-    <div class="get rv"><span class="gk">01</span><h3>Templates aren&rsquo;t a strategy</h3><p>A template gives you a starting point. It doesn&rsquo;t know what your customers need to see, what questions they have, or what makes them trust your business.</p></div>
-    <div class="get rv"><span class="gk">02</span><h3>A good website is more than how it looks</h3><p>The structure, copy, mobile layout, service pages, calls-to-action, contact flow, SEO basics, and trust signals all matter just as much as the design.</p></div>
-    <div class="get rv"><span class="gk">03</span><h3>You don&rsquo;t need another project</h3><p>You already have a business to run. Hatt Digital handles the structure, design, setup, forms, mobile layout, launch details, and cleanup for you.</p></div>
-    <div class="get rv"><span class="gk">04</span><h3>Built to get contacted, not just look nice</h3><p>A nice-looking site isn&rsquo;t the goal. The goal is to help people understand your business, trust it, and reach out.</p></div>
+    {%- for card in home.diy.cards %}
+    <div class="get rv"><span class="gk">0{{ loop.index }}</span><h3>{{ card.title }}</h3><p>{{ card.text }}</p></div>
+    {%- endfor %}
   </div>
   <div class="mini-cta rv"><div class="mc-l"><h3>{{ home.diy.cta_heading }}</h3><p>{{ home.diy.cta_body }}</p></div><a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a></div>
 </div></section>
@@ -369,10 +291,9 @@
   <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.process.eyebrow }}</span><h2>{{ home.process.heading }}</h2>
     <p>{{ home.process.intro }}</p></div>
   <div class="proc-grid" data-stagger="0.08">
-    <div class="pstep rv"><div class="pn">STEP 01</div><div class="pline"></div><h3>Chat</h3><p>A quick, free call to understand your business and what you actually need. Zero pressure.</p></div>
-    <div class="pstep rv"><div class="pn">STEP 02</div><div class="pline"></div><h3>Plan &amp; quote</h3><p>A clear, flat price and timeline up front &mdash; so you know exactly what you&rsquo;re paying before anything starts.</p></div>
-    <div class="pstep rv"><div class="pn">STEP 03</div><div class="pline"></div><h3>Design &amp; build</h3><p>I design it, you review it, and we refine it together until it&rsquo;s right. No surprises at the end.</p></div>
-    <div class="pstep rv"><div class="pn">STEP 04</div><div class="pline"></div><h3>Launch</h3><p>Your site goes live. I make sure everything works and show you how to manage it. Then I&rsquo;m still here.</p></div>
+    {%- for s in home.process.steps %}
+    <div class="pstep rv"><div class="pn">STEP 0{{ loop.index }}</div><div class="pline"></div><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>
+    {%- endfor %}
   </div>
 </div></section>
 
@@ -382,20 +303,17 @@
     <h2>{{ home.reviews.heading }}</h2>
     <p>{{ home.reviews.intro }}</p></div>
   <div class="testi-grid" data-stagger="0.08">
+    {%- for q in home.reviews.quotes %}
     <div class="testi rv">
       <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
-      <p class="quote">Client feedback coming soon. This space is reserved for real reviews from local businesses I&rsquo;ve worked with.</p>
-      <div class="who"><span class="av" aria-hidden="true"></span><span>Your business here</span></div>
+      <p class="quote">{{ q.quote }}</p>
+      <div class="who"><span class="av" aria-hidden="true"></span><span>{{ q.who }}</span></div>
     </div>
-    <div class="testi rv">
-      <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
-      <p class="quote">No stock quotes and no invented names. When a client leaves feedback, it&rsquo;ll show up here exactly as they wrote it.</p>
-      <div class="who"><span class="av" aria-hidden="true"></span><span>Your business here</span></div>
-    </div>
+    {%- endfor %}
     <div class="testi invite rv">
       <span class="ti-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-      <h3>Have we worked together?</h3>
-      <p>Your honest feedback can be featured here. Get in touch and let me know how it went.</p>
+      <h3>{{ home.reviews.invite.title }}</h3>
+      <p>{{ home.reviews.invite.text }}</p>
     </div>
   </div>
 </div></section>
@@ -405,11 +323,9 @@
   <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.faq.eyebrow }}</span><h2>{{ home.faq.heading }}</h2>
     <p>{{ home.faq.intro }}</p></div>
   <div class="faq-list" data-stagger="0.05" style="margin-top:44px">
-    <div class="faq-item rv"><button class="faq-q" aria-expanded="false">How much does a website cost?<span class="pm"></span></button><div class="faq-a"><div class="inner">Every project is quoted individually, because every business is different. Pick the package that sounds closest to what you need, tell me your goals and a budget you&rsquo;re comfortable with, and I&rsquo;ll build a fair, flat quote around the actual project. Whatever number you agree to is the number you pay &mdash; no surprises.</div></div></div>
-    <div class="faq-item rv"><button class="faq-q" aria-expanded="false">How long does a website take?<span class="pm"></span></button><div class="faq-a"><div class="inner">Most sites go live within 2&ndash;3 weeks once I have your content. A simple one-page site can be ready in about a week.</div></div></div>
-    <div class="faq-item rv"><button class="faq-q" aria-expanded="false">Can you redesign my current website?<span class="pm"></span></button><div class="faq-a"><div class="inner">Absolutely. If your current site is slow, dated, or hard to use on a phone, I&rsquo;ll rebuild it into something modern &mdash; keeping what works and fixing what doesn&rsquo;t.</div></div></div>
-    <div class="faq-item rv"><button class="faq-q" aria-expanded="false">Why not just use Squarespace or Wix?<span class="pm"></span></button><div class="faq-a"><div class="inner">Those builders are good tools, but the tool isn&rsquo;t the strategy. Most owners don&rsquo;t have the time or the design, SEO, and copywriting know-how to turn a template into a site that actually brings in leads. That&rsquo;s the part I handle.</div></div></div>
-    <div class="faq-item rv"><button class="faq-q" aria-expanded="false">What happens after I contact you?<span class="pm"></span></button><div class="faq-a"><div class="inner">I reply within one business day with honest advice and clear next steps. No pressure and no obligation &mdash; even if it&rsquo;s just feedback on what you already have.</div></div></div>
+    {%- for item in home.faq.items %}
+    <div class="faq-item rv"><button class="faq-q" aria-expanded="false">{{ item.q }}<span class="pm"></span></button><div class="faq-a"><div class="inner">{{ item.a }}</div></div></div>
+    {%- endfor %}
   </div>
   <div class="mini-cta rv"><div class="mc-l"><h3>{{ home.faq.cta_heading }}</h3><p>{{ home.faq.cta_body }}</p></div><a href="faq.html" class="btn btn-ghost">See all FAQs <span class="arr">&rarr;</span></a></div>
 </div></section>
