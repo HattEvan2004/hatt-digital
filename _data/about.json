@@ -1,0 +1,50 @@
+{
+  "seo": {
+    "title": "Nova Scotia Web Designer — Meet Evan Hatt | Hatt Digital",
+    "description": "Hatt Digital is a one-person web studio in Nova Scotia run by Evan Hatt — honest pricing, clean design, and websites that help local customers contact you."
+  },
+  "hero": {
+    "eyebrow": "About",
+    "heading": "Your neighbour, **not an agency.**",
+    "lead": "Hatt Digital is a one-person studio in Nova Scotia, built on a simple idea: honest websites, fair prices, real support."
+  },
+  "founder": {
+    "quote": "I started Hatt Digital because too many local businesses get sold expensive, complicated websites they don’t actually need — then get ignored once the invoice clears. I wanted to build the opposite: honest pricing, clean design, and a website that actually helps people contact you.",
+    "sig_name": "Evan Hatt",
+    "sig_role": "Founder, Hatt Digital"
+  },
+  "difference": {
+    "eyebrow": "The difference",
+    "heading": "Why working with me is different.",
+    "intro": "No account managers, no handoffs, no mystery. Just one person who builds your site and stays reachable after it’s live.",
+    "cards": [
+      { "title": "You deal directly with the builder", "text": "The person you talk to is the person writing the code. Nothing gets lost in translation." },
+      { "title": "No bloated agency process", "text": "No drawn-out discovery decks or padded retainers — just a clear plan and steady progress." },
+      { "title": "Clear pricing before work starts", "text": "You see a flat, all-in number first. The price we agree on is the price you pay." },
+      { "title": "Built for local Nova Scotia businesses", "text": "I understand the customers you’re trying to reach, because they’re my community too." },
+      { "title": "Simple handoff and support after launch", "text": "I show you how everything works, and I’m still here when you need a change down the road." }
+    ]
+  },
+  "process": {
+    "eyebrow": "How it works",
+    "heading": "Four steps. No mystery.",
+    "intro": "You'll always know exactly where things stand and what happens next.",
+    "steps": [
+      { "title": "Chat", "text": "A quick, free call to understand your business and what you actually need. Zero pressure." },
+      { "title": "Plan & quote", "text": "A clear, flat price and timeline up front — so you know exactly what you're paying before anything starts." },
+      { "title": "Design & build", "text": "I design it, you review it, and we refine it together until it's right. No surprises at the end." },
+      { "title": "Launch", "text": "Your site goes live. I make sure everything works and show you how to manage it. Then I'm still here." }
+    ]
+  },
+  "local": {
+    "eyebrow": "Local & in your corner",
+    "heading": "Built here, for here.",
+    "body1": "I’m based right in Nova Scotia, and I understand small businesses around here because they’re my community. When you call, you reach the person who actually built your site — not a ticket number or an offshore queue.",
+    "body2": "I work with contractors, trades, and service businesses across Halifax, Dartmouth, Bedford, the South Shore and beyond. That means honest advice, quick answers, and someone genuinely invested in your business doing well. No middlemen, no markup, no nonsense.",
+    "button": "Let's talk"
+  },
+  "cta": {
+    "heading": "Ready to work with the person who actually builds it?",
+    "body": "Send me your current site, your business idea, or what you need built. I’ll take a look and let you know the best next step — free."
+  }
+}

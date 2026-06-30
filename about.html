@@ -1,19 +1,19 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071426">
-<title>Nova Scotia Web Designer — Meet Evan Hatt | Hatt Digital</title>
-<meta name="description" content="Hatt Digital is a one-person web studio in Nova Scotia run by Evan Hatt — honest pricing, clean design, and websites that help local customers contact you.">
+<title>{{ about.seo.title }}</title>
+<meta name="description" content="{{ about.seo.description }}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://hattdigital.ca/about.html">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="Hatt Digital">
-<meta property="og:title" content="Nova Scotia Web Designer — Meet Evan Hatt | Hatt Digital">
-<meta property="og:description" content="Hatt Digital is a one-person web studio in Nova Scotia run by Evan Hatt — honest pricing, clean design, and websites that help local customers contact you.">
+<meta property="og:title" content="{{ about.seo.title }}">
+<meta property="og:description" content="{{ about.seo.description }}">
 <meta property="og:url" content="https://hattdigital.ca/about.html">
 <meta property="og:image" content="https://hattdigital.ca/assets/logo.png">
 <meta property="og:locale" content="en_CA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Nova Scotia Web Designer — Meet Evan Hatt | Hatt Digital">
-<meta name="twitter:description" content="Hatt Digital is a one-person web studio in Nova Scotia run by Evan Hatt — honest pricing, clean design, and websites that help local customers contact you.">
+<meta name="twitter:title" content="{{ about.seo.title }}">
+<meta name="twitter:description" content="{{ about.seo.description }}">
 <meta name="twitter:image" content="https://hattdigital.ca/assets/logo.png">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
       </a>
       <div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html" class="active">About</a><a href="faq.html">FAQ</a></div>
       <div class="nav-cta">
-        <a class="nav-call" href="tel:+19022774424" aria-label="Call Hatt Digital at 902-277-4424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 902-277-4424</a>
+        <a class="nav-call" href="tel:{{ site.contact.phone_link }}" aria-label="Call Hatt Digital at {{ site.contact.phone }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{ site.contact.phone }}</a>
         <a href="quote.html" class="btn btn-grad">Start a Website Project</a>
         <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
@@ -41,9 +41,9 @@
 <main id="main">
 <section class="phead"><span class="glow"></span><div class="wrap"><div class="phead-grid">
       <div class="rv">
-        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> About</span>
-        <h1>Your neighbour, <span class="hl">not an agency.</span></h1>
-        <p>Hatt Digital is a one-person studio in Nova Scotia, built on a simple idea: honest websites, fair prices, real support.</p>
+        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.hero.eyebrow }}</span>
+        <h1>{{ about.hero.heading | hl | safe }}</h1>
+        <p>{{ about.hero.lead }}</p>
       </div>
       <div class="editor rv">
       <div class="ebar"><i></i><i></i><i></i><span class="fname">about.js</span></div>
@@ -53,33 +53,30 @@
 <section class="band"><div class="wrap">
   <div class="founder rv">
     <div class="mark"><img src="assets/logo.png" alt="Hatt Digital" width="560" height="397" loading="lazy" decoding="async"></div>
-    <div><span class="qmark" aria-hidden="true">&ldquo;</span><blockquote>I started Hatt Digital because too many local businesses get sold expensive, complicated websites they don&rsquo;t actually need &mdash; then get ignored once the invoice clears. I wanted to build the opposite: honest pricing, clean design, and a website that actually helps people contact you.</blockquote>
-    <div class="sig"><b>Evan Hatt</b> &middot; Founder, Hatt Digital</div></div>
+    <div><span class="qmark" aria-hidden="true">&ldquo;</span><blockquote>{{ about.founder.quote }}</blockquote>
+    <div class="sig"><b>{{ about.founder.sig_name }}</b> &middot; {{ about.founder.sig_role }}</div></div>
   </div>
 </div></section>
 
 <!-- ============ WHY WORKING WITH ME IS DIFFERENT ============ -->
 <section class="band band-tint"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> The difference</span>
-    <h2>Why working with me is different.</h2>
-    <p>No account managers, no handoffs, no mystery. Just one person who builds your site and stays reachable after it&rsquo;s live.</p></div>
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.difference.eyebrow }}</span>
+    <h2>{{ about.difference.heading }}</h2>
+    <p>{{ about.difference.intro }}</p></div>
   <div class="diff-grid" data-stagger="0.06">
-    <div class="diff rv spot"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="dchk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h3>You deal directly with the builder</h3><p>The person you talk to is the person writing the code. Nothing gets lost in translation.</p></div></div>
-    <div class="diff rv spot"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="dchk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h3>No bloated agency process</h3><p>No drawn-out discovery decks or padded retainers &mdash; just a clear plan and steady progress.</p></div></div>
-    <div class="diff rv spot"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="dchk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h3>Clear pricing before work starts</h3><p>You see a flat, all-in number first. The price we agree on is the price you pay.</p></div></div>
-    <div class="diff rv spot"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="dchk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h3>Built for local Nova Scotia businesses</h3><p>I understand the customers you&rsquo;re trying to reach, because they&rsquo;re my community too.</p></div></div>
-    <div class="diff rv spot"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="dchk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h3>Simple handoff and support after launch</h3><p>I show you how everything works, and I&rsquo;m still here when you need a change down the road.</p></div></div>
+    {%- for d in about.difference.cards %}
+    <div class="diff rv spot"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="dchk"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div><h3>{{ d.title }}</h3><p>{{ d.text }}</p></div></div>
+    {%- endfor %}
   </div>
 </div></section>
 
 <section class="band band-dark"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> How it works</span><h2>Four steps. No mystery.</h2>
-    <p>You'll always know exactly where things stand and what happens next.</p></div>
+  <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.process.eyebrow }}</span><h2>{{ about.process.heading }}</h2>
+    <p>{{ about.process.intro }}</p></div>
   <div class="proc-grid" data-stagger="0.08">
-    <div class="pstep rv"><div class="pn">STEP 01</div><div class="pline"></div><h3>Chat</h3><p>A quick, free call to understand your business and what you actually need. Zero pressure.</p></div>
-    <div class="pstep rv"><div class="pn">STEP 02</div><div class="pline"></div><h3>Plan &amp; quote</h3><p>A clear, flat price and timeline up front &mdash; so you know exactly what you're paying before anything starts.</p></div>
-    <div class="pstep rv"><div class="pn">STEP 03</div><div class="pline"></div><h3>Design &amp; build</h3><p>I design it, you review it, and we refine it together until it's right. No surprises at the end.</p></div>
-    <div class="pstep rv"><div class="pn">STEP 04</div><div class="pline"></div><h3>Launch</h3><p>Your site goes live. I make sure everything works and show you how to manage it. Then I'm still here.</p></div>
+    {%- for s in about.process.steps %}
+    <div class="pstep rv"><div class="pn">STEP 0{{ loop.index }}</div><div class="pline"></div><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>
+    {%- endfor %}
   </div>
 </div></section>
 
@@ -89,21 +86,21 @@
     <div class="coord">44.6488&deg; N &middot; 63.5752&deg; W</div>
     <div class="big">Made in<br>Nova Scotia.</div>
   </div>
-  <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Local &amp; in your corner</span>
-    <h2 style="margin-top:16px">Built here, for here.</h2>
-    <p>I&rsquo;m based right in Nova Scotia, and I understand small businesses around here because they&rsquo;re my community. When you call, you reach the person who actually built your site &mdash; not a ticket number or an offshore queue.</p>
-    <p>I work with contractors, trades, and service businesses across Halifax, Dartmouth, Bedford, the South Shore and beyond. That means honest advice, quick answers, and someone genuinely invested in your business doing well. No middlemen, no markup, no nonsense.</p>
+  <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.local.eyebrow }}</span>
+    <h2 style="margin-top:16px">{{ about.local.heading }}</h2>
+    <p>{{ about.local.body1 }}</p>
+    <p>{{ about.local.body2 }}</p>
     <div class="local-pills"><span>Halifax</span><span>Dartmouth</span><span>Bedford</span><span>South Shore</span><span>Annapolis Valley</span><span>Cape Breton</span></div>
-    <div style="margin-top:30px"><a href="quote.html" class="btn btn-primary">Let's talk <span class="arr">&rarr;</span></a></div>
+    <div style="margin-top:30px"><a href="quote.html" class="btn btn-primary">{{ about.local.button }} <span class="arr">&rarr;</span></a></div>
   </div>
 </div></div></section>
 <section class="band"><div class="wrap"><div class="cta-band rv"><span class="glow"></span><span class="glow g2"></span>
-      <h2>Ready to work with the person who actually builds it?</h2>
-      <p>Send me your current site, your business idea, or what you need built. I&rsquo;ll take a look and let you know the best next step &mdash; free.</p>
+      <h2>{{ about.cta.heading }}</h2>
+      <p>{{ about.cta.body }}</p>
       <div class="cta-actions">
         <a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a>
         <a href="quote.html" class="btn btn-ghost on-dark">Start a Website Project</a>
-        <a href="tel:+19022774424" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
+        <a href="tel:{{ site.contact.phone_link }}" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
       </div>
     </div></div></section>
 
@@ -112,10 +109,10 @@
       <div class="foot-top">
         <div class="foot-brand">
           <a class="fb-logo" href="index.html"><img src="assets/logo.png" alt="Hatt Digital" width="560" height="397" loading="lazy" decoding="async"><span class="name">Hatt <span>Digital</span></span></a>
-          <p>Honest, effective websites for local businesses across Nova Scotia.</p>
+          <p>{{ site.footer.blurb }}</p>
           <div class="foot-social">
-            <a href="https://www.facebook.com/profile.php?id=61590965965094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+            <a href="{{ site.social.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="{{ site.social.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
           </div>
         </div>
         <div class="foot-cols">
@@ -126,14 +123,14 @@
             <a href="web-design-for-contractors.html">Contractors</a><a href="web-design-for-electricians.html">Electricians</a><a href="web-design-for-plumbers.html">Plumbers</a><a href="web-design-for-small-businesses.html">Small businesses</a>
           </div>
           <div class="foot-col"><h4>Areas &amp; contact</h4>
-            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:+19022774424">902-277-4424</a><a href="mailto:hattdigitalns@gmail.com">Email me</a>
+            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:{{ site.contact.phone_link }}">{{ site.contact.phone }}</a><a href="mailto:{{ site.contact.email }}">Email me</a>
           </div>
         </div>
       </div>
       <div class="foot-bottom"><span>&copy; <span id="yr"></span> Hatt Digital. All rights reserved.</span><span class="mono">Nova Scotia, Canada &middot; 44.65&deg; N</span></div>
     </div></footer>
 <div class="mobile-cta" id="mobileCta" aria-label="Quick contact bar">
-  <a class="call" href="tel:+19022774424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
+  <a class="call" href="tel:{{ site.contact.phone_link }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
   <a href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
   <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Start Project</a>
 </div>

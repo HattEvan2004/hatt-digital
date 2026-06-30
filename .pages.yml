@@ -274,12 +274,76 @@ content:
       - { name: body, label: Page HTML, type: code, options: { language: html } }
 
   - name: about
-    label: "About (HTML)"
+    label: About page
     type: file
-    path: about.html
-    format: code
+    path: _data/about.json
     fields:
-      - { name: body, label: Page HTML, type: code, options: { language: html } }
+      - name: seo
+        label: Browser tab & search engine
+        type: object
+        fields:
+          - { name: title, label: "Page title", type: string }
+          - { name: description, label: "Search description", type: text }
+      - name: hero
+        label: Hero — top of the page
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - name: heading
+            label: "Heading"
+            type: string
+            description: "Wrap the highlighted part in **double asterisks**."
+          - { name: lead, label: "Intro sentence", type: text }
+      - name: founder
+        label: Founder quote
+        type: object
+        fields:
+          - { name: quote, label: "Quote", type: text }
+          - { name: sig_name, label: "Name", type: string }
+          - { name: sig_role, label: "Role", type: string }
+      - name: difference
+        label: "“The difference” section"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+          - name: cards
+            label: "Difference cards"
+            type: object
+            list: true
+            fields:
+              - { name: title, label: "Title", type: string }
+              - { name: text, label: "Text", type: text }
+      - name: process
+        label: "Process section"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: intro, label: "Intro paragraph", type: text }
+          - name: steps
+            label: "Steps"
+            type: object
+            list: true
+            fields:
+              - { name: title, label: "Title", type: string }
+              - { name: text, label: "Text", type: text }
+      - name: local
+        label: "“Built here” section"
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - { name: heading, label: "Heading", type: string }
+          - { name: body1, label: "Paragraph 1", type: text }
+          - { name: body2, label: "Paragraph 2", type: text }
+          - { name: button, label: "Button label", type: string }
+      - name: cta
+        label: "Final call-to-action"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: body, label: "Paragraph", type: text }
 
   - name: faqpage
     label: FAQ page
