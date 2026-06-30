@@ -13,7 +13,7 @@ A static, dependency-free site: just HTML, CSS, and a little vanilla JavaScript.
 | Projects / Portfolio | `projects.html` |
 | About | `about.html` |
 | FAQ | `faq.html` |
-| Quote / free audit | `quote.html` |
+| Quote / project request | `quote.html` |
 | Contact (redirects to `quote.html`) | `contact.html` |
 
 ### SEO landing pages (industry & area)
@@ -60,8 +60,8 @@ Using a custom domain (e.g. `hattdigital.ca`)? Add it under Settings → Pages, 
 
 - **Domain** — the SEO tags (`canonical`, Open Graph, `sitemap.xml`, `robots.txt`, JSON-LD) all use `https://hattdigital.ca`. Search-and-replace this if your live domain differs.
 - **Contact details** — email `hattdigitalns@gmail.com` and phone `902-277-4424` (`tel:+19022774424`) are used across the site, the click-to-call links, the mobile CTA bar, and the JSON-LD. Search the project for these to change them.
-- **Quote form** — all quote/audit CTAs go to `quote.html`, which submits through **Forminit** (real backend, real file uploads). The Forminit Form ID lives in one place: `FORMINIT_FORM_ID` near the top of `assets/forminit.js`. The CTAs pass the chosen package via a URL parameter (`quote.html?package=starter|business|growth`) and an audit framing via `quote.html?type=audit`; `assets/forminit.js` reads `?package=` to pre-select the package card and keep the hidden `selected_package` field in sync. `contact.html` is now just a redirect to `quote.html` (preserving any query string).
-- **Pricing** — package starting points (`$750` / `$1,500` / Custom) live on `index.html`, `services.html`, `faq.html`, and the home-page JSON-LD `makesOffer`. Update all of them together if prices change.
+- **Quote form** — every CTA goes to `quote.html`, the single project-quote form, which submits through **Forminit**. The Forminit Form ID lives in one place: `FORMINIT_FORM_ID` near the top of `assets/forminit.js`. The CTAs pass the chosen package via a URL parameter (`quote.html?package=starter|business|growth`); `assets/forminit.js` reads `?package=` to pre-select the website-type tile and keep the hidden `selected_package` field in sync. The quote page also submits `selected_budget` (a per-package budget slider), `unsure_budget`, and a hidden `form_type=Website Quote`. `contact.html` is now just a redirect to `quote.html` (preserving any query string).
+- **Pricing** — prices are intentionally **not** shown publicly. The package cards on `index.html` and `services.html` use value-based labels instead of numbers, and every project is quoted individually from the form. Keep it that way unless you decide to publish pricing again.
 - **Founder name** — already set to **Evan Hatt** in `about.html` and the home-page JSON-LD.
 - **Reviews** — the testimonials section on the home page is an honest placeholder. Replace the placeholder cards with real client quotes (no invented names) when you have them.
 - **Social share image** — Open Graph/Twitter tags currently point at `assets/logo.png`. For best results, add a dedicated 1200×630 image and update the `og:image` / `twitter:image` URLs.
@@ -72,7 +72,7 @@ Using a custom domain (e.g. `hattdigital.ca`)? Add it under Settings → Pages, 
 
 - `robots.txt` — allows all crawlers and points to the sitemap.
 - `sitemap.xml` — lists every page, including the six SEO landing pages.
-- JSON-LD structured data: `ProfessionalService` + `WebSite` on `index.html` (with priced `makesOffer`),
+- JSON-LD structured data: `ProfessionalService` + `WebSite` on `index.html` (with `makesOffer`, no public prices),
   `FAQPage` on `faq.html`, `Service` + `BreadcrumbList` on each landing page, and `BreadcrumbList` on the
   interior pages.
 
@@ -85,7 +85,7 @@ Using a custom domain (e.g. `hattdigital.ca`)? Add it under Settings → Pages, 
 ├── projects.html
 ├── about.html
 ├── faq.html
-├── quote.html                           # quote / free-audit form (Forminit-backed)
+├── quote.html                           # project quote form (Forminit-backed)
 ├── contact.html                         # redirects to quote.html
 ├── web-design-for-contractors.html      # SEO landing pages
 ├── web-design-for-electricians.html     #  (shared reusable layout)

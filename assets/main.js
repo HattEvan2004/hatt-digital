@@ -575,7 +575,7 @@
 })();
 
 /* =====================================================
-   MOBILE STICKY CTA BAR — Call · Get Quote · Free Audit
+   MOBILE STICKY CTA BAR — Call · Get Quote · Start Project
    Slides up once the visitor scrolls past the hero so it
    never covers the first screen. CSS hides it >720px.
 ===================================================== */
