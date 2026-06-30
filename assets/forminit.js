@@ -28,18 +28,27 @@
 
   function humanMB(bytes) { return (bytes / (1024 * 1024)).toFixed(1) + ' MB'; }
 
-  /* Send the FormData to Forminit. Uses the CDN SDK when present, and
-     falls back to a direct multipart POST so a real submission (files
-     included) still goes through if the SDK didn't load. */
+  /* Send the FormData to Forminit. Uses the CDN SDK when present
+     (window.Forminit is a CLASS: new Forminit().submit(formId, formData)),
+     and falls back to a direct POST to the same endpoint the SDK uses
+     (https://forminit.com/f/{formId}) so a real submission still goes
+     through if the SDK didn't load. */
   function sendToForminit(formData) {
-    var sdk = window.Forminit || window.forminit;
-    if (sdk && typeof sdk.submit === 'function') {
-      /* Common SDK shape: Forminit.submit(formId, formData) -> Promise */
-      return Promise.resolve(sdk.submit(FORMINIT_FORM_ID, formData));
+    var FI = window.Forminit;
+    if (typeof FI === 'function') {
+      var client = new FI(); /* browser client → POSTs to /f/{formId} */
+      return Promise.resolve(client.submit(FORMINIT_FORM_ID, formData)).then(function (res) {
+        /* SDK resolves with { data, redirectUrl, error } — surface errors. */
+        if (res && res.error) {
+          throw new Error(res.error.message || res.error.error || 'Submission failed');
+        }
+        return res;
+      });
     }
-    return fetch('https://forminit.com/api/v1/forms/' + FORMINIT_FORM_ID + '/submissions', {
+    return fetch('https://forminit.com/f/' + FORMINIT_FORM_ID, {
       method: 'POST',
-      body: formData
+      body: formData,
+      headers: { 'Accept': 'application/json' }
     }).then(function (res) {
       if (!res.ok) throw new Error('HTTP ' + res.status);
       return res;
