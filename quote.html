@@ -214,9 +214,25 @@
           </div>
         </section>
 
-        <!-- ===== Section 2 — Basic details ===== -->
+        <!-- ===== Section 2 — Project budget range ===== -->
         <section class="q-block">
-          <div class="q-head"><span class="q-num">02</span><h2>Basic details</h2></div>
+          <div class="q-head"><span class="q-num">02</span><h2>Project budget range</h2></div>
+          <p class="q-note">This helps me recommend the right scope &mdash; it does not lock you into a final price.</p>
+          <div class="budget-wrap" id="budgetWrap">
+            <input type="range" id="budgetSlider" name="selected_budget" min="500" max="1500" step="50" value="1000"
+                   aria-label="Preferred budget range">
+            <div class="budget-readout">Preferred range: <strong id="budgetValue">$1,000</strong></div>
+            <div class="budget-scale"><span id="budgetMin">$500</span><span id="budgetMax">$1,500</span></div>
+          </div>
+          <label class="check-line">
+            <input type="checkbox" name="unsure_budget" value="Yes — I'd like help choosing a fair budget" id="unsureBudget">
+            <span>I&rsquo;m not sure yet &mdash; I&rsquo;d like help choosing a fair budget.</span>
+          </label>
+        </section>
+
+        <!-- ===== Section 3 — Basic details ===== -->
+        <section class="q-block">
+          <div class="q-head"><span class="q-num">03</span><h2>Basic details</h2></div>
           <div class="q-fields">
             <div class="q-row">
               <div class="q-field"><label for="contact_name">Contact name</label><input id="contact_name" name="fi-sender-fullName" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
@@ -231,29 +247,13 @@
           <p class="q-hint">Add an email or a phone number so I can reply.</p>
         </section>
 
-        <!-- ===== Section 3 — Project goals ===== -->
+        <!-- ===== Section 4 — Project goals ===== -->
         <section class="q-block">
-          <div class="q-head"><span class="q-num">03</span><h2>Project goals</h2></div>
+          <div class="q-head"><span class="q-num">04</span><h2>Project goals</h2></div>
           <div class="q-fields">
             <div class="q-field"><label for="business_does">What does your business do?</label><textarea id="business_does" name="fi-text-business_does" placeholder="A quick description of your business and the services you offer." required></textarea></div>
             <div class="q-field"><label for="website_goals">What do you want the website to help with?</label><textarea id="website_goals" name="fi-text-website_goals" placeholder="e.g. more calls, more quote requests, looking more professional, showing past work." required></textarea></div>
           </div>
-        </section>
-
-        <!-- ===== Section 4 — Project budget range ===== -->
-        <section class="q-block">
-          <div class="q-head"><span class="q-num">04</span><h2>Project budget range</h2></div>
-          <p class="q-note">This helps me recommend the right scope &mdash; it does not lock you into a final price.</p>
-          <div class="budget-wrap" id="budgetWrap">
-            <input type="range" id="budgetSlider" name="selected_budget" min="500" max="1500" step="50" value="1000"
-                   aria-label="Preferred budget range">
-            <div class="budget-readout">Preferred range: <strong id="budgetValue">$1,000</strong></div>
-            <div class="budget-scale"><span id="budgetMin">$500</span><span id="budgetMax">$1,500</span></div>
-          </div>
-          <label class="check-line">
-            <input type="checkbox" name="unsure_budget" value="Yes — I'd like help choosing a fair budget" id="unsureBudget">
-            <span>I&rsquo;m not sure yet &mdash; I&rsquo;d like help choosing a fair budget.</span>
-          </label>
         </section>
 
         <!-- ===== Section 5 — Optional details ===== -->
