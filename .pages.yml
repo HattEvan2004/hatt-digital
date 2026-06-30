@@ -1,0 +1,126 @@
+# Pages CMS configuration — https://pagescms.org
+#
+# Hatt Digital is a hand-coded static HTML site (no markdown/frontmatter),
+# so each page is exposed for raw-HTML editing and the assets/ folder is
+# exposed for image upload/replace. Edit pages under "Content" and manage
+# images under "Media" in the Pages CMS dashboard.
+
+media:
+  input: assets          # folder (in the repo) where images live
+  output: /assets        # public URL prefix used when inserting media
+  extensions: [jpg, jpeg, png, webp, svg, gif, ico, pdf]
+
+content:
+  # ---- Main pages ----
+  - name: home
+    label: Home
+    type: file
+    path: index.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: services
+    label: Services
+    type: file
+    path: services.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: projects
+    label: Portfolio
+    type: file
+    path: projects.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: about
+    label: About
+    type: file
+    path: about.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: faq
+    label: FAQ
+    type: file
+    path: faq.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: quote
+    label: Quote form
+    type: file
+    path: quote.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: contact
+    label: Contact (redirect)
+    type: file
+    path: contact.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: preview
+    label: Preview
+    type: file
+    path: preview.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  # ---- SEO landing pages (industry & area) ----
+  - name: lp-contractors
+    label: Web design for contractors
+    type: file
+    path: web-design-for-contractors.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: lp-electricians
+    label: Web design for electricians
+    type: file
+    path: web-design-for-electricians.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: lp-plumbers
+    label: Web design for plumbers
+    type: file
+    path: web-design-for-plumbers.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: lp-small-businesses
+    label: Web design for small businesses
+    type: file
+    path: web-design-for-small-businesses.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: lp-halifax
+    label: Web design in Halifax
+    type: file
+    path: web-design-halifax.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
+
+  - name: lp-dartmouth
+    label: Web design in Dartmouth
+    type: file
+    path: web-design-dartmouth.html
+    format: code
+    fields:
+      - { name: body, label: Page HTML, type: code, options: { language: html } }
