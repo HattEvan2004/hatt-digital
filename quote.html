@@ -1,19 +1,19 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071426">
-<title>Request a Website Quote — Nova Scotia Web Design | Hatt Digital</title>
-<meta name="description" content="Request a website quote from Hatt Digital. Choose the option that sounds closest to what you need, tell me about your business, goals, and budget, and I'll build a fair quote around your project — replies within one business day.">
+<title>{{ quote.seo.title }}</title>
+<meta name="description" content="{{ quote.seo.description }}">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://hattdigital.ca/quote.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hatt Digital">
-<meta property="og:title" content="Request a Website Quote — Nova Scotia Web Design | Hatt Digital">
-<meta property="og:description" content="Choose the option that sounds closest to what you need, tell me about your business, goals, and budget, and I'll build a fair quote around your project.">
+<meta property="og:title" content="{{ quote.seo.title }}">
+<meta property="og:description" content="{{ quote.og_description }}">
 <meta property="og:url" content="https://hattdigital.ca/quote.html">
 <meta property="og:image" content="https://hattdigital.ca/assets/logo.png">
 <meta property="og:locale" content="en_CA">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Request a Website Quote — Nova Scotia Web Design | Hatt Digital">
-<meta name="twitter:description" content="Choose the option that sounds closest to what you need, tell me about your business, goals, and budget, and I'll build a fair quote around your project.">
+<meta name="twitter:title" content="{{ quote.seo.title }}">
+<meta name="twitter:description" content="{{ quote.og_description }}">
 <meta name="twitter:image" content="https://hattdigital.ca/assets/logo.png">
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,7 +151,7 @@
       </a>
       <div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a></div>
       <div class="nav-cta">
-        <a class="nav-call" href="tel:+19022774424" aria-label="Call Hatt Digital at 902-277-4424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 902-277-4424</a>
+        <a class="nav-call" href="tel:{{ site.contact.phone_link }}" aria-label="Call Hatt Digital at {{ site.contact.phone }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{ site.contact.phone }}</a>
         <a href="quote.html" class="btn btn-grad">Start a Website Project</a>
         <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
@@ -159,10 +159,10 @@
 <main id="main">
 <section class="phead"><span class="glow"></span><div class="wrap"><div class="phead-grid">
       <div class="rv">
-        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> Website quote</span>
-        <h1>Request a <span class="hl">Website Quote</span></h1>
-        <p>Choose the website option that sounds closest to what you need, then tell me about your business, goals, and budget. I&rsquo;ll use that to build a fair quote around the actual project.</p>
-        <p class="phead-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> The option you choose is just a starting point &mdash; every business is different.</p>
+        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ quote.hero.eyebrow }}</span>
+        <h1>{{ quote.hero.heading | hl | safe }}</h1>
+        <p>{{ quote.hero.lead }}</p>
+        <p class="phead-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg> {{ quote.hero.note }}</p>
       </div>
       <div class="editor rv">
       <div class="ebar"><i></i><i></i><i></i><span class="fname">quote.js</span></div>
@@ -174,7 +174,7 @@
   <div class="quote-shell rv">
     <!-- data-forminit hands this form to assets/forminit.js (Forminit backend). -->
     <form id="fiQuoteForm" novalidate data-forminit
-          data-forminit-success="Thanks! Your quote request is in — I’ll reply within one business day.">
+          data-forminit-success="{{ quote.success }}">
 
       <!-- Hidden fields submitted to Forminit. selected_package is kept in sync -->
       <!-- with the selected tile + ?package= URL parameter by assets/forminit.js. -->
@@ -183,41 +183,41 @@
 
       <div class="quote-form">
 
-        <p class="form-lead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> This only takes a minute. Most details are optional &mdash; just share what you can.</p>
+        <p class="form-lead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {{ quote.form_lead }}</p>
 
         <!-- ===== Section 1 — Website type ===== -->
         <section class="q-block" id="pkgSection">
-          <div class="q-head"><span class="q-num">01</span><h2>Choose your website type</h2></div>
-          <p class="q-note">Pick the option that sounds closest to what you need. If you came from a package on the site, it&rsquo;s already selected &mdash; change it any time.</p>
+          <div class="q-head"><span class="q-num">01</span><h2>{{ quote.s1.heading }}</h2></div>
+          <p class="q-note">{{ quote.s1.note }}</p>
           <div class="pkg-picker" data-package-cards>
             <label class="pkg-card">
               <input type="radio" name="package_choice" value="Starter Website">
               <span class="pkg-badge">Selected</span>
               <span class="pkg-name">Starter Website</span>
-              <span class="pkg-label">Best for getting online properly</span>
-              <span class="pkg-desc">A focused website for small businesses that need a clean, credible online presence.</span>
+              <span class="pkg-label">{{ quote.packages[0].label }}</span>
+              <span class="pkg-desc">{{ quote.packages[0].desc }}</span>
             </label>
             <label class="pkg-card">
               <input type="radio" name="package_choice" value="Business Website">
               <span class="pkg-badge">Selected</span>
               <span class="pkg-name">Business Website</span>
-              <span class="pkg-label">Best for most businesses</span>
-              <span class="pkg-desc">A stronger multi-page website for service businesses that need more trust and better structure.</span>
+              <span class="pkg-label">{{ quote.packages[1].label }}</span>
+              <span class="pkg-desc">{{ quote.packages[1].desc }}</span>
             </label>
             <label class="pkg-card">
               <input type="radio" name="package_choice" value="Growth Website">
               <span class="pkg-badge">Selected</span>
               <span class="pkg-name">Growth Website</span>
-              <span class="pkg-label">Best for custom needs</span>
-              <span class="pkg-desc">A flexible option for businesses that need extra pages, quote flows, CMS options, or custom features.</span>
+              <span class="pkg-label">{{ quote.packages[2].label }}</span>
+              <span class="pkg-desc">{{ quote.packages[2].desc }}</span>
             </label>
           </div>
         </section>
 
         <!-- ===== Section 2 — Project budget range ===== -->
         <section class="q-block">
-          <div class="q-head"><span class="q-num">02</span><h2>Project budget range</h2></div>
-          <p class="q-note">This helps me recommend the right scope &mdash; it does not lock you into a final price.</p>
+          <div class="q-head"><span class="q-num">02</span><h2>{{ quote.s2.heading }}</h2></div>
+          <p class="q-note">{{ quote.s2.note }}</p>
           <div class="budget-wrap" id="budgetWrap">
             <input type="range" id="budgetSlider" name="selected_budget" min="500" max="1500" step="50" value="1000"
                    aria-label="Preferred budget range">
@@ -226,13 +226,13 @@
           </div>
           <label class="check-line">
             <input type="checkbox" name="unsure_budget" value="Yes — I'd like help choosing a fair budget" id="unsureBudget">
-            <span>I&rsquo;m not sure yet &mdash; I&rsquo;d like help choosing a fair budget.</span>
+            <span>{{ quote.s2.unsure }}</span>
           </label>
         </section>
 
         <!-- ===== Section 3 — Basic details ===== -->
         <section class="q-block">
-          <div class="q-head"><span class="q-num">03</span><h2>Basic details</h2></div>
+          <div class="q-head"><span class="q-num">03</span><h2>{{ quote.s3.heading }}</h2></div>
           <div class="q-fields">
             <div class="q-row">
               <div class="q-field"><label for="contact_name">Contact name</label><input id="contact_name" name="fi-sender-fullName" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
@@ -244,12 +244,12 @@
             </div>
             <div class="q-field"><label for="current_website">Current website URL <span class="opt">(optional)</span></label><input id="current_website" name="fi-text-current_website" type="text" inputmode="url" placeholder="smithplumbing.ca — or leave blank if you don't have one yet"></div>
           </div>
-          <p class="q-hint">Add an email or a phone number so I can reply.</p>
+          <p class="q-hint">{{ quote.s3.hint }}</p>
         </section>
 
         <!-- ===== Section 4 — Project goals ===== -->
         <section class="q-block">
-          <div class="q-head"><span class="q-num">04</span><h2>Project goals</h2></div>
+          <div class="q-head"><span class="q-num">04</span><h2>{{ quote.s4.heading }}</h2></div>
           <div class="q-fields">
             <div class="q-field"><label for="business_does">What does your business do?</label><textarea id="business_does" name="fi-text-business_does" placeholder="A quick description of your business and the services you offer." required></textarea></div>
             <div class="q-field"><label for="website_goals">What do you want the website to help with?</label><textarea id="website_goals" name="fi-text-website_goals" placeholder="e.g. more calls, more quote requests, looking more professional, showing past work." required></textarea></div>
@@ -258,8 +258,8 @@
 
         <!-- ===== Section 5 — Optional details ===== -->
         <section class="q-block q-optional">
-          <div class="q-head"><span class="q-num">05</span><h2>Optional details</h2></div>
-          <p class="q-note">Add these if you have them. If not, leave them blank.</p>
+          <div class="q-head"><span class="q-num">05</span><h2>{{ quote.s5.heading }}</h2></div>
+          <p class="q-note">{{ quote.s5.note }}</p>
           <div class="q-fields">
             <div class="q-field"><label for="pages_needed">What pages do you think you need?</label><textarea id="pages_needed" name="fi-text-pages_needed" placeholder="e.g. Home, Services, About, Gallery, Contact — a rough idea is fine."></textarea></div>
             <div class="q-row">
@@ -299,8 +299,8 @@
           </div>
         </section>
 
-        <button type="submit" class="btn btn-grad">Request My Website Quote <span class="arr">&rarr;</span></button>
-        <p class="quote-foot">No pressure. I&rsquo;ll review your details and reply with the next best step.</p>
+        <button type="submit" class="btn btn-grad">{{ quote.submit }} <span class="arr">&rarr;</span></button>
+        <p class="quote-foot">{{ quote.foot }}</p>
       </div>
     </form>
   </div>
@@ -310,10 +310,10 @@
       <div class="foot-top">
         <div class="foot-brand">
           <a class="fb-logo" href="index.html"><img src="assets/logo.png" alt="Hatt Digital" width="560" height="397" loading="lazy" decoding="async"><span class="name">Hatt <span>Digital</span></span></a>
-          <p>Honest, effective websites for local businesses across Nova Scotia.</p>
+          <p>{{ site.footer.blurb }}</p>
           <div class="foot-social">
-            <a href="https://www.facebook.com/profile.php?id=61590965965094" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-            <a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
+            <a href="{{ site.social.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="{{ site.social.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></a>
           </div>
         </div>
         <div class="foot-cols">
@@ -324,14 +324,14 @@
             <a href="web-design-for-contractors.html">Contractors</a><a href="web-design-for-electricians.html">Electricians</a><a href="web-design-for-plumbers.html">Plumbers</a><a href="web-design-for-small-businesses.html">Small businesses</a>
           </div>
           <div class="foot-col"><h4>Areas &amp; contact</h4>
-            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:+19022774424">902-277-4424</a><a href="mailto:hattdigitalns@gmail.com">Email me</a>
+            <a href="web-design-halifax.html">Web design in Halifax</a><a href="web-design-dartmouth.html">Web design in Dartmouth</a><a href="quote.html">Get a free quote</a><a href="tel:{{ site.contact.phone_link }}">{{ site.contact.phone }}</a><a href="mailto:{{ site.contact.email }}">Email me</a>
           </div>
         </div>
       </div>
       <div class="foot-bottom"><span>&copy; <span id="yr"></span> Hatt Digital. All rights reserved.</span><span class="mono">Nova Scotia, Canada &middot; 44.65&deg; N</span></div>
     </div></footer>
 <div class="mobile-cta" id="mobileCta" aria-label="Quick contact bar">
-  <a class="call" href="tel:+19022774424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
+  <a class="call" href="tel:{{ site.contact.phone_link }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
   <a href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
   <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Start Project</a>
 </div>

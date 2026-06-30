@@ -437,12 +437,69 @@ content:
           - { name: body, label: "Paragraph", type: text }
 
   - name: quote
-    label: "Quote form (HTML)"
+    label: Quote page
     type: file
-    path: quote.html
-    format: code
+    path: _data/quote.json
     fields:
-      - { name: body, label: Page HTML, type: code, options: { language: html } }
+      - name: seo
+        label: Browser tab & search engine
+        type: object
+        fields:
+          - { name: title, label: "Page title", type: string }
+          - { name: description, label: "Search description", type: text }
+      - { name: og_description, label: "Social share description", type: text }
+      - name: hero
+        label: Hero — top of the page
+        type: object
+        fields:
+          - { name: eyebrow, label: "Eyebrow", type: string }
+          - name: heading
+            label: "Heading"
+            type: string
+            description: "Wrap the highlighted part in **double asterisks**."
+          - { name: lead, label: "Intro sentence", type: text }
+          - { name: note, label: "Small note under the intro", type: text }
+      - { name: form_lead, label: "Friendly note above the form", type: text }
+      - { name: success, label: "Message shown after a successful submit", type: text }
+      - name: s1
+        label: "Step 1 — Website type"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: note, label: "Note", type: text }
+      - name: packages
+        label: "Website-type cards (copy only)"
+        type: object
+        list: true
+        fields:
+          - { name: label, label: "Label", type: string }
+          - { name: desc, label: "Description", type: text }
+      - name: s2
+        label: "Step 2 — Budget"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: note, label: "Note", type: text }
+          - { name: unsure, label: "“Not sure” checkbox label", type: text }
+      - name: s3
+        label: "Step 3 — Basic details"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: hint, label: "Hint under the fields", type: text }
+      - name: s4
+        label: "Step 4 — Project goals"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+      - name: s5
+        label: "Step 5 — Optional details"
+        type: object
+        fields:
+          - { name: heading, label: "Heading", type: string }
+          - { name: note, label: "Note", type: text }
+      - { name: submit, label: "Submit button label", type: string }
+      - { name: foot, label: "Note under the submit button", type: text }
 
   - name: lp-contractors
     label: "LP — Contractors (HTML)"

@@ -1,0 +1,42 @@
+{
+  "seo": {
+    "title": "Request a Website Quote — Nova Scotia Web Design | Hatt Digital",
+    "description": "Request a website quote from Hatt Digital. Choose the option that sounds closest to what you need, tell me about your business, goals, and budget, and I'll build a fair quote around your project — replies within one business day."
+  },
+  "og_description": "Choose the option that sounds closest to what you need, tell me about your business, goals, and budget, and I'll build a fair quote around your project.",
+  "hero": {
+    "eyebrow": "Website quote",
+    "heading": "Request a **Website Quote**",
+    "lead": "Choose the website option that sounds closest to what you need, then tell me about your business, goals, and budget. I’ll use that to build a fair quote around the actual project.",
+    "note": "The option you choose is just a starting point — every business is different."
+  },
+  "form_lead": "This only takes a minute. Most details are optional — just share what you can.",
+  "success": "Thanks! Your quote request is in — I’ll reply within one business day.",
+  "s1": {
+    "heading": "Choose your website type",
+    "note": "Pick the option that sounds closest to what you need. If you came from a package on the site, it’s already selected — change it any time."
+  },
+  "packages": [
+    { "label": "Best for getting online properly", "desc": "A focused website for small businesses that need a clean, credible online presence." },
+    { "label": "Best for most businesses", "desc": "A stronger multi-page website for service businesses that need more trust and better structure." },
+    { "label": "Best for custom needs", "desc": "A flexible option for businesses that need extra pages, quote flows, CMS options, or custom features." }
+  ],
+  "s2": {
+    "heading": "Project budget range",
+    "note": "This helps me recommend the right scope — it does not lock you into a final price.",
+    "unsure": "I’m not sure yet — I’d like help choosing a fair budget."
+  },
+  "s3": {
+    "heading": "Basic details",
+    "hint": "Add an email or a phone number so I can reply."
+  },
+  "s4": {
+    "heading": "Project goals"
+  },
+  "s5": {
+    "heading": "Optional details",
+    "note": "Add these if you have them. If not, leave them blank."
+  },
+  "submit": "Request My Website Quote",
+  "foot": "No pressure. I’ll review your details and reply with the next best step."
+}
