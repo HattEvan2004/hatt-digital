@@ -59,16 +59,16 @@
       <div class="nav-links" id="navLinks"><a href="index.html">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a></div>
       <div class="nav-cta">
         <a class="nav-call" href="tel:+19022774424" aria-label="Call Hatt Digital at 902-277-4424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 902-277-4424</a>
-        <a href="quote.html" class="btn btn-grad">Free Website Audit</a>
+        <a href="quote.html?type=audit" class="btn btn-grad">Free Website Audit</a>
         <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       </div>
     </nav></div></header>
 <main id="main">
 <section class="phead"><span class="glow"></span><div class="wrap"><div class="phead-grid">
       <div class="rv">
-        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> Request a quote</span>
-        <h1>Get your flat, <span class="hl">honest quote.</span></h1>
-        <p>Pick the package that fits, share a few details and any assets you have, and I&rsquo;ll send back a clear, all-in quote &mdash; usually within one business day. No pressure, no runaround.</p>
+        <span class="eyebrow on-dark" id="quoteEyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> Quote &amp; free audit</span>
+        <h1 id="quoteH1">Get a website quote or <span class="hl">free audit.</span></h1>
+        <p id="quoteSub">Choose a package, send over your business details, and I&rsquo;ll reply with clear next steps. If you already have a website, I can also give you honest feedback on what I&rsquo;d improve first &mdash; usually within one business day.</p>
       </div>
       <div class="editor rv">
       <div class="ebar"><i></i><i></i><i></i><span class="fname">quote.js</span></div>
@@ -90,70 +90,284 @@
     <div class="ci"><div class="cic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg></div>
       <div><h4>Instagram</h4><a href="https://www.instagram.com/hattdigital" target="_blank" rel="noopener">@hattdigital</a></div></div>
   </div>
-  <div class="form-card rv">
-    <p class="form-intro">Already picked a package? It&rsquo;s pre-selected below &mdash; change it any time. Not sure yet? Choose &ldquo;Not sure yet&rdquo; and I&rsquo;ll help you figure it out.</p>
+  <div class="form-card">
+    <p class="form-intro" id="quoteIntro">Not sure what you need yet? That&rsquo;s fine. Fill out what you can and leave the rest blank &mdash; pick &ldquo;Not sure yet&rdquo; anywhere and I&rsquo;ll help you figure it out. Only your name and email are required.</p>
 
     <!-- enctype is multipart/form-data so the file uploads below are sent as real files via FormData. -->
     <!-- data-forminit hands this form to assets/forminit.js (Forminit backend). -->
     <form id="fiQuoteForm" enctype="multipart/form-data" novalidate data-forminit data-forminit-max-mb="25"
           data-forminit-success="Thanks! Your quote request is in — I’ll reply within one business day.">
 
-      <!-- Hidden field submitted to Forminit. Kept in sync with the visible -->
-      <!-- "Package" dropdown and the ?package= URL parameter by the inline script. -->
+      <!-- Hidden field submitted to Forminit. Kept in sync with the selected -->
+      <!-- package card and the ?package= URL parameter by assets/forminit.js. -->
       <input type="hidden" id="selected_package" name="selected_package" value="">
 
-      <div>
-        <label for="package">Package</label>
-        <select id="package" name="package_choice" data-package-select>
-          <option value="">Not sure yet — help me choose</option>
-          <option value="Starter Website">Starter Website</option>
-          <option value="Business Website">Business Website</option>
-          <option value="Growth Website">Growth Website</option>
-        </select>
-        <p class="pkg-hint">Starter from $750 · Business from $1,500 · Growth quoted by scope.</p>
-      </div>
+      <!-- ===== Selected package ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">Pick</span> Selected package</legend>
+        <p class="fs-note">Tap a package to select it. Clicked the wrong one on the last page? Just choose another &mdash; the selection updates instantly.</p>
+        <div class="pkg-picker" data-package-cards>
+          <label class="pkg-card">
+            <input type="radio" name="package_choice" value="Starter Website">
+            <span class="pkg-badge">Selected</span>
+            <span class="pkg-name">Starter Website</span>
+            <span class="pkg-price">From $750</span>
+            <span class="pkg-desc">A clean one-page site to get online properly.</span>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" name="package_choice" value="Business Website">
+            <span class="pkg-badge">Selected</span>
+            <span class="pkg-name">Business Website</span>
+            <span class="pkg-price">From $1,500</span>
+            <span class="pkg-desc">A multi-page site that builds trust and ranks locally.</span>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" name="package_choice" value="Growth Website">
+            <span class="pkg-badge">Selected</span>
+            <span class="pkg-name">Growth Website</span>
+            <span class="pkg-price">Custom quote</span>
+            <span class="pkg-desc">Custom features, booking/quote flows, room to scale.</span>
+          </label>
+          <label class="pkg-card">
+            <input type="radio" name="package_choice" value="Not sure yet">
+            <span class="pkg-badge">Selected</span>
+            <span class="pkg-name">Not sure yet</span>
+            <span class="pkg-price">Help me choose</span>
+            <span class="pkg-desc">Tell me your goals and I&rsquo;ll recommend the right fit.</span>
+          </label>
+        </div>
+      </fieldset>
 
-      <div class="row">
-        <div><label for="fullName">Your name</label><input id="fullName" name="fi-sender-fullName" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
-        <div><label for="biz">Business name <span class="opt">(optional)</span></label><input id="biz" name="fi-text-business" type="text" autocomplete="organization" placeholder="Smith Plumbing"></div>
-      </div>
+      <!-- ===== Section 1 — Contact details ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">01</span> Contact details</legend>
+        <div class="row">
+          <div><label for="fullName">Your name</label><input id="fullName" name="fi-sender-fullName" type="text" autocomplete="name" placeholder="Jane Smith" required></div>
+          <div><label for="biz">Business name <span class="opt">(optional)</span></label><input id="biz" name="fi-text-business" type="text" autocomplete="organization" placeholder="Smith Plumbing"></div>
+        </div>
+        <div class="row">
+          <div><label for="email">Email</label><input id="email" name="fi-sender-email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca" required></div>
+          <div><label for="phone">Phone <span class="opt">(optional)</span></label><input id="phone" name="fi-text-phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
+        </div>
+        <div><label for="location">Business location <span class="opt">(optional)</span></label><input id="location" name="fi-text-location" type="text" autocomplete="address-level2" placeholder="Halifax, NS — and the areas you serve"></div>
+      </fieldset>
 
-      <div class="row">
-        <div><label for="email">Email</label><input id="email" name="fi-sender-email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca" required></div>
-        <div><label for="phone">Phone <span class="opt">(optional)</span></label><input id="phone" name="fi-text-phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
-      </div>
+      <!-- ===== Section 2 — Current online presence ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">02</span> Current online presence</legend>
+        <p class="fs-note">Add any links you already use online. Leave blank anything you don&rsquo;t have.</p>
+        <div class="row">
+          <div><label for="website">Current website <span class="opt">(if you have one)</span></label><input id="website" name="fi-text-website" type="text" inputmode="url" placeholder="smithplumbing.ca"></div>
+          <div><label for="gbp">Google Business Profile <span class="opt">(optional)</span></label><input id="gbp" name="fi-text-google_business" type="text" inputmode="url" placeholder="Google Maps / business listing link"></div>
+        </div>
+        <div class="row">
+          <div><label for="facebook">Facebook <span class="opt">(optional)</span></label><input id="facebook" name="fi-text-facebook" type="text" inputmode="url" placeholder="facebook.com/yourbusiness"></div>
+          <div><label for="instagram">Instagram <span class="opt">(optional)</span></label><input id="instagram" name="fi-text-instagram" type="text" inputmode="url" placeholder="instagram.com/yourbusiness"></div>
+        </div>
+        <div class="row">
+          <div><label for="tiktok">TikTok <span class="opt">(optional)</span></label><input id="tiktok" name="fi-text-tiktok" type="text" inputmode="url" placeholder="tiktok.com/@yourbusiness"></div>
+          <div><label for="linkedin">LinkedIn <span class="opt">(optional)</span></label><input id="linkedin" name="fi-text-linkedin" type="text" inputmode="url" placeholder="linkedin.com/company/…"></div>
+        </div>
+        <div class="row">
+          <div><label for="youtube">YouTube <span class="opt">(optional)</span></label><input id="youtube" name="fi-text-youtube" type="text" inputmode="url" placeholder="youtube.com/@yourbusiness"></div>
+          <div><label for="other_social">Other social links <span class="opt">(optional)</span></label><input id="other_social" name="fi-text-other_social" type="text" placeholder="Anything else you use"></div>
+        </div>
+      </fieldset>
 
-      <div><label for="website">Current website <span class="opt">(if you have one)</span></label><input id="website" name="fi-text-website" type="text" inputmode="url" placeholder="smithplumbing.ca, or a Facebook page"></div>
+      <!-- ===== Section 3 — Project type ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">03</span> What do you need?</legend>
+        <p class="fs-note">Tick anything that applies.</p>
+        <div class="check-grid">
+          <label class="check-opt"><input type="checkbox" name="fi-text-project_type[]" value="Brand-new website"><span>I need a brand-new website</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-project_type[]" value="Redesign current website"><span>Redesign my current website</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-project_type[]" value="Landing page"><span>I need a landing page</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-project_type[]" value="Demo website first"><span>I need a demo website first</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-project_type[]" value="Google/local SEO help"><span>Help with Google/local SEO</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-project_type[]" value="Not sure yet"><span>I&rsquo;m not sure yet</span></label>
+        </div>
+      </fieldset>
 
-      <div><label for="message">Project details</label><textarea id="message" name="fi-text-message" placeholder="A new website for my plumbing business — currently just have a Facebook page. I'd like online quote requests and a few photos of recent jobs."></textarea></div>
+      <!-- ===== Section 4 — Website goals ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">04</span> What should the site do for you?</legend>
+        <p class="fs-note">Pick the goals that matter most.</p>
+        <div class="check-grid">
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Get more calls"><span>Get more calls</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Get more quote requests"><span>Get more quote requests</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Look more professional"><span>Look more professional</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Show services clearly"><span>Show services clearly</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Show past work/photos"><span>Show past work/photos</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Help people find me on Google"><span>Help people find me on Google</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Make my business easier to trust"><span>Make my business easier to trust</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Sell products or take bookings"><span>Sell products or take bookings</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-goals[]" value="Other"><span>Other</span></label>
+        </div>
+      </fieldset>
 
-      <!-- ---- File uploads (sent as real files because the form submits via FormData) ---- -->
-      <div>
-        <label for="logo">Logo upload <span class="opt">(optional)</span></label>
-        <input id="logo" name="fi-file-logo" type="file"
-               accept=".jpg,.jpeg,.png,.webp,.svg,.pdf,.doc,.docx,image/jpeg,image/png,image/webp,image/svg+xml,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-        <p class="upload-note">Accepted: JPG, PNG, WEBP, SVG, PDF, DOC, DOCX.</p>
-      </div>
+      <!-- ===== Section 5 — Pages needed ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">05</span> Pages you think you&rsquo;ll need</legend>
+        <p class="fs-note">A rough idea is fine &mdash; I&rsquo;ll confirm the final structure with you.</p>
+        <div class="check-grid">
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="Home"><span>Home</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="About"><span>About</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="Services"><span>Services</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="Contact"><span>Contact</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="Gallery/Portfolio"><span>Gallery/Portfolio</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="FAQ"><span>FAQ</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="Reviews/Testimonials"><span>Reviews/Testimonials</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="Service area/location pages"><span>Service area/location pages</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="Blog/resources"><span>Blog/resources</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-pages[]" value="Not sure yet"><span>Not sure yet</span></label>
+        </div>
+      </fieldset>
 
-      <div>
-        <label for="website_photos">Website photos <span class="opt">(optional, you can pick several)</span></label>
-        <input id="website_photos" name="fi-file-website_photos[]" type="file" multiple
-               accept=".jpg,.jpeg,.png,.webp,.svg,.pdf,.doc,.docx,image/jpeg,image/png,image/webp,image/svg+xml,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
-        <p class="upload-note">Photos of your work, premises, team, etc. Same accepted types. Total uploads must stay under 25&nbsp;MB.</p>
-      </div>
+      <!-- ===== Section 6 — Features needed ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">06</span> Features you&rsquo;d like</legend>
+        <div class="check-grid">
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Contact form"><span>Contact form</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Quote request form"><span>Quote request form</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Click-to-call button"><span>Click-to-call button</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Google Maps embed"><span>Google Maps embed</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Photo gallery"><span>Photo gallery</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Before/after section"><span>Before/after section</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Booking link"><span>Booking link</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Social media links"><span>Social media links</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Testimonials/reviews section"><span>Testimonials/reviews section</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Basic SEO setup"><span>Basic SEO setup</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Google Business Profile guidance"><span>Google Business Profile guidance</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Editable content/CMS"><span>Editable content/CMS</span></label>
+          <label class="check-opt"><input type="checkbox" name="fi-text-features[]" value="Other"><span>Other</span></label>
+        </div>
+      </fieldset>
 
-      <div>
-        <label for="asset_link">Asset folder link <span class="opt">(optional)</span></label>
-        <input id="asset_link" name="fi-text-asset_link" type="text" inputmode="url"
-               placeholder="Google Drive, Dropbox, iCloud, or website link">
-        <p class="upload-note">Got a lot of files? Drop them in a shared folder and paste the link instead of uploading.</p>
-      </div>
+      <!-- ===== Section 7 — Brand and assets ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">07</span> Brand &amp; assets</legend>
+        <div class="qa">
+          <span class="qa-q">Do you already have a logo?</span>
+          <div class="seg">
+            <label class="seg-opt"><input type="radio" name="fi-text-has_logo" value="Yes"><span>Yes</span></label>
+            <label class="seg-opt"><input type="radio" name="fi-text-has_logo" value="No"><span>No</span></label>
+            <label class="seg-opt"><input type="radio" name="fi-text-has_logo" value="Needs improvement"><span>Needs improvement</span></label>
+          </div>
+        </div>
+        <div class="qa">
+          <span class="qa-q">Do you have photos for the website?</span>
+          <div class="seg">
+            <label class="seg-opt"><input type="radio" name="fi-text-has_photos" value="Yes"><span>Yes</span></label>
+            <label class="seg-opt"><input type="radio" name="fi-text-has_photos" value="No"><span>No</span></label>
+            <label class="seg-opt"><input type="radio" name="fi-text-has_photos" value="Some"><span>Some</span></label>
+          </div>
+        </div>
+        <div><label for="brand_colours">Brand colours <span class="opt">(if known)</span></label><input id="brand_colours" name="fi-text-brand_colours" type="text" placeholder="e.g. navy &amp; orange, or “not sure yet”"></div>
+
+        <!-- File uploads are real: the form submits via FormData to Forminit, which stores the files. -->
+        <div>
+          <label for="logo">Logo upload <span class="opt">(optional)</span></label>
+          <input id="logo" name="fi-file-logo" type="file"
+                 accept=".jpg,.jpeg,.png,.webp,.svg,.pdf,.doc,.docx,image/jpeg,image/png,image/webp,image/svg+xml,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          <p class="upload-note">Accepted: JPG, PNG, WEBP, SVG, PDF, DOC, DOCX.</p>
+        </div>
+        <div>
+          <label for="website_photos">Website photos <span class="opt">(optional, pick several)</span></label>
+          <input id="website_photos" name="fi-file-website_photos[]" type="file" multiple
+                 accept=".jpg,.jpeg,.png,.webp,.svg,.pdf,.doc,.docx,image/jpeg,image/png,image/webp,image/svg+xml,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          <p class="upload-note">Photos of your work, premises, team, etc. Same accepted types.</p>
+        </div>
+        <div>
+          <label for="other_files">Other files <span class="opt">(optional)</span></label>
+          <input id="other_files" name="fi-file-other_files[]" type="file" multiple
+                 accept=".jpg,.jpeg,.png,.webp,.svg,.pdf,.doc,.docx,image/jpeg,image/png,image/webp,image/svg+xml,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+          <p class="upload-note">Anything else useful. All uploads together must stay under 25&nbsp;MB.</p>
+        </div>
+        <div>
+          <label for="asset_link">Or paste a folder link <span class="opt">(optional)</span></label>
+          <input id="asset_link" name="fi-text-asset_link" type="text" inputmode="url"
+                 placeholder="Paste a Google Drive, Dropbox, iCloud, or website link to your logo/photos">
+          <p class="upload-note">Got a lot of files, or files too big to upload? Drop them in a shared folder and paste the link instead.</p>
+        </div>
+      </fieldset>
+
+      <!-- ===== Section 8 — Website style ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">08</span> Look &amp; style</legend>
+        <div class="row">
+          <div><label for="likes">Websites you like <span class="opt">(optional)</span></label><input id="likes" name="fi-text-likes" type="text" placeholder="Paste a link or two you like the look of"></div>
+          <div><label for="competitors">Competitor websites <span class="opt">(optional)</span></label><input id="competitors" name="fi-text-competitors" type="text" placeholder="Sites of businesses like yours"></div>
+        </div>
+        <div><label for="style">Style preference</label>
+          <select id="style" name="fi-text-style">
+            <option value="">Not sure</option>
+            <option value="Clean and simple">Clean and simple</option>
+            <option value="Modern and bold">Modern and bold</option>
+            <option value="Premium/professional">Premium/professional</option>
+            <option value="Friendly/local">Friendly/local</option>
+          </select>
+        </div>
+        <div><label for="style_notes">Notes about how you want it to look <span class="opt">(optional)</span></label><textarea id="style_notes" name="fi-text-style_notes" placeholder="Anything about the feel, colours, or vibe you're going for."></textarea></div>
+      </fieldset>
+
+      <!-- ===== Section 9 — Project details ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">09</span> Project details</legend>
+        <div><label for="message">Describe what you need built</label><textarea id="message" name="fi-text-message" placeholder="A new website for my plumbing business — currently just have a Facebook page. I'd like online quote requests and a few photos of recent jobs."></textarea></div>
+        <div class="row">
+          <div><label for="services">Main services you offer <span class="opt">(optional)</span></label><input id="services" name="fi-text-services" type="text" placeholder="e.g. drain cleaning, hot water tanks, emergency repairs"></div>
+          <div><label for="areas">Main areas you serve <span class="opt">(optional)</span></label><input id="areas" name="fi-text-areas" type="text" placeholder="e.g. Halifax, Dartmouth, Bedford"></div>
+        </div>
+        <div><label for="different">What makes your business different? <span class="opt">(optional)</span></label><textarea id="different" name="fi-text-different" placeholder="Why customers pick you — experience, guarantees, speed, local, etc."></textarea></div>
+        <div class="row">
+          <div><label for="must_have">Any must-have content? <span class="opt">(optional)</span></label><input id="must_have" name="fi-text-must_have" type="text" placeholder="Specific text, offers, certifications…"></div>
+          <div><label for="avoid">Anything you do NOT want? <span class="opt">(optional)</span></label><input id="avoid" name="fi-text-avoid" type="text" placeholder="Anything to leave off the site"></div>
+        </div>
+      </fieldset>
+
+      <!-- ===== Section 10 — Budget and timeline ===== -->
+      <fieldset class="form-section">
+        <legend class="fs-head"><span class="fs-num">10</span> Budget &amp; timeline</legend>
+        <div class="row">
+          <div><label for="budget">Budget range</label>
+            <select id="budget" name="fi-text-budget">
+              <option value="">Not sure yet</option>
+              <option value="Under $750">Under $750</option>
+              <option value="$750–$1,500">$750–$1,500</option>
+              <option value="$1,500–$3,000">$1,500–$3,000</option>
+              <option value="$3,000+">$3,000+</option>
+            </select>
+          </div>
+          <div><label for="timeline">Timeline</label>
+            <select id="timeline" name="fi-text-timeline">
+              <option value="">Just researching</option>
+              <option value="ASAP">ASAP</option>
+              <option value="Within 2 weeks">Within 2 weeks</option>
+              <option value="Within 1 month">Within 1 month</option>
+              <option value="1–3 months">1–3 months</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
 
       <button type="submit" class="btn btn-grad">Send my quote request <span class="arr">&rarr;</span></button>
     </form>
   </div>
 </div></div></section>
 
+<!-- Audit-friendly copy swap: quote.html?type=audit reframes the page around a free audit. -->
+<script>
+(function(){
+  var t = (new URLSearchParams(window.location.search).get('type') || '').trim().toLowerCase();
+  if (t !== 'audit') return;
+  function set(id, html){ var el = document.getElementById(id); if (el) el.innerHTML = html; }
+  set('quoteEyebrow', '<span class="pix"><i></i><i></i><i></i><i></i></span> Free website audit');
+  set('quoteH1', 'Get your free <span class="hl">website audit.</span>');
+  set('quoteSub', 'Send over your current site (or your Facebook page) and I&rsquo;ll reply with honest, specific feedback on what I&rsquo;d improve first &mdash; plus a clear quote if you want it handled. No pressure, no obligation.');
+  set('quoteIntro', 'Here for the free audit? Just give me your website and a couple of details below &mdash; everything else is optional. The more you share, the more useful my feedback.');
+  document.title = 'Free Website Audit — Nova Scotia Web Design | Hatt Digital';
+})();
+</script>
 </main>
 <footer><div class="wrap">
       <div class="foot-top">
@@ -182,10 +396,10 @@
 <div class="mobile-cta" id="mobileCta" aria-label="Quick contact bar">
   <a class="call" href="tel:+19022774424"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
   <a href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
-  <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Free Audit</a>
+  <a class="primary" href="quote.html?type=audit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg> Free Audit</a>
 </div>
 <script src="assets/main.js?v=2"></script>
-<!-- Forminit integration (shared by quote.html + contact.html). -->
-<!-- The Forminit Form ID lives in assets/forminit.js. ?v=N busts the asset cache. -->
-<script src="assets/forminit.js?v=2" defer></script>
+<!-- Forminit integration. The Forminit Form ID lives in assets/forminit.js. -->
+<!-- ?v=N busts the 1-hour asset cache when these scripts change. -->
+<script src="assets/forminit.js?v=3" defer></script>
 </body></html>

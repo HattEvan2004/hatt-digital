@@ -13,7 +13,8 @@ A static, dependency-free site: just HTML, CSS, and a little vanilla JavaScript.
 | Projects / Portfolio | `projects.html` |
 | About | `about.html` |
 | FAQ | `faq.html` |
-| Contact | `contact.html` |
+| Quote / free audit | `quote.html` |
+| Contact (redirects to `quote.html`) | `contact.html` |
 
 ### SEO landing pages (industry & area)
 
@@ -58,7 +59,8 @@ Using a custom domain (e.g. `hattdigital.ca`)? Add it under Settings → Pages, 
 ## Customize before launch
 
 - **Domain** — the SEO tags (`canonical`, Open Graph, `sitemap.xml`, `robots.txt`, JSON-LD) all use `https://hattdigital.ca`. Search-and-replace this if your live domain differs.
-- **Contact details** — email `hattdigitalns@gmail.com` and phone `902-277-4424` (`tel:+19022774424`) are used across the site, the click-to-call links, the mobile CTA bar, and the JSON-LD. Search the project for these to change them. The contact form opens a pre-filled email to that address.
+- **Contact details** — email `hattdigitalns@gmail.com` and phone `902-277-4424` (`tel:+19022774424`) are used across the site, the click-to-call links, the mobile CTA bar, and the JSON-LD. Search the project for these to change them.
+- **Quote form** — all quote/audit CTAs go to `quote.html`, which submits through **Forminit** (real backend, real file uploads). The Forminit Form ID lives in one place: `FORMINIT_FORM_ID` near the top of `assets/forminit.js`. The CTAs pass the chosen package via a URL parameter (`quote.html?package=starter|business|growth`) and an audit framing via `quote.html?type=audit`; `assets/forminit.js` reads `?package=` to pre-select the package card and keep the hidden `selected_package` field in sync. `contact.html` is now just a redirect to `quote.html` (preserving any query string).
 - **Pricing** — package starting points (`$750` / `$1,500` / Custom) live on `index.html`, `services.html`, `faq.html`, and the home-page JSON-LD `makesOffer`. Update all of them together if prices change.
 - **Founder name** — already set to **Evan Hatt** in `about.html` and the home-page JSON-LD.
 - **Reviews** — the testimonials section on the home page is an honest placeholder. Replace the placeholder cards with real client quotes (no invented names) when you have them.
@@ -83,7 +85,8 @@ Using a custom domain (e.g. `hattdigital.ca`)? Add it under Settings → Pages, 
 ├── projects.html
 ├── about.html
 ├── faq.html
-├── contact.html
+├── quote.html                           # quote / free-audit form (Forminit-backed)
+├── contact.html                         # redirects to quote.html
 ├── web-design-for-contractors.html      # SEO landing pages
 ├── web-design-for-electricians.html     #  (shared reusable layout)
 ├── web-design-for-plumbers.html
@@ -93,7 +96,8 @@ Using a custom domain (e.g. `hattdigital.ca`)? Add it under Settings → Pages, 
 ├── assets/
 │   ├── styles.css    # all styles + design tokens
 │   ├── projects.css  # portfolio / case-card styles (home + projects)
-│   ├── main.js       # nav, scroll reveals, hero build, FAQ, form, mobile CTA bar
+│   ├── main.js       # nav, scroll reveals, hero build, FAQ, mobile CTA bar
+│   ├── forminit.js   # quote form: Forminit submit, package pre-select, uploads
 │   └── logo.png      # brand mark
 └── .github/workflows/pages.yml
 ```

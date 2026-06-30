@@ -278,9 +278,9 @@
   form{display:flex;flex-direction:column;gap:14px}
   form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   form label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d);margin-bottom:6px;display:block}
-  form input,form textarea,form select{width:100%;background:var(--navy-2);border:1px solid var(--line-d);border-radius:12px;padding:13px 15px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;transition:border-color .2s,box-shadow .2s}
+  form input:not([type=checkbox]):not([type=radio]),form textarea,form select{width:100%;background:var(--navy-2);border:1px solid var(--line-d);border-radius:12px;padding:13px 15px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;transition:border-color .2s,box-shadow .2s}
   form input::placeholder,form textarea::placeholder{color:#5e6f9e}
-  form input:focus,form textarea:focus,form select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(24,182,242,.18)}
+  form input:not([type=checkbox]):not([type=radio]):focus,form textarea:focus,form select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(24,182,242,.18)}
   form textarea{resize:vertical;min-height:110px}
   form .btn{justify-content:center;margin-top:6px}
 
@@ -1062,3 +1062,71 @@
   .form-intro{color:#c9d6ee;font-size:14.5px;line-height:1.55;margin-bottom:20px;
     padding-bottom:18px;border-bottom:1px solid var(--line-d)}
   form label .opt{color:#5e6f9e;font-weight:400;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif}
+
+  /* =====================================================
+     QUOTE FORM — sectioned layout, package picker cards,
+     checkbox/radio grids and segmented controls. All live
+     inside the dark .form-card, so colours read on navy.
+  ===================================================== */
+  /* Grouped sections with a clear heading + breathing room. */
+  .form-section{border:0;margin:0;padding:26px 0 4px;min-width:0;display:flex;flex-direction:column;gap:14px;
+    border-top:1px solid var(--line-d)}
+  .form-section:first-of-type{border-top:0;padding-top:4px}
+  .form-section .fs-head{display:flex;align-items:center;gap:12px;padding:0;margin:0 0 2px;
+    font-family:'Inter Tight',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:#fff;float:none;width:auto}
+  .form-section .fs-num{display:inline-grid;place-items:center;min-width:34px;height:26px;padding:0 9px;border-radius:8px;
+    background:var(--grad);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.06em}
+  .fs-note{color:#9fb0d0;font-size:13.5px;line-height:1.5;margin:-4px 0 2px;font-family:'Inter',sans-serif}
+
+  /* ---- Package picker cards ---- */
+  .pkg-picker{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .pkg-card{position:relative;display:flex;flex-direction:column;gap:3px;cursor:pointer;
+    background:var(--navy-2);border:1.5px solid var(--line-d);border-radius:14px;padding:16px 16px 15px;
+    transition:border-color .2s,box-shadow .2s,background .2s,transform .15s}
+  .pkg-card input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+  .pkg-card:hover{border-color:#2e4f74;transform:translateY(-2px)}
+  .pkg-card .pkg-name{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);font-weight:700}
+  .pkg-card .pkg-price{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:19px;color:#fff;margin-top:2px}
+  .pkg-card .pkg-desc{color:#9fb0d0;font-size:13px;line-height:1.45}
+  .pkg-card .pkg-badge{position:absolute;top:12px;right:12px;display:none;align-items:center;gap:5px;
+    background:var(--grad);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:999px;box-shadow:0 8px 18px -8px rgba(10,91,230,.7)}
+  .pkg-card.is-selected{border-color:var(--cyan);background:#13294a;box-shadow:0 0 0 3px rgba(24,182,242,.16),0 18px 36px -22px rgba(18,103,255,.7)}
+  .pkg-card.is-selected .pkg-badge{display:inline-flex}
+  /* visible keyboard focus on the card when its hidden radio is focused */
+  .pkg-card:focus-within{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(24,182,242,.28)}
+
+  /* ---- Checkbox / option grids ---- */
+  .check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .check-opt{display:flex;align-items:flex-start;gap:11px;cursor:pointer;
+    background:var(--navy-2);border:1.5px solid var(--line-d);border-radius:11px;padding:12px 14px;
+    color:#dbe5f6;font-size:14.5px;line-height:1.4;font-family:'Inter',sans-serif;
+    transition:border-color .18s,background .18s}
+  .check-opt:hover{border-color:#2e4f74}
+  .check-opt input{flex:none;width:19px;height:19px;margin:1px 0 0;accent-color:var(--royal);cursor:pointer}
+  .check-opt span{flex:1}
+  .check-opt:has(input:checked){border-color:var(--cyan);background:#13294a;color:#fff}
+  .check-opt:has(input:focus-visible){box-shadow:0 0 0 3px rgba(24,182,242,.28)}
+
+  /* ---- Segmented Yes/No/… radio controls ---- */
+  .qa{display:flex;flex-direction:column;gap:9px}
+  .qa-q{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d)}
+  .seg{display:flex;flex-wrap:wrap;gap:9px}
+  .seg-opt{cursor:pointer}
+  .seg-opt input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+  .seg-opt span{display:inline-flex;align-items:center;justify-content:center;
+    background:var(--navy-2);border:1.5px solid var(--line-d);border-radius:999px;padding:9px 18px;
+    color:#dbe5f6;font-size:14px;font-family:'Inter',sans-serif;transition:border-color .18s,background .18s,color .18s}
+  .seg-opt:hover span{border-color:#2e4f74}
+  .seg-opt input:checked + span{border-color:var(--cyan);background:#13294a;color:#fff}
+  .seg-opt input:focus-visible + span{box-shadow:0 0 0 3px rgba(24,182,242,.28)}
+
+  /* ---- Mobile: single-column pickers, comfortable tap targets ---- */
+  @media(max-width:560px){
+    .pkg-picker,.check-grid{grid-template-columns:1fr}
+    .form-section{padding-top:22px}
+    .check-opt,.seg-opt span{font-size:15px}
+    .seg{gap:8px}
+    .seg-opt{flex:1 1 auto}
+    .seg-opt span{width:100%;padding:11px 14px}
+  }

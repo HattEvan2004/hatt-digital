@@ -67,6 +67,9 @@
     var maxBytes = isNaN(maxMB) ? 0 : maxMB * 1024 * 1024;
     var hiddenPkg = form.querySelector('input[name="selected_package"]');
     var pkgSelect = form.querySelector('[data-package-select]');
+    var pkgRadios = Array.prototype.slice.call(
+      form.querySelectorAll('[data-package-cards] input[type="radio"][name="package_choice"]'));
+    var hasPkg = !!(hiddenPkg && (pkgSelect || pkgRadios.length));
     var okMsg = form.getAttribute('data-forminit-success') ||
       'Thanks! Your request is in — I’ll reply within one business day.';
     var errMsg = form.getAttribute('data-forminit-error') ||
@@ -84,15 +87,37 @@
       status.className = 'form-status' + (kind ? ' ' + kind : '');
     }
 
-    /* ---- Package pre-selection + hidden-field sync (quote form only) ---- */
-    function syncHiddenPackage() {
-      if (hiddenPkg && pkgSelect) hiddenPkg.value = pkgSelect.value;
+    /* ---- Package pre-selection + hidden-field sync (quote form only) ----
+       Supports either a <select data-package-select> or a set of radio
+       cards inside [data-package-cards]. The selected card gets an
+       .is-selected class so it lights up, and the hidden selected_package
+       field is kept in sync for submission. */
+    function currentPackage() {
+      if (pkgSelect) return pkgSelect.value;
+      for (var i = 0; i < pkgRadios.length; i++) {
+        if (pkgRadios[i].checked) return pkgRadios[i].value;
+      }
+      return '';
     }
-    if (hiddenPkg && pkgSelect) {
+    function highlightCards() {
+      pkgRadios.forEach(function (r) {
+        var card = r.closest('.pkg-card');
+        if (card) card.classList.toggle('is-selected', r.checked);
+      });
+    }
+    function syncHiddenPackage() {
+      if (hiddenPkg) hiddenPkg.value = currentPackage();
+      highlightCards();
+    }
+    if (hasPkg) {
       var raw = (new URLSearchParams(window.location.search).get('package') || '').trim().toLowerCase();
-      if (raw && PACKAGE_MAP[raw]) pkgSelect.value = PACKAGE_MAP[raw];
+      if (raw && PACKAGE_MAP[raw]) {
+        if (pkgSelect) pkgSelect.value = PACKAGE_MAP[raw];
+        pkgRadios.forEach(function (r) { if (r.value === PACKAGE_MAP[raw]) r.checked = true; });
+      }
       syncHiddenPackage();
-      pkgSelect.addEventListener('change', syncHiddenPackage);
+      if (pkgSelect) pkgSelect.addEventListener('change', syncHiddenPackage);
+      pkgRadios.forEach(function (r) { r.addEventListener('change', syncHiddenPackage); });
     }
 
     /* ---- Total upload-size check ---- */
