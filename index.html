@@ -70,7 +70,7 @@
         <img src="assets/logo.png" alt="Hatt Digital logo" width="560" height="397" decoding="async">
         <span class="name">Hatt <span>Digital</span></span>
       </a>
-      <div class="nav-links" id="navLinks"><a href="index.html" class="active">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a><a href="faq.html">FAQ</a></div>
+      <div class="nav-links" id="navLinks"><a href="index.html" class="active">Home</a><a href="services.html">Services</a><a href="projects.html">My Portfolio</a><a href="about.html">About</a></div>
       <div class="nav-cta">
         <a class="nav-call" href="tel:{{ site.contact.phone_link }}" aria-label="Call Hatt Digital at {{ site.contact.phone }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> {{ site.contact.phone }}</a>
         <a href="quote.html" class="btn btn-grad">Start a Website Project</a>
@@ -129,29 +129,6 @@
     <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">01</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><h3>{{ home.why.tiles[0].title }}</h3><p>{{ home.why.tiles[0].text }}</p></div>
     <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">02</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>{{ home.why.tiles[1].title }}</h3><p>{{ home.why.tiles[1].text }}</p></div>
     <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">03</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h3>{{ home.why.tiles[2].title }}</h3><p>{{ home.why.tiles[2].text }}</p></div>
-  </div>
-</div></section>
-
-<!-- ============ START A WEBSITE PROJECT (lead-in) ============ -->
-<section class="band band-tint" id="start"><div class="wrap">
-  <div class="audit rv">
-    <div>
-      <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.start.eyebrow }}</span>
-      <h2>{{ home.start.heading }}</h2>
-      <p>{{ home.start.body }}</p>
-      <div class="audit-actions">
-        <a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a>
-        <a href="tel:{{ site.contact.phone_link }}" class="btn btn-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call Evan</a>
-      </div>
-    </div>
-    <div class="audit-card">
-      <h3>{{ home.start.card_heading }}</h3>
-      <ul class="audit-list">
-        {%- for step in home.start.steps %}
-        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>{{ step }}</span></li>
-        {%- endfor %}
-      </ul>
-    </div>
   </div>
 </div></section>
 
@@ -214,75 +191,6 @@
   </div>
   <p class="price-foot rv">{{ home.pricing.foot }}</p>
 </div></section>
-
-<!-- ============ SIGNATURE: SALES SYSTEM FLOW ============ -->
-<section class="band band-flow" id="salesSystem">
-  <div class="flow-bg" aria-hidden="true">
-    <div class="flow-grid"></div>
-    <span class="flow-glow fg1"></span>
-    <span class="flow-glow fg2"></span>
-  </div>
-  <div class="wrap">
-    <div class="band-head rv">
-      <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.earns.eyebrow }}</span>
-      <h2>{{ home.earns.heading }}</h2>
-      <p>{{ home.earns.intro }}</p>
-    </div>
-    <div class="flow">
-      <div class="flow-track" aria-hidden="true"><span class="flow-pulse"></span></div>
-      {%- for s in home.earns.steps %}
-      <div class="flow-step rv" style="--d:{{ s.d }}">
-        <div class="flow-node"><span class="fn-ring"></span><span class="fn-core"></span><span class="fn-num">0{{ loop.index }}</span></div>
-        <div class="flow-card"><span class="fc-tag">{{ s.tag }}</span><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>
-      </div>
-      {%- endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- ============ WHY HATT DIGITAL (vs agency) + TRUST POINTS ============ -->
-<section class="band band-tint"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.whyhd.eyebrow }}</span>
-    <h2>{{ home.whyhd.heading }}</h2>
-    <p>{{ home.whyhd.intro }}</p></div>
-  <div class="trust-grid" data-stagger="0.06">
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><div><b>{{ home.whyhd.points[0].title }}</b><span>{{ home.whyhd.points[0].text }}</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span><div><b>{{ home.whyhd.points[1].title }}</b><span>{{ home.whyhd.points[1].text }}</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></span><div><b>{{ home.whyhd.points[2].title }}</b><span>{{ home.whyhd.points[2].text }}</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><div><b>{{ home.whyhd.points[3].title }}</b><span>{{ home.whyhd.points[3].text }}</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><div><b>{{ home.whyhd.points[4].title }}</b><span>{{ home.whyhd.points[4].text }}</span></div></div>
-    <div class="tpoint rv"><span class="tp-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="0.6" fill="currentColor"/></svg></span><div><b>{{ home.whyhd.points[5].title }}</b><span>{{ home.whyhd.points[5].text }}</span></div></div>
-  </div>
-</div></section>
-
-<!-- ============ WHY NOT DIY (Squarespace / Wix) ============ -->
-<section class="band"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.diy.eyebrow }}</span>
-    <h2>{{ home.diy.heading }}</h2>
-    <p>{{ home.diy.intro }}</p></div>
-  <div class="get-grid" data-stagger="0.06">
-    {%- for card in home.diy.cards %}
-    <div class="get rv"><span class="gk">0{{ loop.index }}</span><h3>{{ card.title }}</h3><p>{{ card.text }}</p></div>
-    {%- endfor %}
-  </div>
-  <div class="mini-cta rv"><div class="mc-l"><h3>{{ home.diy.cta_heading }}</h3><p>{{ home.diy.cta_body }}</p></div><a href="quote.html" class="btn btn-grad">Request a Website Quote <span class="arr">&rarr;</span></a></div>
-</div></section>
-
-<!-- ============ ABOUT EVAN + LOCAL ============ -->
-<section class="band band-tint"><div class="wrap"><div class="local">
-  <div class="map-card rv">
-    <svg class="ns-dots" viewBox="0 0 200 160" preserveAspectRatio="none" aria-hidden="true"><g fill="#18B6F2"><rect x="20" y="30" width="4" height="4"/><rect x="46" y="58" width="4" height="4"/><rect x="80" y="44" width="4" height="4"/><rect x="120" y="70" width="4" height="4"/><rect x="150" y="50" width="4" height="4"/><rect x="170" y="90" width="4" height="4"/><rect x="60" y="100" width="4" height="4"/><rect x="100" y="120" width="4" height="4"/><rect x="140" y="118" width="4" height="4"/></g></svg>
-    <div class="coord">44.6488&deg; N &middot; 63.5752&deg; W</div>
-    <div class="big">Made in<br>Nova Scotia.</div>
-  </div>
-  <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.local.eyebrow }}</span>
-    <h2 style="margin-top:16px">{{ home.local.heading }}</h2>
-    <p>{{ home.local.body1 }}</p>
-    <p>{{ home.local.body2 }}</p>
-    <div class="local-pills"><span>Halifax</span><span>Dartmouth</span><span>Bedford</span><span>South Shore</span><span>Annapolis Valley</span><span>Cape Breton</span></div>
-    <div style="margin-top:30px"><a href="about.html" class="btn btn-primary">{{ home.local.button }} <span class="arr">&rarr;</span></a></div>
-  </div>
-</div></div></section>
 
 <!-- ============ PROCESS ============ -->
 <section class="band band-dark"><div class="wrap">
