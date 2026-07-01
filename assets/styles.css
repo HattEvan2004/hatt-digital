@@ -1272,28 +1272,32 @@
   .ba-p-list{margin-top:auto;display:flex;flex-direction:column;gap:.8cqw}
   .ba-p-list span{height:1.9cqw;border-radius:.9cqw;background:#eef3fb;display:block}
 
-  /* ---- BEFORE: dated, cluttered site ---- */
+  /* ---- BEFORE: stale, generic template site — the realistic kind of bad:
+     crowded underlined nav, washed-out banner, wall of justified text,
+     a text-link "CTA", and the phone number buried in the footer ---- */
   .ba-browser.is-old{box-shadow:0 3cqw 5cqw -2.6cqw rgba(0,0,0,.5)}
-  .ba-before .ba-view{background:#e9e6dc;font-family:'Times New Roman',Georgia,serif;color:#222;display:block;overflow:hidden}
-  .ba-topbar-old{background:#2b3a5c;color:#e8e2cf;padding:1.2cqw 1.6cqw;text-align:center}
-  .ba-logo-old{font-weight:700;font-size:2cqw;letter-spacing:.02em;color:#ffd34d;text-shadow:1px 1px 0 #00000055;display:block}
-  .ba-nav-old{display:block;margin-top:.9cqw;font-size:1.25cqw;color:#bcd;line-height:1.8}
-  .ba-nav-old span{color:#7fd0ff;text-decoration:underline;margin:0 .6cqw}
-  .ba-phone-old{display:block;margin-top:.7cqw;font-size:1.15cqw;color:#cfd6e6}
-  .ba-banner-old{background:repeating-linear-gradient(45deg,#8a1c1c,#8a1c1c 8px,#a52a2a 8px,#a52a2a 16px);color:#fff23a;font-weight:700;font-size:2.2cqw;text-align:center;padding:1.4cqw;letter-spacing:.03em;border-top:2px solid #5c1010;border-bottom:2px solid #5c1010;text-shadow:1px 1px 0 #000}
+  .ba-before .ba-view{background:#f2f1ec;font-family:Arial,Helvetica,sans-serif;color:#333;display:block;overflow:hidden}
+  .ba-topbar-old{background:#fbfaf7;color:#555;padding:1.2cqw 1.6cqw;text-align:center;border-bottom:1px solid #ddd8ca}
+  .ba-logo-old{font-weight:700;font-size:1.9cqw;letter-spacing:.01em;color:#37456b;display:block}
+  .ba-nav-old{display:block;margin-top:.8cqw;font-size:1.2cqw;color:#888;line-height:1.8}
+  .ba-nav-old span{color:#4a6fa5;text-decoration:underline;margin:0 .7cqw}
+  .ba-heroband-old{background:linear-gradient(#93a6ba,#71859a);color:#f3f5f8;text-align:center;padding:2.6cqw 2cqw;border-bottom:1px solid #5f7288}
+  .ba-heroband-old b{display:block;font-size:2.2cqw;font-weight:700;text-shadow:0 1px 0 rgba(0,0,0,.18)}
+  .ba-heroband-old i{display:block;font-size:1.25cqw;margin-top:.5cqw;opacity:.85}
   .ba-body-old{padding:1.8cqw 2.2cqw}
-  .ba-body-old p{font-size:1.4cqw;line-height:1.5;color:#333;text-align:justify;margin-bottom:1.4cqw}
-  .ba-cta-old{display:inline-block;background:linear-gradient(#7fd06a,#3f8f2f);border:2px outset #6fbf5a;color:#083c00;font-weight:700;font-size:1.5cqw;padding:1cqw 1.8cqw;border-radius:.4cqw;text-shadow:1px 1px 0 #ffffff66}
-  .ba-hits-old{display:block;margin-top:1.6cqw;font-family:'Courier New',monospace;font-size:1.2cqw;color:#556;background:#000;color:#39ff5a;padding:.5cqw 1cqw;width:max-content;border:1px solid #333}
+  .ba-body-old p{font-size:1.35cqw;line-height:1.55;color:#4a4a44;text-align:justify;margin-bottom:1.4cqw}
+  .ba-link-old{display:inline-block;font-size:1.35cqw;color:#4a6fa5;text-decoration:underline}
+  .ba-footer-old{margin-top:1.7cqw;padding-top:1cqw;border-top:1px solid #ddd8ca;font-size:1.05cqw;color:#8f8c80}
   /* before phone: a squished, unreadable desktop layout */
   .ba-phone.is-old{background:#3a3a3a}
-  .ba-phone.is-old .ba-phone-screen{background:#e9e6dc;padding:.9cqw;font-family:'Times New Roman',serif}
+  .ba-phone.is-old .ba-phone-screen{background:#f2f1ec;padding:.9cqw;font-family:Arial,Helvetica,sans-serif}
   .ba-p-old-zoom{transform-origin:top left;display:flex;flex-direction:column;gap:.7cqw}
-  .ba-p-old-logo{font-weight:700;font-size:1.05cqw;color:#2b3a5c;line-height:1.1}
-  .ba-p-old-nav{font-size:.85cqw;color:#7fd0ff;text-decoration:underline}
-  .ba-p-old-banner{background:#8a1c1c;color:#fff23a;font-weight:700;font-size:1cqw;text-align:center;padding:.5cqw}
-  .ba-p-old-line{height:.7cqw;background:#c9c3b2;border-radius:1px;display:block}
+  .ba-p-old-logo{font-weight:700;font-size:1.05cqw;color:#37456b;line-height:1.1}
+  .ba-p-old-nav{font-size:.8cqw;color:#4a6fa5;text-decoration:underline}
+  .ba-p-old-banner{background:linear-gradient(#93a6ba,#71859a);color:#f3f5f8;font-weight:700;font-size:.95cqw;text-align:center;padding:.6cqw}
+  .ba-p-old-line{height:.7cqw;background:#dcd8ca;border-radius:1px;display:block}
   .ba-p-old-line.short{width:55%}
+  .ba-p-old-foot{display:block;margin-top:.5cqw;font-size:.75cqw;color:#8f8c80}
 
   /* ---- Before / After tags ---- */
   .ba-tag{position:absolute;top:5.6cqw;z-index:4;font-family:'JetBrains Mono',monospace;font-size:1.25cqw;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.7cqw 1.4cqw;border-radius:1cqw;color:#fff;backdrop-filter:blur(4px)}
@@ -1338,8 +1342,8 @@
     .ba-kicker{font-size:1.7cqw}
     .ba-card b{font-size:2.2cqw}
     .ba-body-old p{font-size:2.05cqw}
-    .ba-logo-old{font-size:3cqw}.ba-nav-old{font-size:1.85cqw}.ba-banner-old{font-size:3.2cqw}
-    .ba-cta-old{font-size:2.2cqw}.ba-phone-old,.ba-hits-old{font-size:1.75cqw}
+    .ba-logo-old{font-size:2.9cqw}.ba-nav-old{font-size:1.8cqw}.ba-heroband-old b{font-size:3.1cqw}
+    .ba-heroband-old i{font-size:1.9cqw}.ba-link-old{font-size:2cqw}.ba-footer-old{font-size:1.6cqw}
     /* phone mockup would crowd a narrow stage — drop it, focus the desktop view */
     .ba-phone{display:none}
     .ba-tag{font-size:1.9cqw;top:5cqw}
@@ -1357,8 +1361,8 @@
     .ba-kicker{font-size:2.5cqw}
     .ba-card b{font-size:3.1cqw}.ba-ic{width:5cqw;height:5cqw}
     .ba-body-old p{font-size:2.9cqw}
-    .ba-logo-old{font-size:4cqw}.ba-nav-old{font-size:2.5cqw}.ba-banner-old{font-size:4.4cqw}
-    .ba-cta-old{font-size:3cqw}.ba-phone-old,.ba-hits-old{font-size:2.4cqw}
+    .ba-logo-old{font-size:3.9cqw}.ba-nav-old{font-size:2.4cqw}.ba-heroband-old b{font-size:4.2cqw}
+    .ba-heroband-old i{font-size:2.6cqw}.ba-link-old{font-size:2.9cqw}.ba-footer-old{font-size:2.2cqw}
     .ba-tag{font-size:2.7cqw;top:4cqw;padding:1cqw 2cqw}
     .ba-tag-before{left:4cqw}.ba-tag-after{right:4cqw}
     .ba-benefits{gap:10px 20px;margin-top:26px}
@@ -1423,20 +1427,6 @@
   .ba-p-list{gap:.7cqw}
   .ba-p-list span{height:auto;display:flex;align-items:center;padding:.85cqw 1cqw;border-radius:.9cqw;background:#eef3fb;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:1.2cqw;color:var(--ink)}
 
-  /* --- BEFORE: dated utility bar + under-construction badge --- */
-  .ba-util-old{display:flex;justify-content:space-between;align-items:center;gap:1cqw;
-    background:#d7d1c0;color:#5a5340;font-family:Arial,Helvetica,sans-serif;font-size:1.05cqw;
-    padding:.5cqw 1.4cqw;border-bottom:1px solid #b3ab95}
-  .ba-uc-old{flex:0 0 auto;background:#f5c518;color:#3a2c00;font-weight:700;font-size:1cqw;
-    padding:.3cqw .8cqw;border:1px solid #a67c00;border-radius:.2cqw;white-space:nowrap;letter-spacing:.02em}
-  /* --- BEFORE: cluttered footer (counter + dated badge) --- */
-  .ba-foot-old{display:flex;align-items:center;gap:1.4cqw;margin-top:1.6cqw;flex-wrap:wrap}
-  .ba-foot-old .ba-hits-old{margin-top:0}
-  .ba-badge-old{font-family:Arial,Helvetica,sans-serif;font-size:1.2cqw;font-weight:700;color:#083c00;
-    background:linear-gradient(#ffe37a,#e0b000);border:2px outset #d4a600;padding:.4cqw 1cqw;border-radius:.3cqw;text-shadow:1px 1px 0 #ffffff55}
-  /* --- BEFORE phone: weak-mobile note --- */
-  .ba-p-old-note{display:block;margin-top:.6cqw;font-family:Arial,sans-serif;font-size:.85cqw;color:#8a8470;font-style:italic}
-
   /* --- responsive: tablets / large phones (phone mockup already hidden) --- */
   @media(max-width:760px){
     .ba-btn svg,.ba-callbtn svg{width:2.1cqw;height:2.1cqw}
@@ -1451,9 +1441,6 @@
     .ba-qc-btn{font-size:2cqw}
     .ba-qc-note{font-size:1.5cqw}
     .ba-cardp{font-size:1.75cqw}
-    .ba-util-old{font-size:1.55cqw}
-    .ba-uc-old{font-size:1.5cqw}
-    .ba-badge-old{font-size:1.85cqw}
   }
   /* --- responsive: phones --- */
   @media(max-width:520px){
@@ -1466,9 +1453,6 @@
     .ba-trust svg{width:3.5cqw;height:3.5cqw}
     .ba-cardp{font-size:2.5cqw}
     .ba-btn svg,.ba-callbtn svg{width:3cqw;height:3cqw}
-    .ba-util-old{font-size:2.2cqw;flex-wrap:wrap;gap:.6cqw}
-    .ba-uc-old{font-size:2cqw}
-    .ba-badge-old{font-size:2.6cqw}
   }
 
   /* ===== Phase 2A: hero receipts strip + local trust card + homepage FAQ ===== */

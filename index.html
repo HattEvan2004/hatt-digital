@@ -182,39 +182,35 @@
         <span class="ba-tag ba-tag-after">After</span>
       </div>
 
-      <!-- BEFORE — dated, cluttered site (clipped overlay) -->
+      <!-- BEFORE — stale, generic template site: crowded nav, wall of text,
+           no real call-to-action, phone buried in the footer (clipped overlay) -->
       <div class="ba-pane ba-before" aria-hidden="true">
         <div class="ba-browser is-old">
           <div class="ba-chrome"><span class="ba-dots"><i></i><i></i><i></i></span><span class="ba-url">harbourhomeservices.ca/home.html</span></div>
           <div class="ba-view">
-            <div class="ba-util-old">
-              <span>Last updated: March 2018 &nbsp;·&nbsp; Best viewed on desktop at 1024×768</span>
-              <span class="ba-uc-old">⚠ Under construction</span>
-            </div>
             <div class="ba-topbar-old">
-              <span class="ba-logo-old">HARBOUR HOME SERVICES INC.</span>
-              <span class="ba-nav-old"><span>Home</span><span>Services</span><span>About Us</span><span>Our Work</span><span>Gallery</span><span>Testimonials</span><span>FAQ</span><span>Links</span><span>Careers</span><span>Site Map</span><span>Contact Us</span></span>
-              <span class="ba-phone-old">Tel: 902-555-0142</span>
+              <span class="ba-logo-old">Harbour Home Services Inc.</span>
+              <span class="ba-nav-old"><span>Home</span><span>About Us</span><span>Services</span><span>Our Work</span><span>Gallery</span><span>Testimonials</span><span>FAQ</span><span>Contact Us</span></span>
             </div>
-            <div class="ba-banner-old">WELCOME TO OUR WEBSITE!</div>
+            <div class="ba-heroband-old">
+              <b>Welcome to Harbour Home Services</b>
+              <i>Quality workmanship at reasonable rates</i>
+            </div>
             <div class="ba-body-old">
-              <p>We are a family owned and operated home services company serving the local area for many years. We do plumbing, electrical, carpentry, painting, drywall, decks, fences, flooring, roofing repairs, gutter cleaning, snow removal, junk removal, and much much more!!! No job too big or too small. Please browse our website to learn more about the many services that we are able to offer to you and your family, and be sure to check back often for updates and seasonal specials.</p>
-              <span class="ba-cta-old">CLICK HERE FOR A FREE ESTIMATE</span>
-              <div class="ba-foot-old">
-                <span class="ba-hits-old">You are visitor #004271</span>
-                <span class="ba-badge-old">✆ Call us today!</span>
-              </div>
+              <p>We are a family owned and operated home services company serving the local area for many years. We do plumbing, electrical, carpentry, painting, drywall, decks, fences, flooring, roofing repairs, gutter cleaning, snow removal, junk removal and much more. No job too big or too small. Please browse our website to learn more about the many services we offer, and be sure to check back for updates and seasonal specials.</p>
+              <span class="ba-link-old">Click here to contact us for a free estimate</span>
+              <div class="ba-footer-old">&copy; 2019 Harbour Home Services Inc. &nbsp;|&nbsp; Tel: 902-555-0142 &nbsp;|&nbsp; Last updated June 2019</div>
             </div>
           </div>
         </div>
         <div class="ba-phone is-old">
           <div class="ba-phone-screen">
             <div class="ba-p-old-zoom">
-              <span class="ba-p-old-logo">HARBOUR HOME SERVICES INC.</span>
-              <span class="ba-p-old-nav">Home · Services · About · Our Work · Gallery · FAQ · Links · Contact</span>
-              <span class="ba-p-old-banner">WELCOME TO OUR WEBSITE!</span>
+              <span class="ba-p-old-logo">Harbour Home Services Inc.</span>
+              <span class="ba-p-old-nav">Home | About Us | Services | Our Work | Gallery | Contact Us</span>
+              <span class="ba-p-old-banner">Welcome to Harbour Home Services</span>
               <span class="ba-p-old-line"></span><span class="ba-p-old-line"></span><span class="ba-p-old-line"></span><span class="ba-p-old-line"></span><span class="ba-p-old-line short"></span>
-              <span class="ba-p-old-note">Best viewed on desktop</span>
+              <span class="ba-p-old-foot">&copy; 2019 Harbour Home Services Inc.</span>
             </div>
           </div>
         </div>
@@ -262,6 +258,7 @@
           <span class="case-type">{{ c.type }}</span>
           <h3>{{ c.title }}</h3>
           <p class="case-desc">{{ c.desc }}</p>
+          <p class="case-bestfor">Best for {{ c.bestfor }}</p>
           <div class="case-improve">
             <ul class="imp-list">
             {%- for f in c.focus %}

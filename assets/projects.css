@@ -129,6 +129,10 @@ body.pf .menu-btn span{background:#071426}
 .case h3{font-family:'Inter Tight',sans-serif;font-size:20px;font-weight:700;letter-spacing:-.01em;
   color:#f1f5fc;margin-top:11px;line-height:1.18}
 .case-desc{color:#9fadc8;font-size:14.5px;line-height:1.55;margin-top:9px}
+/* who the demo is aimed at — honest targeting, not a client claim */
+.case-bestfor{display:inline-flex;align-items:center;margin-top:12px;width:max-content;max-width:100%;
+  font-family:'Inter Tight',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.02em;color:#9db9e8;
+  border:1px solid rgba(120,170,255,.28);border-radius:999px;padding:5px 13px;background:rgba(24,182,242,.07)}
 
 /* three quick, scannable proof points */
 .case-improve{margin-top:15px;margin-bottom:2px}
