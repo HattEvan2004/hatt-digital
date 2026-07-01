@@ -10,39 +10,15 @@
     "cta_primary": "Request a Website Quote",
     "cta_secondary": "View My Work"
   },
-  "why": {
-    "eyebrow": "Why it matters",
-    "heading": "Your website is either helping you or costing you customers.",
-    "intro": "First impressions happen fast. A clear, professional website makes your business easy to trust and makes the next step obvious.",
-    "lead_heading": "Your website should pull its weight.",
-    "lead_body": "Most people check your website before they ever call. If it looks outdated, unclear, or hard to use on a phone, they move on. Hatt Digital builds websites for Nova Scotia businesses that make your services clear and help more visitors become real leads.",
-    "stats": [
-      {
-        "value": "1",
-        "label": "person you actually talk to — the one building it"
-      },
-      {
-        "value": "0",
-        "label": "hidden fees, surprise invoices, or lock-in"
-      },
-      {
-        "value": "100%",
-        "label": "yours: domain, site, and content in your name"
-      }
-    ],
-    "tiles": [
-      {
-        "title": "Get found on Google",
-        "text": "Local SEO is built into every site, so when someone nearby searches for what you do, your business is what they find."
-      },
-      {
-        "title": "Turn visitors into calls",
-        "text": "Clear layout, fast load times, and obvious ways to get in touch. Built to get you leads, not just to look pretty."
-      },
-      {
-        "title": "Sharp on every phone",
-        "text": "Most customers see your site on their phone first. Every site I build looks sharp and works perfectly on any screen."
-      }
+  "compare": {
+    "eyebrow": "Before & after",
+    "heading": "Your website should make people trust you before they call.",
+    "intro": "Drag the slider to see how a dated, cluttered website becomes a clean, mobile-friendly site that makes it obvious what you do — and easy to get in touch.",
+    "disclaimer": "Example mockup for demonstration purposes. Not based on a real client.",
+    "benefits": [
+      "Better first impression",
+      "Easier to contact",
+      "Built for mobile and local search"
     ]
   },
   "start": {

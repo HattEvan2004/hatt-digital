@@ -595,3 +595,64 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
 })();
+
+/* ============================================================
+   BEFORE / AFTER SLIDER
+   Drives --pos on #baSlider from pointer (mouse + touch) and
+   keyboard. Self-contained; no-ops on pages without the slider.
+   ============================================================ */
+(function () {
+  'use strict';
+  var slider = document.getElementById('baSlider');
+  var handle = document.getElementById('baHandle');
+  if (!slider || !handle) return;
+
+  var dragging = false;
+
+  function clamp(n) { return n < 0 ? 0 : n > 100 ? 100 : n; }
+
+  function setPos(pct) {
+    pct = clamp(pct);
+    slider.style.setProperty('--pos', pct + '%');
+    handle.setAttribute('aria-valuenow', Math.round(pct));
+  }
+
+  function pctFromX(clientX) {
+    var r = slider.getBoundingClientRect();
+    if (!r.width) return 50;
+    return ((clientX - r.left) / r.width) * 100;
+  }
+
+  function currentPct() {
+    return parseFloat(slider.style.getPropertyValue('--pos')) || 50;
+  }
+
+  slider.addEventListener('pointerdown', function (e) {
+    dragging = true;
+    try { slider.setPointerCapture(e.pointerId); } catch (err) {}
+    setPos(pctFromX(e.clientX));
+    handle.focus({ preventScroll: true });
+    e.preventDefault();
+  });
+
+  slider.addEventListener('pointermove', function (e) {
+    if (dragging) setPos(pctFromX(e.clientX));
+  });
+
+  function endDrag(e) {
+    if (!dragging) return;
+    dragging = false;
+    try { slider.releasePointerCapture(e.pointerId); } catch (err) {}
+  }
+  slider.addEventListener('pointerup', endDrag);
+  slider.addEventListener('pointercancel', endDrag);
+
+  handle.addEventListener('keydown', function (e) {
+    var step = e.shiftKey ? 10 : 4;
+    var k = e.key;
+    if (k === 'ArrowLeft' || k === 'ArrowDown') { setPos(currentPct() - step); e.preventDefault(); }
+    else if (k === 'ArrowRight' || k === 'ArrowUp') { setPos(currentPct() + step); e.preventDefault(); }
+    else if (k === 'Home') { setPos(0); e.preventDefault(); }
+    else if (k === 'End') { setPos(100); e.preventDefault(); }
+  });
+})();
