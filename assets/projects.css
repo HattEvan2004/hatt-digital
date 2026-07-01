@@ -283,14 +283,14 @@ body.pf .menu-btn span{background:#071426}
    centred as one intentional feature (the full set lives
    on the portfolio page). Keeps the dark-navy band + glow.
 ===================================================== */
-/* Centre the intro so it sits directly above the card and shares its
-   width — no more left-hugging text with a big empty right side. */
-.band-proj .band-head{max-width:760px;margin-left:auto;margin-right:auto;text-align:center}
-.band-proj .band-head p{max-width:700px;margin-left:auto;margin-right:auto}
+/* Centre the intro so it sits directly above the card on the same axis —
+   no more left-hugging text with a big empty right side. */
+.band-proj .band-head{max-width:680px;margin-left:auto;margin-right:auto;text-align:center}
+.band-proj .band-head p{max-width:600px;margin-left:auto;margin-right:auto}
 
-/* The single example card: centred, aligned to the intro, with real
-   breathing room above it. */
-.feat-solo{max-width:760px;margin:60px auto 0}
+/* The single example card: a restrained, centred preview (not a hero),
+   with real breathing room above it. */
+.feat-solo{max-width:580px;margin:56px auto 0}
 
 @media(max-width:600px){
   .feat-solo{margin-top:44px}
