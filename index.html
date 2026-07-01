@@ -203,18 +203,6 @@
   </div>
 </div></section>
 
-<!-- ============ FAQ PREVIEW ============ -->
-<section class="band band-tint"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.faq.eyebrow }}</span><h2>{{ home.faq.heading }}</h2>
-    <p>{{ home.faq.intro }}</p></div>
-  <div class="faq-list" data-stagger="0.05" style="margin-top:44px">
-    {%- for item in home.faq.items %}
-    <div class="faq-item rv"><button class="faq-q" aria-expanded="false">{{ item.q }}<span class="pm"></span></button><div class="faq-a"><div class="inner">{{ item.a }}</div></div></div>
-    {%- endfor %}
-  </div>
-  <div class="mini-cta rv"><div class="mc-l"><h3>{{ home.faq.cta_heading }}</h3><p>{{ home.faq.cta_body }}</p></div><a href="faq.html" class="btn btn-ghost">See all FAQs <span class="arr">&rarr;</span></a></div>
-</div></section>
-
 <!-- ============ FINAL CTA ============ -->
 <section class="band"><div class="wrap"><div class="cta-band rv"><span class="glow"></span><span class="glow g2"></span>
       <h2>{{ home.cta.heading }}</h2>
