@@ -100,7 +100,7 @@
   .build-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
   .b-card{height:56px}
 
-  /* INTERIOR PAGE HEADER w/ coding animation */
+  /* INTERIOR PAGE HEADER */
   .phead{background:var(--ink);color:#fff;position:relative;overflow:hidden}
   .phead .glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(24,182,242,.16),transparent 65%);top:-220px;left:-120px;pointer-events:none}
   .phead-grid{display:grid;grid-template-columns:1fr .92fr;gap:48px;align-items:center;padding:70px 0 76px;position:relative}
@@ -108,17 +108,19 @@
   .phead h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .phead p{color:var(--muted-d);font-size:18px;margin-top:18px;max-width:42ch}
 
-  .editor{background:#081025;border:1px solid var(--line-d);border-radius:14px;box-shadow:0 30px 60px -34px rgba(0,0,0,.7);overflow:hidden}
-  .editor .ebar{display:flex;align-items:center;gap:7px;padding:13px 16px;background:#0b1530;border-bottom:1px solid var(--line-d)}
-  .editor .ebar i{width:11px;height:11px;border-radius:50%;display:block}
-  .editor .ebar i:nth-child(1){background:#ff6058}.editor .ebar i:nth-child(2){background:#ffbd2e}.editor .ebar i:nth-child(3){background:#28ca42}
-  .editor .ebar .fname{margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted-d)}
-  .editor pre{margin:0;padding:22px 20px;font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.9;color:var(--term);min-height:150px;white-space:pre-wrap;word-break:break-word}
-  .editor .ln{display:block}
-  .editor .ln.cm{color:var(--term-dim)}
-  .editor .kw{color:#6db4ff}
-  .editor .str{color:#ffd479}
-  .editor .cursor{display:inline-block;width:8px;height:16px;background:var(--cyan);vertical-align:-2px;animation:blink 1s steps(1) infinite;margin-left:2px}
+  /* customer-facing "short version" card on interior page headers —
+     the honest receipts (price, timeline, ownership) plus a direct phone line */
+  .phead-card{background:#081025;border:1px solid var(--line-d);border-radius:14px;
+    box-shadow:0 30px 60px -34px rgba(0,0,0,.7);padding:24px 26px}
+  .phead-card .eyebrow{margin:0}
+  .pc-facts{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .pc-facts li{display:flex;align-items:flex-start;gap:11px;color:#cfdaf0;font-size:15px;line-height:1.5}
+  .pc-facts li svg{flex:none;margin-top:3.5px;color:var(--cyan)}
+  .pc-call{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:18px;
+    border-top:1px solid var(--line-d);
+    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15.5px;color:#fff;transition:color .2s}
+  .pc-call svg{width:16px;height:16px;flex:none;color:var(--cyan)}
+  .pc-call:hover{color:var(--cyan)}
 
   /* generic band */
   .band{padding:96px 0}
@@ -318,7 +320,7 @@
   @media(max-width:900px){
     .hero-grid,.phead-grid{grid-template-columns:1fr;gap:38px}
     .phead-grid{padding:50px 0 56px}
-    .build,.editor{max-width:480px}
+    .build,.phead-card{max-width:480px}
     .value-grid{grid-template-columns:1fr}
     .proc-grid{grid-template-columns:1fr 1fr;gap:30px}
     .price-grid{grid-template-columns:1fr}
