@@ -782,23 +782,3 @@
   root.classList.add('is-ready');
   render();
 })();
-
-/* =========================================================================
-   ELEVENLABS CONVAI — floating voice-agent widget (all pages).
-   Injected once here so it appears site-wide without editing every page.
-   Renders its own launcher in the bottom-right corner; the mobile CTA bar
-   is disabled site-wide, so nothing collides with it there.
-========================================================================= */
-(function () {
-  if (document.querySelector('elevenlabs-convai')) return; // guard against dupes
-
-  var widget = document.createElement('elevenlabs-convai');
-  widget.setAttribute('agent-id', 'agent_8601kwffjrnged6rdbckkjkk0wak');
-  document.body.appendChild(widget);
-
-  var s = document.createElement('script');
-  s.src = 'https://unpkg.com/@elevenlabs/convai-widget-embed';
-  s.async = true;
-  s.type = 'text/javascript';
-  document.body.appendChild(s);
-})();
