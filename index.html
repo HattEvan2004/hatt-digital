@@ -79,42 +79,41 @@
     </nav></div></header>
 <main id="main">
 
-<!-- ============ COMPACT HERO ============ -->
-<section class="intro" id="hero">
-  <div class="intro-bg" aria-hidden="true">
-    <div class="intro-grid"></div>
-    <span class="intro-glow ig1"></span>
-    <span class="intro-glow ig2"></span>
-  </div>
-  <div class="wrap">
-    <div class="intro-inner">
-      <div class="sh">
-        <span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.hero.eyebrow }}</span>
-        <h1 class="sh-title">{{ home.hero.title | hl | safe }}</h1>
-        <p class="sh-sub">{{ home.hero.sub }}</p>
-        <div class="sh-cta">
-          <a href="quote.html" class="btn btn-grad">{{ home.hero.cta_primary }} <span class="arr">&rarr;</span></a>
-          <a href="projects.html" class="btn btn-ghost on-dark">{{ home.hero.cta_secondary }}</a>
-          <ul class="sh-receipts" aria-label="The short version">
-            {%- for r in home.hero.receipts %}
-            <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>{{ r }}</li>
-            {%- endfor %}
-          </ul>
-        </div>
-      </div>
-      {%- set hs = home.work.cases[0] %}
-      <div class="hero-shot">
-        <div class="hero-frame">
-          <div class="case-chrome" aria-hidden="true">
-            <span class="case-dots"><i></i><i></i><i></i></span>
-            <span class="case-url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>{{ hs.link | host }}</span>
-            <span class="case-spk"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-          </div>
-          <span class="case-canvas"><img src="{{ hs.image }}" alt="{{ hs.alt }}" width="{{ hs.w }}" height="{{ hs.h }}" loading="eager" decoding="async"></span>
-        </div>
-        <p class="hero-note">{{ home.hero.shot_note }} <a href="{{ hs.link }}" target="_blank" rel="noopener noreferrer">{{ home.hero.shot_link }} <span class="arr">&rarr;</span></a></p>
+<!-- ============ CINEMATIC SCROLL-BUILT HERO ============ -->
+<section class="intro" id="intro">
+  <div class="intro-stage">
+    <div class="intro-bg" aria-hidden="true">
+      <div class="intro-grid"></div>
+      <span class="intro-glow ig1"></span>
+      <span class="intro-glow ig2"></span>
+      <canvas class="intro-specs" id="introSpecs"></canvas>
+    </div>
+    <div class="sh">
+      <span class="eyebrow on-dark" data-build="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.hero.eyebrow }}</span>
+      <h1 class="sh-title">
+        {{ home.hero.title | heroWords | safe }}
+      </h1>
+      <p class="sh-sub" data-build="sub">{{ home.hero.sub }}</p>
+      <div class="sh-cta" data-build="cta">
+        <a href="quote.html" class="btn btn-grad">{{ home.hero.cta_primary }} <span class="arr">&rarr;</span></a>
+        <a href="projects.html" class="btn btn-ghost on-dark">{{ home.hero.cta_secondary }}</a>
+        <ul class="sh-receipts" aria-label="The short version">
+          {%- for r in home.hero.receipts %}
+          <li><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>{{ r }}</li>
+          {%- endfor %}
+        </ul>
       </div>
     </div>
+    <div class="compiler" id="compiler" aria-hidden="true">
+      <div class="comp-bar">
+        <span class="dots"><i></i><i></i><i></i></span>
+        <span class="comp-file">hatt-digital&nbsp;/&nbsp;index.html</span>
+        <span class="comp-stat" id="compStat">compiling</span>
+      </div>
+      <pre class="comp-code" id="compCode"></pre>
+      <div class="comp-prog"><span id="compBar"></span></div>
+    </div>
+    <div class="scroll-hint" id="scrollHint" aria-hidden="true"><span>Scroll to explore</span><i></i></div>
   </div>
 </section>
 
