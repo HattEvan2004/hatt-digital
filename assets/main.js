@@ -262,9 +262,9 @@
     });
   }
 
-  /* cursor spotlight: track pointer over .spot elements */
+  /* cursor spotlight: track pointer over .spot + the main card families */
   if (!reduce && window.matchMedia('(hover:hover)').matches) {
-    document.querySelectorAll('.spot').forEach(function (el) {
+    document.querySelectorAll('.spot, .tile, .appr, .get, .tpoint, .case').forEach(function (el) {
       el.addEventListener('pointermove', function (e) {
         var r = el.getBoundingClientRect();
         el.style.setProperty('--mx', (e.clientX - r.left) + 'px');

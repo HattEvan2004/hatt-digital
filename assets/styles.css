@@ -1167,3 +1167,25 @@
     /* iPhone-class screens: hold a comfortable gutter, never edge-to-edge */
     .wrap{padding:0 18px}
   }
+
+  /* =====================================================
+     CARD EFFECT PASS — cursor spotlight + gradient borders
+     Extends the existing .spot spotlight to the main card
+     families and gives standard package cards the same hover
+     gradient border as the demo cards. Brand colours only,
+     kept subtle; the global reduced-motion rule disables the
+     transitions, so these degrade to a clean static state.
+  ===================================================== */
+  .tile,.tpoint{position:relative}
+  .tile:after,.get:after,.tpoint:after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;
+    pointer-events:none;opacity:0;transition:opacity .35s;
+    background:radial-gradient(320px circle at var(--mx,50%) var(--my,0%),rgba(24,182,242,.09),transparent 60%)}
+  .tile:hover:after,.get:hover:after,.tpoint:hover:after{opacity:1}
+
+  /* gradient border reveal on hover for the standard package cards
+     (the featured card already carries a permanent gradient border) */
+  .ptier:not(.feature):before{content:"";position:absolute;inset:0;z-index:0;border-radius:var(--r);padding:1.5px;
+    pointer-events:none;background:var(--grad);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s}
+  .ptier:not(.feature):hover:before{opacity:1}

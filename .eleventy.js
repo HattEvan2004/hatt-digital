@@ -51,6 +51,18 @@ module.exports = function (eleventyConfig) {
       .join("");
   });
 
+  // Extract a clean display hostname from a full URL, used for the little
+  // browser-mockup address bar on the demo cards (e.g.
+  //  "https://electrical-ns-demo.vercel.app/" -> "electrical-ns-demo.vercel.app").
+  eleventyConfig.addFilter("host", function (url) {
+    if (!url) return "";
+    return String(url)
+      .trim()
+      .replace(/^https?:\/\//i, "")
+      .replace(/^www\./i, "")
+      .replace(/[/#?].*$/, "");
+  });
+
   // Escape + convert newlines to <br>. Lets a single textarea hold a short
   // multi-line heading without exposing HTML to the editor.
   eleventyConfig.addFilter("nl2br", function (str) {
