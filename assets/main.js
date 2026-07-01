@@ -782,3 +782,97 @@
   root.classList.add('is-ready');
   render();
 })();
+
+/* =========================================================================
+   HOMEPAGE PORTFOLIO PREVIEW — one demo at a time.
+   Single card shown; next arrow advances. On the last demo the next arrow
+   is swapped for a "View more" link to the full portfolio page.
+   Prev arrow appears once you've moved off the first demo. Keyboard + swipe.
+   No-op on any page without [data-work-solo].
+========================================================================= */
+(function () {
+  var root = document.querySelector('[data-work-solo]');
+  if (!root) return;
+
+  var stage = root.querySelector('[data-ws-stage]');
+  var cards = Array.prototype.slice.call(root.querySelectorAll('[data-ws-card]'));
+  if (!stage || cards.length === 0) return;
+
+  var prevBtn = root.querySelector('[data-ws-prev]');
+  var nextBtn = root.querySelector('[data-ws-next]');
+  var moreLink = root.querySelector('[data-ws-more]');
+  var dotsWrap = root.querySelector('[data-ws-dots]');
+  var live = root.querySelector('[data-ws-live]');
+  var n = cards.length;
+  var active = 0;
+
+  // ---- dot indicators ----
+  var dots = [];
+  if (dotsWrap) {
+    cards.forEach(function (card, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ws-dot';
+      b.setAttribute('role', 'tab');
+      var title = (card.querySelector('h3') || {}).textContent || ('Demo ' + (i + 1));
+      b.setAttribute('aria-label', title);
+      b.addEventListener('click', function () { setActive(i); });
+      dotsWrap.appendChild(b);
+      dots.push(b);
+    });
+  }
+
+  function render() {
+    var last = active === n - 1;
+    cards.forEach(function (c, i) {
+      c.classList.toggle('is-active', i === active);
+      c.setAttribute('aria-hidden', i === active ? 'false' : 'true');
+    });
+    dots.forEach(function (d, i) {
+      d.classList.toggle('is-active', i === active);
+      d.setAttribute('aria-selected', i === active ? 'true' : 'false');
+    });
+    if (prevBtn) prevBtn.hidden = active === 0;
+    if (nextBtn) nextBtn.hidden = last;          // last demo -> arrow becomes "View more"
+    if (moreLink) moreLink.hidden = !last;
+    if (live) {
+      var t = (cards[active].querySelector('h3') || {}).textContent || '';
+      live.textContent = 'Demo ' + (active + 1) + ' of ' + n + (t ? ': ' + t : '');
+    }
+  }
+
+  function setActive(i) { active = i < 0 ? 0 : i > n - 1 ? n - 1 : i; render(); }
+
+  if (prevBtn) prevBtn.addEventListener('click', function () { setActive(active - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { setActive(active + 1); });
+
+  // Keyboard arrows when the preview has focus.
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft' && active > 0) { setActive(active - 1); e.preventDefault(); }
+    else if (e.key === 'ArrowRight' && active < n - 1) { setActive(active + 1); e.preventDefault(); }
+  });
+
+  // Touch / pointer swipe.
+  var startX = null, startY = null, swiping = false, suppressClick = false;
+  stage.addEventListener('pointerdown', function (e) {
+    startX = e.clientX; startY = e.clientY; swiping = true; suppressClick = false;
+  });
+  stage.addEventListener('pointerup', function (e) {
+    if (!swiping) return;
+    swiping = false;
+    if (startX === null) return;
+    var dx = e.clientX - startX, dy = e.clientY - startY;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+      suppressClick = true;
+      if (dx < 0 && active < n - 1) setActive(active + 1);
+      else if (dx > 0 && active > 0) setActive(active - 1);
+    }
+    startX = startY = null;
+  });
+  stage.addEventListener('click', function (e) {
+    if (suppressClick) { e.preventDefault(); e.stopPropagation(); suppressClick = false; }
+  }, true);
+
+  root.classList.add('is-ready');
+  render();
+})();

@@ -242,37 +242,49 @@
     <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.work.eyebrow }}</span>
       <h2>{{ home.work.heading }}</h2>
       <p>{{ home.work.intro }}</p></div>
-    <div class="cases trio" data-stagger="0.08">
-      {%- for c in home.work.cases %}
-      <article class="case rv">
-        <div class="case-shot">
-          <div class="case-chrome" aria-hidden="true">
-            <span class="case-dots"><i></i><i></i><i></i></span>
-            <span class="case-url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>{{ c.link | host }}</span>
-            <span class="case-spk"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+    <div class="work-solo rv" data-work-solo aria-roledescription="carousel" aria-label="Portfolio demo builds" tabindex="0">
+      <div class="ws-stage" data-ws-stage>
+        {%- for c in home.work.cases %}
+        <article class="case ws-card" data-ws-card>
+          <div class="case-shot">
+            <div class="case-chrome" aria-hidden="true">
+              <span class="case-dots"><i></i><i></i><i></i></span>
+              <span class="case-url"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>{{ c.link | host }}</span>
+              <span class="case-spk"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+            <span class="case-canvas"><img src="{{ c.image }}" alt="{{ c.alt }}" width="{{ c.w }}" height="{{ c.h }}" loading="lazy" decoding="async"></span>
           </div>
-          <span class="case-canvas"><img src="{{ c.image }}" alt="{{ c.alt }}" width="{{ c.w }}" height="{{ c.h }}" loading="lazy" decoding="async"></span>
-        </div>
-        <div class="case-body">
-          <span class="case-type">{{ c.type }}</span>
-          <h3>{{ c.title }}</h3>
-          <p class="case-desc">{{ c.desc }}</p>
-          <div class="case-improve">
-            <ul class="imp-list">
-            {%- for f in c.focus %}
-            <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>{{ f }}</span></li>
-            {%- endfor %}
-            </ul>
+          <div class="case-body">
+            <span class="case-type">{{ c.type }}</span>
+            <h3>{{ c.title }}</h3>
+            <p class="case-desc">{{ c.desc }}</p>
+            <div class="case-improve">
+              <ul class="imp-list">
+              {%- for f in c.focus %}
+              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>{{ f }}</span></li>
+              {%- endfor %}
+              </ul>
+            </div>
+            <div class="case-foot">
+              <span class="case-status"><span class="dot"></span> Live preview</span>
+              <a class="case-btn" href="{{ c.link }}" target="_blank" rel="noopener noreferrer">View Preview <span class="arr">&rarr;</span></a>
+            </div>
           </div>
-          <div class="case-foot">
-            <span class="case-status"><span class="dot"></span> Live preview</span>
-            <a class="case-btn" href="{{ c.link }}" target="_blank" rel="noopener noreferrer">View Preview <span class="arr">&rarr;</span></a>
-          </div>
-        </div>
-      </article>
-      {%- endfor %}
+        </article>
+        {%- endfor %}
+      </div>
+      <div class="ws-bar">
+        <button type="button" class="ws-arrow ws-prev" data-ws-prev aria-label="Previous demo" hidden>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="ws-dots" data-ws-dots role="tablist" aria-label="Choose a demo"></div>
+        <button type="button" class="ws-arrow ws-next" data-ws-next aria-label="Next demo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <a class="ws-more btn btn-grad" data-ws-more href="projects.html" hidden>{{ home.work.viewall }} <span class="arr">&rarr;</span></a>
+      </div>
+      <p class="ws-live sr-only" data-ws-live aria-live="polite"></p>
     </div>
-    <div class="feat-viewall rv"><a href="projects.html" class="btn btn-ghost on-dark">{{ home.work.viewall }} <span class="arr">&rarr;</span></a></div>
   </div>
 </section>
 

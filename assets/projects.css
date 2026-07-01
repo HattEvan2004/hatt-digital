@@ -278,6 +278,52 @@ body.pf .menu-btn span{background:#071426}
 .feat-head .btn{flex:none}
 .feat-viewall{display:flex;justify-content:center;margin-top:44px}
 
+/* =====================================================
+   HOMEPAGE PORTFOLIO PREVIEW — one demo at a time.
+   Single centred card; a next arrow that turns into a
+   "View more" link on the last demo. Driven by main.js.
+===================================================== */
+.work-solo{position:relative;max-width:620px;margin:0 auto;outline:none}
+.work-solo:focus-visible{outline:2px solid var(--cyan);outline-offset:8px;border-radius:22px}
+
+.ws-stage{position:relative}
+/* inactive cards float on top, faded out; the active one sits in flow and
+   sizes the stage, so no height maths are needed. */
+.ws-stage .ws-card{position:absolute;top:0;left:0;width:100%;opacity:0;
+  transform:translateX(22px);pointer-events:none;
+  transition:opacity .4s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.ws-stage .ws-card.is-active{position:relative;opacity:1;transform:none;pointer-events:auto;z-index:2}
+
+/* control bar: prev · dots · next / view-more */
+.ws-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:28px;min-height:46px}
+.ws-arrow{width:46px;height:46px;flex:none;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:50%;background:rgba(11,29,53,.72);border:1px solid rgba(255,255,255,.16);
+  color:#eaf0fa;cursor:pointer;box-shadow:0 10px 26px -14px rgba(0,0,0,.7);
+  transition:background .25s,border-color .25s,color .25s,transform .2s}
+.ws-arrow:hover{background:#1267FF;border-color:#1267FF;color:#fff;transform:translateY(-2px)}
+.ws-arrow:active{transform:translateY(0) scale(.96)}
+.ws-arrow:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.ws-arrow[hidden],.ws-more[hidden]{display:none}
+.ws-more{flex:none}
+
+.ws-dots{display:flex;align-items:center;gap:9px}
+.ws-dot{width:9px;height:9px;padding:0;border:0;border-radius:999px;cursor:pointer;
+  background:rgba(255,255,255,.22);transition:background .3s,width .3s}
+.ws-dot:hover{background:rgba(255,255,255,.45)}
+.ws-dot.is-active{width:28px;background:linear-gradient(120deg,#3fd0ff,#1f7bff)}
+.ws-dot:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+
+/* no-JS fallback: show every card stacked with the view-more link, so the
+   preview is never blank if the script fails to run. */
+.work-solo:not(.is-ready) .ws-stage .ws-card{position:relative;opacity:1;transform:none;
+  pointer-events:auto;margin-bottom:24px}
+.work-solo:not(.is-ready) .ws-arrow{display:none}
+.work-solo:not(.is-ready) .ws-more{display:inline-flex}
+
+@media(prefers-reduced-motion:reduce){
+  .ws-stage .ws-card{transition:none}
+}
+
 /* reveal */
 .rv{opacity:0;transform:translateY(20px)}
 .rv.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
