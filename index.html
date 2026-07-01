@@ -171,14 +171,12 @@
           <h3>{{ c.title }}</h3>
           <p class="case-desc">{{ c.desc }}</p>
           <div class="case-improve">
-            <span class="imp-k">What I focused on</span>
             <ul class="imp-list">
             {%- for f in c.focus %}
             <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>{{ f }}</span></li>
             {%- endfor %}
             </ul>
           </div>
-          <p class="case-bestfor"><b>Best for</b> {{ c.bestfor }}</p>
           <div class="case-foot">
             <span class="case-status"><span class="dot"></span> Live preview</span>
             <a class="case-btn" href="{{ c.link }}" target="_blank" rel="noopener noreferrer">View Preview <span class="arr">&rarr;</span></a>
@@ -294,27 +292,6 @@
     {%- for s in home.process.steps %}
     <div class="pstep rv"><div class="pn">STEP 0{{ loop.index }}</div><div class="pline"></div><h3>{{ s.title }}</h3><p>{{ s.text }}</p></div>
     {%- endfor %}
-  </div>
-</div></section>
-
-<!-- ============ TESTIMONIALS (honest placeholders) ============ -->
-<section class="band"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.reviews.eyebrow }}</span>
-    <h2>{{ home.reviews.heading }}</h2>
-    <p>{{ home.reviews.intro }}</p></div>
-  <div class="testi-grid" data-stagger="0.08">
-    {%- for q in home.reviews.quotes %}
-    <div class="testi rv">
-      <div class="stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg></div>
-      <p class="quote">{{ q.quote }}</p>
-      <div class="who"><span class="av" aria-hidden="true"></span><span>{{ q.who }}</span></div>
-    </div>
-    {%- endfor %}
-    <div class="testi invite rv">
-      <span class="ti-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-      <h3>{{ home.reviews.invite.title }}</h3>
-      <p>{{ home.reviews.invite.text }}</p>
-    </div>
   </div>
 </div></section>
 

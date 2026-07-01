@@ -70,12 +70,11 @@
         "h": "813",
         "type": "Office & toner supplies · Demo build",
         "title": "Toner Supplies Website",
-        "desc": "A demo build for a local toner and office-supply business. The goal: make a large product range easy to browse, build trust quickly, and turn “just looking” into a quote request.",
+        "desc": "A clean demo website for an office and toner supply business, built to make browsing products and requesting a quote easier.",
         "focus": [
-          "Clearer product browsing",
-          "Stronger local trust signals",
-          "Simple quote-request flow",
-          "Mobile-first layout"
+          "Clear product browsing",
+          "Stronger trust signals",
+          "Simple quote flow"
         ],
         "bestfor": "suppliers, retailers & B2B sellers",
         "link": "https://toner-supplies-demo-v2.vercel.app/#"
@@ -87,12 +86,11 @@
         "h": "813",
         "type": "Residential & commercial electrical · Demo build",
         "title": "Electrical Contractor Website",
-        "desc": "A demo build for an electrical contractor. The brief: lay out services clearly, prove the business is trustworthy fast, and make requesting a quote the obvious next step.",
+        "desc": "A modern demo website for an electrical contractor, built to explain services clearly and make requesting a quote simple.",
         "focus": [
-          "Interactive service sections",
-          "Strong quote calls-to-action",
-          "Clear trust signals",
-          "Confident, modern brand feel"
+          "Clear service sections",
+          "Strong calls to action",
+          "Trust focused layout"
         ],
         "bestfor": "electricians, HVAC & trades",
         "link": "https://electrical-ns-demo.vercel.app/"
@@ -104,12 +102,11 @@
         "h": "809",
         "type": "Marine services · Demo build",
         "title": "Marine Business Website",
-        "desc": "A demo build for a local marine business. Organised so services are easy to scan, trust is built early, and customers can reach out without hunting for contact details.",
+        "desc": "A polished demo website for a marine service business, built to organize services and make contact details easy to find.",
         "focus": [
-          "Organised service layout",
-          "Trust-building sections",
-          "One-tap ways to make contact",
-          "Responsive on every device"
+          "Organized service layout",
+          "Mobile friendly design",
+          "Easy contact options"
         ],
         "bestfor": "marine, outdoor & seasonal services",
         "link": "https://marine-services-demo.vercel.app/"
