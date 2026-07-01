@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071426">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta name="theme-color" content="#071426">
 <title>{{ quote.seo.title }}</title>
 <meta name="description" content="{{ quote.seo.description }}">
 <meta name="robots" content="index, follow">
@@ -36,18 +36,22 @@
 
 <style>
   /* ============================================================
-     QUOTE PAGE — premium, airy, light layout. Sections are
-     separate white blocks on a light band, not one cramped card.
-     All form styling here is scoped under .quote-form so it
-     overrides the dark shared form styles in styles.css.
+     QUOTE PAGE — premium, airy, light layout.
+
+     Desktop  : the quote is one calm scroll of clearly-titled
+                sections (unchanged in spirit from before).
+     Mobile   : the SAME sections become a guided, one-screen-at-
+                a-time wizard (progress bar + Back/Continue), so
+                the phone experience is a short, focused flow
+                instead of a long pile of cards.
+     All form styling is scoped under .quote-form so it overrides
+     the dark shared form styles in styles.css.
   ============================================================ */
   .phead-note{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--muted-d);margin-top:20px;
     display:inline-flex;align-items:flex-start;gap:9px;border:1px solid var(--line-d);
     background:rgba(255,255,255,.04);padding:9px 15px;border-radius:14px;line-height:1.5;max-width:42ch}
   .phead-note svg{flex:none;margin-top:1px;color:var(--cyan);width:15px;height:15px}
 
-  .quote-intro{max-width:760px;margin:0 auto 38px;text-align:center}
-  .quote-intro p{color:var(--muted);font-size:17px;line-height:1.6}
   .quote-shell{max-width:840px;margin:0 auto}
   .quote-form{display:flex;flex-direction:column;gap:22px}
 
@@ -72,19 +76,28 @@
   .q-fields{display:flex;flex-direction:column;gap:18px;margin-top:22px}
   .q-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
   .q-field{display:flex;flex-direction:column;min-width:0}
+  .q-sub{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--royal);font-weight:700;margin:22px 0 -4px}
 
   .quote-form .q-field label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.07em;
     text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:block;font-weight:700}
   .quote-form .q-field label .opt{color:#9aa9c2;font-weight:400;text-transform:none;letter-spacing:0;font-family:'Inter',sans-serif}
-  .quote-form input:not([type=checkbox]):not([type=radio]),
+  /* font-size:16px stops iOS Safari auto-zooming when a field is focused */
+  .quote-form input:not([type=checkbox]):not([type=radio]):not([type=file]),
   .quote-form textarea,.quote-form select{
-    width:100%;background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:var(--ink);
-    font-family:'Inter',sans-serif;font-size:15px;transition:border-color .2s,box-shadow .2s}
+    width:100%;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 15px;color:var(--ink);
+    font-family:'Inter',sans-serif;font-size:16px;transition:border-color .2s,box-shadow .2s}
   .quote-form input::placeholder,.quote-form textarea::placeholder{color:#9aa9c2}
   .quote-form input:not([type=checkbox]):not([type=radio]):focus,
   .quote-form textarea:focus,.quote-form select:focus{
     outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(20,184,255,.18)}
-  .quote-form textarea{resize:vertical;min-height:98px;line-height:1.55}
+  .quote-form textarea{resize:vertical;min-height:104px;line-height:1.55}
+
+  /* Native file input, styled to match the brand without a custom widget */
+  .quote-form input[type=file]{width:100%;background:var(--mist-2);border:1px dashed var(--line);border-radius:12px;
+    padding:12px 13px;color:var(--muted);font-family:'Inter',sans-serif;font-size:14.5px}
+  .quote-form input[type=file]::file-selector-button{font-family:'Inter Tight',sans-serif;font-weight:600;font-size:13.5px;
+    color:#fff;background:var(--grad);border:0;border-radius:9px;padding:10px 15px;margin-right:13px;cursor:pointer;min-height:40px}
 
   /* ---- Website-type tiles ---- */
   .quote-form .pkg-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:22px}
@@ -107,18 +120,18 @@
 
   /* ---- Budget slider ---- */
   .budget-wrap{margin-top:6px;transition:opacity .2s,filter .2s}
-  .quote-form input[type=range]{-webkit-appearance:none;appearance:none;width:100%;background:transparent;cursor:pointer;margin:10px 0 0}
+  .quote-form input[type=range]{-webkit-appearance:none;appearance:none;width:100%;background:transparent;cursor:pointer;margin:14px 0 0}
   .quote-form input[type=range]::-webkit-slider-runnable-track{height:9px;border-radius:999px;border:1px solid var(--line);
     background:linear-gradient(90deg,var(--cyan),var(--royal)) 0/var(--pct,50%) 100% no-repeat,var(--mist)}
-  .quote-form input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:27px;height:27px;margin-top:-10px;
+  .quote-form input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:30px;height:30px;margin-top:-11px;
     border-radius:50%;background:#fff;border:2.5px solid var(--royal);box-shadow:0 6px 16px -6px rgba(10,91,230,.75);cursor:pointer}
   .quote-form input[type=range]::-moz-range-track{height:9px;border-radius:999px;border:1px solid var(--line);background:var(--mist)}
   .quote-form input[type=range]::-moz-range-progress{height:9px;border-radius:999px;background:linear-gradient(90deg,var(--cyan),var(--royal))}
-  .quote-form input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;
+  .quote-form input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:#fff;
     border:2.5px solid var(--royal);box-shadow:0 6px 16px -6px rgba(10,91,230,.75);cursor:pointer}
   .quote-form input[type=range]:focus-visible{outline:none}
   .quote-form input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px rgba(20,184,255,.3)}
-  .budget-readout{margin-top:20px;font-family:'Inter Tight',sans-serif;font-size:21px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
+  .budget-readout{margin-top:22px;font-family:'Inter Tight',sans-serif;font-size:22px;font-weight:700;letter-spacing:-.01em;color:var(--ink)}
   .budget-readout strong{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .budget-scale{display:flex;justify-content:space-between;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
   .budget-wrap.is-unsure{opacity:.4;filter:grayscale(.4);pointer-events:none}
@@ -127,8 +140,51 @@
     background:var(--mist-2);border:1px solid var(--line);border-radius:12px;padding:15px 16px;
     font-family:'Inter',sans-serif;font-size:15px;color:var(--ink);line-height:1.45;
     text-transform:none;letter-spacing:0;font-weight:500}
-  .check-line input{flex:none;width:20px;height:20px;margin:1px 0 0;accent-color:var(--royal);cursor:pointer}
+  .check-line input{flex:none;width:22px;height:22px;margin:0;accent-color:var(--royal);cursor:pointer}
   .check-line:has(input:checked){border-color:var(--cyan);box-shadow:0 0 0 3px rgba(20,184,255,.16);background:#fff}
+
+  /* ---- Social-platform chips (write into a single hidden field) ---- */
+  .plat-chips{display:flex;flex-wrap:wrap;gap:9px;margin-top:4px}
+  .plat-chip{cursor:pointer}
+  .plat-chip input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+  .plat-chip span{display:inline-flex;align-items:center;min-height:42px;padding:9px 16px;border-radius:999px;
+    background:var(--mist-2);border:1.5px solid var(--line);font-size:14.5px;color:var(--ink);font-family:'Inter',sans-serif;
+    transition:border-color .18s,background .18s,color .18s}
+  .plat-chip input:checked+span{border-color:var(--cyan);background:#fff;color:var(--royal);box-shadow:0 0 0 3px rgba(20,184,255,.16)}
+  .plat-chip input:focus-visible+span{box-shadow:0 0 0 3px rgba(20,184,255,.3)}
+
+  /* ---- Compact selected-package summary (shown in the mobile wizard) ---- */
+  .pkg-summary{display:none;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+    border-left:3px solid var(--cyan);border-radius:12px;padding:11px 15px}
+  .pkg-summary .ps-ic{flex:none;width:34px;height:34px;border-radius:9px;background:var(--grad);display:grid;place-items:center;color:#fff}
+  .pkg-summary .ps-ic svg{width:17px;height:17px}
+  .pkg-summary .ps-txt{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+  .pkg-summary .ps-k{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .pkg-summary .ps-v{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:15px;color:var(--ink);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pkg-summary .ps-budget{margin-left:auto;flex:none;font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:700;color:var(--royal)}
+
+  /* ---- Review step (mobile + desktop) ---- */
+  .q-review{display:flex;flex-direction:column;margin-top:20px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .q-review .rv-row{display:flex;justify-content:space-between;gap:18px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--mist-2)}
+  .q-review .rv-row:last-child{border-bottom:0}
+  .q-review .rv-k{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);flex:none}
+  .q-review .rv-v{color:var(--ink);font-weight:600;font-size:14.5px;text-align:right;min-width:0;word-break:break-word}
+  .q-review .rv-v.muted{color:var(--muted);font-weight:400}
+
+  /* ---- Progress + wizard navigation (hidden until wizard mode) ---- */
+  .q-progress{height:6px;background:var(--mist);border:1px solid var(--line);border-radius:999px;overflow:hidden;display:none}
+  .q-progress-bar{display:block;height:100%;width:16.66%;background:var(--grad);border-radius:999px;transition:width .35s cubic-bezier(.2,.7,.2,1)}
+  .q-progress-meta{display:none;justify-content:space-between;align-items:center;gap:14px;margin:-8px 0 0;
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.04em}
+  .q-progress-meta .q-step-count{color:var(--muted)}
+  .q-progress-meta .q-step-name{color:var(--royal);font-weight:700;text-transform:uppercase;text-align:right}
+  .q-nav{display:none;gap:12px;align-items:stretch;margin-top:2px}
+  .q-nav .btn{justify-content:center;font-size:16px;padding:16px 20px}
+  .q-nav .q-next{flex:1}
+  .q-nav .q-back{flex:0 0 auto;min-width:104px}
+  .q-nav-error{display:none;color:#d6453a;font-size:14px;line-height:1.45;margin:2px 0 -6px;font-family:'Inter',sans-serif}
+  .q-nav-error.show{display:block}
 
   .quote-form button[type=submit]{width:100%;justify-content:center;font-size:17px;padding:17px 24px}
   .quote-form button[type=submit][disabled]{opacity:.6;cursor:not-allowed}
@@ -137,9 +193,33 @@
   #fiQuoteForm .form-status.err{color:#d6453a}
   .quote-foot{text-align:center;color:var(--muted);font-size:13.5px;margin-top:18px;font-family:'JetBrains Mono',monospace}
 
+  /* =========================================================
+     WIZARD MODE — activated by JS on phones (adds .is-wizard).
+     One step visible at a time; progress + nav appear.
+  ========================================================= */
+  .quote-form.is-wizard .q-progress,
+  .quote-form.is-wizard .q-progress-meta,
+  .quote-form.is-wizard .q-nav{display:flex}
+  .quote-form.is-wizard .q-step{display:none}
+  .quote-form.is-wizard .q-step.is-active{display:block;animation:qStepIn .3s ease}
+  .quote-form.is-wizard .q-submit{display:none}
+  .quote-form.is-wizard.show-summary .pkg-summary{display:flex}
+  .quote-form.is-wizard.on-last .q-submit{display:flex}
+  .quote-form.is-wizard.on-last .q-next{display:none}
+  @keyframes qStepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
   @media(max-width:680px){
-    .quote-form .pkg-picker{grid-template-columns:1fr}
+    .quote-form{gap:16px}
+    .quote-form .pkg-picker{grid-template-columns:1fr;gap:12px}
     .q-row{grid-template-columns:1fr}
+    /* de-card: calmer blocks, no heavy floating shadow on a small screen */
+    .q-block{padding:22px 20px;border-radius:16px;box-shadow:0 10px 30px -30px rgba(10,22,51,.5)}
+    .q-head h2{font-size:19px}
+    .quote-form .pkg-card{padding:18px 18px 16px}
+    .form-lead{font-size:15px;padding:14px 16px}
+  }
+  @media(max-width:430px){
+    .q-block{padding:20px 17px}
   }
 </style>
 </head><body>
@@ -173,20 +253,32 @@
 <section class="band band-tint"><div class="wrap">
   <div class="quote-shell rv">
     <!-- data-forminit hands this form to assets/forminit.js (Forminit backend). -->
-    <form id="fiQuoteForm" novalidate data-forminit
+    <!-- data-forminit-max-mb caps the logo upload so large files don't stall. -->
+    <form id="fiQuoteForm" novalidate data-forminit data-forminit-max-mb="10"
           data-forminit-success="{{ quote.success }}">
 
       <!-- Hidden fields submitted to Forminit. selected_package is kept in sync -->
       <!-- with the selected tile + ?package= URL parameter by assets/forminit.js. -->
       <input type="hidden" id="selected_package" name="selected_package" value="">
       <input type="hidden" name="form_type" value="Website Quote">
+      <!-- social_platforms is populated from the platform chips below. -->
+      <input type="hidden" id="social_platforms" name="fi-text-social_platforms" value="">
 
-      <div class="quote-form">
+      <div class="quote-form" id="quoteForm">
 
         <p class="form-lead"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> {{ quote.form_lead }}</p>
 
-        <!-- ===== Section 1 — Website type ===== -->
-        <section class="q-block" id="pkgSection">
+        <!-- Progress + compact chosen-package summary (mobile wizard only) -->
+        <div class="q-progress" aria-hidden="true"><span class="q-progress-bar" id="qBar"></span></div>
+        <div class="q-progress-meta"><span class="q-step-count" id="qCount">Step 1 of 6</span><span class="q-step-name" id="qName">Website type</span></div>
+        <div class="pkg-summary" id="pkgSummary" aria-hidden="true">
+          <span class="ps-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <span class="ps-txt"><span class="ps-k">Your choice</span><span class="ps-v" id="psPackage">Business Website</span></span>
+          <span class="ps-budget" id="psBudget">$1,000</span>
+        </div>
+
+        <!-- ===== Step 1 — Website type ===== -->
+        <section class="q-block q-step is-active" id="pkgSection" data-step="1" data-step-name="Website type">
           <div class="q-head"><span class="q-num">01</span><h2>{{ quote.s1.heading }}</h2></div>
           <p class="q-note">{{ quote.s1.note }}</p>
           <div class="pkg-picker" data-package-cards>
@@ -214,8 +306,8 @@
           </div>
         </section>
 
-        <!-- ===== Section 2 — Project budget range ===== -->
-        <section class="q-block">
+        <!-- ===== Step 2 — Project budget range ===== -->
+        <section class="q-block q-step" data-step="2" data-step-name="Budget range">
           <div class="q-head"><span class="q-num">02</span><h2>{{ quote.s2.heading }}</h2></div>
           <p class="q-note">{{ quote.s2.note }}</p>
           <div class="budget-wrap" id="budgetWrap">
@@ -230,8 +322,8 @@
           </label>
         </section>
 
-        <!-- ===== Section 3 — Basic details ===== -->
-        <section class="q-block">
+        <!-- ===== Step 3 — Business info ===== -->
+        <section class="q-block q-step" data-step="3" data-step-name="Business info">
           <div class="q-head"><span class="q-num">03</span><h2>{{ quote.s3.heading }}</h2></div>
           <div class="q-fields">
             <div class="q-row">
@@ -239,39 +331,61 @@
               <div class="q-field"><label for="business_name">Business name</label><input id="business_name" name="fi-text-business_name" type="text" autocomplete="organization" placeholder="Smith Plumbing" required></div>
             </div>
             <div class="q-row">
-              <div class="q-field"><label for="email">Email</label><input id="email" name="fi-sender-email" type="email" autocomplete="email" placeholder="jane@smithplumbing.ca"></div>
-              <div class="q-field"><label for="phone">Phone number</label><input id="phone" name="fi-text-phone" type="tel" autocomplete="tel" placeholder="902-555-0123"></div>
+              <div class="q-field"><label for="email">Email</label><input id="email" name="fi-sender-email" type="email" autocomplete="email" inputmode="email" placeholder="jane@smithplumbing.ca"></div>
+              <div class="q-field"><label for="phone">Phone number</label><input id="phone" name="fi-text-phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="902-555-0123"></div>
             </div>
-            <div class="q-field"><label for="current_website">Current website URL <span class="opt">(optional)</span></label><input id="current_website" name="fi-text-current_website" type="text" inputmode="url" placeholder="smithplumbing.ca — or leave blank if you don't have one yet"></div>
+            <div class="q-field"><label for="current_website">Current website <span class="opt">(optional)</span></label><input id="current_website" name="fi-text-current_website" type="text" inputmode="url" placeholder="smithplumbing.ca — or leave blank"></div>
           </div>
           <p class="q-hint">{{ quote.s3.hint }}</p>
         </section>
 
-        <!-- ===== Section 4 — Project goals ===== -->
-        <section class="q-block">
-          <div class="q-head"><span class="q-num">04</span><h2>{{ quote.s4.heading }}</h2></div>
+        <!-- ===== Step 4 — Social media & branding assets ===== -->
+        <section class="q-block q-step" data-step="4" data-step-name="Branding & social">
+          <div class="q-head"><span class="q-num">04</span><h2>Social media &amp; branding</h2></div>
+          <p class="q-note">Share what you already have. Everything here is optional — I can help fill the gaps.</p>
           <div class="q-fields">
-            <div class="q-field"><label for="business_does">What does your business do?</label><textarea id="business_does" name="fi-text-business_does" placeholder="A quick description of your business and the services you offer." required></textarea></div>
-            <div class="q-field"><label for="website_goals">What do you want the website to help with?</label><textarea id="website_goals" name="fi-text-website_goals" placeholder="e.g. more calls, more quote requests, looking more professional, showing past work." required></textarea></div>
+            <div class="q-field">
+              <label>Where are you online?</label>
+              <div class="plat-chips" data-platform-chips>
+                <label class="plat-chip"><input type="checkbox" value="Facebook"><span>Facebook</span></label>
+                <label class="plat-chip"><input type="checkbox" value="Instagram"><span>Instagram</span></label>
+                <label class="plat-chip"><input type="checkbox" value="Google Business"><span>Google Business</span></label>
+                <label class="plat-chip"><input type="checkbox" value="TikTok"><span>TikTok</span></label>
+                <label class="plat-chip"><input type="checkbox" value="LinkedIn"><span>LinkedIn</span></label>
+                <label class="plat-chip"><input type="checkbox" value="Not online yet"><span>Not online yet</span></label>
+              </div>
+            </div>
+            <div class="q-field"><label for="social_links">Social media links <span class="opt">(optional)</span></label>
+              <textarea id="social_links" name="fi-text-social_links" placeholder="Paste any profile links you'd like included."></textarea></div>
+
+            <p class="q-sub">Branding</p>
+            <div class="q-field"><label for="has_branding">Do you already have a logo or branding?</label>
+              <select id="has_branding" name="fi-text-has_branding">
+                <option value="">Not sure yet</option>
+                <option value="Yes — logo and branding ready">Yes — logo &amp; branding ready</option>
+                <option value="Logo only">I have a logo only</option>
+                <option value="No — I need branding help">No — I need branding help</option>
+              </select>
+            </div>
+            <div class="q-field"><label for="logo_upload">Upload your logo <span class="opt">(optional — PNG, JPG, SVG or PDF)</span></label>
+              <input id="logo_upload" name="fi-file-logo" type="file" accept=".png,.jpg,.jpeg,.svg,.pdf,image/*">
+            </div>
+            <div class="q-field"><label for="assets_link">…or paste a link to your logo / images <span class="opt">(optional)</span></label>
+              <input id="assets_link" name="fi-text-assets_link" type="text" inputmode="url"
+                     placeholder="Google Drive, Dropbox, Canva or file link">
+            </div>
           </div>
         </section>
 
-        <!-- ===== Section 5 — Optional details ===== -->
-        <section class="q-block q-optional">
-          <div class="q-head"><span class="q-num">05</span><h2>{{ quote.s5.heading }}</h2></div>
-          <p class="q-note">{{ quote.s5.note }}</p>
+        <!-- ===== Step 5 — Project description & goals ===== -->
+        <section class="q-block q-step" data-step="5" data-step-name="Project & goals">
+          <div class="q-head"><span class="q-num">05</span><h2>{{ quote.s4.heading }}</h2></div>
           <div class="q-fields">
-            <div class="q-field"><label for="pages_needed">What pages do you think you need?</label><textarea id="pages_needed" name="fi-text-pages_needed" placeholder="e.g. Home, Services, About, Gallery, Contact — a rough idea is fine."></textarea></div>
+            <div class="q-field"><label for="business_does">What does your business do?</label><textarea id="business_does" name="fi-text-business_does" placeholder="A quick description of your business and the services you offer." required></textarea></div>
+            <div class="q-field"><label for="website_goals">What should the website help with?</label><textarea id="website_goals" name="fi-text-website_goals" placeholder="e.g. more calls, more quote requests, looking more professional, showing past work." required></textarea></div>
+            <div class="q-field"><label for="pages_needed">What pages do you think you need? <span class="opt">(optional)</span></label><textarea id="pages_needed" name="fi-text-pages_needed" placeholder="e.g. Home, Services, About, Gallery, Contact — a rough idea is fine."></textarea></div>
             <div class="q-row">
-              <div class="q-field"><label for="has_branding">Do you already have a logo or branding?</label>
-                <select id="has_branding" name="fi-text-has_branding">
-                  <option value="">Not sure yet</option>
-                  <option value="Yes — logo and branding ready">Yes — logo &amp; branding ready</option>
-                  <option value="Logo only">I have a logo only</option>
-                  <option value="No — I need branding help">No — I need branding help</option>
-                </select>
-              </div>
-              <div class="q-field"><label for="needs_copy">Do you need help with website copy/text?</label>
+              <div class="q-field"><label for="needs_copy">Need help with the text?</label>
                 <select id="needs_copy" name="fi-text-needs_copy">
                   <option value="">Not sure yet</option>
                   <option value="Yes, please">Yes, please</option>
@@ -279,27 +393,42 @@
                   <option value="Some help">Some help</option>
                 </select>
               </div>
+              <div class="q-field"><label for="needs_images">Need help with images?</label>
+                <select id="needs_images" name="fi-text-needs_images">
+                  <option value="">Not sure yet</option>
+                  <option value="Yes, please">Yes, please</option>
+                  <option value="No — I have my own photos">No — I have my own photos</option>
+                  <option value="Some help">Some help</option>
+                </select>
+              </div>
             </div>
-            <div class="q-field"><label for="needs_images">Do you need help choosing images?</label>
-              <select id="needs_images" name="fi-text-needs_images">
-                <option value="">Not sure yet</option>
-                <option value="Yes, please">Yes, please</option>
-                <option value="No — I have my own photos">No — I have my own photos</option>
-                <option value="Some help">Some help</option>
-              </select>
-            </div>
-            <div class="q-field"><label for="assets_link">Logo / image link</label>
-              <input id="assets_link" name="fi-text-assets_link" type="text" inputmode="url"
-                     placeholder="Paste a Google Drive, Dropbox, Canva, or file link to your logo/images">
-            </div>
-            <div class="q-field"><label for="social_links">Social media links</label>
-              <textarea id="social_links" name="fi-text-social_links" placeholder="Paste any social media links here if you want them included."></textarea></div>
-            <div class="q-field"><label for="extra_notes">Anything else I should know?</label>
+            <div class="q-field"><label for="extra_notes">Anything else I should know? <span class="opt">(optional)</span></label>
               <textarea id="extra_notes" name="fi-text-extra_notes" placeholder="Must-haves, things to avoid, deadlines, inspiration links, questions."></textarea></div>
           </div>
         </section>
 
-        <button type="submit" class="btn btn-grad">{{ quote.submit }} <span class="arr">&rarr;</span></button>
+        <!-- ===== Step 6 — Review & send ===== -->
+        <section class="q-block q-step" data-step="6" data-step-name="Review & send">
+          <div class="q-head"><span class="q-num">06</span><h2>Review &amp; send</h2></div>
+          <p class="q-note">A quick look before you send — I’ll reply within one business day.</p>
+          <div class="q-review" id="qReview">
+            <div class="rv-row"><span class="rv-k">Website type</span><span class="rv-v" data-review="package">—</span></div>
+            <div class="rv-row"><span class="rv-k">Budget</span><span class="rv-v" data-review="budget">—</span></div>
+            <div class="rv-row"><span class="rv-k">Name</span><span class="rv-v" data-review="name">—</span></div>
+            <div class="rv-row"><span class="rv-k">Business</span><span class="rv-v" data-review="business">—</span></div>
+            <div class="rv-row"><span class="rv-k">Contact</span><span class="rv-v" data-review="contact">—</span></div>
+          </div>
+        </section>
+
+        <!-- Wizard navigation (mobile) -->
+        <p class="q-nav-error" id="qNavError" role="alert"></p>
+        <div class="q-nav">
+          <button type="button" class="btn btn-ghost q-back" id="qBack">Back</button>
+          <button type="button" class="btn btn-grad q-next" id="qNext">Continue <span class="arr">&rarr;</span></button>
+        </div>
+
+        <!-- Submit — always visible on desktop; on mobile shown at the final step -->
+        <button type="submit" class="btn btn-grad q-submit">{{ quote.submit }} <span class="arr">&rarr;</span></button>
         <p class="quote-foot">{{ quote.foot }}</p>
       </div>
     </form>
@@ -330,15 +459,11 @@
       </div>
       <div class="foot-bottom"><span>&copy; <span id="yr"></span> Hatt Digital. All rights reserved.</span><span class="mono">Nova Scotia, Canada &middot; 44.65&deg; N</span></div>
     </div></footer>
-<div class="mobile-cta" id="mobileCta" aria-label="Quick contact bar">
-  <a class="call" href="tel:{{ site.contact.phone_link }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>
-  <a href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
-  <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg> Start Project</a>
-</div>
 <script src="assets/main.js?v=2"></script>
 <!-- Forminit integration. The Forminit Form ID lives in assets/forminit.js. -->
 <script src="assets/forminit.js?v=3" defer></script>
-<!-- Budget slider: range + live value adjust to the selected website type. -->
+<!-- Quote page behaviour: budget slider, platform chips, live review,
+     and the mobile step-by-step wizard. -->
 <script>
 (function(){
   'use strict';
@@ -349,77 +474,214 @@
   };
   var PMAP={starter:'Starter Website',business:'Business Website',growth:'Growth Website'};
   function money(n){return '$'+Number(n).toLocaleString('en-US');}
+  function byId(id){return document.getElementById(id);}
 
-  /* ---- Light required-field checks ----
-     This script runs before the deferred assets/forminit.js, so this submit
-     listener fires first. Native `required` handles contact name, business
-     name and the two goal fields; here we cover the two rules native HTML
-     can't: a website type must be picked, and at least one of email/phone.
-     On failure we stop the Forminit handler from sending. */
-  var qForm=document.getElementById('fiQuoteForm');
-  if(qForm){
-    qForm.addEventListener('submit',function(e){
-      var radios=Array.prototype.slice.call(qForm.querySelectorAll('input[name="package_choice"]'));
-      var statusEl=qForm.querySelector('.form-status');
-      function fail(msg,focusEl,scrollEl){
-        e.preventDefault(); e.stopImmediatePropagation();
-        if(statusEl){ statusEl.textContent=msg; statusEl.className='form-status err'; }
-        if(scrollEl) scrollEl.scrollIntoView({behavior:'smooth',block:'center'});
-        if(focusEl) focusEl.focus();
-      }
-      if(!radios.some(function(r){return r.checked;})){
-        return fail('Please choose a website type above.',null,document.getElementById('pkgSection'));
-      }
-      var emailEl=qForm.querySelector('[name="fi-sender-email"]');
-      var phoneEl=qForm.querySelector('[name="fi-text-phone"]');
-      var email=emailEl?emailEl.value.trim():'';
-      var phone=phoneEl?phoneEl.value.trim():'';
-      if(!email && !phone){
-        return fail('Please add an email or a phone number so I can reply.',emailEl);
-      }
-    });
+  var qForm=byId('fiQuoteForm');
+  if(!qForm) return;
+  var wrapEl=byId('quoteForm');
+  var radios=Array.prototype.slice.call(qForm.querySelectorAll('input[name="package_choice"]'));
+
+  /* ---------- Budget slider (range adapts to the chosen website type) ---------- */
+  var slider=byId('budgetSlider');
+  var valEl=byId('budgetValue'), minEl=byId('budgetMin'), maxEl=byId('budgetMax');
+  var budgetWrap=byId('budgetWrap'), unsure=byId('unsureBudget');
+
+  function paint(){
+    if(!slider) return;
+    var min=+slider.min,max=+slider.max,v=+slider.value;
+    var pct=max>min?((v-min)/(max-min))*100:50;
+    slider.style.setProperty('--pct',pct+'%');
+    if(valEl) valEl.textContent=money(v);
+  }
+  function applyRange(pkg,reset){
+    if(!slider) return;
+    var r=RANGES[pkg]||RANGES['Business Website'];
+    slider.min=r.min;slider.max=r.max;slider.step=r.step;
+    if(reset || (+slider.value<r.min) || (+slider.value>r.max)) slider.value=r.def;
+    if(minEl) minEl.textContent=money(r.min);
+    if(maxEl) maxEl.textContent=money(r.max);
+    paint();
+  }
+  function currentPackage(){
+    for(var i=0;i<radios.length;i++){ if(radios[i].checked) return radios[i].value; }
+    return '';
+  }
+  function budgetText(){
+    if(unsure && unsure.checked) return 'Help me choose';
+    return slider ? money(+slider.value) : '—';
   }
 
-  document.addEventListener('DOMContentLoaded',function(){
-    var slider=document.getElementById('budgetSlider');
-    if(!slider) return;
-    var valEl=document.getElementById('budgetValue');
-    var minEl=document.getElementById('budgetMin');
-    var maxEl=document.getElementById('budgetMax');
-    var wrap=document.getElementById('budgetWrap');
-    var unsure=document.getElementById('unsureBudget');
-    var radios=Array.prototype.slice.call(document.querySelectorAll('input[name="package_choice"]'));
+  /* ---------- Compact summary + live review ---------- */
+  var psPackage=byId('psPackage'), psBudget=byId('psBudget');
+  function updateSummary(){
+    var pkg=currentPackage();
+    if(psPackage && pkg) psPackage.textContent=pkg;
+    if(psBudget) psBudget.textContent=budgetText();
+  }
+  function reviewVal(key){ return qForm.querySelector('[data-review="'+key+'"]'); }
+  function setReview(key,val){
+    var el=reviewVal(key); if(!el) return;
+    if(val){ el.textContent=val; el.classList.remove('muted'); }
+    else { el.textContent='Not added'; el.classList.add('muted'); }
+  }
+  function updateReview(){
+    setReview('package',currentPackage());
+    setReview('budget',budgetText());
+    setReview('name',(byId('contact_name')||{}).value);
+    setReview('business',(byId('business_name')||{}).value);
+    var email=(byId('email')||{}).value||'', phone=(byId('phone')||{}).value||'';
+    setReview('contact',[email,phone].filter(Boolean).join(' · '));
+  }
 
-    function paint(){
-      var min=+slider.min,max=+slider.max,v=+slider.value;
-      var pct=max>min?((v-min)/(max-min))*100:50;
-      slider.style.setProperty('--pct',pct+'%');
-      if(valEl) valEl.textContent=money(v);
-    }
-    function applyRange(pkg,reset){
-      var r=RANGES[pkg]||RANGES['Business Website'];
-      slider.min=r.min;slider.max=r.max;slider.step=r.step;
-      if(reset || (+slider.value<r.min) || (+slider.value>r.max)) slider.value=r.def;
-      if(minEl) minEl.textContent=money(r.min);
-      if(maxEl) maxEl.textContent=money(r.max);
-      paint();
-    }
+  /* ---------- Social-platform chips -> single hidden field ---------- */
+  var platWrap=qForm.querySelector('[data-platform-chips]');
+  var platField=byId('social_platforms');
+  if(platWrap && platField){
+    var chips=Array.prototype.slice.call(platWrap.querySelectorAll('input[type="checkbox"]'));
+    var syncPlat=function(){
+      platField.value=chips.filter(function(c){return c.checked;})
+        .map(function(c){return c.value;}).join(', ');
+    };
+    chips.forEach(function(c){ c.addEventListener('change',syncPlat); });
+  }
 
-    /* Initial selection: ?package= URL value, else any pre-checked tile. */
-    var raw=(new URLSearchParams(location.search).get('package')||'').trim().toLowerCase();
-    var initial=PMAP[raw];
-    if(!initial) radios.forEach(function(x){ if(x.checked) initial=x.value; });
-    applyRange(initial||'Business Website', true);
+  /* Initial selection: ?package= URL value, else any pre-checked tile. */
+  var raw=(new URLSearchParams(location.search).get('package')||'').trim().toLowerCase();
+  var initial=PMAP[raw];
+  if(!initial) radios.forEach(function(x){ if(x.checked) initial=x.value; });
+  applyRange(initial||'Business Website', true);
+  updateSummary(); updateReview();
 
-    radios.forEach(function(x){
-      x.addEventListener('change',function(){ if(x.checked) applyRange(x.value,true); });
+  radios.forEach(function(x){
+    x.addEventListener('change',function(){
+      if(x.checked) applyRange(x.value,true);
+      updateSummary(); updateReview();
+      if(wizard.active) wizard.markSummary();
     });
-    slider.addEventListener('input',paint);
-    if(unsure){
-      unsure.addEventListener('change',function(){
-        if(wrap) wrap.classList.toggle('is-unsure',unsure.checked);
-      });
+  });
+  if(slider) slider.addEventListener('input',function(){ paint(); updateSummary(); updateReview(); });
+  if(unsure) unsure.addEventListener('change',function(){
+    if(budgetWrap) budgetWrap.classList.toggle('is-unsure',unsure.checked);
+    updateSummary(); updateReview();
+  });
+  ['contact_name','business_name','email','phone'].forEach(function(id){
+    var el=byId(id); if(el) el.addEventListener('input',updateReview);
+  });
+
+  /* =====================================================
+     MOBILE WIZARD — one step per screen on phones.
+     Progressive enhancement: on wider screens every step
+     stays visible (the original single-page scroll).
+  ===================================================== */
+  var steps=Array.prototype.slice.call(qForm.querySelectorAll('.q-step'));
+  var total=steps.length;
+  var bar=byId('qBar'), count=byId('qCount'), nameEl=byId('qName');
+  var backBtn=byId('qBack'), nextBtn=byId('qNext'), navError=byId('qNavError');
+  var mq=window.matchMedia('(max-width:760px)');
+
+  var wizard={ active:false, i:0 };
+
+  function showError(msg,focusEl){
+    if(navError){ navError.textContent=msg; navError.classList.add('show'); }
+    if(focusEl){ try{focusEl.focus();}catch(e){} }
+  }
+  function clearError(){ if(navError){ navError.textContent=''; navError.classList.remove('show'); } }
+
+  wizard.markSummary=function(){
+    /* reveal the compact summary chip once a package exists (after step 1) */
+    if(wrapEl) wrapEl.classList.toggle('show-summary', wizard.i>0 && !!currentPackage());
+  };
+
+  function validateStep(idx){
+    var step=steps[idx];
+    /* Step 1: a website type must be chosen. */
+    if(step.id==='pkgSection'){
+      if(!currentPackage()){ showError('Please choose a website type to continue.'); return false; }
     }
+    /* Any required inputs in the current step must be valid. */
+    var reqs=step.querySelectorAll('input[required],textarea[required],select[required]');
+    for(var i=0;i<reqs.length;i++){
+      if(!reqs[i].checkValidity()){
+        showError('Please fill in the highlighted field.',reqs[i]);
+        try{reqs[i].reportValidity();}catch(e){}
+        return false;
+      }
+    }
+    /* Step 3: need at least one way to reply. */
+    if(step.getAttribute('data-step')==='3'){
+      var email=(byId('email')||{}).value||'', phone=(byId('phone')||{}).value||'';
+      if(!email.trim() && !phone.trim()){
+        showError('Add an email or a phone number so I can reply.',byId('email'));
+        return false;
+      }
+    }
+    clearError();
+    return true;
+  }
+
+  function render(){
+    steps.forEach(function(s,idx){ s.classList.toggle('is-active',idx===wizard.i); });
+    var human=wizard.i+1;
+    if(bar) bar.style.width=(human/total*100).toFixed(2)+'%';
+    if(count) count.textContent='Step '+human+' of '+total;
+    if(nameEl) nameEl.textContent=steps[wizard.i].getAttribute('data-step-name')||'';
+    if(backBtn) backBtn.disabled=wizard.i===0;
+    if(wrapEl) wrapEl.classList.toggle('on-last',wizard.i===total-1);
+    if(wizard.i===total-1) updateReview();
+    wizard.markSummary();
+  }
+
+  function goTo(idx,opts){
+    wizard.i=Math.max(0,Math.min(total-1,idx));
+    render();
+    if(!(opts&&opts.silent)){
+      /* keep the newly shown step in view under the sticky header */
+      var y=(qForm.getBoundingClientRect().top+window.pageYOffset)-90;
+      window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+    }
+  }
+
+  function enable(){
+    if(wizard.active) return;
+    wizard.active=true;
+    if(wrapEl) wrapEl.classList.add('is-wizard');
+    render();
+  }
+  function disable(){
+    if(!wizard.active) return;
+    wizard.active=false;
+    if(wrapEl){ wrapEl.classList.remove('is-wizard','on-last','show-summary'); }
+    steps.forEach(function(s){ s.classList.remove('is-active'); });
+    clearError();
+  }
+
+  if(nextBtn) nextBtn.addEventListener('click',function(){
+    if(!validateStep(wizard.i)) return;
+    goTo(wizard.i+1);
+  });
+  if(backBtn) backBtn.addEventListener('click',function(){ clearError(); goTo(wizard.i-1); });
+
+  function sync(){ if(mq.matches) enable(); else disable(); }
+  if(mq.addEventListener) mq.addEventListener('change',sync);
+  else if(mq.addListener) mq.addListener(sync);
+  sync();
+
+  /* ---- Final submit safety net (runs before forminit.js) ----
+     Native `required` covers name/business/goals; here we cover the
+     two rules HTML can't: a website type is picked, and at least one
+     of email/phone. In the wizard, also surface the first bad step. */
+  qForm.addEventListener('submit',function(e){
+    var statusEl=qForm.querySelector('.form-status');
+    function fail(msg,stepIdx,focusEl){
+      e.preventDefault(); e.stopImmediatePropagation();
+      if(statusEl){ statusEl.textContent=msg; statusEl.className='form-status err'; }
+      if(wizard.active && typeof stepIdx==='number'){ goTo(stepIdx); }
+      else if(steps[stepIdx]){ steps[stepIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+      if(focusEl){ try{focusEl.focus();}catch(er){} }
+    }
+    if(!currentPackage()){ return fail('Please choose a website type.',0); }
+    var email=(byId('email')||{}).value||'', phone=(byId('phone')||{}).value||'';
+    if(!email.trim() && !phone.trim()){ return fail('Please add an email or a phone number so I can reply.',2,byId('email')); }
   });
 })();
 </script>

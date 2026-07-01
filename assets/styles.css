@@ -278,7 +278,8 @@
   form{display:flex;flex-direction:column;gap:14px}
   form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   form label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-d);margin-bottom:6px;display:block}
-  form input:not([type=checkbox]):not([type=radio]),form textarea,form select{width:100%;background:var(--navy-2);border:1px solid var(--line-d);border-radius:12px;padding:13px 15px;color:#fff;font-family:'Inter',sans-serif;font-size:15px;transition:border-color .2s,box-shadow .2s}
+  /* font-size:16px keeps iOS Safari from auto-zooming the page on field focus */
+  form input:not([type=checkbox]):not([type=radio]),form textarea,form select{width:100%;background:var(--navy-2);border:1px solid var(--line-d);border-radius:12px;padding:13px 15px;color:#fff;font-family:'Inter',sans-serif;font-size:16px;transition:border-color .2s,box-shadow .2s}
   form input::placeholder,form textarea::placeholder{color:#5e6f9e}
   form input:not([type=checkbox]):not([type=radio]):focus,form textarea:focus,form select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(24,182,242,.18)}
   form textarea{resize:vertical;min-height:110px}
@@ -1047,7 +1048,12 @@
   .mobile-cta a.primary{background:var(--grad);border-color:transparent;color:#fff;
     box-shadow:0 10px 22px -12px rgba(10,91,230,.8)}
   .mobile-cta a.call svg{color:var(--cyan)}
-  @media(max-width:720px){.mobile-cta{display:grid}body{padding-bottom:72px}}
+  /* The mobile sticky CTA bar is intentionally NOT shown on mobile: it
+     covered content and competed with the quote form. A clean, full-screen
+     scroll reads more premium on an iPhone. Kept in the DOM (display:none)
+     so it is trivial to reinstate; the nav "Start a Website Project" CTA
+     remains the primary mobile call to action. */
+  .mobile-cta{display:none!important}
 
   /* ===================================================== */
   /* ====  SEO LANDING PAGES (industry / area)  ========== */
@@ -1133,4 +1139,31 @@
     .seg{gap:8px}
     .seg-opt{flex:1 1 auto}
     .seg-opt span{width:100%;padding:11px 14px}
+  }
+
+  /* =====================================================
+     MOBILE POLISH PASS — tighter section rhythm + a calmer
+     card count on small screens. Light-touch and additive:
+     it only adjusts spacing/scale at phone widths, so the
+     desktop composition is untouched.
+  ===================================================== */
+  @media(max-width:600px){
+    /* Even vertical rhythm between sections (was a mix of 64px / loose gaps) */
+    .band{padding:56px 0}
+    @supports(padding:max(0px)){
+      /* respect the iPhone home-indicator / gesture bar at the page foot */
+      footer{padding-bottom:calc(44px + env(safe-area-inset-bottom,0px))}
+    }
+    /* Headings: keep them confident but stop the largest ones from
+       wrapping awkwardly or feeling shouty on a 375px screen. */
+    .band-head h2{font-size:clamp(26px,7.4vw,32px)}
+    .band-head p{font-size:16px}
+    /* Cards: soften the heavy drop-shadows so stacked cards read as a
+       calm list instead of a pile of floating tiles. */
+    .vcard,.tile,.get,.diff,.tpoint,.testi,.ptier{box-shadow:none}
+    .value-grid.v2,.get-grid,.diff-grid,.trust-grid,.testi-grid{gap:12px}
+  }
+  @media(max-width:430px){
+    /* iPhone-class screens: hold a comfortable gutter, never edge-to-edge */
+    .wrap{padding:0 18px}
   }
