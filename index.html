@@ -112,24 +112,102 @@
   </div>
 </section>
 
+<!-- ============ BEFORE / AFTER COMPARISON ============ -->
 <section class="band" id="why-it-matters"><div class="wrap">
-  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.why.eyebrow }}</span>
-    <h2>{{ home.why.heading }}</h2>
-    <p>{{ home.why.intro }}</p></div>
-  <div class="value-grid v2" data-stagger="0.07">
-    <div class="vcard lead rv">
-      <div><h3>{{ home.why.lead_heading }}</h3>
-      <p>{{ home.why.lead_body }}</p></div>
-      <div class="vstat">
-        {%- for s in home.why.stats %}
-        <div class="vs"><b>{{ s.value }}</b><span>{{ s.label }}</span></div>
-        {%- endfor %}
+  <div class="band-head rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.compare.eyebrow }}</span>
+    <h2>{{ home.compare.heading }}</h2>
+    <p>{{ home.compare.intro }}</p></div>
+
+  <div class="ba-stage rv">
+    <figure class="ba-slider" id="baSlider" style="--pos:50%">
+      <span class="ba-specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+
+      <!-- AFTER — polished Hatt Digital redesign (base layer) -->
+      <div class="ba-pane ba-after" aria-hidden="true">
+        <div class="ba-browser">
+          <div class="ba-chrome"><span class="ba-dots"><i></i><i></i><i></i></span><span class="ba-url">harbourhomeservices.ca</span></div>
+          <div class="ba-view">
+            <div class="ba-topbar">
+              <span class="ba-logo"><span class="ba-logo-mark"></span>Harbour Home Services</span>
+              <span class="ba-nav"><span>Services</span><span>About</span><span>Contact</span></span>
+              <span class="ba-callbtn">Call (902) 555-0142</span>
+            </div>
+            <div class="ba-hero">
+              <div class="ba-hero-copy">
+                <span class="ba-kicker">Home services · South Shore, NS</span>
+                <h4>Trusted repairs, renovations &amp; maintenance</h4>
+                <p>One local team for the jobs around your home — done right, on time, with a clear quote up front.</p>
+                <div class="ba-actions"><span class="ba-btn ba-btn-primary">Call now</span><span class="ba-btn ba-btn-ghost">Get a free quote</span></div>
+              </div>
+              <div class="ba-hero-art" aria-hidden="true"><span class="ba-art-glow"></span><span class="ba-art-grid"></span></div>
+            </div>
+            <div class="ba-cards">
+              <div class="ba-card"><span class="ba-ic"></span><b>Repairs</b><span class="ba-line"></span><span class="ba-line short"></span></div>
+              <div class="ba-card"><span class="ba-ic"></span><b>Renovations</b><span class="ba-line"></span><span class="ba-line short"></span></div>
+              <div class="ba-card"><span class="ba-ic"></span><b>Maintenance</b><span class="ba-line"></span><span class="ba-line short"></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ba-phone">
+          <div class="ba-phone-screen">
+            <div class="ba-p-top"><span class="ba-p-logo">Harbour Home</span></div>
+            <div class="ba-p-hero"><b>Trusted local home services</b><span class="ba-p-sub"></span></div>
+            <span class="ba-p-btn">Call now</span>
+            <span class="ba-p-btn ghost">Get a quote</span>
+            <div class="ba-p-list"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+        <span class="ba-tag ba-tag-after">After</span>
       </div>
-    </div>
-    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">01</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><h3>{{ home.why.tiles[0].title }}</h3><p>{{ home.why.tiles[0].text }}</p></div>
-    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">02</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><h3>{{ home.why.tiles[1].title }}</h3><p>{{ home.why.tiles[1].text }}</p></div>
-    <div class="tile rv"><span class="specks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="idx">03</span><div class="chip"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h3>{{ home.why.tiles[2].title }}</h3><p>{{ home.why.tiles[2].text }}</p></div>
+
+      <!-- BEFORE — dated, cluttered site (clipped overlay) -->
+      <div class="ba-pane ba-before" aria-hidden="true">
+        <div class="ba-browser is-old">
+          <div class="ba-chrome"><span class="ba-dots"><i></i><i></i><i></i></span><span class="ba-url">harbourhomeservices.ca/home.html</span></div>
+          <div class="ba-view">
+            <div class="ba-topbar-old">
+              <span class="ba-logo-old">HARBOUR HOME SERVICES INC.</span>
+              <span class="ba-nav-old"><span>Home</span><span>Services</span><span>About Us</span><span>Gallery</span><span>Testimonials</span><span>Links</span><span>Contact Us</span></span>
+              <span class="ba-phone-old">Tel: 902-555-0142</span>
+            </div>
+            <div class="ba-banner-old">WELCOME TO OUR WEBSITE!</div>
+            <div class="ba-body-old">
+              <p>We are a family owned and operated home services company serving the local area for many years. We do plumbing, electrical, carpentry, painting, drywall, decks, fences, flooring, roofing repairs, gutter cleaning, and much much more!!! No job too big or too small. Please browse our website to learn more about the many services that we are able to offer to you and your family and be sure to check back often for updates and special offers.</p>
+              <span class="ba-cta-old">CLICK HERE FOR A FREE ESTIMATE</span>
+              <span class="ba-hits-old">You are visitor #004271</span>
+            </div>
+          </div>
+        </div>
+        <div class="ba-phone is-old">
+          <div class="ba-phone-screen">
+            <div class="ba-p-old-zoom">
+              <span class="ba-p-old-logo">HARBOUR HOME SERVICES INC.</span>
+              <span class="ba-p-old-nav">Home · Services · About · Gallery · Contact</span>
+              <span class="ba-p-old-banner">WELCOME!</span>
+              <span class="ba-p-old-line"></span><span class="ba-p-old-line"></span><span class="ba-p-old-line"></span><span class="ba-p-old-line short"></span>
+            </div>
+          </div>
+        </div>
+        <span class="ba-tag ba-tag-before">Before</span>
+      </div>
+
+      <button class="ba-handle" id="baHandle" type="button" role="slider"
+        aria-label="Drag to compare the before and after website"
+        aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+        <span class="ba-handle-grip" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </button>
+    </figure>
+    <p class="ba-note">{{ home.compare.disclaimer }}</p>
   </div>
+
+  <ul class="ba-benefits rv" data-stagger="0.07">
+    {%- for b in home.compare.benefits %}
+    <li class="rv"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>{{ b }}</span></li>
+    {%- endfor %}
+  </ul>
 </div></section>
 
 <!-- ============ PORTFOLIO PREVIEWS ============ -->

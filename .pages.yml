@@ -37,29 +37,15 @@ content:
           - { name: sub, label: "Intro sentence", type: text }
           - { name: cta_primary, label: "Primary button label", type: string }
           - { name: cta_secondary, label: "Secondary button label", type: string }
-      - name: why
-        label: "“Why it matters” section"
+      - name: compare
+        label: "“Before & after” comparison section"
         type: object
         fields:
           - { name: eyebrow, label: "Eyebrow", type: string }
           - { name: heading, label: "Heading", type: string }
           - { name: intro, label: "Intro paragraph", type: text }
-          - { name: lead_heading, label: "Lead card — heading", type: string }
-          - { name: lead_body, label: "Lead card — paragraph", type: text }
-          - name: stats
-            label: "Stat boxes"
-            type: object
-            list: true
-            fields:
-              - { name: value, label: "Big number / label", type: string }
-              - { name: label, label: "Caption", type: string }
-          - name: tiles
-            label: "Feature tiles"
-            type: object
-            list: true
-            fields:
-              - { name: title, label: "Title", type: string }
-              - { name: text, label: "Text", type: text }
+          - { name: disclaimer, label: "Disclaimer under the slider", type: string }
+          - { name: benefits, label: "Benefit points (under the slider)", type: string, list: true }
       - name: start
         label: "“Start your website” section"
         type: object
