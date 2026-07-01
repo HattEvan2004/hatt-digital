@@ -1,30 +1,30 @@
 {
   "seo": {
     "title": "Web Design in Nova Scotia for Local Businesses | Hatt Digital",
-    "description": "Hatt Digital builds clean, mobile-friendly websites for Nova Scotia businesses — built to turn visitors into calls and quote requests. Local SEO included, flat honest pricing."
+    "description": "I build clean, mobile-friendly websites for Nova Scotia trades and local businesses — straight pricing from $500, live in 1–3 weeks, and you own everything."
   },
   "hero": {
     "eyebrow": "Web design · Nova Scotia",
-    "title": "Websites that work as hard as you do.",
-    "sub": "Hatt Digital builds clean, professional websites for small businesses in Nova Scotia. Our goal is to help people understand what you do, trust your business, and contact you without confusion.",
-    "cta_primary": "Request a Website Quote",
-    "cta_secondary": "View My Work"
+    "title": "A website that gets you calls — built by **someone you can actually phone.**",
+    "sub": "I’m Evan. I build clean, mobile-first websites for contractors and local businesses across Halifax, Dartmouth, and the South Shore — flat quote up front, live in one to three weeks, and you own every piece of it.",
+    "cta_primary": "Get a Straight Quote",
+    "cta_secondary": "See My Work"
   },
   "compare": {
     "eyebrow": "Before & after",
     "heading": "Your website should make people trust you before they call.",
-    "intro": "Drag the slider to see how a dated, cluttered website becomes a clean, mobile-friendly site that makes it obvious what you do — and easy to get in touch.",
-    "disclaimer": "Example mockup for demonstration purposes. Not based on a real client.",
+    "intro": "Drag the slider. This is the difference I’m talking about — a dated, cluttered site next to a clean, mobile-friendly one that makes it obvious what you do and easy to get in touch.",
+    "disclaimer": "Example mockup, not a real client’s site — it shows the standard I build to.",
     "benefits": [
-      "Better first impression",
-      "Easier to contact",
-      "Built for mobile and local search"
+      "Sites from $500, quoted flat",
+      "Live in 1–3 weeks",
+      "You own the domain, site, and content"
     ]
   },
   "start": {
     "eyebrow": "Start your website",
     "heading": "Ready to get your website handled properly?",
-    "body": "Tell me about your business, your goals, and a budget you’re comfortable with, and I’ll put together a fair, all-in quote built around what you actually need. No pressure, no obligation, even if you’re still deciding.",
+    "body": "Tell me about your business, your goals, and a budget you’re comfortable with, and I’ll put together a fair, all-in quote built around what you actually need. No pressure — even if you’re still deciding.",
     "card_heading": "How it works",
     "steps": [
       "Choose the website option that sounds closest to your needs",
@@ -34,27 +34,11 @@
     ]
   },
   "work": {
-    "eyebrow": "Recent work",
-    "heading": "Mini case studies, built to convert.",
-    "intro": "Each build is structured around one goal: making it obvious what the business does, why it’s trusted, and how to get in touch. The builds below are demos that show what a stronger online presence could look like for a local niche.",
-    "viewall": "View more",
+    "eyebrow": "Demo builds",
+    "heading": "Demo websites — judge the quality bar yourself.",
+    "intro": "No borrowed logos and no invented clients. These are sample builds I made for the kinds of trades and local businesses I want to work with. Open one on your phone — that’s the quality your project gets.",
+    "viewall": "See all demo builds",
     "cases": [
-      {
-        "image": "/assets/screens/toner-supplies.svg",
-        "alt": "Toner and office supplies website demo built by Hatt Digital",
-        "w": "1300",
-        "h": "813",
-        "type": "Office & toner supplies · Demo build",
-        "title": "Toner Supplies Website",
-        "desc": "A clean demo website for an office and toner supply business, built to make browsing products and requesting a quote easier.",
-        "focus": [
-          "Clear product browsing",
-          "Stronger trust signals",
-          "Simple quote flow"
-        ],
-        "bestfor": "suppliers, retailers & B2B sellers",
-        "link": "https://toner-supplies-demo-v2.vercel.app/#"
-      },
       {
         "image": "/assets/screens/electrical.png",
         "alt": "Electrical contractor website demo built by Hatt Digital",
@@ -62,7 +46,7 @@
         "h": "813",
         "type": "Residential & commercial electrical · Demo build",
         "title": "Electrical Contractor Website",
-        "desc": "A modern demo website for an electrical contractor, built to explain services clearly and make requesting a quote simple.",
+        "desc": "A demo website for an electrical contractor. Services are laid out clearly, trust details are up front, and requesting a quote takes one tap.",
         "focus": [
           "Clear service sections",
           "Strong calls to action",
@@ -78,7 +62,7 @@
         "h": "809",
         "type": "Marine services · Demo build",
         "title": "Marine Business Website",
-        "desc": "A polished demo website for a marine service business, built to organize services and make contact details easy to find.",
+        "desc": "A demo website for a marine service business. Services are organized simply and the contact details are easy to find on any screen.",
         "focus": [
           "Organized service layout",
           "Mobile friendly design",
@@ -86,49 +70,66 @@
         ],
         "bestfor": "marine, outdoor & seasonal services",
         "link": "https://marine-services-demo.vercel.app/"
+      },
+      {
+        "image": "/assets/screens/toner-supplies.svg",
+        "alt": "Toner and office supplies website demo built by Hatt Digital",
+        "w": "1300",
+        "h": "813",
+        "type": "Office & toner supplies · Demo build",
+        "title": "Toner Supplies Website",
+        "desc": "A demo website for an office and toner supply business. Browsing products is simple and requesting a quote is obvious.",
+        "focus": [
+          "Clear product browsing",
+          "Stronger trust signals",
+          "Simple quote flow"
+        ],
+        "bestfor": "suppliers, retailers & B2B sellers",
+        "link": "https://toner-supplies-demo-v2.vercel.app/#"
       }
     ]
   },
   "pricing": {
-    "eyebrow": "Website packages",
-    "heading": "Three clear ways to get your website built.",
-    "intro": "Choose the option that sounds closest to what you need. Every project gets a fair, custom quote built around your goals — no fixed template pricing, no guesswork.",
-    "foot": "Every business is different. Choose the option that sounds closest to what you need, then tell me your goals and budget. I’ll build a fair quote around the actual project.",
+    "eyebrow": "Straight pricing",
+    "heading": "Straight prices, not “contact us.”",
+    "intro": "Nobody around here puts prices on the page, so here are mine. Every project still gets a flat, all-in quote — these ranges are just where most projects actually land.",
+    "foot": "Every quote is flat and all-in — the number we agree on is the number you pay. Not sure where you fit? Tell me your budget and I’ll tell you straight what it buys.",
     "tiers": [
       {
         "name": "Starter Website",
-        "label": "Best for getting online properly",
-        "sub": "A clean, focused website for small businesses that need a professional online presence without overcomplicating things.",
+        "label": "Most land between $500–$800",
+        "sub": "A clean, focused one-page site that gets your business online properly — usually live in about a week once I have your content.",
         "features": [
           "One-page website",
           "Mobile-friendly design",
           "Contact form",
-          "Basic SEO setup",
-          "Launch support"
+          "Basic local SEO setup",
+          "You own the domain and site"
         ],
-        "button": "Start with Starter",
+        "button": "Get a Starter quote",
         "package": "starter",
         "featured": false
       },
       {
         "name": "Business Website",
-        "label": "Best for most businesses",
-        "sub": "A stronger website for service businesses that need more pages, better structure, and more trust before customers reach out.",
+        "label": "Most land between $900–$1,500",
+        "sub": "A multi-page site for service businesses that need more trust and better structure before customers reach out — usually live in 2–3 weeks.",
         "features": [
           "Multi-page website",
           "Home, Services, About, Contact, FAQ",
           "Local SEO structure",
-          "Stronger calls-to-action"
+          "Stronger calls-to-action",
+          "You own everything — no lock-in"
         ],
-        "button": "Start with Business",
+        "button": "Get a Business quote",
         "package": "business",
         "featured": true,
         "badge": "Best for most"
       },
       {
         "name": "Growth Website",
-        "label": "Best for custom needs",
-        "sub": "A more flexible website option for businesses that need extra pages, custom sections, quote flows, booking flows, or CMS/editable content.",
+        "label": "Quoted flat, by scope",
+        "sub": "For booking or quote flows, editable content, extra service or location pages, and custom features — I scope it with you and quote one flat number.",
         "features": [
           "Advanced layouts",
           "Booking or quote flows",
@@ -136,7 +137,7 @@
           "Extra service or location pages",
           "Custom integrations where needed"
         ],
-        "button": "Start with Growth",
+        "button": "Get a Growth quote",
         "package": "growth",
         "featured": false
       }
@@ -175,16 +176,16 @@
   },
   "whyhd": {
     "eyebrow": "Why Hatt Digital",
-    "heading": "Agency quality without the agency runaround.",
-    "intro": "Bigger agencies can be a good fit for bigger companies. Hatt Digital is built for local businesses that want a clean, professional website — without a bloated process, confusing handoffs, or unclear pricing.",
+    "heading": "One person, straight answers.",
+    "intro": "Bigger agencies are a good fit for bigger companies. I built Hatt Digital for local businesses that want a clean, professional website without a bloated process or unclear pricing.",
     "points": [
       {
         "title": "You work directly with the builder",
         "text": "The person you talk to is the person designing and building your site."
       },
       {
-        "title": "No runaround or handoffs",
-        "text": "No account managers or ticket queues. One point of contact, start to finish."
+        "title": "One point of contact",
+        "text": "From first call to launch, you deal with me — no account managers or ticket queues."
       },
       {
         "title": "Mobile-first as standard",
@@ -243,33 +244,33 @@
     "steps": [
       {
         "title": "Chat",
-        "text": "A quick, free call to understand your business and what you actually need. Zero pressure."
+        "text": "A quick, free call — usually 15 minutes — so I understand your business and what you actually need. Zero pressure."
       },
       {
         "title": "Plan & quote",
-        "text": "A clear, flat price and timeline up front — so you know exactly what you’re paying before anything starts."
+        "text": "Within one business day you get a flat, all-in price and a real timeline. The number we agree on is the number you pay."
       },
       {
         "title": "Design & build",
-        "text": "I design it, you review it, and we refine it together until it’s right. No surprises at the end."
+        "text": "Weeks 1–2: I design and build, you review, and we refine it together until it’s right."
       },
       {
         "title": "Launch",
-        "text": "Your site goes live. I make sure everything works and show you how to manage it. Then I’m still here."
+        "text": "Most sites go live in 2–3 weeks total. I check everything works, show you how to run it, and stay reachable after."
       }
     ]
   },
   "reviews": {
     "eyebrow": "Reviews",
     "heading": "Real reviews will live here.",
-    "intro": "Hatt Digital is a growing local studio. As projects wrap up, genuine client feedback goes right here — no stock photos, no made-up quotes, no fake five-stars.",
+    "intro": "Hatt Digital is a new studio, and I’d rather leave this section empty than fake it. As projects wrap up, real client feedback goes here exactly as clients wrote it.",
     "quotes": [
       {
         "quote": "Client feedback coming soon. This space is reserved for real reviews from local businesses I’ve worked with.",
         "who": "Your business here"
       },
       {
-        "quote": "No stock quotes and no invented names. When a client leaves feedback, it’ll show up here exactly as they wrote it.",
+        "quote": "When a client leaves feedback, it shows up here exactly as they wrote it — nothing invented, nothing polished up.",
         "who": "Your business here"
       }
     ],
@@ -287,7 +288,7 @@
     "items": [
       {
         "q": "How much does a website cost?",
-        "a": "Every project is quoted individually, because every business is different. Pick the package that sounds closest to what you need, tell me your goals and a budget you’re comfortable with, and I’ll build a fair, flat quote around the actual project. Whatever number you agree to is the number you pay — no surprises."
+        "a": "Most Starter sites land between $500–$800, and most Business sites between $900–$1,500. Bigger builds are quoted by scope. Either way you get one flat, all-in number before work starts — and whatever we agree on is what you pay."
       },
       {
         "q": "How long does a website take?",
@@ -303,12 +304,12 @@
       },
       {
         "q": "What happens after I contact you?",
-        "a": "I reply within one business day with honest advice and clear next steps. No pressure and no obligation — even if it’s just feedback on what you already have."
+        "a": "I reply within one business day with honest advice and clear next steps. No pressure — even if it’s just feedback on what you already have."
       }
     ]
   },
   "cta": {
-    "heading": "Ready to make your website easier to trust and easier to contact?",
-    "body": "Send me your current site, your business idea, or what you need built. I’ll take a look and let you know the best next step — free."
+    "heading": "Want a straight answer about your website?",
+    "body": "Send me your current site or what you need built. I’ll reply within one business day with honest advice and a flat quote — and if we work together, the domain, the site, and the content are yours from day one."
   }
 }

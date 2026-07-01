@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "Website Cost & Web Design FAQ — Nova Scotia | Hatt Digital",
-    "description": "Straight answers on what a website costs, how long it takes, ownership, and local SEO — for Nova Scotia businesses. No jargon, no upsells."
+    "description": "Straight answers for Nova Scotia businesses: what a website costs, how long it takes, who owns what, and how local SEO works. Most sites run $500–$1,500."
   },
   "hero": {
     "eyebrow": "FAQ",
@@ -9,7 +9,7 @@
     "lead": "The questions I get asked most, answered plainly. If yours isn't here, just ask."
   },
   "items": [
-    { "q": "How much does a website cost?", "a": "Every project is quoted individually, because every business is different. Pick the package that sounds closest to what you need, tell me your goals and a budget you’re comfortable with, and I’ll build a fair, flat quote around the actual project. Whatever number you agree to is the number you pay — no surprises." },
+    { "q": "How much does a website cost?", "a": "Most Starter sites land between $500–$800, and most Business sites between $900–$1,500. Bigger builds with bookings or extra pages are quoted by scope. Either way you get one flat, all-in number before work starts — whatever we agree on is what you pay, no surprises." },
     { "q": "How long does a website take?", "a": "Most sites go live within 2–3 weeks once I have your content (photos, text, logo). A simple one-page site can be ready in about a week. Bigger projects with bookings or extra pages take a little longer — and you’ll have a timeline up front." },
     { "q": "Can you redesign my current website?", "a": "Yes — redesigns are a big part of what I do. If your current site is slow, dated, or hard to use on a phone, I’ll rebuild it into something modern that actually works, keeping what’s good and fixing what isn’t." },
     { "q": "Do you help with Google and SEO?", "a": "Yes. Local SEO foundations are built into every site — clean page titles, location wording, proper structure, and mobile speed — so nearby customers can find you when they search. I won’t promise guaranteed rankings (no honest person can), but I set you up the right way." },
@@ -28,6 +28,6 @@
   },
   "cta": {
     "heading": "Still weighing it up? Tell me about your website.",
-    "body": "Share your business, your goals, and a budget you’re comfortable with, and I’ll come back with a clear, fair quote — no pressure, no obligation."
+    "body": "Share your business, your goals, and a budget you’re comfortable with, and I’ll come back with a clear, fair quote — no pressure either way."
   }
 }

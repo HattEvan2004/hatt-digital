@@ -17,9 +17,9 @@
     "note": "Pick the option that sounds closest to what you need. If you came from a package on the site, it’s already selected — change it any time."
   },
   "packages": [
-    { "label": "Best for getting online properly", "desc": "A focused website for small businesses that need a clean, credible online presence." },
-    { "label": "Best for most businesses", "desc": "A stronger multi-page website for service businesses that need more trust and better structure." },
-    { "label": "Best for custom needs", "desc": "A flexible option for businesses that need extra pages, quote flows, CMS options, or custom features." }
+    { "label": "Best for getting online properly", "desc": "A focused website for small businesses that need a clean, credible online presence. Most land between $500–$800." },
+    { "label": "Best for most businesses", "desc": "A stronger multi-page website for service businesses that need more trust and better structure. Most land between $900–$1,500." },
+    { "label": "Best for custom needs", "desc": "A flexible option for extra pages, quote or booking flows, CMS options, or custom features. Quoted flat, by scope." }
   ],
   "s2": {
     "heading": "Project budget range",
