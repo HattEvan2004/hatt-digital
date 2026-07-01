@@ -656,3 +656,129 @@
     else if (k === 'End') { setPos(100); e.preventDefault(); }
   });
 })();
+
+/* =========================================================================
+   PORTFOLIO CAROUSEL — rotating "coverflow" of the demo cards.
+   Centre card active; one card peeking on each side (darker, behind).
+   Prev/next buttons, click-a-side-card, keyboard arrows, touch swipe.
+   No-op on any page without [data-carousel].
+========================================================================= */
+(function () {
+  var root = document.querySelector('[data-carousel]');
+  if (!root) return;
+
+  var stage = root.querySelector('[data-carousel-stage]');
+  var cards = Array.prototype.slice.call(root.querySelectorAll('[data-carousel-card]'));
+  if (!stage || cards.length === 0) return;
+
+  var prevBtn = root.querySelector('[data-carousel-prev]');
+  var nextBtn = root.querySelector('[data-carousel-next]');
+  var dotsWrap = root.querySelector('[data-carousel-dots]');
+  var live = root.querySelector('[data-carousel-live]');
+  var n = cards.length;
+  var active = 0;
+
+  // Single card: nothing to rotate — leave it as a static card.
+  if (n < 2) { root.classList.add('is-ready'); return; }
+
+  // ---- dot indicators ----
+  var dots = [];
+  if (dotsWrap) {
+    cards.forEach(function (card, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pfc-dot';
+      b.setAttribute('role', 'tab');
+      var title = (card.querySelector('h3') || {}).textContent || ('Demo ' + (i + 1));
+      b.setAttribute('aria-label', title);
+      b.addEventListener('click', function () { setActive(i); });
+      dotsWrap.appendChild(b);
+      dots.push(b);
+    });
+  }
+
+  function mod(i) { return (i % n + n) % n; }
+
+  function render() {
+    var prev = mod(active - 1);
+    var next = mod(active + 1);
+    cards.forEach(function (card, i) {
+      card.classList.remove('is-active', 'is-prev', 'is-next', 'is-hidden');
+      var state = i === active ? 'is-active'
+        : i === prev ? 'is-prev'
+        : i === next ? 'is-next'
+        : 'is-hidden';
+      card.classList.add(state);
+      card.setAttribute('aria-hidden', state === 'is-active' ? 'false' : 'true');
+    });
+    dots.forEach(function (d, i) {
+      d.classList.toggle('is-active', i === active);
+      d.setAttribute('aria-selected', i === active ? 'true' : 'false');
+    });
+    syncHeight();
+    if (live) {
+      var t = (cards[active].querySelector('h3') || {}).textContent || '';
+      live.textContent = 'Showing demo ' + (active + 1) + ' of ' + n + (t ? ': ' + t : '');
+    }
+  }
+
+  // Absolute cards don't size the stage, so match its height to the active card.
+  function syncHeight() {
+    var h = cards[active].offsetHeight;
+    if (h) stage.style.height = h + 'px';
+  }
+
+  function setActive(i) { active = mod(i); render(); }
+  function go(dir) { setActive(active + dir); }
+
+  if (prevBtn) prevBtn.addEventListener('click', function () { go(-1); });
+  if (nextBtn) nextBtn.addEventListener('click', function () { go(1); });
+
+  // Click a side card to bring it forward (and block its link on that click).
+  cards.forEach(function (card, i) {
+    card.addEventListener('click', function (e) {
+      if (card.classList.contains('is-active')) return; // active card: links work normally
+      e.preventDefault();
+      setActive(i);
+    });
+  });
+
+  // Keyboard: arrows when the carousel has focus.
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { go(-1); e.preventDefault(); }
+    else if (e.key === 'ArrowRight') { go(1); e.preventDefault(); }
+    else if (e.key === 'Home') { setActive(0); e.preventDefault(); }
+    else if (e.key === 'End') { setActive(n - 1); e.preventDefault(); }
+  });
+
+  // Touch / pointer swipe on the stage.
+  var startX = null, startY = null, swiping = false, suppressClick = false;
+  stage.addEventListener('pointerdown', function (e) {
+    startX = e.clientX; startY = e.clientY; swiping = true; suppressClick = false;
+  });
+  stage.addEventListener('pointerup', function (e) {
+    if (!swiping) return;
+    swiping = false;
+    if (startX === null) return;
+    var dx = e.clientX - startX, dy = e.clientY - startY;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+      suppressClick = true;          // this was a swipe, not a tap
+      go(dx < 0 ? 1 : -1);
+    }
+    startX = startY = null;
+  });
+  // Swallow the click that follows a swipe so it doesn't open a link / jump cards.
+  stage.addEventListener('click', function (e) {
+    if (suppressClick) { e.preventDefault(); e.stopPropagation(); suppressClick = false; }
+  }, true);
+
+  // Keep the stage height correct as things resize / images decode.
+  window.addEventListener('resize', syncHeight, { passive: true });
+  window.addEventListener('load', syncHeight);
+  root.querySelectorAll('img').forEach(function (img) {
+    if (!img.complete) img.addEventListener('load', syncHeight, { once: true });
+  });
+
+  root.classList.add('is-ready');
+  render();
+})();
