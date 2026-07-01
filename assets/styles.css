@@ -1343,3 +1343,106 @@
   @media(prefers-reduced-motion:reduce){
     .ba-before,.ba-handle{transition:none}
   }
+
+  /* ============================================================
+     BEFORE / AFTER v2 — stronger transformation
+     Adds icon buttons, trust row, a conversion quote card, card
+     descriptors, a richer After phone, and dated Before clutter
+     (utility bar, under-construction badge, footer badge).
+     ============================================================ */
+  /* --- AFTER: icon buttons --- */
+  .ba-btn{display:inline-flex;align-items:center;gap:.55cqw}
+  .ba-btn svg{width:1.5cqw;height:1.5cqw;flex:0 0 auto}
+  .ba-callbtn{display:inline-flex;align-items:center;gap:.6cqw}
+  .ba-callbtn svg{width:1.4cqw;height:1.4cqw;flex:0 0 auto}
+
+  /* --- AFTER: tighter hero so trust + quote card + cards fit --- */
+  .ba-hero{padding:2cqw 2.4cqw 1.4cqw;gap:2cqw;align-items:stretch}
+  .ba-hero-copy{display:flex;flex-direction:column}
+  .ba-hero-copy h4{font-size:2.7cqw;margin:.9cqw 0 .8cqw}
+  .ba-hero-copy p{font-size:1.4cqw;max-width:32ch}
+
+  /* --- AFTER: trust row under the buttons --- */
+  .ba-trust{display:flex;flex-wrap:wrap;gap:1cqw 1.8cqw;margin-top:1.5cqw}
+  .ba-trust span{display:inline-flex;align-items:center;gap:.6cqw;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:1.3cqw;letter-spacing:-.01em;color:var(--ink)}
+  .ba-trust svg{width:1.7cqw;height:1.7cqw;color:#fff;background:var(--grad);border-radius:50%;padding:.4cqw;flex:0 0 auto;box-shadow:0 .4cqw 1cqw -.3cqw rgba(18,103,255,.6)}
+
+  /* --- AFTER: conversion quote card (replaces the empty art panel) --- */
+  .ba-quote-card{flex:.92;align-self:stretch;position:relative;border-radius:1.6cqw;overflow:hidden;
+    background:linear-gradient(165deg,#10233e,#0a1729);color:#fff;padding:1.9cqw 1.8cqw;
+    display:flex;flex-direction:column;min-height:16cqw;border:1px solid rgba(20,184,255,.28);
+    box-shadow:0 1.4cqw 3cqw -1.2cqw rgba(4,12,30,.7)}
+  .ba-qc-glow{position:absolute;width:12cqw;height:12cqw;border-radius:50%;background:radial-gradient(circle,rgba(20,184,255,.5),transparent 70%);top:-3cqw;right:-2.5cqw}
+  .ba-qc-eyebrow{position:relative;font-family:'JetBrains Mono',monospace;font-size:1.1cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);font-weight:600}
+  .ba-qc-title{position:relative;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:2cqw;letter-spacing:-.02em;margin:.7cqw 0 1.1cqw;color:#fff}
+  .ba-qc-row{position:relative;display:flex;align-items:center;gap:.9cqw;font-size:1.35cqw;color:#cfe0f5;margin-bottom:.7cqw}
+  .ba-qc-row i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:var(--grad);flex:0 0 auto;box-shadow:0 0 0 .3cqw rgba(20,184,255,.18)}
+  .ba-qc-btn{position:relative;margin-top:auto;background:var(--grad);color:#fff;font-weight:600;font-size:1.4cqw;text-align:center;padding:1.1cqw;border-radius:1.2cqw;box-shadow:0 1cqw 2cqw -.6cqw rgba(18,103,255,.7)}
+  .ba-qc-note{position:relative;text-align:center;font-size:1.05cqw;color:var(--muted-d);margin-top:.8cqw}
+
+  /* --- AFTER: service cards get a short descriptor --- */
+  .ba-cards{padding:0 2.4cqw 2cqw;gap:1.3cqw}
+  .ba-card{padding:1.4cqw}
+  .ba-card b{margin-bottom:.5cqw}
+  .ba-ic{margin-bottom:.9cqw}
+  .ba-cardp{display:block;font-size:1.2cqw;line-height:1.35;color:var(--muted)}
+
+  /* --- AFTER phone: stronger conversion layout --- */
+  .ba-p-top{justify-content:space-between}
+  .ba-p-call{display:inline-flex;align-items:center;justify-content:center;width:2.7cqw;height:2.7cqw;border-radius:50%;background:var(--grad);color:#fff;flex:0 0 auto}
+  .ba-p-call svg{width:1.4cqw;height:1.4cqw}
+  .ba-p-kick{display:block;font-family:'JetBrains Mono',monospace;font-size:1cqw;letter-spacing:.1em;text-transform:uppercase;color:var(--royal);font-weight:600;margin-bottom:.35cqw}
+  .ba-p-hero b{font-size:1.75cqw}
+  .ba-p-btn{display:flex;align-items:center;justify-content:center;gap:.5cqw}
+  .ba-p-btn svg{width:1.25cqw;height:1.25cqw;flex:0 0 auto}
+  .ba-p-trust{display:flex;justify-content:space-between;gap:.4cqw;font-size:1.02cqw;font-weight:600;color:var(--royal);margin-top:.1cqw}
+  .ba-p-list{gap:.7cqw}
+  .ba-p-list span{height:auto;display:flex;align-items:center;padding:.85cqw 1cqw;border-radius:.9cqw;background:#eef3fb;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:1.2cqw;color:var(--ink)}
+
+  /* --- BEFORE: dated utility bar + under-construction badge --- */
+  .ba-util-old{display:flex;justify-content:space-between;align-items:center;gap:1cqw;
+    background:#d7d1c0;color:#5a5340;font-family:Arial,Helvetica,sans-serif;font-size:1.05cqw;
+    padding:.5cqw 1.4cqw;border-bottom:1px solid #b3ab95}
+  .ba-uc-old{flex:0 0 auto;background:#f5c518;color:#3a2c00;font-weight:700;font-size:1cqw;
+    padding:.3cqw .8cqw;border:1px solid #a67c00;border-radius:.2cqw;white-space:nowrap;letter-spacing:.02em}
+  /* --- BEFORE: cluttered footer (counter + dated badge) --- */
+  .ba-foot-old{display:flex;align-items:center;gap:1.4cqw;margin-top:1.6cqw;flex-wrap:wrap}
+  .ba-foot-old .ba-hits-old{margin-top:0}
+  .ba-badge-old{font-family:Arial,Helvetica,sans-serif;font-size:1.2cqw;font-weight:700;color:#083c00;
+    background:linear-gradient(#ffe37a,#e0b000);border:2px outset #d4a600;padding:.4cqw 1cqw;border-radius:.3cqw;text-shadow:1px 1px 0 #ffffff55}
+  /* --- BEFORE phone: weak-mobile note --- */
+  .ba-p-old-note{display:block;margin-top:.6cqw;font-family:Arial,sans-serif;font-size:.85cqw;color:#8a8470;font-style:italic}
+
+  /* --- responsive: tablets / large phones (phone mockup already hidden) --- */
+  @media(max-width:760px){
+    .ba-btn svg,.ba-callbtn svg{width:2.1cqw;height:2.1cqw}
+    .ba-hero{padding:1.8cqw 2cqw 1.2cqw}
+    .ba-hero-copy h4{font-size:3.6cqw}
+    .ba-hero-copy p{font-size:2cqw}
+    .ba-trust span{font-size:1.85cqw}
+    .ba-trust svg{width:2.4cqw;height:2.4cqw}
+    .ba-qc-eyebrow{font-size:1.6cqw}
+    .ba-qc-title{font-size:2.8cqw}
+    .ba-qc-row{font-size:1.9cqw}
+    .ba-qc-btn{font-size:2cqw}
+    .ba-qc-note{font-size:1.5cqw}
+    .ba-cardp{font-size:1.75cqw}
+    .ba-util-old{font-size:1.55cqw}
+    .ba-uc-old{font-size:1.5cqw}
+    .ba-badge-old{font-size:1.85cqw}
+  }
+  /* --- responsive: phones --- */
+  @media(max-width:520px){
+    .ba-hero{flex-direction:column}
+    .ba-quote-card{display:none}
+    .ba-hero-copy h4{font-size:5.2cqw}
+    .ba-hero-copy p{font-size:3cqw}
+    .ba-trust{gap:.8cqw 2.6cqw;margin-top:2cqw}
+    .ba-trust span{font-size:2.7cqw}
+    .ba-trust svg{width:3.5cqw;height:3.5cqw}
+    .ba-cardp{font-size:2.5cqw}
+    .ba-btn svg,.ba-callbtn svg{width:3cqw;height:3cqw}
+    .ba-util-old{font-size:2.2cqw;flex-wrap:wrap;gap:.6cqw}
+    .ba-uc-old{font-size:2cqw}
+    .ba-badge-old{font-size:2.6cqw}
+  }
