@@ -242,9 +242,9 @@
     <div class="band-head rv"><span class="eyebrow on-dark"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.work.eyebrow }}</span>
       <h2>{{ home.work.heading }}</h2>
       <p>{{ home.work.intro }}</p></div>
-    <div class="cases trio" data-stagger="0.08">
-      {%- for c in home.work.cases %}
-      <article class="case rv">
+    {%- set c = home.work.cases[0] %}
+    <div class="feat-solo rv">
+      <article class="case">
         <div class="case-shot">
           <div class="case-chrome" aria-hidden="true">
             <span class="case-dots"><i></i><i></i><i></i></span>
@@ -270,7 +270,6 @@
           </div>
         </div>
       </article>
-      {%- endfor %}
     </div>
     <div class="feat-viewall rv"><a href="projects.html" class="btn btn-ghost on-dark">{{ home.work.viewall }} <span class="arr">&rarr;</span></a></div>
   </div>
