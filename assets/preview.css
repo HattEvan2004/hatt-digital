@@ -46,9 +46,9 @@
 .shot figcaption{padding:18px 4px 0}
 .cap-k{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--royal)}
 .cap-k .tag{background:var(--mist);border:1px solid var(--line);border-radius:6px;padding:3px 8px;color:var(--muted)}
-.shot figcaption h3{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-top:10px}
+.shot figcaption h2{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-top:10px}
 .cap-sub{font-size:14.5px;color:var(--muted);margin-top:6px;max-width:52ch}
-.shot.feature figcaption h3{font-size:23px}
+.shot.feature figcaption h2{font-size:23px}
 
 /* ---- Approach strip ---- */
 .dp-approach{background:var(--mist-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0}

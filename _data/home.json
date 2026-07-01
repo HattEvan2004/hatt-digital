@@ -46,7 +46,7 @@
     "viewall": "See all demo builds",
     "cases": [
       {
-        "image": "/assets/screens/electrical.png",
+        "image": "/assets/screens/electrical.webp",
         "alt": "Electrical contractor website demo built by Hatt Digital",
         "w": "1300",
         "h": "813",
@@ -62,7 +62,7 @@
         "link": "https://electrical-ns-demo.vercel.app/"
       },
       {
-        "image": "/assets/screens/blandford-marine-real.png",
+        "image": "/assets/screens/blandford-marine-real.webp",
         "alt": "Marine services website demo built by Hatt Digital",
         "w": "1300",
         "h": "809",
