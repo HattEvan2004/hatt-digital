@@ -33,7 +33,7 @@ content:
           - name: title
             label: "Headline"
             type: text
-            description: "Wrap the words you want highlighted in **double asterisks**. e.g. Websites that make local businesses look **impossible to ignore.**"
+            description: "Wrap the words you want highlighted in **double asterisks**. e.g. A website that gets you calls, built by **someone you can actually phone.**"
           - { name: sub, label: "Intro sentence", type: text }
           - { name: cta_primary, label: "Primary button label", type: string }
           - { name: cta_secondary, label: "Secondary button label", type: string }
