@@ -37,8 +37,22 @@
     "eyebrow": "Sample websites ",
     "heading": "Website examples built for local trades and small businesses.",
     "intro": "No borrowed logos. No fake client names. These are sample websites I built to show the kind of work I can create for contractors, trades, and local businesses. Open one on your phone and see how your project could feel.",
-    "viewall": "See all website examples",
     "cases": [
+      {
+        "image": "/assets/screens/toner-supplies.svg",
+        "alt": "Toner and office supplies website demo built by Hatt Digital",
+        "w": "1300",
+        "h": "813",
+        "type": "Office & toner supplies · Demo build",
+        "title": "Toner Supplies Website",
+        "desc": "A clean demo website for an office and toner supply business, built to make browsing products and requesting a quote easier.",
+        "focus": [
+          "Clear product browsing",
+          "Stronger trust signals",
+          "Simple quote flow"
+        ],
+        "link": "https://toner-supplies-demo-v2.vercel.app/#"
+      },
       {
         "image": "/assets/screens/electrical.webp",
         "alt": "Electrical contractor website demo built by Hatt Digital",
@@ -46,13 +60,12 @@
         "h": "813",
         "type": "Residential & commercial electrical · Demo build",
         "title": "Electrical Contractor Website",
-        "desc": "A demo website for an electrical contractor. Services are laid out clearly, trust details are up front, and requesting a quote takes one tap.",
+        "desc": "A modern demo website for an electrical contractor, built to explain services clearly and make requesting a quote simple.",
         "focus": [
           "Clear service sections",
           "Strong calls to action",
           "Trust focused layout"
         ],
-        "bestfor": "electricians, HVAC & trades",
         "link": "https://electrical-ns-demo.vercel.app/"
       },
       {
@@ -62,30 +75,13 @@
         "h": "809",
         "type": "Marine services · Demo build",
         "title": "Marine Business Website",
-        "desc": "A demo website for a marine service business. Services are organized simply and the contact details are easy to find on any screen.",
+        "desc": "A polished demo website for a marine service business, built to organize services and make contact details easy to find.",
         "focus": [
           "Organized service layout",
           "Mobile friendly design",
           "Easy contact options"
         ],
-        "bestfor": "marine, outdoor & seasonal services",
         "link": "https://marine-services-demo.vercel.app/"
-      },
-      {
-        "image": "/assets/screens/toner-supplies.svg",
-        "alt": "Toner and office supplies website demo built by Hatt Digital",
-        "w": "1300",
-        "h": "813",
-        "type": "Office & toner supplies · Demo build",
-        "title": "Toner Supplies Website",
-        "desc": "A demo website for an office and toner supply business. Browsing products is simple and requesting a quote is obvious.",
-        "focus": [
-          "Clear product browsing",
-          "Stronger trust signals",
-          "Simple quote flow"
-        ],
-        "bestfor": "suppliers, retailers & B2B sellers",
-        "link": "https://toner-supplies-demo-v2.vercel.app/#"
       }
     ]
   },
@@ -257,50 +253,6 @@
       {
         "title": "Launch",
         "text": "Most sites go live in two to three weeks total. I check everything works, show you how to run it, and stay reachable after."
-      }
-    ]
-  },
-  "reviews": {
-    "eyebrow": "Reviews",
-    "heading": "Real reviews will live here.",
-    "intro": "Hatt Digital is a new studio, and I won’t fake this part. There are no stock quotes or invented names here — real client reviews get added only when real clients give permission, and they’ll appear exactly as written.",
-    "quotes": [
-      {
-        "quote": "Client feedback coming soon. This space is reserved for real reviews from local businesses I’ve worked with.",
-        "who": "Your business here"
-      },
-      {
-        "quote": "When a client leaves feedback, it shows up here exactly as they wrote it — nothing invented, nothing polished up.",
-        "who": "Your business here"
-      }
-    ],
-    "invite": {
-      "title": "Have we worked together?",
-      "text": "Your honest feedback can be featured here. Get in touch and let me know how it went."
-    }
-  },
-  "faq": {
-    "eyebrow": "FAQ",
-    "heading": "Questions business owners ask me.",
-    "intro": "The honest answers to the things people want to know before they reach out.",
-    "cta_heading": "Got a question that isn’t here?",
-    "cta_body": "See the full FAQ, or just send it over and I’ll give you a straight answer.",
-    "items": [
-      {
-        "q": "How much does a website cost?",
-        "a": "Most Starter sites land between $500–$800, and most Business sites between $900–$1,500. Bigger builds are quoted by scope. Either way you get one flat, all-in number before work starts — and whatever we agree on is what you pay."
-      },
-      {
-        "q": "How long does it take?",
-        "a": "Most sites go live within 2–3 weeks once I have your content. A simple one-page site can be ready in about a week."
-      },
-      {
-        "q": "Why not just use Wix or Squarespace?",
-        "a": "Those builders are good tools, but the tool isn’t the strategy. Most owners don’t have the time or the design, SEO, and copywriting know-how to turn a template into a site that actually brings in leads. That’s the part I handle."
-      },
-      {
-        "q": "What happens after I request a quote?",
-        "a": "I reply within one business day with honest advice and clear next steps. If a quote makes sense, you get one flat number and a real timeline. No pressure — even if it’s just feedback on what you already have."
       }
     ]
   },

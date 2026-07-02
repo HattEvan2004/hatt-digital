@@ -10,7 +10,6 @@ A static site of hand-coded HTML, CSS, and a little vanilla JavaScript. Editable
 |------|------|
 | Home | `index.html` |
 | Services | `services.html` |
-| Projects / Portfolio | `projects.html` |
 | About | `about.html` |
 | FAQ | `faq.html` |
 | Quote / project request | `quote.html` |
@@ -99,7 +98,6 @@ redeploys the finished site.
 .
 ├── index.html
 ├── services.html
-├── projects.html
 ├── about.html
 ├── faq.html
 ├── quote.html                           # project quote form (Forminit-backed)
@@ -112,7 +110,7 @@ redeploys the finished site.
 ├── web-design-dartmouth.html
 ├── assets/
 │   ├── styles.css    # all styles + design tokens
-│   ├── projects.css  # portfolio / case-card styles (home + projects)
+│   ├── projects.css  # portfolio / case-card + carousel styles (home)
 │   ├── main.js       # nav, scroll reveals, hero build, FAQ, mobile CTA bar
 │   ├── forminit.js   # quote form: Forminit submit, package pre-select, uploads
 │   └── logo.png      # brand mark

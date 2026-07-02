@@ -4,8 +4,10 @@
   "outputDirectory": "_site",
   "trailingSlash": false,
   "redirects": [
-    { "source": "/pricing.html", "destination": "/projects.html", "permanent": true },
-    { "source": "/pricing", "destination": "/projects.html", "permanent": true }
+    { "source": "/pricing.html", "destination": "/#pricing", "permanent": true },
+    { "source": "/pricing", "destination": "/#pricing", "permanent": true },
+    { "source": "/projects.html", "destination": "/#portfolio", "permanent": true },
+    { "source": "/projects", "destination": "/#portfolio", "permanent": true }
   ],
   "headers": [
     {
