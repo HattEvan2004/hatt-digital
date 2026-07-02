@@ -167,7 +167,9 @@
     var ticking = false;
     var sync = function () {
       ticking = false;
-      var trigger = header.offsetHeight || 76;
+      /* At least the html scroll-padding-top (84px) so an anchor jump that
+         lands a section exactly at the padding offset still reveals the bar. */
+      var trigger = Math.max(header.offsetHeight || 0, 90);
       var reached = whyMatters.getBoundingClientRect().top <= trigger;
       header.classList.toggle('is-visible', reached);
     };
@@ -237,8 +239,22 @@
       renderCode(TOTAL, false);                 // remove the blinking caret
       if (compiler) compiler.style.display = 'none';
       if (hint) hint.style.opacity = '1';       // invite scrolling into the page
+      unbindSkip();
     }
   }
+
+  /* A visitor who scrolls, taps, or presses a key isn't here for the show —
+     jump the build straight to the finished hero so the headline and CTAs
+     are never more than one gesture away. */
+  var SKIP_EVENTS = ['wheel', 'touchstart', 'pointerdown', 'keydown'];
+  function skip() { t0 = -Infinity; unbindSkip(); }
+  function unbindSkip() {
+    SKIP_EVENTS.forEach(function (ev) { window.removeEventListener(ev, skip); });
+  }
+  SKIP_EVENTS.forEach(function (ev) {
+    window.addEventListener(ev, skip, { passive: true });
+  });
+
   /* small beat so layout + fonts settle, then play */
   setTimeout(function () { requestAnimationFrame(tick); }, 320);
 })();
