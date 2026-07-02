@@ -294,7 +294,7 @@ body.pf .menu-btn span{background:#071426}
 
 /* The single example card: a restrained, centred preview (not a hero),
    with real breathing room above it. */
-.feat-solo{max-width:580px;margin:56px auto 0}
+.feat-solo{max-width:640px;margin:56px auto 0}
 
 @media(max-width:600px){
   .feat-solo{margin-top:44px}

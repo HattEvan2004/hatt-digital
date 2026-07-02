@@ -826,6 +826,10 @@
   .ba-dots{display:inline-flex;gap:.9cqw}
   .ba-dots i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:#c4cede;display:block}
   .ba-url{font-family:'JetBrains Mono',monospace;font-size:1.35cqw;color:#7688a3;background:#fff;border-radius:1cqw;padding:.4cqw 1.6cqw;flex:1;text-align:center;letter-spacing:.01em}
+  /* anchor the two URLs to opposite sides so they never splice into one
+     another at the clip line (both used to sit centred at the same spot) */
+  .ba-before .ba-url{text-align:left}
+  .ba-after .ba-url{text-align:right}
   .ba-view{flex:1;overflow:hidden;position:relative;font-size:1.4cqw;line-height:1.4;color:var(--ink)}
 
   /* ---- AFTER: polished Hatt-style redesign ---- */
@@ -885,6 +889,19 @@
   .ba-body-old{padding:1.8cqw 2.2cqw}
   .ba-body-old p{font-size:1.35cqw;line-height:1.55;color:#4a4a44;text-align:justify;margin-bottom:1.4cqw}
   .ba-link-old{display:inline-block;font-size:1.35cqw;color:#4a6fa5;text-decoration:underline}
+  /* dull mid-page filler: plain services list + a photo that never loaded —
+     fills the pane the way a real stale site does, no joke elements */
+  .ba-cols-old{display:flex;gap:2cqw;align-items:stretch;margin:0 0 1.4cqw}
+  .ba-list-old{flex:1.15;min-width:0}
+  .ba-list-old b{display:block;font-size:1.3cqw;color:#43433d;text-decoration:underline;margin-bottom:.5cqw}
+  .ba-list-old span{display:block;font-size:1.2cqw;color:#55554e;line-height:1.65}
+  .ba-img-old{flex:1;background:#e7e4d8;border:1px solid #cfcaba;min-height:8.5cqw;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6cqw}
+  .ba-img-old i{width:2.4cqw;height:2cqw;display:block;background:#f4f1e7;border:1px solid #b5b09e;position:relative}
+  .ba-img-old i:after{content:"";position:absolute;left:.35cqw;right:.35cqw;bottom:.3cqw;height:.7cqw;
+    background:linear-gradient(135deg,transparent 42%,#b5b09e 43%,#b5b09e 57%,transparent 58%),
+    linear-gradient(225deg,transparent 42%,#b5b09e 43%,#b5b09e 57%,transparent 58%)}
+  .ba-img-old span{font-size:1cqw;font-style:italic;color:#8f8c80}
   .ba-footer-old{margin-top:1.7cqw;padding-top:1cqw;border-top:1px solid #ddd8ca;font-size:1.05cqw;color:#8f8c80}
   /* before phone: a squished, unreadable desktop layout */
   .ba-phone.is-old{background:#3a3a3a}
@@ -897,10 +914,15 @@
   .ba-p-old-line.short{width:55%}
   .ba-p-old-foot{display:block;margin-top:.5cqw;font-size:.75cqw;color:#8f8c80}
 
-  /* ---- Before / After tags ---- */
-  .ba-tag{position:absolute;top:5.6cqw;z-index:4;font-family:'JetBrains Mono',monospace;font-size:1.25cqw;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.7cqw 1.4cqw;border-radius:1cqw;color:#fff;backdrop-filter:blur(4px)}
+  /* ---- Before / After tags — floated on the dark stage margin above the
+     browser so they never cover the mockup's URL bar at any handle position ---- */
+  .ba-tag{position:absolute;top:.9cqw;z-index:4;font-family:'JetBrains Mono',monospace;font-size:1.25cqw;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.7cqw 1.4cqw;border-radius:1cqw;color:#fff;backdrop-filter:blur(4px)}
   .ba-tag-before{left:5.4cqw;background:rgba(120,30,30,.72);border:1px solid rgba(255,255,255,.18)}
   .ba-tag-after{right:5.4cqw;background:rgba(18,103,255,.72);border:1px solid rgba(255,255,255,.22)}
+  /* one honest micro-caption per side: name the sin, name the fix */
+  .ba-tag em{font-style:normal;font-family:'Inter',sans-serif;font-weight:500;text-transform:none;
+    letter-spacing:.015em;font-size:1.15cqw;opacity:.94;margin-left:1cqw;padding-left:1cqw;
+    border-left:1px solid rgba(255,255,255,.38)}
 
   /* ---- Draggable handle ---- */
   .ba-handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);z-index:5;
@@ -930,8 +952,9 @@
   @media(max-width:760px){
     .ba-stage{margin-top:40px}
     .ba-slider{aspect-ratio:4/3.15}
-    /* scale the whole mockup up so text stays readable on tablets/phones */
-    .ba-browser{top:3.4cqw;left:3cqw;right:3cqw;bottom:3.4cqw}
+    /* scale the whole mockup up so text stays readable on tablets/phones
+       (extra top inset leaves room for the Before/After tags in the margin) */
+    .ba-browser{top:5.6cqw;left:3cqw;right:3cqw;bottom:3.4cqw}
     .ba-view{font-size:2.15cqw}
     .ba-url{font-size:1.9cqw}
     .ba-logo{font-size:2.5cqw}.ba-nav{gap:1.6cqw}
@@ -942,9 +965,12 @@
     .ba-body-old p{font-size:2.05cqw}
     .ba-logo-old{font-size:2.9cqw}.ba-nav-old{font-size:1.8cqw}.ba-heroband-old b{font-size:3.1cqw}
     .ba-heroband-old i{font-size:1.9cqw}.ba-link-old{font-size:2cqw}.ba-footer-old{font-size:1.6cqw}
+    .ba-list-old b{font-size:1.9cqw}.ba-list-old span{font-size:1.8cqw}
+    .ba-img-old span{font-size:1.5cqw}.ba-img-old i{width:3.4cqw;height:2.8cqw}
     /* phone mockup would crowd a narrow stage — drop it, focus the desktop view */
     .ba-phone{display:none}
-    .ba-tag{font-size:1.9cqw;top:5cqw}
+    .ba-tag{font-size:1.9cqw;top:1cqw}
+    .ba-tag em{font-size:1.7cqw}
   }
   @media(max-width:520px){
     .ba-slider{aspect-ratio:1/1.02}
@@ -961,7 +987,14 @@
     .ba-body-old p{font-size:2.9cqw}
     .ba-logo-old{font-size:3.9cqw}.ba-nav-old{font-size:2.4cqw}.ba-heroband-old b{font-size:4.2cqw}
     .ba-heroband-old i{font-size:2.6cqw}.ba-link-old{font-size:2.9cqw}.ba-footer-old{font-size:2.2cqw}
-    .ba-tag{font-size:2.7cqw;top:4cqw;padding:1cqw 2cqw}
+    /* phone-width pane: the filler columns would push the buried-phone
+       footer (the payoff) out of the frame — the shorter page fills it fine */
+    .ba-cols-old{display:none}
+    .ba-browser{top:7cqw}
+    .ba-specks{display:none}
+    .ba-tag{font-size:2.7cqw;top:1cqw;padding:1cqw 2cqw}
+    /* the micro-captions would crowd a phone-width stage — tags only */
+    .ba-tag em{display:none}
     .ba-tag-before{left:4cqw}.ba-tag-after{right:4cqw}
     .ba-benefits{gap:10px 20px;margin-top:26px}
     .ba-benefits li{font-size:14.5px}
