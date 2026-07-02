@@ -1,25 +1,58 @@
 {
   "seo": {
-    "title": "Website Cost & Web Design FAQ — Nova Scotia | Hatt Digital",
-    "description": "Straight answers for Nova Scotia businesses: what a website costs, how long it takes, who owns what, and how local SEO works. Most sites run $500–$1,500."
+    "title": "Website Cost and Web Design FAQ in Nova Scotia | Hatt Digital",
+    "description": "Straight answers for Nova Scotia businesses about website pricing, timelines, ownership, payment, and local SEO. Most sites cost $500 to $1,500."
   },
   "hero": {
     "eyebrow": "FAQ",
-    "heading": "Straight answers, **no fluff.**",
-    "lead": "The questions I get asked most, answered plainly. If yours isn't here, just ask."
+    "heading": "Straight answers, no fluff.",
+    "lead": "The questions I get asked most, answered plainly. If yours is not here, just ask."
   },
   "items": [
-    { "q": "How much does a website cost?", "a": "Most Starter sites land between $500–$800, and most Business sites between $900–$1,500. Bigger builds with bookings or extra pages are quoted by scope. Either way you get one flat, all-in number before work starts — whatever we agree on is what you pay, no surprises." },
-    { "q": "How long does a website take?", "a": "Most sites go live within 2–3 weeks once I have your content (photos, text, logo). A simple one-page site can be ready in about a week. Bigger projects with bookings or extra pages take a little longer — and you’ll have a timeline up front." },
-    { "q": "Can you redesign my current website?", "a": "Yes — redesigns are a big part of what I do. If your current site is slow, dated, or hard to use on a phone, I’ll rebuild it into something modern that actually works, keeping what’s good and fixing what isn’t." },
-    { "q": "Do you help with Google and SEO?", "a": "Yes. Local SEO foundations are built into every site — clean page titles, location wording, proper structure, and mobile speed — so nearby customers can find you when they search. I won’t promise guaranteed rankings (no honest person can), but I set you up the right way." },
-    { "q": "Can you help with my Google Business Profile?", "a": "Yes. I’ll guide you through setting up or tidying your Google Business Profile and pointing it at your new site, so you have a better shot at showing up in the local map results when people search nearby." },
-    { "q": "Can I update the website myself later?", "a": "If you’d like to, yes. I can set the site up so you can make simple edits to text and images yourself, with a plain-English guide. Prefer to hand it off completely? An optional care plan covers updates for you." },
-    { "q": "Do I need to have all my text and images ready?", "a": "No. Just an idea of what your business does and what you want the site to achieve is enough to start. I’ll guide you on photos and wording, and I can help write the copy if you’re stuck." },
-    { "q": "Why not just use Squarespace or Wix?", "a": "Those builders are useful tools, but the tool isn’t the strategy. Most business owners don’t have the time or the design, SEO, and copywriting know-how to turn a template into a site that actually brings in leads. You could build it yourself — but if you want it done properly and built around getting contacted, that’s the part I handle." },
-    { "q": "Do I actually own my website?", "a": "Yes — 100%. Your domain, your site, and your content are all in your name. There are no fees to access your own property and nothing locking you in. It’s yours." },
-    { "q": "I’m not techy — is that a problem?", "a": "Not even a little. I handle the technical side and explain everything in plain English. You focus on running your business; I’ll take care of the website." },
-    { "q": "What happens after I contact you?", "a": "I reply within one business day with honest advice and clear next steps. We’ll have a quick, no-pressure chat about what you need, then I’ll send a flat quote and timeline. Nothing starts until you’re happy with the plan." }
+    {
+      "q": "How much does a website cost?",
+      "a": "Most Starter sites land between $500–$800, and most Business sites between $900–$1,500. Bigger builds with bookings or extra pages are quoted by scope. Either way you get one flat, all-in number before work starts — whatever we agree on is what you pay, no surprises."
+    },
+    {
+      "q": "How long does a website take?",
+      "a": "Most sites go live within 2–3 weeks once I have your content (photos, text, logo). A simple one-page site can be ready in about a week. Bigger projects with bookings or extra pages take a little longer — and you’ll have a timeline up front."
+    },
+    {
+      "q": "Can you redesign my current website?",
+      "a": "Yes — redesigns are a big part of what I do. If your current site is slow, dated, or hard to use on a phone, I’ll rebuild it into something modern that actually works, keeping what’s good and fixing what isn’t."
+    },
+    {
+      "q": "Do you help with Google and SEO?",
+      "a": "Yes. Local SEO foundations are built into every site — clean page titles, location wording, proper structure, and mobile speed — so nearby customers can find you when they search. I won’t promise guaranteed rankings (no honest person can), but I set you up the right way."
+    },
+    {
+      "q": "Can you help with my Google Business Profile?",
+      "a": "Yes. I’ll guide you through setting up or tidying your Google Business Profile and pointing it at your new site, so you have a better shot at showing up in the local map results when people search nearby."
+    },
+    {
+      "q": "Can I update the website myself later?",
+      "a": "If you’d like to, yes. I can set the site up so you can make simple edits to text and images yourself, with a plain-English guide. Prefer to hand it off completely? An optional care plan covers updates for you."
+    },
+    {
+      "q": "Do I need to have all my text and images ready?",
+      "a": "No. Just an idea of what your business does and what you want the site to achieve is enough to start. I’ll guide you on photos and wording, and I can help write the copy if you’re stuck."
+    },
+    {
+      "q": "Why not just use Squarespace or Wix?",
+      "a": "Those builders are useful tools, but the tool isn’t the strategy. Most business owners don’t have the time or the design, SEO, and copywriting know-how to turn a template into a site that actually brings in leads. You could build it yourself — but if you want it done properly and built around getting contacted, that’s the part I handle."
+    },
+    {
+      "q": "Do I actually own my website?",
+      "a": "Yes — 100%. Your domain, your site, and your content are all in your name. There are no fees to access your own property and nothing locking you in. It’s yours."
+    },
+    {
+      "q": "I’m not techy — is that a problem?",
+      "a": "Not even a little. I handle the technical side and explain everything in plain English. You focus on running your business; I’ll take care of the website."
+    },
+    {
+      "q": "What happens after I contact you?",
+      "a": "I reply within one business day with honest advice and clear next steps. We’ll have a quick, no-pressure chat about what you need, then I’ll send a flat quote and timeline. Nothing starts until you’re happy with the plan."
+    }
   ],
   "mini": {
     "heading": "Still have a question?",
