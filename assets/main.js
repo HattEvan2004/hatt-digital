@@ -610,6 +610,7 @@
   var hint = document.getElementById('baHint');
   var dragging = false;
   var hintGone = false;
+  var interacted = false;
 
   // The "Drag to compare" hint has done its job once the visitor touches the
   // slider — fade it, then remove it so it never blocks the mockup.
@@ -642,6 +643,7 @@
 
   slider.addEventListener('pointerdown', function (e) {
     dragging = true;
+    interacted = true;
     dismissHint();
     try { slider.setPointerCapture(e.pointerId); } catch (err) {}
     setPos(pctFromX(e.clientX));
@@ -664,11 +666,51 @@
   handle.addEventListener('keydown', function (e) {
     var step = e.shiftKey ? 10 : 4;
     var k = e.key;
+    if (['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].indexOf(k) !== -1) interacted = true;
     if (k === 'ArrowLeft' || k === 'ArrowDown') { setPos(currentPct() - step); dismissHint(); e.preventDefault(); }
     else if (k === 'ArrowRight' || k === 'ArrowUp') { setPos(currentPct() + step); dismissHint(); e.preventDefault(); }
     else if (k === 'Home') { setPos(0); dismissHint(); e.preventDefault(); }
     else if (k === 'End') { setPos(100); dismissHint(); e.preventDefault(); }
   });
+
+  /* ---- one-time auto-sweep when the slider first scrolls into view ----
+     Wipes the handle 50 → 72 → 28 → 50 so the interaction demonstrates
+     itself. Skipped for reduced-motion, and it bails the moment the
+     visitor takes over. Leaves the pill hint in place to reinforce it. */
+  function runSweep() {
+    var stops = [[0, 50], [0.30, 72], [0.66, 28], [1, 50]];
+    var dur = 1500, start;
+    function easeInOut(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
+    function step(ts) {
+      if (interacted) return;               // visitor took over — stop, leave their position
+      if (start === undefined) start = ts;
+      var g = Math.min((ts - start) / dur, 1);
+      for (var i = 1; i < stops.length; i++) {
+        if (g <= stops[i][0]) {
+          var a = stops[i - 1], b = stops[i];
+          var local = (g - a[0]) / (b[0] - a[0]);
+          setPos(a[1] + (b[1] - a[1]) * easeInOut(local));
+          break;
+        }
+      }
+      if (g < 1) requestAnimationFrame(step);
+      else setPos(50);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          io.disconnect();
+          if (!interacted) setTimeout(runSweep, 350);
+        }
+      });
+    }, { threshold: 0.55 });
+    io.observe(slider);
+  }
 })();
 
 /* =========================================================================
