@@ -14,7 +14,7 @@
   "success": "Thanks! Your quote request is in — I’ll reply within one business day.",
   "s1": {
     "heading": "Choose your website type",
-    "note": "Pick the option that sounds closest to what you need. If you came from a package on the site, it’s already selected — change it any time."
+    "note": "Pick the option that sounds closest to what you need. If you came from a package on the site, it is already selected. You can change it any time."
   },
   "packages": [
     {
