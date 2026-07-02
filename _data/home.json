@@ -34,10 +34,10 @@
     ]
   },
   "work": {
-    "eyebrow": "Demo builds",
-    "heading": "Demo websites — judge the quality bar yourself.",
-    "intro": "No borrowed logos and no invented clients. These are sample builds I made for the kinds of trades and local businesses I want to work with. Open one on your phone — that’s the quality your project gets.",
-    "viewall": "See all demo builds",
+    "eyebrow": "Sample websites ",
+    "heading": "Website examples built for local trades and small businesses.",
+    "intro": "No borrowed logos. No fake client names. These are sample websites I built to show the kind of work I can create for contractors, trades, and local businesses. Open one on your phone and see how your project could feel.",
+    "viewall": "See all website examples",
     "cases": [
       {
         "image": "/assets/screens/electrical.webp",
