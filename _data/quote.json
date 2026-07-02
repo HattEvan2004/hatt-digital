@@ -32,8 +32,8 @@
   ],
   "s2": {
     "heading": "Project budget range",
-    "note": "This helps me recommend the right scope — it does not lock you into a final price.",
-    "unsure": "I’m not sure yet — I’d like help choosing a fair budget."
+    "note": "This helps me recommend the right scope.  It does not lock you into a final price.",
+    "unsure": "I’m not sure yet.  I’d like help choosing a fair budget."
   },
   "s3": {
     "heading": "Basic details",
