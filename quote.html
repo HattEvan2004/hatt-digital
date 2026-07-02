@@ -240,9 +240,9 @@
               <span class="pkg-desc">{{ quote.packages[1].desc }}</span>
             </label>
             <label class="pkg-card">
-              <input type="radio" name="package_choice" value="Growth Website">
+              <input type="radio" name="package_choice" value="Custom Website">
               <span class="pkg-badge">Selected</span>
-              <span class="pkg-name">Growth Website</span>
+              <span class="pkg-name">Custom Website</span>
               <span class="pkg-label">{{ quote.packages[2].label }}</span>
               <span class="pkg-desc">{{ quote.packages[2].desc }}</span>
             </label>
@@ -254,10 +254,10 @@
           <div class="q-head"><span class="q-num">02</span><h2>{{ quote.s2.heading }}</h2></div>
           <p class="q-note">{{ quote.s2.note }}</p>
           <div class="budget-wrap" id="budgetWrap">
-            <input type="range" id="budgetSlider" name="selected_budget" min="500" max="1500" step="50" value="1000"
+            <input type="range" id="budgetSlider" name="selected_budget" min="700" max="2000" step="50" value="1200"
                    aria-label="Preferred budget range">
-            <div class="budget-readout">Preferred range: <strong id="budgetValue">$1,000</strong></div>
-            <div class="budget-scale"><span id="budgetMin">$500</span><span id="budgetMax">$1,500</span></div>
+            <div class="budget-readout">Preferred range: <strong id="budgetValue">$1,200</strong></div>
+            <div class="budget-scale"><span id="budgetMin">$700</span><span id="budgetMax">$2,000</span></div>
           </div>
           <label class="check-line">
             <input type="checkbox" name="unsure_budget" value="Yes — I'd like help choosing a fair budget" id="unsureBudget">
@@ -379,11 +379,12 @@
 (function(){
   'use strict';
   var RANGES={
-    'Starter Website':{min:250,max:500,step:25,def:400},
-    'Business Website':{min:500,max:1500,step:50,def:1000},
-    'Growth Website':{min:1500,max:5000,step:100,def:2500}
+    'Starter Website':{min:400,max:1000,step:50,def:650},
+    'Business Website':{min:700,max:2000,step:50,def:1200},
+    'Custom Website':{min:1500,max:5000,step:100,def:2500}
   };
-  var PMAP={starter:'Starter Website',business:'Business Website',growth:'Growth Website'};
+  /* "growth" kept as an alias so older links with ?package=growth still work. */
+  var PMAP={starter:'Starter Website',business:'Business Website',custom:'Custom Website',growth:'Custom Website'};
   function money(n){return '$'+Number(n).toLocaleString('en-US');}
   function byId(id){return document.getElementById(id);}
 

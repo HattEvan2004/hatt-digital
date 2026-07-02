@@ -19,11 +19,13 @@
   var FORMINIT_FORM_ID = 'wfjl4ah61iy';
   /* =================================================================== */
 
-  /* Map ?package= URL value -> the visible package option value. */
+  /* Map ?package= URL value -> the visible package option value.
+     "growth" is a legacy alias for the renamed Custom Website package. */
   var PACKAGE_MAP = {
     starter: 'Starter Website',
     business: 'Business Website',
-    growth: 'Growth Website'
+    custom: 'Custom Website',
+    growth: 'Custom Website'
   };
 
   function humanMB(bytes) { return (bytes / (1024 * 1024)).toFixed(1) + ' MB'; }

@@ -37,6 +37,7 @@ content:
           - { name: sub, label: "Intro sentence", type: text }
           - { name: cta_primary, label: "Primary button label", type: string }
           - { name: cta_secondary, label: "Secondary button label", type: string }
+          - { name: receipts, label: "Quick facts under the buttons (short — 3 or 4 max)", type: string, list: true }
       - name: compare
         label: "“Before & after” comparison section"
         type: object
@@ -157,6 +158,14 @@ content:
           - { name: body1, label: "Paragraph 1", type: text }
           - { name: body2, label: "Paragraph 2", type: text }
           - { name: button, label: "Button label", type: string }
+          - name: card
+            label: "Trust card (the “who you deal with” box)"
+            type: object
+            fields:
+              - { name: name, label: "Name", type: string }
+              - { name: role, label: "Role / business", type: string }
+              - { name: area, label: "Area", type: string }
+              - { name: line, label: "One-line promise", type: text }
       - name: process
         label: "Process"
         type: object
@@ -238,6 +247,13 @@ content:
         type: object
         fields:
           - { name: blurb, label: "Short blurb under the logo", type: text }
+      - name: facts
+        label: "“The short version” card (interior page headers)"
+        type: object
+        fields:
+          - { name: label, label: "Card title", type: string }
+          - { name: items, label: "Facts (3 short lines)", type: string, list: true }
+          - { name: call_label, label: "Call link label (e.g. Call Evan)", type: string }
 
   # ───────────────  OTHER PAGES (advanced raw-HTML editing)  ───────────────
   # These are still hand-coded HTML. You can edit them here, but you are editing

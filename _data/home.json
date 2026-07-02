@@ -8,7 +8,13 @@
     "title": "A website that gets you calls, built by **someone you can actually phone.**",
     "sub": "I’m Evan. I build clean, mobile-first websites for contractors and local businesses across Halifax, Dartmouth, and the South Shore. You get a flat quote up front, a site live in 1 to 3 weeks, and you own every piece of it.",
     "cta_primary": "Get a Clear Quote",
-    "cta_secondary": "See My Work"
+    "cta_secondary": "See My Work",
+    "receipts": [
+      "Sites from $500",
+      "Live in 1–3 weeks",
+      "You own everything",
+      "Replies in 1 business day"
+    ]
   },
   "compare": {
     "eyebrow": "Before & After",
@@ -235,7 +241,13 @@
     "heading": "Your website, built by the person you actually talk to.",
     "body1": "Hatt Digital is run by Evan Hatt, right here in Nova Scotia. That means you’re not being passed between salespeople, account managers, and developers. You deal directly with the person designing, building, and launching your website.",
     "body2": "I work with local businesses across Halifax, Dartmouth, Bedford, the South Shore and beyond — contractors, trades, and service businesses that want a site that actually brings in work.",
-    "button": "More about Evan"
+    "button": "More about Evan",
+    "card": {
+      "name": "Evan Hatt",
+      "role": "Hatt Digital",
+      "area": "Nova Scotia",
+      "line": "When you call or email, you deal with me directly."
+    }
   },
   "process": {
     "eyebrow": "How it works",
