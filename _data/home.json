@@ -90,15 +90,15 @@
     ]
   },
   "pricing": {
-    "eyebrow": "Straight pricing",
-    "heading": "Straight prices, not “contact us.”",
-    "intro": "Nobody around here puts prices on the page, so here are mine. Every project still gets a flat, all-in quote — these ranges are just where most projects actually land.",
-    "foot": "Every quote is flat and all-in — the number we agree on is the number you pay. Not sure where you fit? Tell me your budget and I’ll tell you straight what it buys.",
+    "eyebrow": "Clear pricing",
+    "heading": "Website pricing without the runaround.",
+    "intro": "Most website projects hide the price until after a call. I keep it simple. These are the ranges where most local business websites land, and every project gets a flat, all in quote before anything starts.",
+    "foot": "Every quote is flat and all in. The number we agree on is the number you pay. Not sure where you fit? Tell me what you need and I’ll point you to the right option.",
     "tiers": [
       {
         "name": "Starter Website",
         "label": "Most land between $500–$800",
-        "sub": "A clean, focused one-page site that gets your business online properly — usually live in about a week once I have your content.",
+        "sub": "A clean, focused one page website that gets your business online properly. Best for simple service businesses that need a strong homepage, clear contact options, and a professional mobile layout.",
         "features": [
           "One-page website",
           "Mobile-friendly design",
