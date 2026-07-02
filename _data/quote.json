@@ -1,7 +1,7 @@
 {
   "seo": {
-    "title": "Request a Website Quote — Nova Scotia Web Design | Hatt Digital",
-    "description": "Request a website quote from Hatt Digital. Choose the option that sounds closest to what you need, tell me about your business, goals, and budget, and I'll build a fair quote around your project — replies within one business day."
+    "title": "Request a Website Quote in Nova Scotia | Hatt Digital",
+    "description": "Request a website quote from Hatt Digital. Choose the option that sounds closest to what you need, tell me about your business, goals, and budget, and I will reply within one business day."
   },
   "og_description": "Choose the option that sounds closest to what you need, tell me about your business, goals, and budget, and I'll build a fair quote around your project.",
   "hero": {
@@ -17,9 +17,18 @@
     "note": "Pick the option that sounds closest to what you need. If you came from a package on the site, it’s already selected — change it any time."
   },
   "packages": [
-    { "label": "Best for getting online properly", "desc": "A focused website for small businesses that need a clean, credible online presence. Most land between $500–$800." },
-    { "label": "Best for most businesses", "desc": "A stronger multi-page website for service businesses that need more trust and better structure. Most land between $900–$1,500." },
-    { "label": "Best for custom needs", "desc": "A flexible option for extra pages, quote or booking flows, CMS options, or custom features. Quoted flat, by scope." }
+    {
+      "label": "Best for getting online properly",
+      "desc": "A focused website for small businesses that need a clean, credible online presence. Most land between $500–$800."
+    },
+    {
+      "label": "Best for most businesses",
+      "desc": "A stronger multi-page website for service businesses that need more trust and better structure. Most land between $900–$1,500."
+    },
+    {
+      "label": "Best for custom needs",
+      "desc": "A flexible option for extra pages, quote or booking flows, CMS options, or custom features. Quoted flat, by scope."
+    }
   ],
   "s2": {
     "heading": "Project budget range",
