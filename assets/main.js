@@ -607,7 +607,20 @@
   var handle = document.getElementById('baHandle');
   if (!slider || !handle) return;
 
+  var hint = document.getElementById('baHint');
   var dragging = false;
+  var hintGone = false;
+
+  // The "Drag to compare" hint has done its job once the visitor touches the
+  // slider — fade it, then remove it so it never blocks the mockup.
+  function dismissHint() {
+    if (hintGone || !hint) return;
+    hintGone = true;
+    hint.classList.add('is-hidden');
+    setTimeout(function () {
+      if (hint && hint.parentNode) hint.parentNode.removeChild(hint);
+    }, 550);
+  }
 
   function clamp(n) { return n < 0 ? 0 : n > 100 ? 100 : n; }
 
@@ -629,6 +642,7 @@
 
   slider.addEventListener('pointerdown', function (e) {
     dragging = true;
+    dismissHint();
     try { slider.setPointerCapture(e.pointerId); } catch (err) {}
     setPos(pctFromX(e.clientX));
     handle.focus({ preventScroll: true });
@@ -650,10 +664,10 @@
   handle.addEventListener('keydown', function (e) {
     var step = e.shiftKey ? 10 : 4;
     var k = e.key;
-    if (k === 'ArrowLeft' || k === 'ArrowDown') { setPos(currentPct() - step); e.preventDefault(); }
-    else if (k === 'ArrowRight' || k === 'ArrowUp') { setPos(currentPct() + step); e.preventDefault(); }
-    else if (k === 'Home') { setPos(0); e.preventDefault(); }
-    else if (k === 'End') { setPos(100); e.preventDefault(); }
+    if (k === 'ArrowLeft' || k === 'ArrowDown') { setPos(currentPct() - step); dismissHint(); e.preventDefault(); }
+    else if (k === 'ArrowRight' || k === 'ArrowUp') { setPos(currentPct() + step); dismissHint(); e.preventDefault(); }
+    else if (k === 'Home') { setPos(0); dismissHint(); e.preventDefault(); }
+    else if (k === 'End') { setPos(100); dismissHint(); e.preventDefault(); }
   });
 })();
 

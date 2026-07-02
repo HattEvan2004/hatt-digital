@@ -957,6 +957,22 @@
   .ba-handle:focus-visible{outline:none}
   .ba-handle:focus-visible .ba-handle-grip{box-shadow:0 6px 20px -4px rgba(4,12,30,.6),0 0 0 4px #fff,0 0 0 7px var(--royal)}
 
+  /* ---- "Drag to compare" hint: pulses near the handle, fades on first use ---- */
+  .ba-hint{position:absolute;left:50%;top:50%;margin-top:5.4cqw;transform:translateX(-50%);z-index:6;
+    pointer-events:none;display:inline-flex;align-items:center;gap:.9cqw;white-space:nowrap;
+    font-family:'JetBrains Mono',monospace;font-size:1.3cqw;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:#fff;background:rgba(8,20,38,.74);backdrop-filter:blur(6px);
+    padding:1cqw 1.8cqw;border-radius:100px;border:1px solid rgba(255,255,255,.2);
+    box-shadow:0 1.4cqw 3cqw -1.2cqw rgba(4,12,30,.8),0 0 0 1px rgba(4,12,30,.25);
+    animation:baHintPulse 2.4s ease-in-out infinite;
+    transition:opacity .45s ease,transform .45s ease}
+  .ba-hint svg{width:2cqw;height:2cqw;flex:0 0 auto;color:var(--cyan)}
+  .ba-hint.is-hidden{opacity:0;transform:translateX(-50%) scale(.92);animation:none}
+  @keyframes baHintPulse{
+    0%,100%{transform:translateX(-50%)}
+    50%{transform:translateX(calc(-50% + 6px))}
+  }
+
   .ba-note{text-align:center;color:var(--muted);font-size:12.5px;margin-top:16px;letter-spacing:.01em}
 
   /* ---- benefit points ---- */
@@ -1079,6 +1095,8 @@
     .ba-stars svg{width:2.2cqw;height:2.2cqw}
     .ba-url-secure svg,.ba-url-insecure svg{width:2.2cqw;height:2.2cqw}
     .ba-oldimg-wm{font-size:2.4cqw}
+    .ba-hint{font-size:1.9cqw;margin-top:6cqw}
+    .ba-hint svg{width:2.8cqw;height:2.8cqw}
     .ba-trust span{font-size:1.85cqw}
     .ba-trust svg{width:2.4cqw;height:2.4cqw}
     .ba-trust-badge svg{width:2.2cqw!important;height:2.2cqw!important}
@@ -1106,6 +1124,8 @@
     .ba-insecure-url{display:none}
     .ba-oldimg{height:12cqw}
     .ba-oldimg-wm{font-size:3.2cqw}
+    .ba-hint{font-size:2.7cqw;margin-top:7cqw;padding:1.4cqw 2.4cqw}
+    .ba-hint svg{width:4cqw;height:4cqw}
     .ba-cardp{font-size:2.5cqw}
     .ba-btn svg,.ba-callbtn svg{width:3cqw;height:3cqw}
   }
