@@ -50,12 +50,12 @@
         "text": "A quick phone or video call, usually 15 minutes, so I can understand your business, what you need, and what the website should help with. No pressure."
       },
       {
-        "title": "Plan & quote",
-        "text": "Within one business day you get a flat, all-in price and a real timeline. The number we agree on is the number you pay."
+        "title": "Plan and quote",
+        "text": "Within one business day, you get a flat, all in price and a real timeline. The number we agree on is the number you pay."
       },
       {
-        "title": "Design & build",
-        "text": "Weeks 1–2: I design and build, you review, and we refine it together until it's right."
+        "title": "Design and build",
+        "text": "In week one and week two, I design and build the site, you review it, and we refine it together until it feels right."
       },
       {
         "title": "Launch",
@@ -64,9 +64,9 @@
     ]
   },
   "local": {
-    "eyebrow": "Local & in your corner",
+    "eyebrow": "Local and in your corner",
     "heading": "Built here, for here.",
-    "body1": "I’m based right in Nova Scotia, and I understand small businesses around here because they’re my community. When you call, you reach the person who actually built your site — not a ticket number or an offshore queue.",
+    "body1": "I’m based right here in Nova Scotia, and I understand small businesses around here because they’re my community too. When you call, you reach the person who actually built your site, not a ticket number or an offshore queue.",
     "body2": "I work with contractors, trades, and service businesses across Halifax, Dartmouth, Bedford, the South Shore and beyond. That means honest advice, quick answers, and someone genuinely invested in your business doing well.",
     "button": "Let's talk"
   },
