@@ -113,13 +113,13 @@
       {
         "name": "Business Website",
         "label": "Most land between $900–$1,500",
-        "sub": "A multi-page site for service businesses that need more trust and better structure before customers reach out — usually live in 2–3 weeks.",
+        "sub": "A multi-page site for service businesses that need more trust and better structure before customers reach out. ",
         "features": [
           "Multi-page website",
           "Home, Services, About, Contact, FAQ",
           "Local SEO structure",
           "Stronger calls-to-action",
-          "You own everything — no lock-in"
+          "You own the domain and site"
         ],
         "button": "Get a Business quote",
         "package": "business",
@@ -127,9 +127,9 @@
         "badge": "Best for most"
       },
       {
-        "name": "Growth Website",
-        "label": "Quoted flat, by scope",
-        "sub": "For booking or quote flows, editable content, extra service or location pages, and custom features — I scope it with you and quote one flat number.",
+        "name": "Custom Website",
+        "label": "Custom quoted after scope",
+        "sub": "For businesses that need more than a standard website, such as booking forms, quote flows, editable content, extra service or location pages, or custom features. I scope it with you first, then give one flat price.",
         "features": [
           "Advanced layouts",
           "Booking or quote flows",
@@ -137,8 +137,8 @@
           "Extra service or location pages",
           "Custom integrations where needed"
         ],
-        "button": "Get a Growth quote",
-        "package": "growth",
+        "button": "Get a Custom Quote",
+        "package": "custom",
         "featured": false
       }
     ]
