@@ -10,8 +10,8 @@
     "lead": "Choose the website option that sounds closest to what you need, then tell me about your business, goals, and budget. I’ll use that to build a fair quote around the actual project.",
     "note": "The option you choose is just a starting point.  Every business is different."
   },
-  "form_lead": "This only takes a minute. Most details are optional — just share what you can.",
-  "success": "Thanks! Your quote request is in — I’ll reply within one business day.",
+  "form_lead": "This only takes a minute. Most details are optional,  just share what you can.",
+  "success": "Thanks! Your quote request is in! I will reply within one business day.",
   "s1": {
     "heading": "Choose your website type",
     "note": "Pick the option that sounds closest to what you need. If you came from a package on the site, it is already selected. You can change it any time."
