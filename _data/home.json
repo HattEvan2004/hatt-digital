@@ -239,24 +239,24 @@
   },
   "process": {
     "eyebrow": "How it works",
-    "heading": "From first message to launch — no mystery.",
-    "intro": "You’ll always know exactly where things stand and what happens next.",
+    "heading": "Four steps. No mystery.",
+    "intro": "You'll always know exactly where things stand and what happens next.",
     "steps": [
       {
-        "title": "Chat",
-        "text": "A quick, free call — usually 15 minutes — so I understand your business and what you actually need. Zero pressure."
+        "title": "Quick call",
+        "text": "A quick phone or video call, usually 15 minutes, so I can understand your business, what you need, and what the website should help with. No pressure."
       },
       {
-        "title": "Plan & quote",
-        "text": "Within one business day you get a flat, all-in price and a real timeline. The number we agree on is the number you pay."
+        "title": "Plan and quote",
+        "text": "Within one business day, you get a flat, all in price and a real timeline. The number we agree on is the number you pay."
       },
       {
-        "title": "Design & build",
-        "text": "Weeks 1–2: I design and build, you review, and we refine it together until it’s right."
+        "title": "Design and build",
+        "text": "In week one and week two, I design and build the site, you review it, and we refine it together until it feels right."
       },
       {
         "title": "Launch",
-        "text": "Most sites go live in 2–3 weeks total. I check everything works, show you how to run it, and stay reachable after."
+        "text": "Most sites go live in two to three weeks total. I check everything works, show you how to run it, and stay reachable after."
       }
     ]
   },
