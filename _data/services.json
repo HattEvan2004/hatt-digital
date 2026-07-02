@@ -95,16 +95,6 @@
           "Plain-English guide"
         ],
         "tag": "Optional"
-      },
-      {
-        "title": "Care & updates",
-        "body": "An optional monthly plan that keeps everything running — hosting, security, backups, and small content changes — so you never have to think about your site’s upkeep again. Cancel anytime.",
-        "features": [
-          "Hosting & backups",
-          "Security updates",
-          "Small edits included"
-        ],
-        "tag": "Optional"
       }
     ]
   },
