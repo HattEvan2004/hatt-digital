@@ -5,22 +5,18 @@
   },
   "hero": {
     "eyebrow": "About",
-    "heading": "Your neighbour, **not an agency.**",
-    "lead": "Hatt Digital is a one-person studio in Nova Scotia, built on a simple idea: honest websites, fair prices, real support."
+    "heading": "Your neighbour, not an agency.",
+    "lead": "Hatt Digital is a one-person website studio in Nova Scotia built on a simple idea: honest websites, fair prices, and real support."
   },
   "founder": {
-    "quote": "I started Hatt Digital because too many local businesses get sold expensive, complicated websites they don’t actually need — then get ignored once the invoice clears. I wanted to build the opposite: honest pricing, clean design, and a website that actually helps people contact you.",
+    "quote": "I started Hatt Digital because too many local businesses get sold expensive, complicated websites they don’t actually need. I wanted to build the opposite: honest pricing, clean design, and websites that make it easier for customers to find you, trust you, and contact you.",
     "sig_name": "Evan Hatt",
     "sig_role": "Founder, Hatt Digital"
-  },
-  "direct": {
-    "heading": "Local, direct, and easy to work with.",
-    "body": "Hatt Digital is built for small businesses that want a clean website without dealing with a confusing agency process. You talk directly with the person building the site, you own your domain, site, and content outright, and you get a flat quote before the work starts."
   },
   "difference": {
     "eyebrow": "The difference",
     "heading": "Why working with me is different.",
-    "intro": "One person builds your site and stays reachable after it’s live — no account managers in between.",
+    "intro": "When you work with Hatt Digital, you deal directly with the person building your website. No handoffs, no account managers, and no getting ignored after launch.",
     "cards": [
       {
         "title": "You deal directly with the builder",
