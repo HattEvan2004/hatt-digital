@@ -843,6 +843,12 @@
   .ba-dots{display:inline-flex;gap:.9cqw}
   .ba-dots i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:#c4cede;display:block}
   .ba-url{font-family:'JetBrains Mono',monospace;font-size:1.35cqw;color:#7688a3;background:#fff;border-radius:1cqw;padding:.4cqw 1.6cqw;flex:1;text-align:center;letter-spacing:.01em}
+  .ba-url-secure{display:flex;align-items:center;justify-content:center;gap:.7cqw;color:#3a4a63}
+  .ba-url-secure svg{width:1.4cqw;height:1.4cqw;color:#1f9d55;flex:0 0 auto}
+  .ba-url-insecure{display:flex;align-items:center;justify-content:center;gap:.7cqw;background:#fdf3f3;text-align:left}
+  .ba-url-insecure svg{width:1.5cqw;height:1.5cqw;color:#c0392b;flex:0 0 auto}
+  .ba-insecure-txt{color:#c0392b;font-weight:700}
+  .ba-insecure-url{color:#9aa2ae;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .ba-view{flex:1;overflow:hidden;position:relative;font-size:1.4cqw;line-height:1.4;color:var(--ink)}
 
   /* ---- AFTER: polished Hatt-style redesign ---- */
@@ -855,6 +861,10 @@
   .ba-hero{display:flex;gap:2.4cqw;padding:3cqw 2.4cqw 2.4cqw;align-items:center}
   .ba-hero-copy{flex:1.25;min-width:0}
   .ba-kicker{font-family:'JetBrains Mono',monospace;font-size:1.15cqw;letter-spacing:.14em;text-transform:uppercase;color:var(--royal);font-weight:600}
+  .ba-rating{display:flex;align-items:center;gap:.8cqw;margin-top:1cqw;font-size:1.35cqw;color:var(--muted)}
+  .ba-rating b{color:var(--ink);font-weight:700}
+  .ba-stars{display:inline-flex;gap:.2cqw}
+  .ba-stars svg{width:1.6cqw;height:1.6cqw;color:#f6b40a}
   .ba-hero-copy h4{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:3cqw;line-height:1.06;letter-spacing:-.03em;margin:1cqw 0 .9cqw;color:var(--ink)}
   .ba-hero-copy p{color:var(--muted);font-size:1.5cqw;line-height:1.5;max-width:34ch}
   .ba-actions{display:flex;gap:1.2cqw;margin-top:1.9cqw}
@@ -899,6 +909,21 @@
   .ba-heroband-old{background:linear-gradient(#93a6ba,#71859a);color:#f3f5f8;text-align:center;padding:2.6cqw 2cqw;border-bottom:1px solid #5f7288}
   .ba-heroband-old b{display:block;font-size:2.2cqw;font-weight:700;text-shadow:0 1px 0 rgba(0,0,0,.18)}
   .ba-heroband-old i{display:block;font-size:1.25cqw;margin-top:.5cqw;opacity:.85}
+  /* a stretched, low-res generic "stock photo" banner — the classic bad-template hero */
+  .ba-oldimg{position:relative;height:9cqw;overflow:hidden;border-bottom:2px solid #cfc9b8;
+    background:
+      radial-gradient(circle at 82% 26%,#ffe9a8 0 2.6cqw,transparent 2.9cqw),
+      linear-gradient(#a8c6df 0 55%,#8fb56a 55% 100%);
+    image-rendering:pixelated}
+  /* crude clip-art house */
+  .ba-oldimg:before{content:"";position:absolute;left:38%;bottom:1.6cqw;width:10cqw;height:4.2cqw;
+    background:#d8b98a;border:.35cqw solid #7a5a38;
+    box-shadow:0 -2.2cqw 0 -1.2cqw #b34a3a, inset 0 0 0 10cqw transparent;
+    clip-path:polygon(0 100%,0 30%,50% -30%,100% 30%,100% 100%)}
+  .ba-oldimg-wm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-14deg);
+    font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:1.7cqw;letter-spacing:.06em;
+    color:rgba(255,255,255,.55);text-shadow:0 1px 2px rgba(0,0,0,.35);white-space:nowrap;
+    border:.25cqw dashed rgba(255,255,255,.5);padding:.4cqw 1.2cqw;border-radius:.6cqw}
   .ba-body-old{padding:1.8cqw 2.2cqw}
   .ba-body-old p{font-size:1.35cqw;line-height:1.55;color:#4a4a44;text-align:justify;margin-bottom:1.4cqw}
   .ba-link-old{display:inline-block;font-size:1.35cqw;color:#4a6fa5;text-decoration:underline}
@@ -1009,6 +1034,8 @@
   .ba-trust{display:flex;flex-wrap:wrap;gap:1cqw 1.8cqw;margin-top:1.5cqw}
   .ba-trust span{display:inline-flex;align-items:center;gap:.6cqw;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:1.3cqw;letter-spacing:-.01em;color:var(--ink)}
   .ba-trust svg{width:1.7cqw;height:1.7cqw;color:#fff;background:var(--grad);border-radius:50%;padding:.4cqw;flex:0 0 auto;box-shadow:0 .4cqw 1cqw -.3cqw rgba(18,103,255,.6)}
+  .ba-trust-badge{background:rgba(31,157,85,.1);border:1px solid rgba(31,157,85,.28);border-radius:1.4cqw;padding:.5cqw 1.2cqw;color:#177a43!important}
+  .ba-trust-badge svg{width:1.6cqw!important;height:1.6cqw!important;color:#1f9d55!important;background:none!important;border-radius:0!important;padding:0!important;box-shadow:none!important}
 
   /* --- AFTER: conversion quote card (replaces the empty art panel) --- */
   .ba-quote-card{flex:.92;align-self:stretch;position:relative;border-radius:1.6cqw;overflow:hidden;
@@ -1048,8 +1075,13 @@
     .ba-hero{padding:1.8cqw 2cqw 1.2cqw}
     .ba-hero-copy h4{font-size:3.6cqw}
     .ba-hero-copy p{font-size:2cqw}
+    .ba-rating{font-size:1.9cqw}
+    .ba-stars svg{width:2.2cqw;height:2.2cqw}
+    .ba-url-secure svg,.ba-url-insecure svg{width:2.2cqw;height:2.2cqw}
+    .ba-oldimg-wm{font-size:2.4cqw}
     .ba-trust span{font-size:1.85cqw}
     .ba-trust svg{width:2.4cqw;height:2.4cqw}
+    .ba-trust-badge svg{width:2.2cqw!important;height:2.2cqw!important}
     .ba-qc-eyebrow{font-size:1.6cqw}
     .ba-qc-title{font-size:2.8cqw}
     .ba-qc-row{font-size:1.9cqw}
@@ -1063,9 +1095,17 @@
     .ba-quote-card{display:none}
     .ba-hero-copy h4{font-size:5.2cqw}
     .ba-hero-copy p{font-size:3cqw}
+    .ba-rating{font-size:2.7cqw;margin-top:1.6cqw}
+    .ba-stars svg{width:3.1cqw;height:3.1cqw}
     .ba-trust{gap:.8cqw 2.6cqw;margin-top:2cqw}
     .ba-trust span{font-size:2.7cqw}
     .ba-trust svg{width:3.5cqw;height:3.5cqw}
+    .ba-trust-badge svg{width:3cqw!important;height:3cqw!important}
+    /* the raw URL crowds the "Not secure" flag on a narrow bar — keep the flag, drop the path */
+    .ba-url-secure svg,.ba-url-insecure svg{width:3cqw;height:3cqw}
+    .ba-insecure-url{display:none}
+    .ba-oldimg{height:12cqw}
+    .ba-oldimg-wm{font-size:3.2cqw}
     .ba-cardp{font-size:2.5cqw}
     .ba-btn svg,.ba-callbtn svg{width:3cqw;height:3cqw}
   }
