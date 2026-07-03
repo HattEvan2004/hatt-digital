@@ -817,13 +817,15 @@
   .ba-stage{margin-top:52px;max-width:1040px;margin-left:auto;margin-right:auto}
   .ba-slider{
     position:relative;width:100%;aspect-ratio:16/9.6;
-    border-radius:calc(var(--r) + 4px);overflow:hidden;
-    background:linear-gradient(180deg,#0c1c34,#0a1729);
+    /* slim, modern-tablet corner radius (kept in px/vw — cqw can't measure the
+       container from the container element itself) */
+    border-radius:clamp(22px,2.6vw,38px);overflow:hidden;
+    background:linear-gradient(155deg,#0e2138,#0a1729 62%);
     border:1px solid var(--line-d);
-    box-shadow:0 40px 90px -46px rgba(4,12,30,.85),0 2px 0 rgba(255,255,255,.04) inset;
+    box-shadow:0 40px 90px -46px rgba(4,12,30,.85),0 1px 0 rgba(255,255,255,.06) inset,0 0 0 1px rgba(255,255,255,.02) inset;
     container-type:inline-size;
     touch-action:pan-y;user-select:none;-webkit-user-select:none;
-    cursor:ew-resize;isolation:isolate;
+    cursor:default;isolation:isolate;
   }
   .ba-specks{position:absolute;top:14px;left:16px;z-index:6;display:grid;grid-template-columns:repeat(3,4px);gap:4px;opacity:.7;pointer-events:none}
   .ba-specks i{width:4px;height:4px;border-radius:1px;display:block}
@@ -836,9 +838,11 @@
   .ba-after{z-index:1}
 
   /* ---- shared mockup: browser + phone frame ---- */
-  .ba-browser{position:absolute;top:4.2cqw;left:3.6cqw;right:3.6cqw;bottom:4.2cqw;
-    border-radius:2cqw;overflow:hidden;background:#fff;
-    box-shadow:0 3cqw 5cqw -2.6cqw rgba(0,0,0,.55);display:flex;flex-direction:column}
+  /* slim uniform bezel — the navy frame reads as a thin-bezel tablet, the white
+     screen sits cleanly inside it with a hairline cutout edge */
+  .ba-browser{position:absolute;top:2.8cqw;left:2.8cqw;right:2.8cqw;bottom:2.8cqw;
+    border-radius:1.7cqw;overflow:hidden;background:#fff;
+    box-shadow:0 2.6cqw 4.4cqw -2.4cqw rgba(0,0,0,.55),0 0 0 1px rgba(4,12,30,.5);display:flex;flex-direction:column}
   .ba-chrome{display:flex;align-items:center;gap:1.4cqw;height:4cqw;padding:0 2cqw;background:#eef2f8;border-bottom:1px solid #dbe3ef;flex:0 0 auto}
   .ba-dots{display:inline-flex;gap:.9cqw}
   .ba-dots i{width:1.2cqw;height:1.2cqw;border-radius:50%;background:#c4cede;display:block}
@@ -883,10 +887,13 @@
   .ba-line.short{width:60%}
 
   /* ---- AFTER phone ---- */
-  .ba-phone{position:absolute;right:3.4cqw;bottom:3cqw;width:15cqw;aspect-ratio:1/2.02;
-    border-radius:2.6cqw;background:#0b1424;padding:1cqw;z-index:3;
-    box-shadow:0 3cqw 5cqw -1.6cqw rgba(0,0,0,.7),0 0 0 .35cqw rgba(255,255,255,.06)}
-  .ba-phone-screen{width:100%;height:100%;border-radius:1.8cqw;overflow:hidden;background:#fff;display:flex;flex-direction:column;padding:1.4cqw;gap:1cqw}
+  /* slim modern phone: taller screen proportion, rounder corners, thin uniform
+     bezel and a fine machined rim — the screen radius stays concentric with the
+     frame so it reads as a premium handset, not a bulky slab */
+  .ba-phone{position:absolute;right:3.4cqw;bottom:3cqw;width:14.4cqw;aspect-ratio:1/2.15;
+    border-radius:3.3cqw;background:linear-gradient(158deg,#152131,#0a1220);padding:.7cqw;z-index:3;
+    box-shadow:0 3cqw 5cqw -1.6cqw rgba(0,0,0,.72),0 0 0 .14cqw rgba(255,255,255,.12),inset 0 0 0 .1cqw rgba(255,255,255,.07)}
+  .ba-phone-screen{width:100%;height:100%;border-radius:2.6cqw;overflow:hidden;background:#fff;display:flex;flex-direction:column;padding:1.3cqw;gap:1cqw}
   .ba-p-top{display:flex;align-items:center;justify-content:center}
   .ba-p-logo{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:1.35cqw;color:var(--ink)}
   .ba-p-hero{margin-top:.4cqw}
@@ -900,7 +907,7 @@
   /* ---- BEFORE: stale, generic template site — the realistic kind of bad:
      crowded underlined nav, washed-out banner, wall of justified text,
      a text-link "CTA", and the phone number buried in the footer ---- */
-  .ba-browser.is-old{box-shadow:0 3cqw 5cqw -2.6cqw rgba(0,0,0,.5)}
+  .ba-browser.is-old{box-shadow:0 2.6cqw 4.4cqw -2.4cqw rgba(0,0,0,.5),0 0 0 1px rgba(4,12,30,.45)}
   .ba-before .ba-view{background:#f2f1ec;font-family:Arial,Helvetica,sans-serif;color:#333;display:block;overflow:hidden}
   .ba-topbar-old{background:#fbfaf7;color:#555;padding:1.2cqw 1.6cqw;text-align:center;border-bottom:1px solid #ddd8ca}
   .ba-logo-old{font-weight:700;font-size:1.9cqw;letter-spacing:.01em;color:#37456b;display:block}
@@ -988,8 +995,9 @@
   @media(max-width:760px){
     .ba-stage{margin-top:40px}
     .ba-slider{aspect-ratio:4/3.15}
-    /* scale the whole mockup up so text stays readable on tablets/phones */
-    .ba-browser{top:3.4cqw;left:3cqw;right:3cqw;bottom:3.4cqw}
+    /* scale the whole mockup up so text stays readable on tablets/phones,
+       with a slim uniform bezel to match the desktop tablet frame */
+    .ba-browser{top:2.4cqw;left:2.4cqw;right:2.4cqw;bottom:2.4cqw}
     .ba-view{font-size:2.15cqw}
     .ba-url{font-size:1.9cqw}
     .ba-logo{font-size:2.5cqw}.ba-nav{gap:1.6cqw}

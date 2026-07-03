@@ -598,8 +598,10 @@
 
 /* ============================================================
    BEFORE / AFTER SLIDER
-   Drives --pos on #baSlider from pointer (mouse + touch) and
-   keyboard. Self-contained; no-ops on pages without the slider.
+   Drives --pos on #baSlider by dragging the #baHandle (pointer:
+   mouse + touch + pen) or with the keyboard. Only the handle moves
+   the divider — the rest of the section is inert so taps and
+   vertical scrolls behave normally. No-ops on pages without it.
    ============================================================ */
 (function () {
   'use strict';
@@ -641,27 +643,36 @@
     return parseFloat(slider.style.getPropertyValue('--pos')) || 50;
   }
 
-  slider.addEventListener('pointerdown', function (e) {
+  // Dragging is driven ONLY by the blue handle. Pressing anywhere else on the
+  // slider — the mockup image, cards, labels, the wrapper itself — does nothing:
+  // no jump, no drag. A vertical swipe over the section scrolls the page as
+  // usual, because the wrapper keeps touch-action:pan-y and only the handle
+  // sets touch-action:none. There is intentionally no pointerdown/click handler
+  // on the container, so tapping the image can never move the divider.
+  handle.addEventListener('pointerdown', function (e) {
     dragging = true;
     interacted = true;
     dismissHint();
-    try { slider.setPointerCapture(e.pointerId); } catch (err) {}
-    setPos(pctFromX(e.clientX));
+    // Capture the pointer on the handle so pointermove/up/cancel keep firing on
+    // it even when the finger travels off the handle and over the mockup. We do
+    // NOT reposition on press — the divider only follows a real drag.
+    try { handle.setPointerCapture(e.pointerId); } catch (err) {}
     handle.focus({ preventScroll: true });
-    e.preventDefault();
+    e.preventDefault();   // block text selection / native image drag
   });
 
-  slider.addEventListener('pointermove', function (e) {
-    if (dragging) setPos(pctFromX(e.clientX));
+  handle.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    setPos(pctFromX(e.clientX));
   });
 
   function endDrag(e) {
     if (!dragging) return;
     dragging = false;
-    try { slider.releasePointerCapture(e.pointerId); } catch (err) {}
+    try { handle.releasePointerCapture(e.pointerId); } catch (err) {}
   }
-  slider.addEventListener('pointerup', endDrag);
-  slider.addEventListener('pointercancel', endDrag);
+  handle.addEventListener('pointerup', endDrag);
+  handle.addEventListener('pointercancel', endDrag);
 
   handle.addEventListener('keydown', function (e) {
     var step = e.shiftKey ? 10 : 4;
