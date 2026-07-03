@@ -874,7 +874,7 @@
     truro:       { q: '45.3650,-63.2869', name: 'Truro' },
     bedford:     { q: '44.7258,-63.6668', name: 'Bedford' },
     chester:     { q: '44.5429,-64.2389', name: 'Chester' },
-    mahonebay:   { q: '44.4490,-64.3820', name: 'Mahone Bay' },
+    mahonebay:   { q: '44.4489,-64.3872', name: 'Mahone Bay' },
     bridgewater: { q: '44.3786,-64.5188', name: 'Bridgewater' }
   };
   var ZOOM = 12;
