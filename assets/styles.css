@@ -152,32 +152,24 @@
   .ptier .btn{width:100%;justify-content:center;margin-top:auto}
   /* local */
   .local{display:grid;grid-template-columns:1fr 1.05fr;gap:52px;align-items:center}
-  /* ---- interactive Nova Scotia service-area map ---- */
-  .map-card{background:linear-gradient(155deg,var(--navy-2),var(--ink));border:1px solid var(--line-d);border-radius:24px;padding:0;margin:0;position:relative;overflow:hidden;aspect-ratio:1/.74;box-shadow:0 40px 80px -40px rgba(7,16,40,.7)}
-  .map-card:before{content:"";position:absolute;inset:0;z-index:1;background-image:linear-gradient(rgba(120,170,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(120,170,255,.05) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:radial-gradient(120% 100% at 58% 26%,#000 32%,transparent 82%);mask-image:radial-gradient(120% 100% at 58% 26%,#000 32%,transparent 82%);pointer-events:none}
-  .ns-map{position:absolute;inset:0;width:100%;height:100%;z-index:2;display:block}
-  /* live readout panel */
-  .map-readout{position:absolute;left:clamp(18px,4%,26px);top:clamp(15px,4.4%,24px);z-index:3;pointer-events:none;max-width:62%}
-  .map-tag{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
-  .map-town{display:block;margin-top:4px;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:clamp(19px,2.5vw,26px);line-height:1.04;letter-spacing:-.02em;color:#fff}
-  .map-coord{display:block;margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.05em;color:#9fc4ff}
-  /* brand accent squares (top-right) */
-  .map-accents{position:absolute;right:16px;top:16px;z-index:3;display:grid;grid-template-columns:repeat(2,5px);grid-auto-rows:5px;gap:4px;pointer-events:none}
-  .map-accents i{width:5px;height:5px;border-radius:1px;display:block}
-  .map-accents i:nth-child(1){background:var(--cyan)}.map-accents i:nth-child(2){background:var(--royal);opacity:.6}.map-accents i:nth-child(3){background:var(--cyan);opacity:.4}.map-accents i:nth-child(4){background:var(--royal);opacity:.5}
-  /* SVG pieces */
-  .ns-cb{fill:#102a49;stroke:rgba(20,184,255,.16);stroke-width:1}
-  .ns-land{fill:url(#nsLand);stroke:rgba(90,185,255,.55);stroke-width:1.4;filter:drop-shadow(0 6px 16px rgba(6,20,48,.55))}
-  .ns-dot{fill:#7cc0ff;opacity:.55;transition:opacity .3s ease}
-  .ns-dot.is-active{opacity:0}
-  .ns-spot,.ns-marker,.ns-label{transition:transform .6s cubic-bezier(.22,.61,.36,1);will-change:transform}
-  .ns-spot circle{fill:url(#nsSpotGrad)}
-  .ns-halo{fill:rgba(20,184,255,.16)}
-  .ns-pulse{fill:none;stroke:rgba(20,184,255,.7);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:nsPing 2.6s ease-out infinite}
-  .ns-pin{fill:#18B6F2;stroke:#eaf7ff;stroke-width:1.5}
-  .ns-pin-core{fill:#fff}
-  .ns-label text{font-family:'Inter Tight',sans-serif;font-weight:700;font-size:17px;fill:#fff;paint-order:stroke;stroke:rgba(5,14,30,.92);stroke-width:3.6px;stroke-linejoin:round}
-  @keyframes nsPing{0%{transform:scale(.5);opacity:.85}70%{opacity:0}100%{transform:scale(2.1);opacity:0}}
+  /* ---- real service-area map (Leaflet + OpenStreetMap) ---- */
+  .map-card{position:relative;overflow:hidden;border-radius:20px;padding:0;margin:0;aspect-ratio:1/.74;
+    background:#e8edf4;border:1px solid var(--line);
+    box-shadow:0 26px 54px -30px rgba(7,16,40,.5),0 2px 8px -5px rgba(7,16,40,.3)}
+  .ns-map{position:absolute;inset:0;width:100%;height:100%}
+  /* Leaflet surface: sit cleanly inside the card, match the brand */
+  .leaflet-container{background:#e8edf4;font:inherit;font-size:12px}
+  .leaflet-container a{color:var(--royal)}
+  .map-card .leaflet-control-zoom{border:0;border-radius:10px;overflow:hidden;margin:12px;box-shadow:0 4px 12px -4px rgba(7,16,40,.4)}
+  .map-card .leaflet-control-zoom a{width:30px;height:30px;line-height:30px;color:var(--ink);background:rgba(255,255,255,.94);border-bottom:1px solid var(--line)}
+  .map-card .leaflet-control-zoom a:hover{background:#fff;color:var(--royal)}
+  .map-card .leaflet-control-attribution{background:rgba(255,255,255,.82);color:var(--muted);font-size:10px;padding:1px 6px}
+  /* custom pin markers (divIcon) — clear active state */
+  .map-pin{box-sizing:border-box;display:block;width:16px;height:16px;border-radius:50%;background:var(--royal);
+    border:3px solid #fff;box-shadow:0 2px 6px rgba(4,12,30,.5);cursor:pointer;
+    transition:transform .2s ease,background .2s ease,box-shadow .2s ease}
+  .map-pin.is-active{background:var(--cyan);transform:scale(1.45);
+    box-shadow:0 0 0 6px rgba(20,184,255,.28),0 3px 9px rgba(4,12,30,.55)}
   .local h2{font-size:clamp(28px,3.8vw,40px);letter-spacing:-.03em}
   .local p{color:var(--muted);font-size:17px;margin-top:18px}
   /* ---- service-area buttons ---- */
@@ -470,13 +462,11 @@
     .mini-cta .btn{width:100%;justify-content:center}
     .foot-cols{gap:40px}
     .foot-bottom{flex-direction:column;align-items:flex-start;gap:10px}
-    .map-card{height:clamp(200px,54vw,286px)}
-    .map-town{font-size:clamp(18px,5.6vw,22px)}
+    .map-card{height:clamp(210px,54vw,286px)}
   }
 
   /* reduced motion: calm the ambient accents */
   @media(prefers-reduced-motion:reduce){
-    .ns-pulse{animation:none}
     footer:before{animation:none}
   }
 

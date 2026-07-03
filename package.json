@@ -8,6 +8,7 @@
     "dev": "eleventy --serve"
   },
   "dependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "@11ty/eleventy": "^2.0.1",
+    "leaflet": "^1.9.4"
   }
 }

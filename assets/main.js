@@ -851,66 +851,84 @@
 })();
 
 /* ============================================================
-   ABOUT — INTERACTIVE SERVICE-AREA MAP
-   The location buttons drive a highlighted town on a custom
-   Nova Scotia SVG map: marker, spotlight, on-map label and a
-   live readout all move to the chosen town. CSS handles the
-   smooth transition; this only sets positions + state.
-   Self-contained; no-ops on pages without the map.
+   ABOUT — SERVICE-AREA MAP (Leaflet + OpenStreetMap)
+   Real, pannable/zoomable map. The location buttons fly the map
+   to each town and mark that pin active. Default: Halifax.
+   Self-contained; no-ops on pages without the map or Leaflet.
    ============================================================ */
 (function () {
   'use strict';
-  var map = document.getElementById('nsMap');
+  var el = document.getElementById('nsMap');
   var btns = Array.prototype.slice.call(document.querySelectorAll('.area-btn'));
-  if (!map || !btns.length) return;
+  if (!el || !btns.length || typeof L === 'undefined') return;
 
-  var spot    = map.querySelector('.ns-spot');
-  var marker  = map.querySelector('.ns-marker');
-  var label   = map.querySelector('.ns-label');
-  var labelEl = label && label.querySelector('text');
-  var nameEl  = document.getElementById('nsTownName');
-  var coordEl = document.getElementById('nsTownCoord');
-
-  // town -> position on the 500x360 viewBox + display data.
-  // Positions are geographically reasonable: Truro north, the
-  // Halifax/Dartmouth/Bedford cluster central, and the South Shore
-  // chain (Chester -> Mahone Bay -> Bridgewater) running south-west.
+  // real coordinates for each service area
   var TOWNS = {
-    halifax:     { x:252, y:224, name:'Halifax',     coord:'44.6488° N · 63.5752° W' },
-    dartmouth:   { x:275, y:212, name:'Dartmouth',   coord:'44.6653° N · 63.5669° W' },
-    truro:       { x:301, y:122, name:'Truro',       coord:'45.3668° N · 63.2653° W' },
-    bedford:     { x:233, y:200, name:'Bedford',     coord:'44.7256° N · 63.6614° W' },
-    chester:     { x:190, y:254, name:'Chester',     coord:'44.5415° N · 64.2380° W' },
-    mahonebay:   { x:158, y:274, name:'Mahone Bay',  coord:'44.4487° N · 64.3816° W' },
-    bridgewater: { x:129, y:289, name:'Bridgewater', coord:'44.3776° N · 64.5188° W' }
+    halifax:     { ll: [44.6488, -63.5752], name: 'Halifax' },
+    dartmouth:   { ll: [44.6713, -63.5772], name: 'Dartmouth' },
+    truro:       { ll: [45.3658, -63.2860], name: 'Truro' },
+    bedford:     { ll: [44.7266, -63.6647], name: 'Bedford' },
+    chester:     { ll: [44.5423, -64.2382], name: 'Chester' },
+    mahonebay:   { ll: [44.4490, -64.3820], name: 'Mahone Bay' },
+    bridgewater: { ll: [44.3786, -64.5188], name: 'Bridgewater' }
   };
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TOWN_ZOOM = 11;
 
-  function place(el, x, y) { if (el) el.style.transform = 'translate(' + x + 'px,' + y + 'px)'; }
-  function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+  var map = L.map(el, {
+    center: TOWNS.halifax.ll,
+    zoom: 9,
+    zoomControl: true,
+    scrollWheelZoom: false,   // don't hijack page scrolling; drag/pinch/buttons still zoom + pan
+    attributionControl: true
+  });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
 
-  function select(town) {
-    var t = TOWNS[town];
+  // one custom pin per town
+  var markers = {};
+  Object.keys(TOWNS).forEach(function (key) {
+    var icon = L.divIcon({ className: 'ns-pin-wrap', html: '<span class="map-pin"></span>', iconSize: [16, 16], iconAnchor: [8, 8] });
+    var m = L.marker(TOWNS[key].ll, { icon: icon, title: TOWNS[key].name, keyboard: false })
+      .bindPopup('<b>' + TOWNS[key].name + '</b>')
+      .addTo(map);
+    m.on('click', function () { select(key); });
+    markers[key] = m;
+  });
+
+  // default view frames every service area at once (Halifax stays the active pin)
+  var allBounds = L.latLngBounds(Object.keys(TOWNS).map(function (k) { return TOWNS[k].ll; }));
+  map.fitBounds(allBounds, { padding: [32, 32] });
+
+  function select(key, fly) {
+    var t = TOWNS[key];
     if (!t) return;
-    place(spot, t.x, t.y);
-    place(marker, t.x, t.y);
-    // label floats just above the marker, x clamped so it never leaves the map
-    place(label, clamp(t.x, 62, 438), t.y - 28);
-    if (labelEl) labelEl.textContent = t.name;
-    if (nameEl)  nameEl.textContent = t.name;
-    if (coordEl) coordEl.textContent = t.coord;
+    if (fly !== false) map.flyTo(t.ll, TOWN_ZOOM, { duration: reduce ? 0 : 1.05 });
+    Object.keys(markers).forEach(function (k) {
+      var mEl = markers[k].getElement();
+      var pin = mEl && mEl.querySelector('.map-pin');
+      if (pin) pin.classList.toggle('is-active', k === key);
+    });
+    markers[key].openPopup();
     btns.forEach(function (b) {
-      var on = b.getAttribute('data-town') === town;
-      b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      var dot = map.querySelector('.ns-dot[data-dot="' + b.getAttribute('data-town') + '"]');
-      if (dot) dot.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', b.getAttribute('data-town') === key ? 'true' : 'false');
     });
   }
 
+  var userMoved = false;
   btns.forEach(function (b) {
-    b.addEventListener('click', function () { select(b.getAttribute('data-town')); });
+    b.addEventListener('click', function () { userMoved = true; select(b.getAttribute('data-town')); });
   });
+  map.on('dragstart', function () { userMoved = true; });
 
-  // default: the pre-pressed button (Halifax), else the first one
+  // default active = the pre-pressed button (Halifax); no fly on first paint
   var initial = btns.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || btns[0];
-  select(initial.getAttribute('data-town'));
+  select(initial.getAttribute('data-town'), false);
+
+  // correct sizing after layout/reveal settles; re-frame only if untouched
+  function refresh() { map.invalidateSize(); if (!userMoved) map.fitBounds(allBounds, { padding: [32, 32] }); }
+  setTimeout(refresh, 300);
+  window.addEventListener('load', refresh);
 })();
