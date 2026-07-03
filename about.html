@@ -85,7 +85,17 @@
 
 <section class="band band-tint"><div class="wrap"><div class="local">
   <div class="map-card rv">
-    <div id="nsMap" class="ns-map" role="application" aria-label="Interactive map of Hatt Digital service areas across Nova Scotia"></div>
+    <!--
+      Real Google Map via the free Maps Embed API (no billing account needed).
+      The API key is injected at build time from GOOGLE_MAPS_API_KEY (see
+      _data/maps.js). The default view (Halifax) is rendered here so the map
+      shows before JS runs; main.js re-points this iframe at the exact
+      lat/lng of whichever service-area button is clicked.
+    -->
+    <iframe id="nsMap" class="ns-map"
+      title="Map of Hatt Digital service areas across Nova Scotia — Halifax selected"
+      loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+      src="https://www.google.com/maps/embed/v1/place?key={{ maps.googleMapsApiKey }}&amp;q=44.6488,-63.5752&amp;zoom=12"></iframe>
   </div>
   <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.local.eyebrow }}</span>
     <h2 style="margin-top:16px">{{ about.local.heading }}</h2>
@@ -139,13 +149,4 @@
   <a class="primary" href="quote.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Get Quote</a>
 </div>
 <script src="assets/main.js"></script>
-<!--
-  Google Maps JavaScript API — powers the service-area map above.
-  The API key is injected at build time from the GOOGLE_MAPS_API_KEY
-  environment variable (see _data/maps.js for where to set it). If no key
-  is configured, the literal "YOUR_GOOGLE_MAPS_API_KEY_HERE" placeholder is
-  emitted and Google will show an auth error until a real key is provided.
-  main.js loads first so window.initNsMap exists before this async callback fires.
--->
-<script async src="https://maps.googleapis.com/maps/api/js?key={{ maps.googleMapsApiKey }}&loading=async&callback=initNsMap"></script>
 </body></html>

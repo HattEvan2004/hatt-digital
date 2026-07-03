@@ -851,121 +851,66 @@
 })();
 
 /* ============================================================
-   ABOUT — SERVICE-AREA MAP (Google Maps JavaScript API)
-   Real, pannable/zoomable Google Map. Each location button pans +
-   zooms the map to that Nova Scotia town, drops the active pin and
-   marks the button pressed. Default selected: Halifax.
-
-   Coordinates are HARDCODED (never geocoded by name — a text lookup
-   can resolve to the wrong place, e.g. a rural road). Google loads
-   the Maps script asynchronously and calls window.initNsMap once
-   ready (see the loader <script> in about.html). No-ops on pages
-   that don't have the map.
+   ABOUT — SERVICE-AREA MAP (Google Maps Embed API)
+   A real, interactive Google Map embedded via the free Maps Embed
+   API (no billing account required). Each location button re-points
+   the iframe at that Nova Scotia town using its EXACT hardcoded
+   latitude/longitude (never a text lookup, which could resolve to
+   the wrong place) and drops a marker there. Default selected:
+   Halifax — also rendered server-side in the iframe src so the map
+   shows before this script runs. No-ops on pages without the map.
    ============================================================ */
 (function () {
   'use strict';
+  var frame = document.getElementById('nsMap');
+  var btns = Array.prototype.slice.call(document.querySelectorAll('.area-btn'));
+  if (!frame || !btns.length) return;
 
-  // Exact latitude/longitude for every service area.
+  // Exact "lat,lng" for every service area (passed to the Embed API's `q`,
+  // so the marker + centre land on precisely these coordinates).
   var TOWNS = {
-    halifax:     { lat: 44.6488, lng: -63.5752, name: 'Halifax' },
-    dartmouth:   { lat: 44.6713, lng: -63.5772, name: 'Dartmouth' },
-    truro:       { lat: 45.3650, lng: -63.2869, name: 'Truro' },
-    bedford:     { lat: 44.7258, lng: -63.6668, name: 'Bedford' },
-    chester:     { lat: 44.5429, lng: -64.2389, name: 'Chester' },
-    mahonebay:   { lat: 44.4490, lng: -64.3820, name: 'Mahone Bay' },
-    bridgewater: { lat: 44.3786, lng: -64.5188, name: 'Bridgewater' }
+    halifax:     { q: '44.6488,-63.5752', name: 'Halifax' },
+    dartmouth:   { q: '44.6713,-63.5772', name: 'Dartmouth' },
+    truro:       { q: '45.3650,-63.2869', name: 'Truro' },
+    bedford:     { q: '44.7258,-63.6668', name: 'Bedford' },
+    chester:     { q: '44.5429,-64.2389', name: 'Chester' },
+    mahonebay:   { q: '44.4490,-64.3820', name: 'Mahone Bay' },
+    bridgewater: { q: '44.3786,-64.5188', name: 'Bridgewater' }
   };
-  var TOWN_ZOOM = 12;
+  var ZOOM = 12;
 
-  // Brand pin drawn as an inline SVG icon: royal when idle, larger cyan
-  // (with a soft halo) when it's the selected town. Colours match the CSS
-  // custom properties --royal / --cyan.
-  function pinIcon(active) {
-    var fill = active ? '#14b8ff' : '#1267ff';
-    var r = active ? 9 : 7;
-    var halo = active ? '<circle cx="18" cy="18" r="16" fill="' + fill + '" opacity="0.22"/>' : '';
-    var svg =
-      '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">' +
-        halo +
-        '<circle cx="18" cy="18" r="' + r + '" fill="' + fill + '" stroke="#ffffff" stroke-width="3"/>' +
-      '</svg>';
-    return {
-      url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
-      scaledSize: new google.maps.Size(36, 36),
-      anchor: new google.maps.Point(18, 18)
-    };
+  // Reuse the API key already present in the server-rendered iframe src, so the
+  // key lives in exactly one place (about.html, filled from _data/maps.js).
+  var apiKey = '';
+  try { apiKey = new URL(frame.src).searchParams.get('key') || ''; } catch (e) {}
+
+  function urlFor(key) {
+    return 'https://www.google.com/maps/embed/v1/place?key=' + encodeURIComponent(apiKey) +
+      '&q=' + encodeURIComponent(TOWNS[key].q) + '&zoom=' + ZOOM;
   }
 
-  // Called by the Google Maps API once it has finished loading.
-  window.initNsMap = function () {
-    var el = document.getElementById('nsMap');
-    var btns = Array.prototype.slice.call(document.querySelectorAll('.area-btn'));
-    if (!el || !btns.length || typeof google === 'undefined' || !google.maps) return;
+  // soften the iframe reload with a brief fade
+  frame.addEventListener('load', function () { frame.classList.remove('is-loading'); });
 
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var current = null;
+  // start on the pre-pressed button (Halifax) — already showing, so don't reload it
+  var current = (btns.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || btns[0])
+    .getAttribute('data-town');
 
-    var map = new google.maps.Map(el, {
-      center: { lat: TOWNS.halifax.lat, lng: TOWNS.halifax.lng },
-      zoom: TOWN_ZOOM,
-      mapTypeControl: false,
-      streetViewControl: false,
-      fullscreenControl: false,
-      zoomControl: true,
-      clickableIcons: false,
-      gestureHandling: 'cooperative' // don't hijack page scroll; ctrl/two-finger to zoom
-    });
-
-    // one marker per town; the selected one is enlarged + cyan
-    var markers = {};
-    Object.keys(TOWNS).forEach(function (key) {
-      var t = TOWNS[key];
-      var m = new google.maps.Marker({
-        position: { lat: t.lat, lng: t.lng },
-        map: map,
-        title: t.name,
-        icon: pinIcon(false),
-        optimized: false
-      });
-      m.addListener('click', function () { select(key); });
-      markers[key] = m;
-    });
-
-    function select(key, animate) {
-      var t = TOWNS[key];
-      if (!t) return;
+  function select(key) {
+    var t = TOWNS[key];
+    if (!t) return;
+    if (key !== current) {
       current = key;
-      var pos = { lat: t.lat, lng: t.lng };
-      map.setZoom(TOWN_ZOOM);
-      if (animate === false || reduce) {
-        map.setCenter(pos);      // instant on first paint / reduced motion
-      } else {
-        map.panTo(pos);          // smooth pan for button clicks
-      }
-      Object.keys(markers).forEach(function (k) {
-        var on = k === key;
-        markers[k].setIcon(pinIcon(on));
-        markers[k].setZIndex(on ? 999 : 1);
-      });
-      btns.forEach(function (b) {
-        b.setAttribute('aria-pressed', b.getAttribute('data-town') === key ? 'true' : 'false');
-      });
+      frame.classList.add('is-loading');
+      frame.src = urlFor(key);
+      frame.setAttribute('title', 'Map of Hatt Digital service areas across Nova Scotia — ' + t.name + ' selected');
     }
-
     btns.forEach(function (b) {
-      b.addEventListener('click', function () { select(b.getAttribute('data-town')); });
+      b.setAttribute('aria-pressed', b.getAttribute('data-town') === key ? 'true' : 'false');
     });
+  }
 
-    // default active = the pre-pressed button (Halifax); no animation on first paint
-    var initial = btns.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || btns[0];
-    select(initial.getAttribute('data-town'), false);
-
-    // re-centre after the card's reveal animation settles / on resize
-    function refresh() {
-      google.maps.event.trigger(map, 'resize');
-      if (current) map.setCenter({ lat: TOWNS[current].lat, lng: TOWNS[current].lng });
-    }
-    google.maps.event.addListenerOnce(map, 'idle', refresh);
-    window.addEventListener('load', refresh);
-  };
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () { select(b.getAttribute('data-town')); });
+  });
 })();

@@ -156,10 +156,10 @@
   .map-card{position:relative;overflow:hidden;border-radius:20px;padding:0;margin:0;aspect-ratio:1/.74;
     background:#e8edf4;border:1px solid var(--line);
     box-shadow:0 26px 54px -30px rgba(7,16,40,.5),0 2px 8px -5px rgba(7,16,40,.3)}
-  .ns-map{position:absolute;inset:0;width:100%;height:100%;background:#e8edf4}
-  /* Google Maps surface: fill the card, keep the rounded corners */
-  .ns-map .gm-style{font:inherit}
-  .ns-map img{max-width:none}
+  /* Google Maps Embed iframe: fill the card, keep the rounded corners */
+  .ns-map{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#e8edf4;
+    transition:opacity .25s ease}
+  .ns-map.is-loading{opacity:.55}
   .local h2{font-size:clamp(28px,3.8vw,40px);letter-spacing:-.03em}
   .local p{color:var(--muted);font-size:17px;margin-top:18px}
   /* ---- service-area buttons ---- */
