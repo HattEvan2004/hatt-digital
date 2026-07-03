@@ -851,84 +851,121 @@
 })();
 
 /* ============================================================
-   ABOUT — SERVICE-AREA MAP (Leaflet + OpenStreetMap)
-   Real, pannable/zoomable map. The location buttons fly the map
-   to each town and mark that pin active. Default: Halifax.
-   Self-contained; no-ops on pages without the map or Leaflet.
+   ABOUT — SERVICE-AREA MAP (Google Maps JavaScript API)
+   Real, pannable/zoomable Google Map. Each location button pans +
+   zooms the map to that Nova Scotia town, drops the active pin and
+   marks the button pressed. Default selected: Halifax.
+
+   Coordinates are HARDCODED (never geocoded by name — a text lookup
+   can resolve to the wrong place, e.g. a rural road). Google loads
+   the Maps script asynchronously and calls window.initNsMap once
+   ready (see the loader <script> in about.html). No-ops on pages
+   that don't have the map.
    ============================================================ */
 (function () {
   'use strict';
-  var el = document.getElementById('nsMap');
-  var btns = Array.prototype.slice.call(document.querySelectorAll('.area-btn'));
-  if (!el || !btns.length || typeof L === 'undefined') return;
 
-  // real coordinates for each service area
+  // Exact latitude/longitude for every service area.
   var TOWNS = {
-    halifax:     { ll: [44.6488, -63.5752], name: 'Halifax' },
-    dartmouth:   { ll: [44.6713, -63.5772], name: 'Dartmouth' },
-    truro:       { ll: [45.3658, -63.2860], name: 'Truro' },
-    bedford:     { ll: [44.7266, -63.6647], name: 'Bedford' },
-    chester:     { ll: [44.5423, -64.2382], name: 'Chester' },
-    mahonebay:   { ll: [44.4490, -64.3820], name: 'Mahone Bay' },
-    bridgewater: { ll: [44.3786, -64.5188], name: 'Bridgewater' }
+    halifax:     { lat: 44.6488, lng: -63.5752, name: 'Halifax' },
+    dartmouth:   { lat: 44.6713, lng: -63.5772, name: 'Dartmouth' },
+    truro:       { lat: 45.3650, lng: -63.2869, name: 'Truro' },
+    bedford:     { lat: 44.7258, lng: -63.6668, name: 'Bedford' },
+    chester:     { lat: 44.5429, lng: -64.2389, name: 'Chester' },
+    mahonebay:   { lat: 44.4490, lng: -64.3820, name: 'Mahone Bay' },
+    bridgewater: { lat: 44.3786, lng: -64.5188, name: 'Bridgewater' }
   };
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var TOWN_ZOOM = 11;
+  var TOWN_ZOOM = 12;
 
-  var map = L.map(el, {
-    center: TOWNS.halifax.ll,
-    zoom: 9,
-    zoomControl: true,
-    scrollWheelZoom: false,   // don't hijack page scrolling; drag/pinch/buttons still zoom + pan
-    attributionControl: true
-  });
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-
-  // one custom pin per town
-  var markers = {};
-  Object.keys(TOWNS).forEach(function (key) {
-    var icon = L.divIcon({ className: 'ns-pin-wrap', html: '<span class="map-pin"></span>', iconSize: [16, 16], iconAnchor: [8, 8] });
-    var m = L.marker(TOWNS[key].ll, { icon: icon, title: TOWNS[key].name, keyboard: false })
-      .bindPopup('<b>' + TOWNS[key].name + '</b>')
-      .addTo(map);
-    m.on('click', function () { select(key); });
-    markers[key] = m;
-  });
-
-  // default view frames every service area at once (Halifax stays the active pin)
-  var allBounds = L.latLngBounds(Object.keys(TOWNS).map(function (k) { return TOWNS[k].ll; }));
-  map.fitBounds(allBounds, { padding: [32, 32] });
-
-  function select(key, fly) {
-    var t = TOWNS[key];
-    if (!t) return;
-    if (fly !== false) map.flyTo(t.ll, TOWN_ZOOM, { duration: reduce ? 0 : 1.05 });
-    Object.keys(markers).forEach(function (k) {
-      var mEl = markers[k].getElement();
-      var pin = mEl && mEl.querySelector('.map-pin');
-      if (pin) pin.classList.toggle('is-active', k === key);
-    });
-    markers[key].openPopup();
-    btns.forEach(function (b) {
-      b.setAttribute('aria-pressed', b.getAttribute('data-town') === key ? 'true' : 'false');
-    });
+  // Brand pin drawn as an inline SVG icon: royal when idle, larger cyan
+  // (with a soft halo) when it's the selected town. Colours match the CSS
+  // custom properties --royal / --cyan.
+  function pinIcon(active) {
+    var fill = active ? '#14b8ff' : '#1267ff';
+    var r = active ? 9 : 7;
+    var halo = active ? '<circle cx="18" cy="18" r="16" fill="' + fill + '" opacity="0.22"/>' : '';
+    var svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">' +
+        halo +
+        '<circle cx="18" cy="18" r="' + r + '" fill="' + fill + '" stroke="#ffffff" stroke-width="3"/>' +
+      '</svg>';
+    return {
+      url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+      scaledSize: new google.maps.Size(36, 36),
+      anchor: new google.maps.Point(18, 18)
+    };
   }
 
-  var userMoved = false;
-  btns.forEach(function (b) {
-    b.addEventListener('click', function () { userMoved = true; select(b.getAttribute('data-town')); });
-  });
-  map.on('dragstart', function () { userMoved = true; });
+  // Called by the Google Maps API once it has finished loading.
+  window.initNsMap = function () {
+    var el = document.getElementById('nsMap');
+    var btns = Array.prototype.slice.call(document.querySelectorAll('.area-btn'));
+    if (!el || !btns.length || typeof google === 'undefined' || !google.maps) return;
 
-  // default active = the pre-pressed button (Halifax); no fly on first paint
-  var initial = btns.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || btns[0];
-  select(initial.getAttribute('data-town'), false);
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var current = null;
 
-  // correct sizing after layout/reveal settles; re-frame only if untouched
-  function refresh() { map.invalidateSize(); if (!userMoved) map.fitBounds(allBounds, { padding: [32, 32] }); }
-  setTimeout(refresh, 300);
-  window.addEventListener('load', refresh);
+    var map = new google.maps.Map(el, {
+      center: { lat: TOWNS.halifax.lat, lng: TOWNS.halifax.lng },
+      zoom: TOWN_ZOOM,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
+      zoomControl: true,
+      clickableIcons: false,
+      gestureHandling: 'cooperative' // don't hijack page scroll; ctrl/two-finger to zoom
+    });
+
+    // one marker per town; the selected one is enlarged + cyan
+    var markers = {};
+    Object.keys(TOWNS).forEach(function (key) {
+      var t = TOWNS[key];
+      var m = new google.maps.Marker({
+        position: { lat: t.lat, lng: t.lng },
+        map: map,
+        title: t.name,
+        icon: pinIcon(false),
+        optimized: false
+      });
+      m.addListener('click', function () { select(key); });
+      markers[key] = m;
+    });
+
+    function select(key, animate) {
+      var t = TOWNS[key];
+      if (!t) return;
+      current = key;
+      var pos = { lat: t.lat, lng: t.lng };
+      map.setZoom(TOWN_ZOOM);
+      if (animate === false || reduce) {
+        map.setCenter(pos);      // instant on first paint / reduced motion
+      } else {
+        map.panTo(pos);          // smooth pan for button clicks
+      }
+      Object.keys(markers).forEach(function (k) {
+        var on = k === key;
+        markers[k].setIcon(pinIcon(on));
+        markers[k].setZIndex(on ? 999 : 1);
+      });
+      btns.forEach(function (b) {
+        b.setAttribute('aria-pressed', b.getAttribute('data-town') === key ? 'true' : 'false');
+      });
+    }
+
+    btns.forEach(function (b) {
+      b.addEventListener('click', function () { select(b.getAttribute('data-town')); });
+    });
+
+    // default active = the pre-pressed button (Halifax); no animation on first paint
+    var initial = btns.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || btns[0];
+    select(initial.getAttribute('data-town'), false);
+
+    // re-centre after the card's reveal animation settles / on resize
+    function refresh() {
+      google.maps.event.trigger(map, 'resize');
+      if (current) map.setCenter({ lat: TOWNS[current].lat, lng: TOWNS[current].lng });
+    }
+    google.maps.event.addListenerOnce(map, 'idle', refresh);
+    window.addEventListener('load', refresh);
+  };
 })();
