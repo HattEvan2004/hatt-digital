@@ -84,16 +84,67 @@
 </div></section>
 
 <section class="band band-tint"><div class="wrap"><div class="local">
-  <div class="map-card rv">
-    <svg class="ns-dots" viewBox="0 0 200 160" preserveAspectRatio="none" aria-hidden="true"><g fill="#18B6F2"><rect x="20" y="30" width="4" height="4"/><rect x="46" y="58" width="4" height="4"/><rect x="80" y="44" width="4" height="4"/><rect x="120" y="70" width="4" height="4"/><rect x="150" y="50" width="4" height="4"/><rect x="170" y="90" width="4" height="4"/><rect x="60" y="100" width="4" height="4"/><rect x="100" y="120" width="4" height="4"/><rect x="140" y="118" width="4" height="4"/></g></svg>
-    <div class="coord">44.6488&deg; N &middot; 63.5752&deg; W</div>
-    <div class="big">Made in<br>Nova Scotia.</div>
-  </div>
+  <figure class="map-card rv">
+    <span class="map-accents" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <figcaption class="map-readout" aria-live="polite">
+      <span class="map-tag">Service area</span>
+      <span class="map-town" id="nsTownName">Halifax</span>
+      <span class="map-coord" id="nsTownCoord">44.6488&deg; N &middot; 63.5752&deg; W</span>
+    </figcaption>
+    <svg class="ns-map" id="nsMap" viewBox="0 0 500 360" preserveAspectRatio="xMidYMid meet"
+         role="img" aria-label="Map of Nova Scotia showing Hatt Digital service areas: Halifax, Dartmouth, Truro, Bedford, Chester, Mahone Bay and Bridgewater.">
+      <defs>
+        <linearGradient id="nsLand" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#173a63"/><stop offset="1" stop-color="#0d2340"/>
+        </linearGradient>
+        <radialGradient id="nsGlow" cx="60%" cy="26%" r="72%">
+          <stop offset="0" stop-color="#18B6F2" stop-opacity=".26"/>
+          <stop offset="55%" stop-color="#1267FF" stop-opacity=".05"/>
+          <stop offset="1" stop-color="#1267FF" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="nsSpotGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#18B6F2" stop-opacity=".55"/>
+          <stop offset="60%" stop-color="#18B6F2" stop-opacity=".12"/>
+          <stop offset="1" stop-color="#18B6F2" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect x="0" y="0" width="500" height="360" fill="url(#nsGlow)"/>
+      <path class="ns-cb" d="M438 138 Q452 108 476 98 Q494 114 488 144 Q478 178 452 178 Q436 166 438 138 Z"/>
+      <path class="ns-land" d="M66 286 Q86 250 110 232 Q150 204 196 182 Q240 160 276 128 Q300 104 340 100 Q384 96 414 112 Q432 122 430 144 Q424 170 398 190 Q356 216 322 234 Q296 248 272 258 Q240 270 210 282 Q178 294 150 304 Q116 316 90 310 Q72 304 66 286 Z"/>
+      <g class="ns-spot" style="transform:translate(252px,224px)"><circle r="54"/></g>
+      <g class="ns-towns">
+        <circle class="ns-dot is-active" data-dot="halifax"     cx="252" cy="224" r="4"/>
+        <circle class="ns-dot"           data-dot="dartmouth"   cx="275" cy="212" r="4"/>
+        <circle class="ns-dot"           data-dot="truro"       cx="301" cy="122" r="4"/>
+        <circle class="ns-dot"           data-dot="bedford"     cx="233" cy="200" r="4"/>
+        <circle class="ns-dot"           data-dot="chester"     cx="190" cy="254" r="4"/>
+        <circle class="ns-dot"           data-dot="mahonebay"   cx="158" cy="274" r="4"/>
+        <circle class="ns-dot"           data-dot="bridgewater" cx="129" cy="289" r="4"/>
+      </g>
+      <g class="ns-marker" style="transform:translate(252px,224px)">
+        <circle class="ns-halo" r="15"/>
+        <circle class="ns-pulse" r="10"/>
+        <circle class="ns-pin" r="6"/>
+        <circle class="ns-pin-core" r="2.4"/>
+      </g>
+      <g class="ns-label" style="transform:translate(252px,196px)">
+        <text text-anchor="middle" dominant-baseline="middle">Halifax</text>
+      </g>
+    </svg>
+  </figure>
   <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.local.eyebrow }}</span>
     <h2 style="margin-top:16px">{{ about.local.heading }}</h2>
     <p>{{ about.local.body1 }}</p>
     <p>{{ about.local.body2 }}</p>
-    <div class="local-pills"><span>Halifax</span><span>Dartmouth</span><span>Bedford</span><span>South Shore</span><span>Annapolis Valley</span><span>Cape Breton</span></div>
+    <div class="local-pills" role="group" aria-label="Choose a service area to show it on the map">
+      <button type="button" class="area-btn" data-town="halifax"     aria-pressed="true">Halifax</button>
+      <button type="button" class="area-btn" data-town="dartmouth"   aria-pressed="false">Dartmouth</button>
+      <button type="button" class="area-btn" data-town="truro"       aria-pressed="false">Truro</button>
+      <button type="button" class="area-btn" data-town="bedford"     aria-pressed="false">Bedford</button>
+      <button type="button" class="area-btn" data-town="chester"     aria-pressed="false">Chester</button>
+      <button type="button" class="area-btn" data-town="mahonebay"   aria-pressed="false">Mahone Bay</button>
+      <button type="button" class="area-btn" data-town="bridgewater" aria-pressed="false">Bridgewater</button>
+    </div>
     <div style="margin-top:30px"><a href="quote.html" class="btn btn-primary">{{ about.local.button }} <span class="arr">&rarr;</span></a></div>
   </div>
 </div></div></section>
