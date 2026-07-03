@@ -851,14 +851,14 @@
 })();
 
 /* ============================================================
-   ABOUT — SERVICE-AREA MAP (Google Maps Embed API)
-   A real, interactive Google Map embedded via the free Maps Embed
-   API (no billing account required). Each location button re-points
-   the iframe at that Nova Scotia town using its EXACT hardcoded
-   latitude/longitude (never a text lookup, which could resolve to
-   the wrong place) and drops a marker there. Default selected:
-   Halifax — also rendered server-side in the iframe src so the map
-   shows before this script runs. No-ops on pages without the map.
+   ABOUT — SERVICE-AREA MAP (Google keyless embed)
+   A real, interactive Google Map embedded via ?output=embed — no
+   API key, Cloud project or billing required. Each location button
+   re-points the iframe at that Nova Scotia town using its EXACT
+   hardcoded latitude/longitude (never a text lookup, which could
+   resolve to the wrong place) and drops a marker there. Default
+   selected: Halifax — also rendered server-side in the iframe src so
+   the map shows before this script runs. No-ops on pages without it.
    ============================================================ */
 (function () {
   'use strict';
@@ -866,8 +866,8 @@
   var btns = Array.prototype.slice.call(document.querySelectorAll('.area-btn'));
   if (!frame || !btns.length) return;
 
-  // Exact "lat,lng" for every service area (passed to the Embed API's `q`,
-  // so the marker + centre land on precisely these coordinates).
+  // Exact "lat,lng" for every service area (passed to the embed's `q`, so the
+  // marker + centre land on precisely these coordinates).
   var TOWNS = {
     halifax:     { q: '44.6488,-63.5752', name: 'Halifax' },
     dartmouth:   { q: '44.6713,-63.5772', name: 'Dartmouth' },
@@ -879,14 +879,8 @@
   };
   var ZOOM = 12;
 
-  // Reuse the API key already present in the server-rendered iframe src, so the
-  // key lives in exactly one place (about.html, filled from _data/maps.js).
-  var apiKey = '';
-  try { apiKey = new URL(frame.src).searchParams.get('key') || ''; } catch (e) {}
-
   function urlFor(key) {
-    return 'https://www.google.com/maps/embed/v1/place?key=' + encodeURIComponent(apiKey) +
-      '&q=' + encodeURIComponent(TOWNS[key].q) + '&zoom=' + ZOOM;
+    return 'https://maps.google.com/maps?q=' + TOWNS[key].q + '&z=' + ZOOM + '&output=embed';
   }
 
   // soften the iframe reload with a brief fade

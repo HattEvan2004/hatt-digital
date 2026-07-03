@@ -86,16 +86,15 @@
 <section class="band band-tint"><div class="wrap"><div class="local">
   <div class="map-card rv">
     <!--
-      Real Google Map via the free Maps Embed API (no billing account needed).
-      The API key is injected at build time from GOOGLE_MAPS_API_KEY (see
-      _data/maps.js). The default view (Halifax) is rendered here so the map
-      shows before JS runs; main.js re-points this iframe at the exact
-      lat/lng of whichever service-area button is clicked.
+      Real Google Map via Google's keyless embed (?output=embed) — no API key,
+      Cloud project or billing required. The default view (Halifax) is rendered
+      here so the map shows before JS runs; main.js re-points this iframe at the
+      exact lat/lng of whichever service-area button is clicked.
     -->
     <iframe id="nsMap" class="ns-map"
       title="Map of Hatt Digital service areas across Nova Scotia — Halifax selected"
       loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-      src="https://www.google.com/maps/embed/v1/place?key={{ maps.googleMapsApiKey }}&amp;q=44.6488,-63.5752&amp;zoom=12"></iframe>
+      src="https://maps.google.com/maps?q=44.6488,-63.5752&amp;z=12&amp;output=embed"></iframe>
   </div>
   <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.local.eyebrow }}</span>
     <h2 style="margin-top:16px">{{ about.local.heading }}</h2>
