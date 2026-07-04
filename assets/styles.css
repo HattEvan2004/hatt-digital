@@ -425,6 +425,11 @@
   html:not(.js) .intro{height:auto}
   html:not(.js) .intro-stage{height:auto;min-height:100vh;min-height:100dvh}
   html:not(.js) .sh-word,html:not(.js) .intro [data-build]{opacity:1;transform:none}
+  /* Load-failure safety net: an inline <head> timer adds html.hero-ready if the
+     hero script never runs (failed to load, or threw before revealing), so the
+     content is shown instead of staying stuck at its hidden opacity:0 start.
+     In the normal case the reveal (.built) has already run well before this. */
+  html.hero-ready .sh-word,html.hero-ready .intro [data-build]{opacity:1;transform:none}
 
   /* ---- stack to a single centred column on tablet + phone ---- */
   @media(max-width:900px){

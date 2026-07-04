@@ -1,5 +1,15 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071426">
+<!-- Mark the document as JS-capable BEFORE first paint so the hero starts in
+     its hidden state (opacity:0 in the CSS) instead of flashing the finished
+     text. Without this the no-JS fallback (html:not(.js) .sh-word{opacity:1})
+     matches until main.js loads at the end of <body>, painting the completed
+     hero for a frame. This inline script runs before the stylesheet, so the
+     .js class is set before anything paints. If JS is disabled it never runs
+     and the no-JS fallback still shows the hero. The timer is a safety net:
+     if main.js fails to load or errors before revealing, hero-ready reveals
+     the content so it is never stuck hidden. -->
+<script>document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('hero-ready')},6000);</script>
 <title>{{ home.seo.title }}</title>
 <meta name="description" content="{{ home.seo.description }}">
 <meta name="robots" content="index, follow">
@@ -19,7 +29,7 @@
 <link rel="icon" type="image/png" href="assets/logo-nav.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="{{ assets.stylesCss }}">
 <link rel="stylesheet" href="assets/projects.css">
 <script type="application/ld+json">
 {

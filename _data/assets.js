@@ -26,6 +26,7 @@ function ver(rel) {
 
 module.exports = function () {
   return {
-    mainJs: "assets/main.js?v=" + ver("assets/main.js")
+    mainJs: "assets/main.js?v=" + ver("assets/main.js"),
+    stylesCss: "assets/styles.css?v=" + ver("assets/styles.css")
   };
 };
