@@ -136,19 +136,42 @@
     return;
   }
 
-  /* ---------- Light staggered entrance ---------- */
+  /* ---------- Entrance ----------
+     First load in a session: the spec-field canvas runs a short particle
+     formation (see BRAND SPEC FIELD below) that gathers the drifting specs
+     into the outlines of the headline, preview card, and CTA. The real HTML
+     resolves in underneath while the particles hold, then they release into
+     a calm drift. Repeat loads in the same session skip the formation and
+     play the quick stagger instead. Timings live in window.__hdHeroForm so
+     the canvas and the content reveal stay in step. */
   bindHeaderReveal();
 
+  var seen = false;
+  try {
+    seen = sessionStorage.getItem('hdHeroIntro') === '1';
+    sessionStorage.setItem('hdHeroIntro', '1');
+  } catch (e) { /* private mode: formation just plays each load */ }
+  var vw = window.innerWidth;
+  var F = {
+    active: !seen && !!document.getElementById('introSpecs'),
+    form: vw < 600 ? 650 : vw < 1000 ? 780 : 900,      // gather (ms)
+    hold: vw < 600 ? 240 : 320,                        // lock on the outlines
+    release: vw < 600 ? 320 : 420                      // ease back into drift
+  };
+  window.__hdHeroForm = F;
+
   function play() {
+    var base = F.active ? Math.round(F.form * 0.82) : 90;
+    var gap = F.active ? 40 : 55;
     var seq = [intro.querySelector('[data-build="eyebrow"]')];
     words.forEach(function (w) { seq.push(w); });
     seq.push(intro.querySelector('[data-build="sub"]'));
     seq.push(intro.querySelector('[data-build="cta"]'));
     seq.forEach(function (el, i) {
-      if (el) setTimeout(function () { on(el, true); }, 90 + i * 55);
+      if (el) setTimeout(function () { on(el, true); }, base + i * gap);
     });
     /* the value preview eases in alongside the headline, not last */
-    setTimeout(function () { on(intro.querySelector('[data-build="preview"]'), true); }, 240);
+    setTimeout(function () { on(intro.querySelector('[data-build="preview"]'), true); }, F.active ? base + 140 : 240);
   }
   /* small beat so layout + fonts settle, then play */
   setTimeout(function () { requestAnimationFrame(play); }, 60);
@@ -191,6 +214,12 @@
    hero: small glowing rounded-square "logo specs" drift
    along loose curved paths, softly cluster and separate,
    and leave gentle comet trails. Canvas + rAF, no deps.
+   On the first load of a session the specs open with a
+   short formation intro: they sweep inward along curved
+   paths onto perimeter points traced around the real
+   headline, preview card, and CTA rects, hold there while
+   the HTML content resolves in, then release into a calmer
+   ambient drift. Repeat loads skip straight to the drift.
    Lives behind the hero content (pointer-events:none),
    is responsive, and respects prefers-reduced-motion by
    falling back to a static spec scatter.
@@ -221,6 +250,16 @@
   var pX = 0, pY = 0, cX = 0, cY = 0;   // pointer parallax (target / eased)
   var raf = null, running = false, last = 0;
 
+  /* Formation intro (set up by the hero IIFE above): on the first load of a
+     session the specs gather onto perimeter points traced around the real
+     headline / preview card / CTA rects, hold there while the HTML resolves
+     in, then release back into the ambient drift. mode walks
+     form → hold → release → ambient; mT accumulates frame time so a hidden
+     tab pauses rather than skips the sequence. */
+  var F = window.__hdHeroForm || { active: false };
+  var mode = 'ambient', mT = 0;
+  var calm = 0.75;                       // post-intro drift is calmer than the gather
+
   function rand(a, b) { return a + Math.random() * (b - a); }
   function pick(a) { return a[(Math.random() * a.length) | 0]; }
   function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
@@ -237,7 +276,7 @@
     var roll = Math.random();
     var cat = roll < 0.70 ? 'small' : roll < 0.92 ? 'mid' : 'block';
     var base = cat === 'small' ? rand(2, 4.5) : cat === 'mid' ? rand(5.5, 9) : rand(12, 18);
-    return {
+    var s = {
       x: Math.random() * W,
       y: Math.random() * H,
       z: z,
@@ -251,6 +290,8 @@
       trail: [],
       tlen: cat === 'small' ? 5 : cat === 'mid' ? 6 : 3
     };
+    s.baseAlpha = s.alpha;               // formation extras fade out from this
+    return s;
   }
 
   function resize() {
@@ -267,6 +308,83 @@
     var c = count();
     specs = [];
     for (var i = 0; i < c; i++) specs.push(makeSpec());
+  }
+
+  /* ---- formation intro: target maps traced around the real hero DOM ---- */
+  function easeIO(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+  function extraCount() {                // temporary extra specs, removed on release
+    var w = window.innerWidth;
+    if (w < 600) return 12;
+    if (w < 1000) return 22;
+    return 34;
+  }
+
+  /* Perimeter points around the headline, preview card, and CTA block, in
+     canvas coordinates. Rects are clipped to the visible viewport so on
+     phones (where the card sits below the fold) the formation only traces
+     what the visitor can actually see. Elements still waiting on their
+     reveal carry an 18px translateY, so unbuilt [data-build] rects are
+     lifted back to their final resting position. */
+  function heroTargets(total) {
+    var cr = canvas.getBoundingClientRect();
+    var vBot = Math.min(cr.bottom, window.innerHeight);
+    var groups = [
+      ['.sh-title', 0.45],
+      ['.hero-preview', 0.35],
+      ['.sh-cta', 0.20]
+    ];
+    var pts = [];
+    groups.forEach(function (g) {
+      var el = intro.querySelector(g[0]);
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      var lift = el.hasAttribute('data-build') && !el.classList.contains('built') ? 18 : 0;
+      var top = Math.max(r.top - lift, cr.top);
+      var bot = Math.min(r.bottom - lift, vBot);
+      if (bot - top < 46) return;        // essentially offscreen: skip this group
+      var x0 = r.left - cr.left, y0 = top - cr.top, w = r.width, h = bot - top;
+      var n = Math.max(8, Math.round(total * g[1]));
+      var peri = 2 * (w + h);
+      for (var i = 0; i < n; i++) {
+        var d = ((i + rand(0, 0.75)) / n) * peri;
+        var x, y;
+        if (d < w) { x = x0 + d; y = y0; }
+        else if (d < w + h) { x = x0 + w; y = y0 + d - w; }
+        else if (d < w * 2 + h) { x = x0 + (w * 2 + h - d); y = y0 + h; }
+        else { x = x0; y = y0 + (peri - d); }
+        pts.push([x + rand(-4, 4), y + rand(-4, 4)]);
+      }
+    });
+    return pts;
+  }
+
+  function buildFormation() {
+    var pts = heroTargets(specs.length + extraCount());
+    if (!pts.length) return false;
+    for (var i = pts.length - 1; i > 0; i--) {           // shuffle: groups mix organically
+      var j = (Math.random() * (i + 1)) | 0, t = pts[i]; pts[i] = pts[j]; pts[j] = t;
+    }
+    while (specs.length < pts.length) {
+      var ex = makeSpec(); ex.tmp = true; specs.push(ex);
+    }
+    var mob = window.innerWidth < 600;
+    for (var k = 0; k < specs.length; k++) {
+      var s = specs[k];
+      if (k < pts.length) {
+        s.free = false;
+        s.sx = s.x; s.sy = s.y;
+        s.tx = pts[k][0]; s.ty = pts[k][1];
+        var dx = s.tx - s.sx, dy = s.ty - s.sy, L = Math.hypot(dx, dy) || 1;
+        s.nx = -dy / L; s.ny = dx / L;                   // perpendicular for the curved bow
+        s.bow = rand(-1, 1) * Math.min(L * 0.22, mob ? 30 : 60);
+        s.delay = rand(0, 0.22);
+        s.rot0 = s.rot;
+      } else {
+        s.free = true;                                   // no target: keeps drifting softly
+      }
+    }
+    return true;
   }
 
   /* rounded-square path (with manual fallback for older engines) */
@@ -308,28 +426,75 @@
     ctx.restore();
   }
 
+  function pushTrail(s) {
+    s.trail.push(s.x, s.y);
+    if (s.trail.length > (s.tlen + 1) * 2) s.trail.splice(0, 2);
+  }
+
   /* loose curved drift: layered sines create natural convergence
-     (clustering) and divergence (separation) zones over time */
-  function step(dt, time) {
-    var amp = 13, m = 44;
-    for (var i = 0; i < specs.length; i++) {
-      var s = specs[i];
-      var sp = 0.4 + s.z * 0.9;
-      var fx = Math.sin(s.y * 0.0042 + time * 0.16 + s.phase);
-      var fy = Math.cos(s.x * 0.0040 - time * 0.13 + s.phase * 1.3);
-      s.x += (fx * amp + 9) * sp * dt;     // gentle global drift right…
-      s.y += (fy * amp - 6) * sp * dt;     // …and slightly up
-      s.rot += s.rotSpeed * dt;
+     (clustering) and divergence (separation) zones over time.
+     k scales the whole motion (1 = original field, calm < 1 = post-intro). */
+  function driftOne(s, dt, time, k) {
+    var m = 44;
+    var sp = 0.4 + s.z * 0.9;
+    var fx = Math.sin(s.y * 0.0042 + time * 0.16 + s.phase);
+    var fy = Math.cos(s.x * 0.0040 - time * 0.13 + s.phase * 1.3);
+    s.x += (fx * 13 + 9) * k * sp * dt;    // gentle global drift right…
+    s.y += (fy * 13 - 6) * k * sp * dt;    // …and slightly up
+    s.rot += s.rotSpeed * dt * k;
 
-      var wrapped = false;
-      if (s.x < -m) { s.x = W + m; wrapped = true; }
-      else if (s.x > W + m) { s.x = -m; wrapped = true; }
-      if (s.y < -m) { s.y = H + m; wrapped = true; }
-      else if (s.y > H + m) { s.y = -m; wrapped = true; }
+    var wrapped = false;
+    if (s.x < -m) { s.x = W + m; wrapped = true; }
+    else if (s.x > W + m) { s.x = -m; wrapped = true; }
+    if (s.y < -m) { s.y = H + m; wrapped = true; }
+    else if (s.y > H + m) { s.y = -m; wrapped = true; }
 
-      if (wrapped) { s.trail.length = 0; }
-      s.trail.push(s.x, s.y);
-      if (s.trail.length > (s.tlen + 1) * 2) s.trail.splice(0, 2);
+    if (wrapped) { s.trail.length = 0; }
+    pushTrail(s);
+  }
+
+  function stepAmbient(dt, time, k) {
+    for (var i = 0; i < specs.length; i++) driftOne(specs[i], dt, time, k);
+  }
+
+  /* formation timeline: gather → hold on the outlines → release into drift */
+  function formStep(dt, time) {
+    mT += dt;
+    var i, s;
+    if (mode === 'form') {
+      var p = clamp(mT / (F.form / 1000), 0, 1);
+      for (i = 0; i < specs.length; i++) {
+        s = specs[i];
+        if (s.free) { driftOne(s, dt, time, calm); continue; }
+        var q = clamp((p - s.delay) / (1 - s.delay), 0, 1);
+        var e = easeIO(q);
+        var bow = Math.sin(Math.PI * e) * s.bow + (1 - e) * Math.sin(time * 1.4 + s.phase) * 6;
+        s.x = s.sx + (s.tx - s.sx) * e + s.nx * bow;
+        s.y = s.sy + (s.ty - s.sy) * e + s.ny * bow;
+        s.rot = s.rot0 * (1 - e);          // squares align as they lock in
+        pushTrail(s);
+      }
+      if (p >= 1) { mode = 'hold'; mT = 0; }
+    } else if (mode === 'hold') {
+      for (i = 0; i < specs.length; i++) {
+        s = specs[i];
+        if (s.free) { driftOne(s, dt, time, calm); continue; }
+        s.x = s.tx + Math.sin(time * 2.2 + s.phase) * 1.1;
+        s.y = s.ty + Math.cos(time * 2.0 + s.phase * 1.3) * 1.1;
+        pushTrail(s);
+      }
+      if (mT >= F.hold / 1000) { mode = 'release'; mT = 0; }
+    } else {                               // release: drift ramps back in
+      var rp = easeIO(clamp(mT / (F.release / 1000), 0, 1));
+      for (i = 0; i < specs.length; i++) {
+        s = specs[i];
+        driftOne(s, dt, time, (s.free ? 1 : rp) * calm);
+        if (s.tmp) s.alpha = s.baseAlpha * (1 - rp);
+      }
+      if (rp >= 1) {
+        specs = specs.filter(function (sp) { return !sp.tmp; });
+        mode = 'ambient'; mT = 0;
+      }
     }
   }
 
@@ -357,7 +522,8 @@
     last = ts;
     cX += (pX - cX) * 0.05;
     cY += (pY - cY) * 0.05;
-    step(dt, ts / 1000);
+    if (mode === 'ambient') stepAmbient(dt, ts / 1000, calm);
+    else formStep(dt, ts / 1000);
     draw();
     raf = requestAnimationFrame(frame);
   }
@@ -390,7 +556,8 @@
     clearTimeout(rt);
     rt = setTimeout(function () {
       if (reduce) { paintStatic(); return; }
-      build();
+      build();                 // fresh field; a mid-formation resize just
+      mode = 'ambient';        // settles straight into the ambient drift
     }, 200);
   }, { passive: true });
 
@@ -417,6 +584,37 @@
   }
 
   build();
+  if (F.active && buildFormation()) {
+    mode = 'form'; mT = 0;
+    /* Webfont metrics can shift the headline box just after first paint.
+       If the fonts settle while we're still gathering, re-aim each spec at
+       the nearest point of a freshly measured target map — a zero shift
+       maps every spec back onto its own point, so nothing jumps. */
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        if (mode !== 'form') return;
+        var n = 0, i;
+        for (i = 0; i < specs.length; i++) if (!specs[i].free) n++;
+        var pts = heroTargets(n);
+        if (!pts.length) return;
+        var used = new Array(pts.length);
+        for (i = 0; i < specs.length; i++) {
+          var s = specs[i];
+          if (s.free) continue;
+          var bi = -1, bd = Infinity;
+          for (var q = 0; q < pts.length; q++) {
+            if (used[q]) continue;
+            var dx = pts[q][0] - s.tx, dy = pts[q][1] - s.ty;
+            var d2 = dx * dx + dy * dy;
+            if (d2 < bd) { bd = d2; bi = q; }
+          }
+          if (bi < 0) break;
+          used[bi] = 1;
+          s.tx = pts[bi][0]; s.ty = pts[bi][1];
+        }
+      });
+    }
+  }
   start();
 })();
 
