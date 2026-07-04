@@ -137,13 +137,19 @@
   }
 
   /* ---------- Entrance ----------
-     First load in a session: the spec-field canvas runs a short particle
-     formation (see BRAND SPEC FIELD below) that gathers the drifting specs
-     into the outlines of the headline, preview card, and CTA. The real HTML
-     resolves in underneath while the particles hold, then they release into
-     a calm drift. Repeat loads in the same session skip the formation and
-     play the quick stagger instead. Timings live in window.__hdHeroForm so
-     the canvas and the content reveal stay in step. */
+     First load in a session: the spec-field canvas runs a particle formation
+     (see BRAND SPEC FIELD below) that gathers the drifting specs into the
+     outlines of the headline, preview card, and CTA. The real HTML fades in
+     near the end of that gather, while the particles hold on the outlines,
+     then everything releases into a calm ambient drift. Repeat loads in the
+     same session skip the formation and play a quick stagger instead.
+     Timings live in window.__hdHeroForm so the canvas and the content
+     reveal are driven off the SAME requestAnimationFrame clock — never off
+     independent setTimeouts — so the two can't drift out of sync if the
+     browser is slow to paint the first frame (a slow font/CSS fetch, a
+     throttled device, etc). Whatever the delay before the first real frame,
+     content still only appears after the particle field has actually had
+     frames to gather in. */
   bindHeaderReveal();
 
   var seen = false;
@@ -154,27 +160,75 @@
   var vw = window.innerWidth;
   var F = {
     active: !seen && !!document.getElementById('introSpecs'),
-    form: vw < 600 ? 650 : vw < 1000 ? 780 : 900,      // gather (ms)
-    hold: vw < 600 ? 240 : 320,                        // lock on the outlines
-    release: vw < 600 ? 320 : 420                      // ease back into drift
+    // gather / hold / lock-in / settle, tuned so the whole intro reads as a
+    // real reveal: ~3.2-4s desktop, ~2.8-3.5s tablet, ~2.2-3s mobile.
+    form: vw < 600 ? 1500 : vw < 1000 ? 1850 : 2100,   // gather (ms)
+    hold: vw < 600 ? 430 : vw < 1000 ? 520 : 600,      // lock on the outlines
+    release: vw < 600 ? 670 : vw < 1000 ? 780 : 900    // ease back into drift
   };
   window.__hdHeroForm = F;
 
+  var revealed = false;
+  function finish() {
+    if (revealed) return;
+    revealed = true;
+    revealAll();
+  }
+
   function play() {
-    var base = F.active ? Math.round(F.form * 0.82) : 90;
-    var gap = F.active ? 40 : 55;
     var seq = [intro.querySelector('[data-build="eyebrow"]')];
     words.forEach(function (w) { seq.push(w); });
     seq.push(intro.querySelector('[data-build="sub"]'));
     seq.push(intro.querySelector('[data-build="cta"]'));
-    seq.forEach(function (el, i) {
-      if (el) setTimeout(function () { on(el, true); }, base + i * gap);
-    });
-    /* the value preview eases in alongside the headline, not last */
-    setTimeout(function () { on(intro.querySelector('[data-build="preview"]'), true); }, F.active ? base + 140 : 240);
+    var preview = intro.querySelector('[data-build="preview"]');
+
+    if (!F.active) {
+      /* repeat visit this session: no particle wait to sync with — just the
+         quick stagger, same as before */
+      var base = 90, gap = 55;
+      seq.forEach(function (el, i) {
+        if (el) setTimeout(function () { on(el, true); }, base + i * gap);
+      });
+      setTimeout(function () { on(preview, true); }, 240);
+      setTimeout(finish, base + seq.length * gap + 400);
+      return;
+    }
+
+    /* First load: the headline/sub/cta/preview fade in staggered across the
+       "hold" window — i.e. only once the particles have finished gathering
+       into the hero outlines — so the content reads as resolving out of the
+       particles, never ahead of them. Driven off rAF timestamps (the same
+       clock formStep() below uses), not wall-clock delays. */
+    var startAt = F.form;
+    var span = Math.max(F.hold - 60, 120);
+    var gap = seq.length > 1 ? span / (seq.length + 1) : span * 0.5;
+    var t0 = null;
+
+    function tick(ts) {
+      if (revealed) return;
+      try {
+        if (t0 === null) t0 = ts;
+        var elapsed = ts - t0;
+        seq.forEach(function (el, i) {
+          if (el && elapsed >= startAt + i * gap) on(el, true);
+        });
+        if (preview && elapsed >= startAt + gap * 1.4) on(preview, true);
+        if (elapsed < startAt + span + 300) { requestAnimationFrame(tick); return; }
+      } catch (e) { /* fall through to finish() below */ }
+      finish();
+    }
+    requestAnimationFrame(tick);
   }
-  /* small beat so layout + fonts settle, then play */
-  setTimeout(function () { requestAnimationFrame(play); }, 60);
+
+  try {
+    /* Two rAF ticks so layout + fonts settle, then run the timeline off the
+       same animation-frame clock as the particle field. */
+    requestAnimationFrame(function () { requestAnimationFrame(play); });
+  } catch (e) { finish(); }
+
+  /* Hard safety net: whatever else happens (a thrown error, a stalled tab,
+     an rAF that never fires), never leave the hero permanently hidden. */
+  setTimeout(finish, F.form + F.hold + F.release + 1500);
 })();
 
 /* =====================================================
@@ -226,6 +280,11 @@
 ===================================================== */
 (function () {
   'use strict';
+  /* The whole field runs inside a try/catch: it's a purely decorative
+     background layer, so a failure here (an odd browser, a canvas quirk)
+     must never take the rest of the page's scripts down with it — the
+     hero content reveal above is fully independent of this succeeding. */
+  try {
   var intro = document.getElementById('intro');
   var canvas = document.getElementById('introSpecs');
   if (!intro || !canvas) return;
@@ -616,6 +675,7 @@
     }
   }
   start();
+  } catch (e) { /* decorative layer only — see comment above */ }
 })();
 
 /* =====================================================
