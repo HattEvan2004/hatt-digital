@@ -152,11 +152,19 @@
      frames to gather in. */
   bindHeaderReveal();
 
+  /* The formation plays once per session (sessionStorage flag); repeat loads
+     get the quick stagger. For development / QA, append ?hero=replay (or the
+     hash #hero-replay) to force the full particle intro on any load without
+     clearing storage by hand — do NOT mistake the once-per-session throttle
+     for a broken animation. */
+  var forceReplay = /(?:[?&]hero=replay\b|#hero-replay\b)/i.test(
+    (location.search || '') + (location.hash || ''));
   var seen = false;
   try {
     seen = sessionStorage.getItem('hdHeroIntro') === '1';
     sessionStorage.setItem('hdHeroIntro', '1');
   } catch (e) { /* private mode: formation just plays each load */ }
+  if (forceReplay) seen = false;
   var vw = window.innerWidth;
   var F = {
     active: !seen && !!document.getElementById('introSpecs'),
@@ -305,6 +313,14 @@
   ];
 
   var W = 0, H = 0, dpr = 1;
+  /* VH is the *visible* height of the hero (the viewport), which on phones and
+     portrait tablets is much shorter than the full canvas: the stacked hero
+     column makes the canvas ~1300px tall while only ~700-850px is on screen.
+     Particles spawn and wrap within VH, not H, so the whole budget stays in
+     the band the visitor can actually see (otherwise a third of them scatter
+     below the fold and the formation reads as almost nothing on mobile). On
+     desktop VH === H, so nothing changes there. */
+  var VH = 0;
   var specs = [];
   var pX = 0, pY = 0, cX = 0, cY = 0;   // pointer parallax (target / eased)
   var raf = null, running = false, last = 0;
@@ -325,8 +341,8 @@
 
   function count() {
     var w = window.innerWidth;
-    if (w < 600) return 18;    // mobile: keep it uncluttered (15–25)
-    if (w < 1000) return 34;
+    if (w < 600) return 30;    // mobile: lighter than desktop, but dense enough to read
+    if (w < 1000) return 42;   // tablet: between mobile and desktop
     return 52;                 // desktop (35–60)
   }
 
@@ -337,7 +353,7 @@
     var base = cat === 'small' ? rand(2, 4.5) : cat === 'mid' ? rand(5.5, 9) : rand(12, 18);
     var s = {
       x: Math.random() * W,
-      y: Math.random() * H,
+      y: Math.random() * VH,               // stay in the visible band (see VH note)
       z: z,
       cat: cat,
       size: base * (0.6 + z * 0.85),
@@ -354,9 +370,17 @@
   }
 
   function resize() {
+    /* Cap DPR at 2: keeps the canvas crisp on 3x phones without quadrupling
+       the fill cost (3x backing store on a tall hero is needlessly heavy). */
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     var r = canvas.getBoundingClientRect();
     W = Math.max(1, r.width); H = Math.max(1, r.height);
+    /* Visible band: how much of the (possibly very tall) canvas is on screen.
+       Clamp to the canvas so it never exceeds H. Uses innerHeight, which is a
+       stable, layout-ready number on mobile Safari (unlike a CSS 100vh read). */
+    var vv = window.innerHeight || H;
+    var top = r.top;                       // canvas top relative to viewport
+    VH = Math.max(1, Math.min(H, vv - (top < 0 ? 0 : top)));
     canvas.width = Math.round(W * dpr);
     canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -374,8 +398,8 @@
 
   function extraCount() {                // temporary extra specs, removed on release
     var w = window.innerWidth;
-    if (w < 600) return 12;
-    if (w < 1000) return 22;
+    if (w < 600) return 20;              // mobile: enough extras to trace the outline
+    if (w < 1000) return 26;
     return 34;
   }
 
@@ -384,27 +408,40 @@
      phones (where the card sits below the fold) the formation only traces
      what the visitor can actually see. Elements still waiting on their
      reveal carry an 18px translateY, so unbuilt [data-build] rects are
-     lifted back to their final resting position. */
+     lifted back to their final resting position.
+
+     Points are handed out in proportion to each box's *visible* perimeter,
+     not by fixed per-group weights. This matters on portrait phones: the
+     preview card is mostly below the fold, so a fixed weight would spend a
+     third of the budget on a thin clipped sliver and starve the headline —
+     the element that actually carries the reveal. Weighting by visible
+     perimeter keeps the density where the structure reads. */
   function heroTargets(total) {
     var cr = canvas.getBoundingClientRect();
     var vBot = Math.min(cr.bottom, window.innerHeight);
-    var groups = [
-      ['.sh-title', 0.45],
-      ['.hero-preview', 0.35],
-      ['.sh-cta', 0.20]
-    ];
-    var pts = [];
-    groups.forEach(function (g) {
-      var el = intro.querySelector(g[0]);
+    var sels = ['.sh-title', '.hero-preview', '.sh-cta'];
+    var boxes = [];
+    var periSum = 0;
+    sels.forEach(function (sel) {
+      var el = intro.querySelector(sel);
       if (!el) return;
       var r = el.getBoundingClientRect();
       var lift = el.hasAttribute('data-build') && !el.classList.contains('built') ? 18 : 0;
       var top = Math.max(r.top - lift, cr.top);
       var bot = Math.min(r.bottom - lift, vBot);
       if (bot - top < 46) return;        // essentially offscreen: skip this group
-      var x0 = r.left - cr.left, y0 = top - cr.top, w = r.width, h = bot - top;
-      var n = Math.max(8, Math.round(total * g[1]));
-      var peri = 2 * (w + h);
+      var box = { x0: r.left - cr.left, y0: top - cr.top, w: r.width, h: bot - top };
+      box.peri = 2 * (box.w + box.h);
+      periSum += box.peri;
+      boxes.push(box);
+    });
+    var pts = [];
+    if (!boxes.length || periSum <= 0) return pts;
+    boxes.forEach(function (box) {
+      var w = box.w, h = box.h, x0 = box.x0, y0 = box.y0, peri = box.peri;
+      /* share of the budget ∝ this box's visible perimeter, min 8 so even a
+         small CTA still reads as an outline rather than a few stray dots */
+      var n = Math.max(8, Math.round(total * (peri / periSum)));
       for (var i = 0; i < n; i++) {
         var d = ((i + rand(0, 0.75)) / n) * peri;
         var x, y;
@@ -502,11 +539,13 @@
     s.y += (fy * 13 - 6) * k * sp * dt;    // …and slightly up
     s.rot += s.rotSpeed * dt * k;
 
+    /* wrap within the visible band (VH), not the full canvas height, so the
+       ambient drift stays where it can be seen on a tall mobile hero */
     var wrapped = false;
     if (s.x < -m) { s.x = W + m; wrapped = true; }
     else if (s.x > W + m) { s.x = -m; wrapped = true; }
-    if (s.y < -m) { s.y = H + m; wrapped = true; }
-    else if (s.y > H + m) { s.y = -m; wrapped = true; }
+    if (s.y < -m) { s.y = VH + m; wrapped = true; }
+    else if (s.y > VH + m) { s.y = -m; wrapped = true; }
 
     if (wrapped) { s.trail.length = 0; }
     pushTrail(s);
@@ -609,16 +648,34 @@
     }
   }
 
-  /* ---- responsive rebuild (debounced) ---- */
+  /* ---- responsive rebuild (debounced) ----
+     Handles window resize AND orientation change (portrait ↔ landscape). If
+     it fires while the formation is still playing (e.g. mobile Safari settling
+     its address bar just after load, or a device rotation mid-intro), we
+     re-measure and re-aim the formation onto the freshly laid-out hero rects
+     instead of dropping straight to the ambient drift — so the reveal isn't
+     lost. A settled field just rebuilds into ambient as before. Wrapped in
+     rAF so we measure only after the browser has finished laying out. */
   var rt = null;
-  window.addEventListener('resize', function () {
+  function onViewportChange() {
     clearTimeout(rt);
     rt = setTimeout(function () {
-      if (reduce) { paintStatic(); return; }
-      build();                 // fresh field; a mid-formation resize just
-      mode = 'ambient';        // settles straight into the ambient drift
+      requestAnimationFrame(function () {
+        try {
+          if (reduce) { paintStatic(); return; }
+          var forming = (mode === 'form' || mode === 'hold');
+          build();
+          if (forming && F.active && buildFormation()) {
+            mode = 'form'; mT = 0;         // keep revealing after the reflow
+          } else {
+            mode = 'ambient';              // settled field: back to calm drift
+          }
+        } catch (e) { /* decorative layer — never throw on resize */ }
+      });
     }, 200);
-  }, { passive: true });
+  }
+  window.addEventListener('resize', onViewportChange, { passive: true });
+  window.addEventListener('orientationchange', onViewportChange, { passive: true });
 
   if (reduce) { paintStatic(); return; }
 
