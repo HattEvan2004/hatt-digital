@@ -79,7 +79,7 @@
     </nav></div></header>
 <main id="main">
 
-<!-- ============ CINEMATIC SCROLL-BUILT HERO ============ -->
+<!-- ============ HOMEPAGE HERO ============ -->
 <section class="intro" id="intro">
   <div class="intro-stage">
     <div class="intro-bg" aria-hidden="true">
@@ -88,6 +88,7 @@
       <span class="intro-glow ig2"></span>
       <canvas class="intro-specs" id="introSpecs"></canvas>
     </div>
+    <div class="intro-inner">
     <div class="sh">
       <span class="eyebrow on-dark" data-build="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.hero.eyebrow }}</span>
       <h1 class="sh-title">
@@ -104,16 +105,36 @@
         </ul>
       </div>
     </div>
-    <div class="compiler" id="compiler" aria-hidden="true">
-      <div class="comp-bar">
-        <span class="dots"><i></i><i></i><i></i></span>
-        <span class="comp-file">hatt-digital&nbsp;/&nbsp;index.html</span>
-        <span class="comp-stat" id="compStat">compiling</span>
+    <div class="hero-preview" data-build="preview" role="group" aria-label="{{ home.hero.preview.title }}">
+      <div class="hp-head">
+        <span class="hp-kicker"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ home.hero.preview.kicker }}</span>
+        <b class="hp-title">{{ home.hero.preview.title }}</b>
       </div>
-      <pre class="comp-code" id="compCode"></pre>
-      <div class="comp-prog"><span id="compBar"></span></div>
+      <div class="hp-cards">
+        <article class="hp-card hp-old">
+          <span class="hp-badge hp-badge-old">{{ home.hero.preview.old.label }}</span>
+          <ul class="hp-list">
+            {%- for p in home.hero.preview.old.points %}
+            <li><span class="hp-ic hp-ic-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>{{ p }}</li>
+            {%- endfor %}
+          </ul>
+        </article>
+        <span class="hp-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="6 13 12 19 18 13"/></svg></span>
+        <article class="hp-card hp-new">
+          <span class="hp-badge hp-badge-new">{{ home.hero.preview.new.label }}</span>
+          <ul class="hp-list">
+            {%- for p in home.hero.preview.new.points %}
+            <li><span class="hp-ic hp-ic-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span>{{ p }}</li>
+            {%- endfor %}
+          </ul>
+          <div class="hp-mock" aria-hidden="true">
+            <span class="hp-pill hp-pill-call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call now</span>
+            <span class="hp-pill hp-pill-quote">Get a quote</span>
+          </div>
+        </article>
+      </div>
     </div>
-    <div class="scroll-hint" id="scrollHint" aria-hidden="true"><span>Scroll to explore</span><i></i></div>
+    </div>
   </div>
 </section>
 
