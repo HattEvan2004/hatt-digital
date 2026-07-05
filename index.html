@@ -1,14 +1,24 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#071426">
-<!-- Mark the document as JS-capable BEFORE first paint so the hero starts in
-     its hidden state (opacity:0 in the CSS) instead of flashing the finished
-     text. Without this the no-JS fallback (html:not(.js) .sh-word{opacity:1})
-     matches until main.js loads at the end of <body>, painting the completed
-     hero for a frame. This inline script runs before the stylesheet, so the
-     .js class is set before anything paints. If JS is disabled it never runs
-     and the no-JS fallback still shows the hero. The timer is a safety net:
-     if main.js fails to load or errors before revealing, hero-ready reveals
-     the content so it is never stuck hidden. -->
+<!-- Hero anti-flash (must stay in <head>, before the stylesheet).
+     The hero must never paint its finished text before the reveal animation.
+     The old approach hid the hero only once JS added an html.js class and
+     relied on html:not(.js) for the no-JS case — but Safari/WebKit can resolve
+     that :not(.js) rule for the FIRST paint before the class addition is
+     reflected, so the completed hero flashed and then faded out. This instead
+     hides the hero UNCONDITIONALLY at first paint (inlined here so it does not
+     even wait on the external stylesheet), and only ever reveals it through an
+     explicit signal: JS adds .built during the animation; reduced-motion shows
+     it instantly; a <noscript> block shows it when JS is disabled; and a 6s
+     safety timer (hero-ready) shows it if the hero script never runs. No rule
+     can reveal the hero based on the absence of a class, so there is nothing
+     to flash regardless of the engine's paint timing. -->
+<style>
+  .sh-word,.intro [data-build]{opacity:0}
+  html.hero-ready .sh-word,html.hero-ready .intro [data-build]{opacity:1}
+  @media (prefers-reduced-motion:reduce){.sh-word,.intro [data-build]{opacity:1}}
+</style>
+<noscript><style>.sh-word,.intro [data-build]{opacity:1!important;transform:none!important}</style></noscript>
 <script>document.documentElement.classList.add('js');setTimeout(function(){document.documentElement.classList.add('hero-ready')},6000);</script>
 <title>{{ home.seo.title }}</title>
 <meta name="description" content="{{ home.seo.description }}">

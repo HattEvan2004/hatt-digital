@@ -424,7 +424,12 @@
   }
   html:not(.js) .intro{height:auto}
   html:not(.js) .intro-stage{height:auto;min-height:100vh;min-height:100dvh}
-  html:not(.js) .sh-word,html:not(.js) .intro [data-build]{opacity:1;transform:none}
+  /* The hero is shown for no-JS via a <noscript> block in the page <head>, not
+     an html:not(.js) opacity rule — a class-absence reveal like that can win
+     the FIRST paint on WebKit before the html.js class lands, flashing the
+     finished hero. The <noscript> approach can never match when JS is enabled,
+     so there is nothing to flash. no-JS still gets the transform reset here: */
+  html:not(.js) .sh-word,html:not(.js) .intro [data-build]{transform:none}
   /* Load-failure safety net: an inline <head> timer adds html.hero-ready if the
      hero script never runs (failed to load, or threw before revealing), so the
      content is shown instead of staying stuck at its hidden opacity:0 start.
