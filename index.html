@@ -15,7 +15,13 @@
      to flash regardless of the engine's paint timing. -->
 <style>
   .sh-word,.intro [data-build]{opacity:0}
-  html.hero-ready .sh-word,html.hero-ready .intro [data-build]{opacity:1}
+  /* Reveal signals (any one wins): .built (the JS reveal timeline), .hero-ready
+     (a 6s load-failure timer, below), or .hero-fallback (added by the hero JS
+     the moment the particle layer fails — a fast, clean CSS fade/slide so the
+     hero is NEVER left blank and the reveal is never skipped). Only the canvas
+     particle field is decorative; the content reveal never depends on it. */
+  html.hero-ready .sh-word,html.hero-ready .intro [data-build],
+  html.hero-fallback .sh-word,html.hero-fallback .intro [data-build]{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.sh-word,.intro [data-build]{opacity:1}}
 </style>
 <noscript><style>.sh-word,.intro [data-build]{opacity:1!important;transform:none!important}</style></noscript>

@@ -430,11 +430,16 @@
      finished hero. The <noscript> approach can never match when JS is enabled,
      so there is nothing to flash. no-JS still gets the transform reset here: */
   html:not(.js) .sh-word,html:not(.js) .intro [data-build]{transform:none}
-  /* Load-failure safety net: an inline <head> timer adds html.hero-ready if the
-     hero script never runs (failed to load, or threw before revealing), so the
-     content is shown instead of staying stuck at its hidden opacity:0 start.
-     In the normal case the reveal (.built) has already run well before this. */
-  html.hero-ready .sh-word,html.hero-ready .intro [data-build]{opacity:1;transform:none}
+  /* Reveal safety nets (both animate in via the .sh-word/[data-build] transition
+     above — a clean fade + slide, never a snap):
+      • html.hero-ready    — a 6s inline <head> timer, for when the hero script
+        never runs at all (failed to load, or threw before revealing).
+      • html.hero-fallback — added by the hero JS the instant the particle layer
+        fails on any engine (a WebKit canvas quirk, a thrown frame, etc.), so the
+        hero reveals immediately instead of waiting on the 6s net or staying blank.
+     In the normal case the reveal (.built) has already run well before either. */
+  html.hero-ready .sh-word,html.hero-ready .intro [data-build],
+  html.hero-fallback .sh-word,html.hero-fallback .intro [data-build]{opacity:1;transform:none}
 
   /* ---- stack to a single centred column on tablet + phone ---- */
   @media(max-width:900px){

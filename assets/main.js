@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   document.documentElement.classList.add('js');
-  /* HD-BUILD: autoplay-10s-iphonefix */
+  /* HD-BUILD: safari-particle-reveal-reliable */
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
@@ -152,22 +152,19 @@
      frames to gather in. */
   bindHeaderReveal();
 
-  /* The formation plays once per session (sessionStorage flag); repeat loads
-     get the quick stagger. For development / QA, append ?hero=replay (or the
-     hash #hero-replay) to force the full particle intro on any load without
-     clearing storage by hand — do NOT mistake the once-per-session throttle
-     for a broken animation. */
+  /* The particle formation now plays on EVERY load. The old once-per-session
+     throttle (a sessionStorage 'hdHeroIntro' flag) was removed: on Safari a
+     returning tab kept that flag set, so every reload skipped the formation and
+     the hero appeared with no reveal at all — which read as a broken animation
+     rather than a throttle. ?hero=replay / #hero-replay are still honoured as an
+     explicit "force the intro" switch (and clear any legacy flag), but they are
+     no longer required — the intro is not throttled. */
   var forceReplay = /(?:[?&]hero=replay\b|#hero-replay\b)/i.test(
     (location.search || '') + (location.hash || ''));
-  var seen = false;
-  try {
-    seen = sessionStorage.getItem('hdHeroIntro') === '1';
-    sessionStorage.setItem('hdHeroIntro', '1');
-  } catch (e) { /* private mode: formation just plays each load */ }
-  if (forceReplay) seen = false;
+  if (forceReplay) { try { sessionStorage.removeItem('hdHeroIntro'); } catch (e) {} }
   var vw = window.innerWidth;
   var F = {
-    active: !seen && !!document.getElementById('introSpecs'),
+    active: !!document.getElementById('introSpecs'),
     // gather / hold / lock-in / settle, tuned so the whole intro reads as a
     // real reveal: ~3.2-4s desktop, ~2.8-3.5s tablet, ~2.2-3s mobile.
     form: vw < 600 ? 1500 : vw < 1000 ? 1850 : 2100,   // gather (ms)
@@ -291,13 +288,25 @@
   /* The whole field runs inside a try/catch: it's a purely decorative
      background layer, so a failure here (an odd browser, a canvas quirk)
      must never take the rest of the page's scripts down with it — the
-     hero content reveal above is fully independent of this succeeding. */
+     hero content reveal above is fully independent of this succeeding.
+     But it must NOT fail silently: a swallowed error is exactly why the reveal
+     "just vanished" on Safari with nothing to go on. So every failure path both
+     warns to the console (temporary diagnostics) AND calls heroFallback(), which
+     guarantees a clean CSS fade/slide reveal of the hero (html.hero-fallback). */
+  function warn(msg, e) {
+    try { (console.warn || console.log).call(console, '[hero-specs] ' + msg, e || ''); } catch (_) {}
+  }
+  function heroFallback(reason, e) {
+    try { document.documentElement.classList.add('hero-fallback'); } catch (_) {}
+    if (reason) warn(reason, e);
+  }
   try {
   var intro = document.getElementById('intro');
   var canvas = document.getElementById('introSpecs');
   if (!intro || !canvas) return;
-  var ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  var ctx = null;
+  try { ctx = canvas.getContext('2d'); } catch (e) { ctx = null; }
+  if (!ctx) { heroFallback('2D canvas context unavailable — revealing hero via CSS fallback'); return; }
 
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hoverable = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -369,20 +378,31 @@
     return s;
   }
 
+  /* WebKit/iOS silently refuse to render a canvas whose backing store is too
+     large — they paint nothing at all (a classic "works in Chrome, blank in
+     Safari" trap). The tall dvh hero on a 3x phone can push the backing store
+     high, so cap the total area AND each dimension by scaling DPR down before it
+     can cross the ceiling, guaranteeing a paintable surface on every engine. */
+  var MAX_CANVAS_AREA = 16000000;   // just under iOS's ~16.7M-px canvas limit
+  var MAX_CANVAS_DIM = 8192;        // and its per-side texture ceiling
   function resize() {
+    var r = canvas.getBoundingClientRect();
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
     /* Cap DPR at 2: keeps the canvas crisp on 3x phones without quadrupling
        the fill cost (3x backing store on a tall hero is needlessly heavy). */
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var r = canvas.getBoundingClientRect();
-    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    var area = W * dpr * H * dpr;
+    if (area > MAX_CANVAS_AREA) dpr = Math.max(1, dpr * Math.sqrt(MAX_CANVAS_AREA / area));
+    var maxDim = Math.max(W, H) * dpr;
+    if (maxDim > MAX_CANVAS_DIM) dpr = Math.max(1, dpr * (MAX_CANVAS_DIM / maxDim));
     /* Visible band: how much of the (possibly very tall) canvas is on screen.
        Clamp to the canvas so it never exceeds H. Uses innerHeight, which is a
        stable, layout-ready number on mobile Safari (unlike a CSS 100vh read). */
     var vv = window.innerHeight || H;
     var top = r.top;                       // canvas top relative to viewport
     VH = Math.max(1, Math.min(H, vv - (top < 0 ? 0 : top)));
-    canvas.width = Math.round(W * dpr);
-    canvas.height = Math.round(H * dpr);
+    canvas.width = Math.max(1, Math.round(W * dpr));
+    canvas.height = Math.max(1, Math.round(H * dpr));
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
@@ -615,15 +635,22 @@
 
   function frame(ts) {
     if (!running) return;
-    if (!last) last = ts;
-    var dt = Math.min((ts - last) / 1000, 0.05);
-    last = ts;
-    cX += (pX - cX) * 0.05;
-    cY += (pY - cY) * 0.05;
-    if (mode === 'ambient') stepAmbient(dt, ts / 1000, calm);
-    else formStep(dt, ts / 1000);
-    draw();
-    raf = requestAnimationFrame(frame);
+    try {
+      if (!last) last = ts;
+      var dt = Math.min((ts - last) / 1000, 0.05);
+      last = ts;
+      cX += (pX - cX) * 0.05;
+      cY += (pY - cY) * 0.05;
+      if (mode === 'ambient') stepAmbient(dt, ts / 1000, calm);
+      else formStep(dt, ts / 1000);
+      draw();
+      raf = requestAnimationFrame(frame);
+    } catch (e) {
+      /* A thrown frame would otherwise stop the loop with no reschedule and no
+         trace. Surface it and make sure the hero is revealed cleanly. */
+      running = false;
+      heroFallback('animation frame error — stopping particle field', e);
+    }
   }
 
   function start() {
@@ -687,52 +714,101 @@
     }, { passive: true });
   }
 
-  /* pause when the hero is offscreen or the tab is hidden */
+  /* Webfont metrics can shift the headline box just after first paint. If the
+     fonts settle while we're still gathering, re-aim each spec at the nearest
+     point of a freshly measured target map — a zero shift maps every spec back
+     onto its own point, so nothing jumps. */
+  function reaimFormation() {
+    try {
+      if (mode !== 'form') return;
+      var n = 0, i;
+      for (i = 0; i < specs.length; i++) if (!specs[i].free) n++;
+      var pts = heroTargets(n);
+      if (!pts.length) return;
+      var used = new Array(pts.length);
+      for (i = 0; i < specs.length; i++) {
+        var s = specs[i];
+        if (s.free) continue;
+        var bi = -1, bd = Infinity;
+        for (var q = 0; q < pts.length; q++) {
+          if (used[q]) continue;
+          var dx = pts[q][0] - s.tx, dy = pts[q][1] - s.ty;
+          var d2 = dx * dx + dy * dy;
+          if (d2 < bd) { bd = d2; bi = q; }
+        }
+        if (bi < 0) break;
+        used[bi] = 1;
+        s.tx = pts[bi][0]; s.ty = pts[bi][1];
+      }
+    } catch (e) { warn('re-aim after fonts.ready failed', e); }
+  }
+
+  /* Pause when the hero is scrolled off-screen or the tab is hidden — this is
+     purely a performance optimisation. The field is STARTED unconditionally in
+     boot() below; the observer only ever pauses/resumes it, so we never depend
+     on IntersectionObserver to start the animation (a WebKit quirk where the
+     first callback can report the top-of-page hero as not-intersecting used to
+     leave the field dead). */
   var onScreen = true;
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) stop(); else if (onScreen) start();
   });
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) {
-      onScreen = es[0].isIntersecting;
-      if (onScreen && !document.hidden) start(); else stop();
-    }, { threshold: 0 }).observe(intro);
+    try {
+      new IntersectionObserver(function (es) {
+        onScreen = es[es.length - 1].isIntersecting;
+        /* Never pause while we're still at the top of the page: there the hero
+           is on screen by definition, so a spurious "not intersecting" reading
+           (seen on WebKit right after load) can't kill the intro. */
+        if (!onScreen && (window.pageYOffset || 0) < Math.max(140, H * 0.5)) onScreen = true;
+        if (onScreen && !document.hidden) start(); else stop();
+      }, { threshold: 0 }).observe(intro);
+    } catch (e) { warn('IntersectionObserver setup failed', e); }
   }
 
-  build();
-  if (F.active && buildFormation()) {
-    mode = 'form'; mT = 0;
-    /* Webfont metrics can shift the headline box just after first paint.
-       If the fonts settle while we're still gathering, re-aim each spec at
-       the nearest point of a freshly measured target map — a zero shift
-       maps every spec back onto its own point, so nothing jumps. */
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () {
-        if (mode !== 'form') return;
-        var n = 0, i;
-        for (i = 0; i < specs.length; i++) if (!specs[i].free) n++;
-        var pts = heroTargets(n);
-        if (!pts.length) return;
-        var used = new Array(pts.length);
-        for (i = 0; i < specs.length; i++) {
-          var s = specs[i];
-          if (s.free) continue;
-          var bi = -1, bd = Infinity;
-          for (var q = 0; q < pts.length; q++) {
-            if (used[q]) continue;
-            var dx = pts[q][0] - s.tx, dy = pts[q][1] - s.ty;
-            var d2 = dx * dx + dy * dy;
-            if (d2 < bd) { bd = d2; bi = q; }
-          }
-          if (bi < 0) break;
-          used[bi] = 1;
-          s.tx = pts[bi][0]; s.ty = pts[bi][1];
-        }
-      });
+  /* ---- boot: build the field + formation, then START, from a reliable path ----
+     Runs exactly once, kicked by whichever fires first: an immediate rAF (the
+     script is at the end of <body>, so layout is usually ready), DOMContentLoaded,
+     window load, and a setTimeout backstop — so the field starts even if any one
+     of those never fires on a given engine. If the hero rects aren't measurable
+     yet, the formation is retried for a few frames before settling into ambient
+     drift, so the reveal is never dropped just because layout was a beat late. */
+  var booted = false;
+  function tryFormation() {
+    if (!F.active) return true;              // nothing to form: ambient is correct
+    if (buildFormation()) { mode = 'form'; mT = 0; return true; }
+    return false;
+  }
+  function boot() {
+    if (booted) return;
+    booted = true;
+    try {
+      build();
+      if (!tryFormation()) {
+        var tries = 0;
+        (function retry() {
+          if (mode === 'form') return;
+          if (++tries > 30) { warn('formation targets never became measurable; showing ambient drift'); return; }
+          if (!tryFormation()) requestAnimationFrame(retry);
+        })();
+      }
+      if (F.active && document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(reaimFormation).catch(function () {});
+      }
+      start();
+    } catch (e) {
+      heroFallback('boot failed', e);
     }
   }
-  start();
-  } catch (e) { /* decorative layer only — see comment above */ }
+  function scheduleBoot() { requestAnimationFrame(boot); }
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    scheduleBoot();
+  } else {
+    document.addEventListener('DOMContentLoaded', scheduleBoot);
+  }
+  window.addEventListener('load', scheduleBoot);
+  setTimeout(boot, 1200);                    // last-resort backstop
+  } catch (e) { heroFallback('particle field crashed during setup', e); }
 })();
 
 /* =====================================================
