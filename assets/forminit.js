@@ -23,7 +23,7 @@
   var PACKAGE_MAP = {
     starter: 'Starter Website',
     business: 'Business Website',
-    growth: 'Growth Website'
+    custom: 'Custom Website'
   };
 
   function humanMB(bytes) { return (bytes / (1024 * 1024)).toFixed(1) + ' MB'; }
