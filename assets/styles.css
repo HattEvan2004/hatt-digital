@@ -75,27 +75,18 @@
   /* INTERIOR PAGE HEADER */
   .phead{background:var(--ink);color:#fff;position:relative;overflow:hidden}
   .phead .glow{position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(24,182,242,.16),transparent 65%);top:-220px;left:-120px;pointer-events:none}
-  .phead-grid{display:grid;grid-template-columns:1fr .92fr;gap:48px;align-items:center;padding:70px 0 76px;position:relative}
+  /* Copy-only page hero (the side facts card was removed): a single, capped
+     column so the headline never stretches full width or sits in a half-empty grid. */
+  .phead-grid{padding:clamp(52px,6.4vw,80px) 0;position:relative}
+  .phead-grid>div{max-width:720px}
   .phead h1{font-size:clamp(38px,5.6vw,62px);font-weight:800;letter-spacing:-.035em;margin-top:18px}
   .phead h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .phead p{color:var(--muted-d);font-size:18px;margin-top:18px;max-width:42ch}
 
-  /* customer-facing "short version" card on interior page headers —
-     the honest receipts (price, timeline, ownership) plus a direct phone line */
-  .phead-card{background:#081025;border:1px solid var(--line-d);border-radius:14px;
-    box-shadow:0 30px 60px -34px rgba(0,0,0,.7);padding:24px 26px}
-  .phead-card .eyebrow{margin:0}
-  .pc-facts{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
-  .pc-facts li{display:flex;align-items:flex-start;gap:11px;color:#cfdaf0;font-size:15px;line-height:1.5}
-  .pc-facts li svg{flex:none;margin-top:3.5px;color:var(--cyan)}
-  .pc-call{display:flex;align-items:center;gap:10px;margin-top:18px;padding-top:18px;
-    border-top:1px solid var(--line-d);
-    font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15.5px;color:#fff;transition:color .2s}
-  .pc-call svg{width:16px;height:16px;flex:none;color:var(--cyan)}
-  .pc-call:hover{color:var(--cyan)}
-
   /* generic band */
-  .band{padding:96px 0}
+  /* One smooth section rhythm for every width instead of stepped 56/96/104
+     jumps: ~56px on phones, easing up to ~100px on wide desktop. */
+  .band{padding:clamp(56px,7vw,100px) 0}
   .band-tint{background:var(--mist-2);position:relative}
   .band-tint:before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
   .band-head{max-width:680px}
@@ -183,7 +174,10 @@
   .founder .sig b{color:var(--ink);font-weight:700}
 
   /* why different (about) */
-  .diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:50px}
+  /* Two even columns on desktop + tablet (4 cards read as a tidy 2×2), dropping
+     to a single column only on phones (see ≤560 below). */
+  .diff-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:clamp(32px,4vw,50px)}
+  @media(max-width:560px){.diff-grid{grid-template-columns:1fr}}
   .diff{position:relative;display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s,border-color .3s}
   .diff:hover{transform:translateY(-4px);box-shadow:0 24px 46px -28px rgba(10,22,51,.3);border-color:#cdd9ef}
   .diff .dchk{flex:none;width:42px;height:42px;border-radius:12px;background:var(--grad);display:grid;place-items:center;color:#fff;box-shadow:0 12px 24px -12px rgba(18,103,255,.6);transition:transform .35s}
@@ -262,12 +256,12 @@
   .band-dark .band-head p{color:var(--muted-d)}
 
   @media(max-width:900px){
-    .hero-grid,.phead-grid{grid-template-columns:1fr;gap:38px}
-    .phead-grid{padding:50px 0 56px}
-    .build,.phead-card{max-width:480px}
+    .hero-grid{grid-template-columns:1fr;gap:38px}
+    .build{max-width:480px}
     .value-grid{grid-template-columns:1fr}
     .proc-grid{grid-template-columns:1fr 1fr;gap:30px}
-    .price-grid{grid-template-columns:1fr}
+    /* stacked pricing reads as one centred column, not stretched full-width cards */
+    .price-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}
     .local,.contact-grid{grid-template-columns:1fr;gap:32px}
     /* stacked: keep the map a balanced banner, never too tall */
     .map-card{aspect-ratio:auto;height:clamp(240px,46vw,360px)}
@@ -290,7 +284,7 @@
     .menu-btn{display:block}
     .nav-cta .btn:not(.menu-btn){display:none}
   }
-  @media(max-width:520px){.proc-grid{grid-template-columns:1fr}form .row{grid-template-columns:1fr}.band{padding:68px 0}.care{flex-direction:column;align-items:flex-start}}
+  @media(max-width:520px){.proc-grid{grid-template-columns:1fr}form .row{grid-template-columns:1fr}.care{flex-direction:column;align-items:flex-start}}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1!important;transform:none!important}.cursor{display:none!important}}
 
   /* ===================================================== */
@@ -469,11 +463,9 @@
   /* RESPONSIVE QA — premium polish across breakpoints      */
   /* ===================================================== */
   @media(max-width:900px){
-    .diff-grid{grid-template-columns:1fr}
     .mini-cta{flex-direction:column;align-items:flex-start;gap:18px}
   }
   @media(max-width:600px){
-    .band{padding:64px 0}
     .svc{grid-template-columns:auto 1fr;gap:14px;padding:26px 8px 26px 16px}
     .svc .num{font-size:20px}
     .svc .svc-tag{grid-column:2;justify-self:start;margin-top:2px}
@@ -614,7 +606,6 @@
   .contact-social svg{width:19px;height:19px}
 
   /* Consistent vertical rhythm: keep band padding aligned with projects page */
-  @media(min-width:901px){.band{padding:104px 0}}
 
   /* ===================================================== */
   /* ====  ACCESSIBILITY & INTERACTION HARDENING  ======== */
@@ -809,8 +800,6 @@
      desktop composition is untouched.
   ===================================================== */
   @media(max-width:600px){
-    /* Even vertical rhythm between sections (was a mix of 64px / loose gaps) */
-    .band{padding:56px 0}
     @supports(padding:max(0px)){
       /* respect the iPhone home-indicator / gesture bar at the page foot */
       footer{padding-bottom:calc(44px + env(safe-area-inset-bottom,0px))}
@@ -1026,11 +1015,6 @@
 
   .ba-note{text-align:center;color:var(--muted);font-size:12.5px;margin-top:16px;letter-spacing:.01em}
 
-  /* ---- benefit points ---- */
-  .ba-benefits{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:12px 30px;margin:34px auto 0;max-width:760px;padding:0}
-  .ba-benefits li{display:inline-flex;align-items:center;gap:9px;font-family:'Inter Tight',sans-serif;font-weight:600;font-size:15.5px;letter-spacing:-.01em;color:var(--ink)}
-  .ba-benefits li svg{flex:0 0 auto;width:15px;height:15px;color:#fff;background:var(--grad);border-radius:50%;padding:3px;box-shadow:0 3px 8px -2px rgba(18,103,255,.6)}
-
   /* ---- responsive: keep mockups legible + no overflow ---- */
   @container (max-width:720px){
     .ba-view{font-size:1.7cqw}
@@ -1073,8 +1057,6 @@
     .ba-heroband-old i{font-size:2.6cqw}.ba-link-old{font-size:2.9cqw}.ba-footer-old{font-size:2.2cqw}
     .ba-tag{font-size:2.7cqw;top:4cqw;padding:1cqw 2cqw}
     .ba-tag-before{left:4cqw}.ba-tag-after{right:4cqw}
-    .ba-benefits{gap:10px 20px;margin-top:26px}
-    .ba-benefits li{font-size:14.5px}
   }
   @media(prefers-reduced-motion:reduce){
     .ba-before,.ba-handle{transition:none}
@@ -1189,24 +1171,12 @@
     font-size:12.5px;letter-spacing:.02em;color:#c5d4ec;white-space:nowrap}
   .sh-receipts li svg{color:var(--cyan);flex:none}
 
-  .local-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,64px);align-items:center}
+  /* The "who you deal with" side card was removed; the copy now stands on its
+     own as a left-aligned statement block, capped so it never runs full width. */
+  .local-grid{max-width:640px}
   .local-copy h2{font-size:clamp(28px,3.8vw,40px);letter-spacing:-.03em;margin-top:16px}
   .local-copy p{color:var(--muted);margin-top:16px;font-size:16.5px;max-width:56ch}
   .local-copy .btn{margin-top:26px}
-  .trust-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;
-    box-shadow:0 26px 54px -34px rgba(10,22,51,.35)}
-  .trust-card .tc-top{display:flex;align-items:center;gap:15px}
-  .trust-card .tc-mark{flex:none;width:52px;height:52px;border-radius:14px;background:var(--grad);color:#fff;
-    display:grid;place-items:center;font-family:'Inter Tight',sans-serif;font-weight:800;font-size:19px}
-  .trust-card .tc-name{display:block;font-family:'Inter Tight',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.01em}
-  .trust-card .tc-role{display:block;color:var(--muted);font-size:14px;margin-top:2px}
-  .trust-card .tc-line{color:var(--ink);font-size:15.5px;line-height:1.6;margin:18px 0 0;padding-top:18px;border-top:1px solid var(--line)}
-  .trust-card .btn{width:100%;justify-content:center;margin-top:20px}
-
-  @media(max-width:860px){
-    .local-grid{grid-template-columns:1fr;gap:28px}
-    .trust-card{padding:24px 22px}
-  }
   @media(max-width:520px){
     .sh-receipts{gap:8px 16px;margin-top:22px}
     .sh-receipts li{font-size:11.5px}
