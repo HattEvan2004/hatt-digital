@@ -152,19 +152,16 @@
      frames to gather in. */
   bindHeaderReveal();
 
-  /* The formation plays once per session (sessionStorage flag); repeat loads
-     get the quick stagger. For development / QA, append ?hero=replay (or the
-     hash #hero-replay) to force the full particle intro on any load without
-     clearing storage by hand — do NOT mistake the once-per-session throttle
-     for a broken animation. */
-  var forceReplay = /(?:[?&]hero=replay\b|#hero-replay\b)/i.test(
-    (location.search || '') + (location.hash || ''));
-  var seen = false;
-  try {
-    seen = sessionStorage.getItem('hdHeroIntro') === '1';
-    sessionStorage.setItem('hdHeroIntro', '1');
-  } catch (e) { /* private mode: formation just plays each load */ }
-  if (forceReplay) seen = false;
+  /* TEMPORARY (testing): the once-per-session throttle is DISABLED so the
+     particle intro replays on every page load — makes it possible to actually
+     confirm the reveal on Safari without clearing storage. To restore
+     "play once per session" later, gate `active` on the sessionStorage flag
+     again (see the commented block below). ?hero=replay still works too. */
+  var seen = false;                 // <- was read from sessionStorage; forced off for testing
+  /* try {
+       seen = sessionStorage.getItem('hdHeroIntro') === '1';
+       sessionStorage.setItem('hdHeroIntro', '1');
+     } catch (e) {} */
   var vw = window.innerWidth;
   var F = {
     active: !seen && !!document.getElementById('introSpecs'),
@@ -176,31 +173,42 @@
   };
   window.__hdHeroForm = F;
 
+  /* The reveal sequence, built once so both the particle-synced path and the
+     fallback path animate the same elements. */
+  var seq = [intro.querySelector('[data-build="eyebrow"]')];
+  words.forEach(function (w) { seq.push(w); });
+  seq.push(intro.querySelector('[data-build="sub"]'));
+  seq.push(intro.querySelector('[data-build="cta"]'));
+  var preview = intro.querySelector('[data-build="preview"]');
+
   var revealed = false;
+  var played = false;
   function finish() {
     if (revealed) return;
     revealed = true;
     revealAll();
   }
 
-  function play() {
-    var seq = [intro.querySelector('[data-build="eyebrow"]')];
-    words.forEach(function (w) { seq.push(w); });
-    seq.push(intro.querySelector('[data-build="sub"]'));
-    seq.push(intro.querySelector('[data-build="cta"]'));
-    var preview = intro.querySelector('[data-build="preview"]');
+  /* Clean CSS fade/slide reveal (each element keeps its .sh-word / [data-build]
+     opacity+transform transition). Used whenever the particle field is NOT
+     driving the timing: reduced situations, or — importantly — when the
+     particle canvas fails or never runs on a given browser. Exposed globally so
+     the particle IIFE can trigger it on error. Idempotent + guarded. */
+  function quickReveal() {
+    if (revealed) return;
+    var base = 90, gap = 55;
+    seq.forEach(function (el, i) {
+      if (el) setTimeout(function () { on(el, true); }, base + i * gap);
+    });
+    setTimeout(function () { on(preview, true); }, 240);
+    setTimeout(finish, base + seq.length * gap + 400);
+  }
+  window.__hdHeroReveal = quickReveal;
 
-    if (!F.active) {
-      /* repeat visit this session: no particle wait to sync with — just the
-         quick stagger, same as before */
-      var base = 90, gap = 55;
-      seq.forEach(function (el, i) {
-        if (el) setTimeout(function () { on(el, true); }, base + i * gap);
-      });
-      setTimeout(function () { on(preview, true); }, 240);
-      setTimeout(finish, base + seq.length * gap + 400);
-      return;
-    }
+  function play() {
+    played = true;
+    /* No particle field to sync with: reveal cleanly right away. */
+    if (!F.active) { quickReveal(); return; }
 
     /* First load: the headline/sub/cta/preview fade in staggered across the
        "hold" window — i.e. only once the particles have finished gathering
@@ -212,8 +220,20 @@
     var gap = seq.length > 1 ? span / (seq.length + 1) : span * 0.5;
     var t0 = null;
 
+    /* Watchdog: if the particle field is not actually running a short beat
+       after load (it threw on this browser, the canvas never sized, etc.), do
+       NOT keep waiting on a gather that will never happen — reveal the hero
+       now with the clean CSS fade so Safari/anything never shows a bare hero
+       waiting on a dead animation. */
+    var watchdog = setTimeout(function () {
+      if (!revealed && !window.__hdParticlesRunning) {
+        try { console.warn('[hero] particle field not running ~750ms after load — revealing hero via CSS fallback'); } catch (e) {}
+        quickReveal();
+      }
+    }, 750);
+
     function tick(ts) {
-      if (revealed) return;
+      if (revealed) { clearTimeout(watchdog); return; }
       try {
         if (t0 === null) t0 = ts;
         var elapsed = ts - t0;
@@ -222,7 +242,8 @@
         });
         if (preview && elapsed >= startAt + gap * 1.4) on(preview, true);
         if (elapsed < startAt + span + 300) { requestAnimationFrame(tick); return; }
-      } catch (e) { /* fall through to finish() below */ }
+      } catch (e) { try { console.warn('[hero] reveal tick error:', e); } catch (_) {} }
+      clearTimeout(watchdog);
       finish();
     }
     requestAnimationFrame(tick);
@@ -232,7 +253,16 @@
     /* Two rAF ticks so layout + fonts settle, then run the timeline off the
        same animation-frame clock as the particle field. */
     requestAnimationFrame(function () { requestAnimationFrame(play); });
-  } catch (e) { finish(); }
+  } catch (e) { quickReveal(); }
+  /* Belt-and-suspenders: if requestAnimationFrame never fires at all (so play()
+     never even ran), reveal via plain timers. Guarded on `played` so it does
+     NOT pre-empt the normal gather-synced reveal when rAF is working. */
+  setTimeout(function () {
+    if (!revealed && !played) {
+      try { console.warn('[hero] rAF did not fire — revealing hero via timer fallback'); } catch (e) {}
+      quickReveal();
+    }
+  }, 1000);
 
   /* Hard safety net: whatever else happens (a thrown error, a stalled tab,
      an rAF that never fires), never leave the hero permanently hidden. */
@@ -374,15 +404,21 @@
        the fill cost (3x backing store on a tall hero is needlessly heavy). */
     dpr = Math.min(window.devicePixelRatio || 1, 2);
     var r = canvas.getBoundingClientRect();
-    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    var nw = Math.max(1, r.width), nh = Math.max(1, r.height);
     /* Visible band: how much of the (possibly very tall) canvas is on screen.
        Clamp to the canvas so it never exceeds H. Uses innerHeight, which is a
        stable, layout-ready number on mobile Safari (unlike a CSS 100vh read). */
-    var vv = window.innerHeight || H;
+    var vv = window.innerHeight || nh;
     var top = r.top;                       // canvas top relative to viewport
-    VH = Math.max(1, Math.min(H, vv - (top < 0 ? 0 : top)));
-    canvas.width = Math.round(W * dpr);
-    canvas.height = Math.round(H * dpr);
+    VH = Math.max(1, Math.min(nh, vv - (top < 0 ? 0 : top)));
+    var backW = Math.round(nw * dpr), backH = Math.round(nh * dpr);
+    /* Setting canvas.width/height clears the canvas, so skip it when nothing
+       actually changed — this lets the load / DOMContentLoaded re-measure
+       calls be safe no-ops instead of flickering a mid-animation frame. */
+    if (nw === W && nh === H && canvas.width === backW && canvas.height === backH) return;
+    W = nw; H = nh;
+    canvas.width = backW;
+    canvas.height = backH;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
@@ -615,15 +651,27 @@
 
   function frame(ts) {
     if (!running) return;
-    if (!last) last = ts;
-    var dt = Math.min((ts - last) / 1000, 0.05);
-    last = ts;
-    cX += (pX - cX) * 0.05;
-    cY += (pY - cY) * 0.05;
-    if (mode === 'ambient') stepAmbient(dt, ts / 1000, calm);
-    else formStep(dt, ts / 1000);
-    draw();
-    raf = requestAnimationFrame(frame);
+    try {
+      /* signal to the content-reveal watchdog (in the hero IIFE) that the
+         canvas is genuinely animating on this browser */
+      window.__hdParticlesRunning = true;
+      if (!last) last = ts;
+      var dt = Math.min((ts - last) / 1000, 0.05);
+      last = ts;
+      cX += (pX - cX) * 0.05;
+      cY += (pY - cY) * 0.05;
+      if (mode === 'ambient') stepAmbient(dt, ts / 1000, calm);
+      else formStep(dt, ts / 1000);
+      draw();
+      raf = requestAnimationFrame(frame);
+    } catch (e) {
+      /* A per-frame WebKit/canvas error must not leave a half-drawn, frozen
+         hero: stop the loop, warn loudly (temporary), and make sure the hero
+         content is revealed via the CSS fallback. */
+      running = false;
+      try { console.warn('[hero] particle frame error — stopping canvas; hero still revealed via CSS:', e); } catch (_) {}
+      try { if (window.__hdHeroReveal) window.__hdHeroReveal(); } catch (_) {}
+    }
   }
 
   function start() {
@@ -687,20 +735,38 @@
     }, { passive: true });
   }
 
-  /* pause when the hero is offscreen or the tab is hidden */
+  /* Pause when the hero is genuinely scrolled off-screen or the tab is hidden.
+     IMPORTANT: the IntersectionObserver only ever *pauses* an already-started
+     animation — it must never be the thing that STARTS it, and a spurious
+     initial "not intersecting" (seen on some WebKit first-layout timings) must
+     never stop the intro before it plays. So stop() only fires when the hero
+     is really out of view, confirmed against getBoundingClientRect. */
   var onScreen = true;
+  function trulyOffscreen() {
+    var r = intro.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+    return r.bottom <= 0 || r.top >= vh;
+  }
   document.addEventListener('visibilitychange', function () {
     if (document.hidden) stop(); else if (onScreen) start();
   });
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (es) {
-      onScreen = es[0].isIntersecting;
-      if (onScreen && !document.hidden) start(); else stop();
-    }, { threshold: 0 }).observe(intro);
+    try {
+      new IntersectionObserver(function (es) {
+        var vis = es[0].isIntersecting || !trulyOffscreen();
+        onScreen = vis;
+        if (vis && !document.hidden) start(); else stop();
+      }, { threshold: 0 }).observe(intro);
+    } catch (e) { try { console.warn('[hero] IntersectionObserver failed:', e); } catch (_) {} }
   }
 
   build();
-  if (F.active && buildFormation()) {
+  var formationOk = false;
+  if (F.active) {
+    try { formationOk = buildFormation(); }
+    catch (e) { try { console.warn('[hero] buildFormation failed — ambient drift only:', e); } catch (_) {} }
+  }
+  if (formationOk) {
     mode = 'form'; mT = 0;
     /* Webfont metrics can shift the headline box just after first paint.
        If the fonts settle while we're still gathering, re-aim each spec at
@@ -731,8 +797,34 @@
       });
     }
   }
+
+  /* Start the loop directly, and ALSO from DOMContentLoaded and window.load —
+     each is idempotent (start() no-ops if already running) and re-measures the
+     canvas. Relying on any single trigger (or on the IntersectionObserver) is
+     what left Safari with a dead canvas when its first layout wasn't ready at
+     script-execution time; these belt-and-suspenders paths fix that. */
   start();
-  } catch (e) { /* decorative layer only — see comment above */ }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      try { resize(); if (formationOk && mode === 'ambient') { if (buildFormation()) { mode = 'form'; mT = 0; } } } catch (e) {}
+      start();
+    });
+  }
+  window.addEventListener('load', function () { try { resize(); } catch (e) {} start(); });
+  /* If, a beat after load, no frame has run on this browser, warn (temporary
+     diagnostic) and make sure the hero content is revealed via the CSS
+     fallback rather than sitting on a dead canvas. */
+  setTimeout(function () {
+    if (!window.__hdParticlesRunning) {
+      try { console.warn('[hero] particle canvas produced no frames — check WebKit canvas/rAF; revealing hero via CSS fallback'); } catch (_) {}
+      try { if (window.__hdHeroReveal) window.__hdHeroReveal(); } catch (_) {}
+    }
+  }, 800);
+  } catch (e) {
+    /* Never fail silently: warn (temporary) and guarantee the hero reveals. */
+    try { console.warn('[hero] particle field failed to initialize — hero revealed via CSS fallback:', e); } catch (_) {}
+    try { if (window.__hdHeroReveal) window.__hdHeroReveal(); } catch (_) {}
+  }
 })();
 
 /* =====================================================
