@@ -144,7 +144,10 @@
   .ptier li svg{flex:none;margin-top:3px;color:var(--royal)}
   .ptier .btn{width:100%;justify-content:center;margin-top:auto}
   /* local */
-  .local{display:grid;grid-template-columns:1fr 1.05fr;gap:52px;align-items:center}
+  .local{display:grid;grid-template-columns:1fr 1.05fr;grid-template-areas:"map intro" "map actions";column-gap:52px;row-gap:0;align-items:center}
+  .local .map-card{grid-area:map}
+  .local-intro{grid-area:intro}
+  .local-actions{grid-area:actions}
   /* ---- real service-area map (Google Maps) ---- */
   .map-card{position:relative;overflow:hidden;border-radius:20px;padding:0;margin:0;aspect-ratio:1/.74;
     background:#e8edf4;border:1px solid var(--line);
@@ -268,9 +271,7 @@
     .proc-grid{grid-template-columns:1fr 1fr;gap:30px}
     /* stacked pricing reads as one centred column, not stretched full-width cards */
     .price-grid{grid-template-columns:1fr;max-width:460px;margin-inline:auto}
-    .local,.contact-grid{grid-template-columns:1fr;gap:32px}
-    /* stacked: keep the map a balanced banner, never too tall */
-    .map-card{aspect-ratio:auto;height:clamp(240px,46vw,360px)}
+    .contact-grid{grid-template-columns:1fr;gap:32px}
     .founder{grid-template-columns:1fr;gap:24px;padding:36px 34px}
     .svc{grid-template-columns:auto 1fr;gap:16px}
     .svc .svc-tag{grid-column:2;padding-top:0}
@@ -289,6 +290,16 @@
     .nav-links a.active:after{display:none}
     .menu-btn{display:block}
     .nav-cta .btn:not(.menu-btn){display:none}
+  }
+  /* Local / service-area: on tablet + mobile (single column up to 1024px) the
+     map stacks directly above the city buttons, so the buttons read as part of
+     the map instead of stranded far below it. Order: intro → map → buttons →
+     Let's talk (matches DOM order). */
+  @media(max-width:1024px){
+    .local{grid-template-columns:1fr;grid-template-areas:none;column-gap:0;row-gap:26px;align-items:stretch}
+    .local .map-card,.local-intro,.local-actions{grid-area:auto}
+    .local .map-card{aspect-ratio:auto;height:clamp(220px,44vw,360px)}
+    .local-actions .local-pills{margin-top:0}
   }
   @media(max-width:520px){.proc-grid{grid-template-columns:1fr}form .row{grid-template-columns:1fr}.care{flex-direction:column;align-items:flex-start}}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1!important;transform:none!important}.cursor{display:none!important}}

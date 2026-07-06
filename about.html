@@ -67,6 +67,10 @@
 </div></section>
 
 <section class="band band-tint"><div class="wrap"><div class="local">
+  <div class="local-intro rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.local.eyebrow }}</span>
+    <h2 style="margin-top:16px">{{ about.local.heading }}</h2>
+    <p>{{ about.local.body1 }}</p>
+    <p>{{ about.local.body2 }}</p></div>
   <div class="map-card rv">
     <!--
       Real Google Map via Google's keyless embed (?output=embed) — no API key,
@@ -79,10 +83,7 @@
       loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
       src="https://maps.google.com/maps?q=44.6488,-63.5752&amp;z=12&amp;output=embed"></iframe>
   </div>
-  <div class="rv"><span class="eyebrow"><span class="pix"><i></i><i></i><i></i><i></i></span> {{ about.local.eyebrow }}</span>
-    <h2 style="margin-top:16px">{{ about.local.heading }}</h2>
-    <p>{{ about.local.body1 }}</p>
-    <p>{{ about.local.body2 }}</p>
+  <div class="local-actions rv">
     <div class="local-pills" role="group" aria-label="Choose a service area to show it on the map">
       <button type="button" class="area-btn" data-town="halifax"     aria-pressed="true">Halifax</button>
       <button type="button" class="area-btn" data-town="dartmouth"   aria-pressed="false">Dartmouth</button>
