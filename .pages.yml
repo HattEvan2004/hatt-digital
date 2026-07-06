@@ -37,6 +37,25 @@ content:
           - { name: sub, label: "Intro sentence", type: text }
           - { name: cta_primary, label: "Primary button label", type: string }
           - { name: cta_secondary, label: "Secondary button label", type: string }
+          - { name: receipts, label: "Trust chips under the buttons", type: string, list: true }
+          - name: preview
+            label: "Preview card (right side of hero)"
+            type: object
+            fields:
+              - { name: kicker, label: "Card kicker", type: string }
+              - { name: title, label: "Card title", type: string }
+              - name: old
+                label: "“Old site problem” column"
+                type: object
+                fields:
+                  - { name: label, label: "Column label", type: string }
+                  - { name: points, label: "Points", type: string, list: true }
+              - name: new
+                label: "“New site result” column"
+                type: object
+                fields:
+                  - { name: label, label: "Column label", type: string }
+                  - { name: points, label: "Points", type: string, list: true }
       - name: compare
         label: "“Before & after” comparison section"
         type: object
