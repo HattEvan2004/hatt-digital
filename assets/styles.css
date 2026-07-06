@@ -48,6 +48,11 @@
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px -10px rgba(10,22,51,.6)}
   .btn .arr{transition:transform .2s ease}
   .btn:hover .arr{transform:translateX(4px)}
+  /* Solid-fill buttons drop the transparent sizing border: painting a
+     gradient/solid fill under a transparent 1.5px border leaves a faint
+     antialiased "double-border" seam. The removed 1.5px is added back as
+     padding so their box stays identical to the bordered ghost/call buttons. */
+  .btn-grad,.btn-primary{border-width:0;padding:15.5px 25.5px}
   .btn-grad{background:var(--grad);color:#fff;box-shadow:0 8px 26px -8px rgba(10,91,230,.6)}
   .btn-grad:hover{transform:translateY(-2px);box-shadow:0 16px 38px -10px rgba(10,91,230,.65)}
   .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
