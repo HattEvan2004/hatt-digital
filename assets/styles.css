@@ -291,14 +291,15 @@
   /* ======  CINEMATIC SCROLL-BUILT HERO (homepage)  ===== */
   /* ===================================================== */
 
-  /* Homepage nav is hidden entirely over the dark hero + code-build intro,
-     then drops in as a solid white bar once "Why it matters" is reached. */
+  /* Homepage nav: the same solid white bar sits over the dark hero from the
+     start and stays for the rest of the page. (.is-visible is kept as a no-op
+     so the scroll-driven JS toggle remains harmless.) */
   html.js body.home header{
     position:fixed;top:0;left:0;width:100%;
     background:#ffffff;backdrop-filter:none;
     border-bottom:1px solid rgba(10,20,45,.08);
     box-shadow:0 12px 30px rgba(10,20,45,.08);
-    opacity:0;transform:translateY(-100%);pointer-events:none;
+    opacity:1;transform:none;pointer-events:auto;
     transition:opacity .3s ease,transform .3s ease;
     z-index:1000}
   html.js body.home header.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
@@ -645,12 +646,10 @@
   .faq-q:active{transform:none}
   .foot-social a:active,.contact-social a:active{transform:translateY(0) scale(.96)}
 
-  /* --- Home: the auto-hiding sticky header must not be a keyboard
-     trap while it is invisible. visibility:hidden removes its links
-     from the tab order until the bar actually drops in. --- */
-  html.js body.home header{visibility:hidden;
+  /* --- Home: the nav bar is visible over the hero from the start, so its
+     links stay in the tab order throughout (no keyboard trap to guard). --- */
+  html.js body.home header{visibility:visible;
     transition:opacity .3s ease,transform .3s ease,visibility .3s ease}
-  html.js body.home header.is-visible{visibility:visible}
 
   @media(prefers-reduced-motion:reduce){
     .skip-link{transition:none}
