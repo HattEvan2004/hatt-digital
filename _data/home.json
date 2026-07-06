@@ -50,6 +50,19 @@
           "Easy contact options"
         ],
         "link": "https://marine-services-demo.vercel.app/"
+      },
+      {
+        "image": "/assets/screens/water.webp",
+        "w": "1300",
+        "h": "809",
+        "title": "Water Delivery Website",
+        "desc": "A clean local-service website concept that makes bulk water delivery easy to understand and makes urgent, emergency requests simple to send.",
+        "focus": [
+          "Organized service layout ",
+          " Trust-building sections ",
+          "One-tap ways to make contact responsive on every device"
+        ],
+        "link": "https://safe-list-149285.framer.app/"
       }
     ]
   },
