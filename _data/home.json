@@ -8,32 +8,7 @@
     "title": "A website that gets you calls, built by **someone you can actually phone.**",
     "sub": "I’m Evan. I build clean, mobile first websites for contractors and local businesses across Halifax, Dartmouth, and the South Shore. You get a flat quote up front, a site live in 1 to 3 weeks, and you own every piece of it.",
     "cta_primary": "Get a Clear Quote",
-    "cta_secondary": "See My Work",
-    "receipts": [
-      "Sites from $500",
-      "Live in 1 to 3 weeks",
-      "Full ownership"
-    ],
-    "preview": {
-      "kicker": "Website preview",
-      "title": "What a better website fixes",
-      "old": {
-        "label": "Old site problem",
-        "points": [
-          "Hard to read on phones",
-          "Buried contact info",
-          "Unclear services"
-        ]
-      },
-      "new": {
-        "label": "New site result",
-        "points": [
-          "Clear mobile layout",
-          "Tap to call button",
-          "Quote form ready"
-        ]
-      }
-    }
+    "cta_secondary": "See My Work"
   },
   "compare": {
     "eyebrow": "Before & After",
@@ -77,6 +52,7 @@
         "link": "https://marine-services-demo.vercel.app/"
       },
       {
+        "image": "/assets/Screenshot 2026-07-06 at 5.19.28 PM.png",
         "w": "1300",
         "h": "809",
         "type": "Pool Water Service ",
