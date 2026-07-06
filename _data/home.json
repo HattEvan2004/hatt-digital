@@ -8,24 +8,7 @@
     "title": "A website that gets you calls, built by **someone you can actually phone.**",
     "sub": "I’m Evan. I build clean, mobile first websites for contractors and local businesses across Halifax, Dartmouth, and the South Shore. You get a flat quote up front, a site live in 1 to 3 weeks, and you own every piece of it.",
     "cta_primary": "Get a Clear Quote",
-    "cta_secondary": "See My Work",
-    "receipts": [
-      "Sites from $500",
-      "Live in 1 to 3 weeks",
-      "Full ownership"
-    ],
-    "preview": {
-      "kicker": "Website preview",
-      "title": "What a better website fixes",
-      "old": {
-        "label": "Old site problem",
-        "points": ["Hard to read on phones", "Buried contact info", "Unclear services"]
-      },
-      "new": {
-        "label": "New site result",
-        "points": ["Clear mobile layout", "Tap to call button", "Quote form ready"]
-      }
-    }
+    "cta_secondary": "See My Work"
   },
   "compare": {
     "eyebrow": "Before & After",
@@ -39,7 +22,7 @@
     "intro": "No borrowed logos. No fake client names. These are sample websites I built to show the kind of work I can create for contractors, trades, and local businesses. Open one on your phone and see how your project could feel.",
     "cases": [
       {
-        "image": "/assets/screens/toner-supplies.svg",
+        "image": "/assets/Screenshot 2026-07-06 at 5.08.00 PM.png",
         "alt": "Toner and office supplies website demo built by Hatt Digital",
         "w": "1300",
         "h": "813",
@@ -52,21 +35,6 @@
           "Simple quote flow"
         ],
         "link": "https://toner-supplies-demo-v2.vercel.app/#"
-      },
-      {
-        "image": "/assets/screens/electrical.webp",
-        "alt": "Electrical contractor website demo built by Hatt Digital",
-        "w": "1300",
-        "h": "813",
-        "type": "Residential & commercial electrical · Demo build",
-        "title": "Electrical Contractor Website",
-        "desc": "A modern demo website for an electrical contractor, built to explain services clearly and make requesting a quote simple.",
-        "focus": [
-          "Clear service sections",
-          "Strong calls to action",
-          "Trust focused layout"
-        ],
-        "link": "https://electrical-ns-demo.vercel.app/"
       },
       {
         "image": "/assets/screens/blandford-marine-real.webp",
