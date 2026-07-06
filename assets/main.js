@@ -1212,60 +1212,56 @@
 })();
 
 /* =========================================================================
-   PRICING SELECTOR — tab between the three package cards. One card shows at a
-   time (grid-stacked, fade + slide); the others are hidden. Click/tap a tab,
-   or arrow-key the tablist. No auto-rotation, no swipe-only. The default
-   active card is whatever was rendered .is-active server-side (the featured
-   package), so it's correct before this runs. No-op without [data-pricing].
+   PRICING ACCORDION — expand one package row at a time. Tapping a header opens
+   its details and collapses whichever was open, so exactly one package shows at
+   a time (no three-tall-card scroll). The default open row is whatever the
+   template rendered .is-open (the featured package). Enter/Space or click
+   toggles; Up/Down/Home/End move focus between headers (WAI accordion pattern).
+   No auto-rotation. No-op on pages without [data-pricing].
 ========================================================================= */
 (function () {
   var root = document.querySelector('[data-pricing]');
   if (!root) return;
 
-  var tablist = root.querySelector('[role="tablist"]');
-  var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-pricing-tab]'));
-  var panels = Array.prototype.slice.call(root.querySelectorAll('[data-pricing-panel]'));
-  if (!tablist || tabs.length < 2 || tabs.length !== panels.length) return;
+  var items = Array.prototype.slice.call(root.querySelectorAll('[data-pricing-item]'));
+  var triggers = Array.prototype.slice.call(root.querySelectorAll('[data-pricing-trigger]'));
+  if (items.length < 2 || items.length !== triggers.length) return;
 
-  var n = tabs.length;
+  var n = items.length;
 
-  // Start on the panel the template marked active (the featured tier), else first.
-  var active = 0;
-  for (var k = 0; k < panels.length; k++) {
-    if (panels[k].classList.contains('is-active')) { active = k; break; }
+  // Start on the row the template opened (the featured tier), else the first.
+  var open = 0;
+  for (var k = 0; k < items.length; k++) {
+    if (items[k].classList.contains('is-open')) { open = k; break; }
   }
 
-  function setActive(i, focusTab) {
-    active = (i % n + n) % n;
-    tabs.forEach(function (tab, idx) {
-      var on = idx === active;
-      tab.classList.toggle('is-active', on);
-      tab.setAttribute('aria-selected', on ? 'true' : 'false');
-      tab.setAttribute('tabindex', on ? '0' : '-1');
+  function setOpen(i) {
+    open = (i % n + n) % n;
+    items.forEach(function (item, idx) {
+      var on = idx === open;
+      item.classList.toggle('is-open', on);
+      triggers[idx].setAttribute('aria-expanded', on ? 'true' : 'false');
     });
-    panels.forEach(function (panel, idx) {
-      var on = idx === active;
-      panel.classList.toggle('is-active', on);
-      panel.setAttribute('aria-hidden', on ? 'false' : 'true');
-    });
-    if (focusTab) tabs[active].focus();
   }
 
-  tabs.forEach(function (tab, i) {
-    tab.addEventListener('click', function () { setActive(i); });
+  function focusTrigger(i) { triggers[(i % n + n) % n].focus(); }
+
+  triggers.forEach(function (trigger, i) {
+    // Click / tap / Enter / Space (native <button>) opens this row; the open
+    // row stays open so one package is always shown.
+    trigger.addEventListener('click', function () { setOpen(i); });
+
+    trigger.addEventListener('keydown', function (e) {
+      var handled = true;
+      if (e.key === 'ArrowDown') focusTrigger(i + 1);
+      else if (e.key === 'ArrowUp') focusTrigger(i - 1);
+      else if (e.key === 'Home') focusTrigger(0);
+      else if (e.key === 'End') focusTrigger(n - 1);
+      else handled = false;
+      if (handled) e.preventDefault();
+    });
   });
 
-  // WAI-ARIA tablist keys: arrows move + activate, Home/End jump to the ends.
-  tablist.addEventListener('keydown', function (e) {
-    var handled = true;
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') setActive(active + 1, true);
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') setActive(active - 1, true);
-    else if (e.key === 'Home') setActive(0, true);
-    else if (e.key === 'End') setActive(n - 1, true);
-    else handled = false;
-    if (handled) e.preventDefault();
-  });
-
-  // Normalise tab/panel state (server rendered the default active card already).
-  setActive(active);
+  // Normalise state (the template already opened the default row).
+  setOpen(open);
 })();

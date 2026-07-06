@@ -343,41 +343,41 @@
     <h2>{{ home.pricing.heading }}</h2>
     <p>{{ home.pricing.intro }}</p></div>
 
-  <!-- One package at a time. Tabs swap the active card (fade + slide) so this
-       section stops being three tall stacked cards you scroll through. The tab
-       row is only shown once JS is on (html.js, set in <head>); without JS the
-       three .ps-panel cards simply flow stacked as a graceful fallback. -->
-  <div class="pricing-selector rv" data-pricing>
-    <div class="ps-tabs" role="tablist" aria-label="Choose a website package">
-      {%- for t in home.pricing.tiers %}
-      <button type="button" class="ps-tab{% if t.featured %} is-active{% endif %}" role="tab"
-        id="ps-tab-{{ t.package }}" aria-controls="ps-panel-{{ t.package }}"
-        aria-selected="{% if t.featured %}true{% else %}false{% endif %}"
-        tabindex="{% if t.featured %}0{% else %}-1{% endif %}"
-        data-pricing-tab="{{ loop.index0 }}">{{ t.name }}</button>
-      {%- endfor %}
-    </div>
-
-    <div class="ps-stage" data-pricing-stage>
-      {%- for t in home.pricing.tiers %}
-      <div class="ps-panel ptier{% if t.featured %} feature is-active{% endif %}" role="tabpanel"
-        id="ps-panel-{{ t.package }}" aria-labelledby="ps-tab-{{ t.package }}"
-        data-pricing-panel="{{ loop.index0 }}" aria-hidden="{% if t.featured %}false{% else %}true{% endif %}">
-        {%- if t.badge %}
-        <span class="tier-badge">{{ t.badge }}</span>
-        {%- endif %}
-        <span class="tier-name">{{ t.name }}</span>
-        <p class="tier-label">{{ t.label }}</p>
-        <p class="tier-sub">{{ t.sub }}</p>
-        <ul>
-          {%- for f in t.features %}
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</li>
-          {%- endfor %}
-        </ul>
-        <a href="quote.html?package={{ t.package }}" class="btn {% if t.featured %}btn-grad{% else %}btn-ghost{% endif %}">{{ t.button }}</a>
+  <!-- One package at a time. Each package is an accordion row: tap a row to
+       expand its details, and the previously open one collapses — so exactly
+       one package is shown at a time instead of three tall stacked cards. Much
+       shorter on mobile. Enhanced only when JS is on (html.js, set in <head>);
+       without JS every row is simply left expanded as a graceful fallback. -->
+  <div class="pricing-accordion rv" data-pricing>
+    {%- for t in home.pricing.tiers %}
+    <div class="pa-item{% if t.featured %} feature is-open{% endif %}" data-pricing-item="{{ loop.index0 }}">
+      <h3 class="pa-head">
+        <button type="button" class="pa-trigger" id="pa-trigger-{{ t.package }}"
+          aria-controls="pa-panel-{{ t.package }}" aria-expanded="{% if t.featured %}true{% else %}false{% endif %}"
+          data-pricing-trigger="{{ loop.index0 }}">
+          <span class="pa-name">{{ t.name }}</span>
+          {%- if t.badge %}
+          <span class="pa-badge">{{ t.badge }}</span>
+          {%- endif %}
+          <span class="pa-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><line x1="12" y1="5" x2="12" y2="19" class="pa-icon-v"/></svg></span>
+        </button>
+      </h3>
+      <div class="pa-panel" id="pa-panel-{{ t.package }}" role="region" aria-labelledby="pa-trigger-{{ t.package }}">
+        <div class="pa-panel-clip">
+          <div class="pa-panel-inner">
+            <p class="tier-label">{{ t.label }}</p>
+            <p class="tier-sub">{{ t.sub }}</p>
+            <ul>
+              {%- for f in t.features %}
+              <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>{{ f }}</li>
+              {%- endfor %}
+            </ul>
+            <a href="quote.html?package={{ t.package }}" class="btn {% if t.featured %}btn-grad{% else %}btn-ghost{% endif %}">{{ t.button }}</a>
+          </div>
+        </div>
       </div>
-      {%- endfor %}
     </div>
+    {%- endfor %}
   </div>
 
   <p class="price-foot rv">{{ home.pricing.foot }}</p>
