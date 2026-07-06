@@ -721,6 +721,53 @@
     position:absolute;top:-12px;left:50%;transform:translateX(-50%);white-space:nowrap;
     box-shadow:0 10px 24px -10px rgba(10,91,230,.7)}
 
+  /* --- Interactive pricing selector (homepage) ---------------------------
+     Shows ONE package card at a time, switched by the tab row above it, so the
+     section is no longer three tall stacked cards you scroll through (much
+     shorter on mobile). Enhanced only when JS is on — html.js is set
+     synchronously in <head>, so there is no flash. Without JS the three
+     .ps-panel cards just flow stacked (the fallback further down). */
+  .pricing-selector{max-width:600px;margin:44px auto 0}
+
+  /* Tab row — a segmented pill control on a mist track. Hidden until enhanced. */
+  .ps-tabs{display:none}
+  html.js .ps-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;
+    background:var(--mist);border:1px solid var(--line);border-radius:999px;padding:6px}
+  .ps-tab{appearance:none;-webkit-appearance:none;border:0;cursor:pointer;background:transparent;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:.04em;
+    text-transform:uppercase;line-height:1.25;color:var(--muted);padding:12px 8px;border-radius:999px;
+    transition:color .25s ease,background .25s ease,box-shadow .25s ease}
+  .ps-tab:hover{color:var(--ink)}
+  .ps-tab.is-active{color:var(--royal);background:#fff;
+    box-shadow:0 8px 20px -10px rgba(10,22,51,.32),0 1px 0 rgba(255,255,255,.6) inset}
+  .ps-tab:focus-visible{outline:2px solid var(--royal);outline-offset:2px}
+
+  /* Card stage. No-JS: a tidy stacked grid. Enhanced: every panel shares one
+     grid cell, so the stage keeps the tallest card's height and switching
+     never shifts the page. */
+  .ps-stage{display:grid;gap:20px;margin-top:28px}
+  html.js .ps-stage{gap:0}
+  html.js .ps-panel{grid-area:1/1;opacity:0;visibility:hidden;pointer-events:none;
+    transform:translateY(12px);will-change:opacity,transform;
+    transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1),visibility 0s linear .5s}
+  html.js .ps-panel.is-active{opacity:1;visibility:visible;pointer-events:auto;transform:none;
+    transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1),visibility 0s}
+  /* the single card is static: give it a soft resting elevation and neutralise
+     .ptier's hover lift, which would fight the enter-slide transform. */
+  html.js .ps-panel.ptier{box-shadow:0 26px 54px -30px rgba(10,22,51,.32)}
+  html.js .ps-panel.ptier.feature{box-shadow:0 34px 70px -32px rgba(10,91,230,.5)}
+  html.js .ps-panel.ptier:hover,html.js .ps-panel.ptier.feature:hover{transform:none}
+
+  @media(max-width:560px){
+    .pricing-selector{margin-top:34px}
+    html.js .ps-tabs{gap:4px;padding:5px}
+    .ps-tab{font-size:11px;padding:11px 5px;letter-spacing:.02em}
+    .ps-stage{margin-top:24px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html.js .ps-panel,html.js .ps-panel.is-active{transition:none}
+  }
+
   /* --- Trust-points strip (item 6) --- */
   .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
   .tpoint{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);

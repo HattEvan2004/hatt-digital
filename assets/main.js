@@ -1210,3 +1210,62 @@
     b.addEventListener('click', function () { select(b.getAttribute('data-town')); });
   });
 })();
+
+/* =========================================================================
+   PRICING SELECTOR — tab between the three package cards. One card shows at a
+   time (grid-stacked, fade + slide); the others are hidden. Click/tap a tab,
+   or arrow-key the tablist. No auto-rotation, no swipe-only. The default
+   active card is whatever was rendered .is-active server-side (the featured
+   package), so it's correct before this runs. No-op without [data-pricing].
+========================================================================= */
+(function () {
+  var root = document.querySelector('[data-pricing]');
+  if (!root) return;
+
+  var tablist = root.querySelector('[role="tablist"]');
+  var tabs = Array.prototype.slice.call(root.querySelectorAll('[data-pricing-tab]'));
+  var panels = Array.prototype.slice.call(root.querySelectorAll('[data-pricing-panel]'));
+  if (!tablist || tabs.length < 2 || tabs.length !== panels.length) return;
+
+  var n = tabs.length;
+
+  // Start on the panel the template marked active (the featured tier), else first.
+  var active = 0;
+  for (var k = 0; k < panels.length; k++) {
+    if (panels[k].classList.contains('is-active')) { active = k; break; }
+  }
+
+  function setActive(i, focusTab) {
+    active = (i % n + n) % n;
+    tabs.forEach(function (tab, idx) {
+      var on = idx === active;
+      tab.classList.toggle('is-active', on);
+      tab.setAttribute('aria-selected', on ? 'true' : 'false');
+      tab.setAttribute('tabindex', on ? '0' : '-1');
+    });
+    panels.forEach(function (panel, idx) {
+      var on = idx === active;
+      panel.classList.toggle('is-active', on);
+      panel.setAttribute('aria-hidden', on ? 'false' : 'true');
+    });
+    if (focusTab) tabs[active].focus();
+  }
+
+  tabs.forEach(function (tab, i) {
+    tab.addEventListener('click', function () { setActive(i); });
+  });
+
+  // WAI-ARIA tablist keys: arrows move + activate, Home/End jump to the ends.
+  tablist.addEventListener('keydown', function (e) {
+    var handled = true;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') setActive(active + 1, true);
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') setActive(active - 1, true);
+    else if (e.key === 'Home') setActive(0, true);
+    else if (e.key === 'End') setActive(n - 1, true);
+    else handled = false;
+    if (handled) e.preventDefault();
+  });
+
+  // Normalise tab/panel state (server rendered the default active card already).
+  setActive(active);
+})();
