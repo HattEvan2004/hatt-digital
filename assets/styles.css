@@ -87,6 +87,8 @@
   .phead h1{font-size:clamp(38px,5.6vw,62px);font-weight:800;letter-spacing:-.035em;margin-top:18px}
   .phead h1 .hl{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
   .phead p{color:var(--muted-d);font-size:18px;margin-top:18px;max-width:42ch}
+  .phead .phead-note{display:inline-flex;align-items:center;gap:9px;font-size:14px;color:var(--muted-d);max-width:none}
+  .phead .phead-note svg{flex:none;width:16px;height:16px;color:var(--cyan)}
 
   /* generic band */
   /* One smooth section rhythm for every width instead of stepped 56/96/104
