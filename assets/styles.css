@@ -467,6 +467,12 @@
     .hero-preview{justify-self:center;max-width:460px;margin:0 auto}
   }
   @media(max-width:600px){
+    /* On phones the stacked hero is taller than the viewport, so a centred
+       flex column overflows upward and the eyebrow ends up cramped just a few
+       px under the fixed header. Anchor the column to the top and give the
+       eyebrow real breathing room below the header — the tight 22px eyebrow→
+       headline gap above is untouched. */
+    .intro-stage{justify-content:flex-start;padding-top:clamp(110px,14vh,128px)}
     .sh-title{font-size:clamp(30px,8vw,40px)}
     .sh-sub{font-size:16px}
     .sh-cta .btn{flex:1 1 auto;justify-content:center}
